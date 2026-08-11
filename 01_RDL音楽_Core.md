@@ -39,16 +39,19 @@ S_t
 =
 \langle
 B_t,
-M_t,
-W_t,
+M_{B_t,t},
+W_{B_t,t},
 F_t,
-E_t,
-H_t,
-\xi_t
+E_{B_t,t},
+H_{B_t,t},
+\xi_{B_t,t}
 \rangle
 \]
 
 と仮設する。
+
+ここで、\(M\)、\(W\)、\(E\)、\(H\)、\(\xi\)は、現在の境界\(B_t\)に依存する。
+以下では、B依存と時刻が文脈上自明な場合、記法を簡略化して\(M_B\)、\(W\)、\(E\)、\(H\)、\(\xi\)と書く。
 
 ---
 
@@ -132,7 +135,7 @@ W_form
 \(E\) は、現在のM_Bから維持・予測される関係とFとの差である。
 
 ```text
-predicted /惯性 relation
+predicted / inertial relation
           ↓
           E
           ↑
@@ -203,13 +206,13 @@ S_{t+1}
 Δによって、
 
 ```text
-B
-M
-W
-F
-E
-H
-ξ
+B_t
+M_{B_t,t}
+W_{B_t,t}
+F_t
+E_{B_t,t}
+H_{B_t,t}
+ξ_{B_t,t}
 ```
 
 の一部または複数が変化する。
@@ -260,7 +263,7 @@ Change(Y)
 指定したM_Bが維持されやすい方向へ関係を操作する。
 
 ```text
-stabilize(M)
+stabilize(M_B)
 ```
 
 反復、中心の強化、既知関係への回帰などが具体操作候補になりうる。
@@ -274,7 +277,7 @@ stabilize(M)
 M_Bをただちに破壊せず、維持の確実性を低下させる。
 
 ```text
-destabilize(M)
+destabilize(M_B)
 ```
 
 予測からの逸脱、中心の弱化、競合関係の導入などが候補になる。
@@ -294,14 +297,13 @@ shift(B_A → B_B)
 概念的には、
 
 ```text
-B_A
- ↓
-M_Δ
- ↓
-B_B
+B_A ─────────→ B_B
+ │               │
+ M_{B_A} ─→ M_Δ ─→ M_{B_B}
 ```
 
-となる。
+となる。\(M_\Delta\)は、Bそのものではなく、現在の安定構造が再編される遷移相である。
+したがって、Bの変更とMの相転移を同一視しない。
 
 転調は、この操作の一例として扱える。
 
@@ -441,7 +443,7 @@ Target：
 RDL Music Core
 
 STATE
-S_t = <B,M,W,F,E,H,ξ>
+S_t = <B_t,M_{B_t,t},W_{B_t,t},F_t,E_{B_t,t},H_{B_t,t},ξ_{B_t,t}>
 
 FLOW
 S_t → Δ → S_t+1
