@@ -18,13 +18,15 @@ RDL音楽理論/
 │  ├─ 06_波形関係_二正弦波_最小実験.md
 │  ├─ 07_波形関係_時間変化する二正弦波_最小実験.md
 │  ├─ 08_波形関係_短時間破断と観測分解能_最小実験.md
+│  ├─ 09_波形関係_観測格子位相と破断検出_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
 │  ├─ boundary_candidate_generation.py
 │  ├─ two_sine_wave_relations.py
 │  ├─ time_varying_two_sine_wave_relations.py
-│  └─ short_ratio_break_resolution.py
+│  ├─ short_ratio_break_resolution.py
+│  └─ sampling_phase_ratio_break.py
 ```
 
 ## ■ 2. 各文書の役割
@@ -179,6 +181,14 @@ RDL_Core / SILN_動態
 
 既知の連続時間モデルに0.5 msだけ比が`1.5`から`1.6`へ移動する区間を置き、10 kHzと1 kHzのサンプル境界で破断が検出されるかを比較する。連続モデル上の破断、Bのサンプル点で検出された破断、観測上の比保存を別軸で記録する。粗いBで破断を検出しなかったことを、連続時間で比が保存されたこととは解釈しない。未知波形からの関係推定、破断の補間、知覚可能性は扱わず、Coreへ追加しない。
 
+### 5.8 観測格子の開始位相と破断検出
+
+記録：`10_検証/09_波形関係_観測格子位相と破断検出_最小実験.md`
+
+実装：`10_検証/sampling_phase_ratio_break.py`
+
+08と同じ既知モデル・同じ観測時間・同じsample_rate・同じ`Γ_point_ratio`を使い、`sampling_phase_s`だけを0 msと0.5 msで切り替える。分解能が同じでも観測格子の配置によって破断検出が変わることを、独立した`run_checks()`と`main()`出力で確認する。`model_ratio_break_present`、観測時間窓との交差、サンプル点での破断検出、観測上の比保存を分離し、08のコードを拡張するのではなく09専用実験として管理する。未観測領域の内容を直接確定せず、Coreへ追加しない。
+
 ## ■ 6. 運用原則
 
 - GitHubリポジトリを保存・版管理の基準とする
@@ -200,5 +210,6 @@ Bから候補空間生成 v0.1 / 実験中
 波形関係・二正弦波 v0.1 / 実験中
 時間変化する波形関係 v0.1 / 実験中
 短時間破断と観測分解能 v0.1 / 実験中
+観測格子の開始位相と破断検出 v0.1 / 実験中
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```
