@@ -5,7 +5,16 @@
 """
 
 
-CANDIDATES = ("A", "B", "C")
+BOUNDARY = {
+    "declared_candidates": ("A", "B", "C"),
+}
+
+
+def candidate_space(boundary: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
+    """宣言された境界に対応する閉じた候補空間を返す。"""
+    if boundary != BOUNDARY:
+        raise ValueError("この実験で定義していない境界です")
+    return boundary["declared_candidates"]
 
 
 def constrain_candidates(
@@ -25,7 +34,7 @@ def constrain_candidates(
     if len(result) == 0:
         status = "no_candidate"
     elif len(result) == 1:
-        status = "locally_resolved"
+        status = "resolved"
     else:
         status = "underdetermined"
 
@@ -38,7 +47,7 @@ def constrain_candidates(
 
 
 def run_checks() -> None:
-    candidates = CANDIDATES
+    candidates = candidate_space(BOUNDARY)
     changed = constrain_candidates(
         candidates,
         current="A",
@@ -66,16 +75,16 @@ def run_checks() -> None:
     assert changed["candidates"] == ("B", "C")
     assert changed["status"] == "underdetermined"
     assert targeted["candidates"] == ("C",)
-    assert targeted["status"] == "locally_resolved"
+    assert targeted["status"] == "resolved"
     assert impossible["candidates"] == ()
     assert impossible["status"] == "no_candidate"
     assert singleton["target_specified"] is False
-    assert singleton["status"] == "locally_resolved"
+    assert singleton["status"] == "resolved"
 
 
 def main() -> None:
     run_checks()
-    candidates = CANDIDATES
+    candidates = candidate_space(BOUNDARY)
 
     changed = constrain_candidates(
         candidates,
@@ -95,13 +104,13 @@ def main() -> None:
         target="X",
     )
 
-    print("[C + change(current)]")
+    print("[declared candidates + change(current)]")
     print(" ", "candidates=", changed["candidates"])
     print(" ", "status=", changed["status"])
-    print("[C + change(current) + target=C]")
+    print("[declared candidates + change(current) + target=C]")
     print(" ", "candidates=", targeted["candidates"])
     print(" ", "status=", targeted["status"])
-    print("[C + change(current) + target=X]")
+    print("[declared candidates + change(current) + target=X]")
     print(" ", "candidates=", impossible["candidates"])
     print(" ", "status=", impossible["status"])
 
