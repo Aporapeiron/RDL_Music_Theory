@@ -26,6 +26,14 @@ RDL音楽理論/
 │  ├─ 13_音程分解_解決候補の文脈分解_最小実験.md
 │  ├─ 14_音程分解_音度から具体音への実現_最小実験.md
 │  ├─ 15_音程分解_実現制約の競合と候補消滅_最小実験.md
+│  ├─ 16_音程分解_空集合後の再探索分岐_最小実験.md
+│  ├─ 17_音程分解_再探索分岐の優先順位と採用条件_最小実験.md
+│  ├─ 18_音程分解_採用枝から次状態への履歴循環_最小実験.md
+│  ├─ 19_音程分解_状態からの再探索枝再生成_最小実験.md
+│  ├─ 20_音程分解_操作後も空集合を保持する観測.md
+│  ├─ 21_音程分解_全操作empty後のfallback観測_最小実験.md
+│  ├─ 22_音程分解_fallback採用後の実状態遷移_最小実験.md
+│  ├─ 23_音程分解_10〜22の動態圧縮_全体構造.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -39,7 +47,13 @@ RDL音楽理論/
 │  ├─ tritone_spelling_resolution.py
 │  ├─ contextual_resolution_candidate.py
 │  ├─ degree_to_pitch_realization.py
-│  └─ constraint_competition_observation.py
+│  ├─ constraint_competition_observation.py
+│  ├─ reexploration_after_empty.py
+│  ├─ reexploration_policy_comparison.py
+│  ├─ history_aware_reexploration_cycle.py
+│  ├─ state_rebased_reexploration.py
+│  ├─ empty_action_observation.py
+│  └─ exhaustion_fallback_observation.py
 ```
 
 ## ■ 2. 各文書の役割
@@ -102,6 +116,16 @@ RDL_Core / SILN ───→ 01 Core ────────┘
 ```
 
 入口文書とCoreと全体設計方針は役割が異なる。入口は目的と全体像、Coreは共通文法、全体設計方針は層・検証順序・昇格境界を定める。
+
+### 23_音程分解_10〜22の動態圧縮_全体構造.md
+
+10〜22で確認した音程分解Moduleの動態を、関係観測・候補生成・実現・再探索・empty・action set枯渇・fallback・通常探索復帰の一枚の構造へ圧縮する。
+
+`observation_history`、`fallback_transition_history`、`realized_transition_history`を分離したまま、22で実状態化できた`reopen_voice_B_boundary`と、未解決ξとして残した`stop_search`・`discard_target`を同じ意味へ潰さずに記録する。新しいCore変数や音楽一般の規則は追加しない。
+
+### 24_音程分解_動態Adapterの最小境界_検証.md
+
+23で圧縮した音程Moduleの三履歴を、`observation`・`fallback_transition`・`realized_transition`という音楽語彙を含まない最小イベントへ投影する。empty観測、fallbackを適用した構造遷移、ordinary actionによる具体音実現を別履歴のまま保持できることを確認する。Adapterは状態意味・controller・fallback選択を一般化せず、Coreへ新しい状態変数を追加しない。
 
 ## ■ 4. 将来の分岐候補
 
@@ -276,7 +300,7 @@ target候補の分解・整合確認
 
 実装：`10_検証/degree_to_pitch_realization.py`
 
-13で既選択targetとして与えていた具体音について、13から引き継いだlearned tendencyによる目標音度の後段を検証する。`B_realization`で候補オクターブと声部範囲を境界として置き、`Γ_spelling`で複数の綴り付き候補を生成し、`Γ_admissible`で範囲・上下関係を満たす候補対へ絞り、`Γ_select`で開始音からの最小移動を適用して候補の一つを選択する。`7→1`だけでは`F♯3 / F♯4 / F♯5`を区別できず、`F♯4`の具体化には別の境界と規則が必要であることを検査する。これは一つの12TET長音階モデルと選択規則の限定実験であり、音度遷移から具体音が常に一意に決まること、機能和声や人間の音楽的選択を一般化することは扱わない。
+13で既選択targetとして与えていた具体音について、13から引き継いだlearned tendencyによる目標音度の後段を検証する。`B_realization`で候補オクターブと声部範囲を境界として置き、`Γ_spelling`で複数の綴り付き候補を生成し、`B_range_projection`で声域範囲を通過した候補へ絞り、`Γ_ordering`で上下関係を満たす候補対を構成し、`Γ_select`で開始音からの最小移動を適用して候補の一つを選択する。`7→1`だけでは`F♯3 / F♯4 / F♯5`を区別できず、`F♯4`の具体化には別の境界と規則が必要であることを検査する。これは一つの12TET長音階モデルと選択規則の限定実験であり、音度遷移から具体音が常に一意に決まること、機能和声や人間の音楽的選択を一般化することは扱わない。
 
 ### 5.14 音程分解・実現制約の競合と候補消滅
 
@@ -285,6 +309,84 @@ target候補の分解・整合確認
 実装：`10_検証/constraint_competition_observation.py`
 
 14で分離した候補生成・`B_range_projection`・`Γ_ordering`・選択の各段階について、候補が消える位置を観測する。`Γ_spelling`直後の生成候補が同じでも、`B_realization`の声部範囲による投影で片側候補が空になる場合と、投影後の候補が`Γ_ordering`で候補対を作れない場合へ分岐する。前者は`status = constraint_no_candidate`、後者は`status = no_admissible_candidate`として、`selected`を空にし、`failure_stage`と理由を保持する。これは境界競合の既知の診断であり、音域・上下関係を音楽一般の普遍的制約、空集合を実際の不可能性、候補消滅を直ちにB引き直しの根拠とは扱わない。Bの引き直し・制約緩和・別の候補生成Γへの切替は未解決ξとして残す。
+
+### 5.15 音程分解・空集合後の再探索分岐
+
+記録：`10_検証/16_音程分解_空集合後の再探索分岐_最小実験.md`
+
+実装：`10_検証/reexploration_after_empty.py`
+
+15で導入した`no_admissible_candidate`という診断形式を引き継ぐ初期空集合から、`B_change`・`Γ_change`・`upstream_target_change`を別分岐として適用する。14の既存`lower / upper`フィールドは16では声部IDの枠として扱い、物理的な上下は`pitch_ordering_rule`で分離する。B変更とΓ変更は実現層内の変更であり、B変更では候補オクターブ・声域を開き、Γ変更ではcrossed voice pitchesを比較対象へ含める。`upstream_target_change`は上流から与えられたtarget入力を差し替えて実現層を再実行する境界を観測する。各分岐の`change_axes`（`boundary_changed`・`relation_changed`・`upstream_target_changed`）と`generated_voice_A / generated_voice_B / filtered_voice_A / filtered_voice_B / admissible_voice_pairs / selected / pitch_ordering_rule`を保持し、`branch_kind`から変更内容を逆算しない。空集合後の再探索が一つの復旧操作へ縮約できないことを検査する。分岐の優先順位、採用条件、打ち切り条件は未解決ξとして残し、音楽一般の再探索順序やCoreの操作へ昇格させない。
+
+### 5.16 音程分解・再探索分岐の優先順位と採用条件
+
+記録：`10_検証/17_音程分解_再探索分岐の優先順位と採用条件_最小実験.md`
+
+実装：`10_検証/reexploration_policy_comparison.py`
+
+16で得られた三つの再探索枝を、`change_axes`から投影した`motion_cost`、`boundary_change_cost`、`relation_change_cost`、`upstream_target_change_cost`、保存条件の別軸へ分解する。重み付き総合点は置かず、target維持・厳密な実音高順序の維持・即時移動量の最小化という明示的な方針を適用し、同じ枝集合でも採用結果が変わることを検証する。これは採用方針を一意化するものではなく、保存条件と比較順が必要であることを示す比較実験である。方針の起源、複数条件の競合、履歴による更新、打ち切り条件は未解決ξとして残し、Coreへ昇格させない。
+
+### 5.17 音程分解・採用枝から次状態への履歴controller接続
+
+記録：`10_検証/18_音程分解_採用枝から次状態への履歴循環_最小実験.md`
+
+実装：`10_検証/history_aware_reexploration_cycle.py`
+
+17の`BranchEvaluation`と`SearchPolicy`を引き継ぎ、採用枝を`StateTransition`として次状態へ記録する。次状態の`selected_pair`を次回の即時移動量の基準へ再投影し、履歴に保持した`change_axes`をcontrollerへ渡して次の方針を選ぶ。履歴なし→`target_continuity_then_relation`、直前の`change_axes`が`boundary_changed`のみ→`strict_relation_then_boundary`、直前の`change_axes`が`upstream_target_changed`のみ→`minimum_immediate_motion`という暫定写像を二回の遷移で実行し、S2で次方針を得たところで停止する。候補枝は初期seedから一度だけ作る固定メニューであるため、現在状態からのB・Γ・target差分の再計算は19へ送る。`branch_kind`は表示・追跡用に留め、性質の推定には使わない。これは履歴controllerの接続検査であり、controllerの写像、履歴保持長、Γ_change後の規則、打ち切り条件は未解決ξとして残す。12平均律・長音階・音度・声部順序は引き続きModule固有の`M_B`と`Γ`に留め、Coreへ昇格させない。
+
+### 5.18 音程分解・状態からの再探索枝再生成
+
+記録：`10_検証/19_音程分解_状態からの再探索枝再生成_最小実験.md`
+
+実装：`10_検証/state_rebased_reexploration.py`
+
+18の固定枝メニューを、現在状態へ適用する操作候補へ置き換える。`B`を候補オクターブ・声域、`Γ`を実音高ordering rule、`target`をvoiceごとのtarget degreeとして`DynamicSearchState`へ保持し、`B_change`・`Γ_change`・`upstream_target_change`を状態へ適用する。具体音の移動基準は`last_realized_pair`へ一本化し、初期seedの開始音から採用候補へ遷移ごとに更新する。これは現在の`B`で有効なペアを保証する名前ではなく、最後に具体音として実現したペアを基準点として保持するための名称である。これにより、次回の`Γ_select`は`state_0`の開始音ではなく`state_t`の最後に実現した音高を移動基準として読む。S1の`A♯3–F♯4`からtarget変更を適用した場合、`E♯3`と`E♯4`の移動量はそれぞれ5半音と7半音となり、`E♯3–F♯4`が選ばれる。適用後に候補を再生成し、適用前後の状態差分から実際の`change_axes`を計算するため、枝名から性質を逆算しない。既にtargetが変更済みの状態へ同じ操作を適用すると`no_effect`として検出され、`upstream_target_changed = false`のまま保持される。`no_effect`は観測には残すが、今回の比較では採用対象から除外する。採用された具体音遷移は`realized_transition_history`へ記録し、各操作の観測は`observation_history`へ分離する。これは状態・操作・候補再生成・履歴を接続する検証であり、Coreへ音楽固有のB・Γ・targetを追加しない。候補再生成後もemptyになる場合の復帰、複合変更、操作controllerの更新は未解決ξとして残す。
+
+### 5.19 音程分解・操作後も空集合を保持する観測
+
+記録：`10_検証/20_音程分解_操作後も空集合を保持する観測.md`
+
+実装：`10_検証/empty_action_observation.py`
+
+19の`ActionObservation`を空候補対応へ拡張し、操作後に`selected = None`となっても
+`ReexplorationObservation.status`、`failure_stage`、`failure_reason`を保持する。空観測には
+`BranchEvaluation`を作らず、採用された`DynamicStateTransition`と、各操作を試した
+`realized_transition_history`と`observation_history`を分離する。`B_tighten`で`B_range_projection`後の
+`constraint_no_candidate`を作り、空状態を通常の遷移と混同せず保持する。同じ空状態から
+`Γ_change`がなおemptyになる観測も履歴へ残し、`strict_relation_then_boundary`の比較では
+空枝を除外して`upstream_target_change`を採用し、`E♯4–F♯4`へ戻ることを確認する。
+`empty`は既知の診断、復旧方針・打ち切り条件・空状態での`last_realized_pair`の意味は未解決ξとして
+分離する。Coreへ音楽固有のB・Γ・targetを追加しない。
+
+### 5.20 音程分解・列挙済みaction set枯渇後のfallback outcome観測
+
+記録：`10_検証/21_音程分解_全操作empty後のfallback観測_最小実験.md`
+
+実装：`10_検証/exhaustion_fallback_observation.py`
+
+20の空状態にvoice B側の境界閉鎖を加え、同一source stateから列挙した
+`B_change`・`Γ_change`・`upstream_target_change`の一手先枝を独立に評価する。
+列挙済みaction setの全枝がemptyになった場合を、可能な操作全体の消滅とは呼ばず、
+action-set exhaustionとして記録する。その後の`stop_search`、
+`reopen_voice_B_boundary`、`discard_target`を`FallbackOutcomeObservation`として比較し、
+いずれも正式な`DynamicSearchState`の次状態へはまだ昇格させない。voice B境界の局所的な
+再開は、上位層のBへの退避とは区別する。fallback選択controller、境界再開の権限、target破棄後の
+代替target、fallback履歴の形式は未解決ξとして保持し、Coreへ昇格させない。
+
+### 5.21 音程分解・fallback採用後の実状態遷移
+
+記録：`10_検証/22_音程分解_fallback採用後の実状態遷移_最小実験.md`
+
+実装：`10_検証/fallback_state_adoption.py`
+
+21で`FallbackOutcomeObservation`に留めた`reopen_voice_B_boundary`を実際に
+`DynamicSearchState`へ適用し、`S_t → Δ → S_t+1`を構成する。fallbackはvoice Bの
+境界を変えるが、具体音をまだ採用しないため、`FallbackStateTransition`を
+`fallback_transition_history`へ記録し、`realized_transition_history`へ混ぜない。
+境界再開後の状態から`upstream_target_change`を採用し、その後
+`minimum_immediate_motion`で`B_change`を採用して、fallback後も通常探索が続くことを
+確認する。`stop_search`と`discard_target`は正式な次状態へ変換せず、停止後のcontroller接続と
+target破棄後の状態表現を未解決ξとして保持する。Coreへ音楽固有のB・Γ・targetを追加しない。
 
 ## ■ 6. 運用原則
 
@@ -318,5 +420,13 @@ Bから候補空間生成 v0.1 / 実験中
 同一トライトーンと綴りによる解決方向 v0.1 / Module候補・最小接続検査
 解決候補の文脈分解 v0.1 / Module候補・最小接続検査
 音度から具体音への実現 v0.1 / Module候補・最小接続検査
+実現制約の競合と候補消滅 v0.1 / Module候補・最小接続検査
+空集合後の再探索分岐 v0.1 / Module候補・最小接続検査
+再探索分岐の優先順位と採用条件 v0.1 / Module候補・最小接続検査
+採用枝から次状態への履歴controller接続 v0.1 / Module候補・最小接続検査
+状態からの再探索枝再生成 v0.1 / Module候補・最小接続検査
+列挙済みaction set枯渇後のfallback outcome観測 v0.1 / Module候補・最小接続検査
+fallback採用後の実状態遷移 v0.1 / Module候補・最小接続検査
+音程分解・動態Adapterの最小境界 v0.1 / Adapter候補・最小接続検査
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```
