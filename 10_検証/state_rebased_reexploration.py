@@ -127,7 +127,10 @@ class FallbackStateTransition:
     operation_status: str
     resulting_state_id: str
     change_axes: ChangeAxes
-    resulting_voice_b_boundary: str
+    # fallbackが候補生成条件を変えたかを、表示用文字列だけでなく
+    # 実際の前後境界として保存する。両者の意味は音程Moduleに留める。
+    source_voice_b_boundary: RealizationBoundary
+    resulting_voice_b_boundary: RealizationBoundary
     next_policy_reason: str
 
 

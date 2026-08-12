@@ -34,6 +34,14 @@ RDL音楽理論/
 │  ├─ 21_音程分解_全操作empty後のfallback観測_最小実験.md
 │  ├─ 22_音程分解_fallback採用後の実状態遷移_最小実験.md
 │  ├─ 23_音程分解_10〜22の動態圧縮_全体構造.md
+│  ├─ 24_音程分解_動態Adapterの最小境界_検証.md
+│  ├─ 25_リズム候補Module_動態Adapter第二標本.md
+│  ├─ 26_リズム境界変更_候補空間再構成_最小実験.md
+│  ├─ 27_二標本_動態境界の横断不変条件.md
+│  ├─ 28_同一BoundaryTransition_投影と候補再構成_最小実験.md
+│  ├─ 29_動態Adapter候補_二標本と一標本の圧縮.md
+│  ├─ 30_同一音程fallback遷移_投影と候補再構成_最小実験.md
+│  ├─ 31_二標本_構造遷移record接続の横断検査.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -53,7 +61,15 @@ RDL音楽理論/
 │  ├─ history_aware_reexploration_cycle.py
 │  ├─ state_rebased_reexploration.py
 │  ├─ empty_action_observation.py
-│  └─ exhaustion_fallback_observation.py
+│  ├─ exhaustion_fallback_observation.py
+│  ├─ fallback_state_adoption.py
+│  ├─ dynamic_adapter_boundary.py
+│  ├─ rhythm_dynamic_adapter.py
+│  ├─ rhythm_boundary_reconstruction.py
+│  ├─ rhythm_transition_projection_reconstruction.py
+│  ├─ pitch_transition_projection_reconstruction.py
+│  ├─ cross_module_transition_connection.py
+│  └─ cross_module_dynamic_invariants.py
 ```
 
 ## ■ 2. 各文書の役割
@@ -125,7 +141,19 @@ RDL_Core / SILN ───→ 01 Core ────────┘
 
 ### 24_音程分解_動態Adapterの最小境界_検証.md
 
-23で圧縮した音程Moduleの三履歴を、`observation`・`fallback_transition`・`realized_transition`という音楽語彙を含まない最小イベントへ投影する。empty観測、fallbackを適用した構造遷移、ordinary actionによる具体音実現を別履歴のまま保持できることを確認する。Adapterは状態意味・controller・fallback選択を一般化せず、Coreへ新しい状態変数を追加しない。
+23で圧縮した音程Moduleの三履歴を、`observation`・`structural_transition`・`realized_transition`という音楽語彙を含まない最小イベントへ投影する。empty観測、fallbackを適用した構造遷移、ordinary actionによる具体音実現を別履歴のまま保持し、Module側の操作識別子を不透明な`operation_kind`として残せることを確認する。Adapterは状態意味・controller・fallback選択を一般化せず、Coreへ新しい状態変数を追加しない。
+
+### 29_動態Adapter候補_二標本と一標本の圧縮.md
+
+24〜30で確認した動態Adapter候補を圧縮する。三イベント分類・`operation_kind`の不透明保持・`realization_status`の分離に加え、Module固有の構造遷移recordが投影とrecord由来の候補再生成へ接続する形式を二標本で比較する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通候補生成器・共通controller・因果順序を追加しない。
+
+### 30_同一音程fallback遷移_投影と候補再構成_最小実験.md
+
+22の`FallbackStateTransition`を同一recordのまま24の`project_fallback`と19の`observe_actions()`へ接続する。recordに保存したsource／resulting voice B境界の実差分を読み、構造遷移イベントへの投影と、`B_change`・`upstream_target_change`の有効枝再観測を分離して確認する。これは28のリズムModuleと比較可能な第二標本であり、共通状態・共通候補生成器・因果順序を追加しない。
+
+### 31_二標本_構造遷移record接続の横断検査.md
+
+28のリズムModuleと30の音程Moduleを個別に実行し、Module固有の構造遷移recordが`structural_transition / not_realized`への投影と、record由来の候補再生成の双方へ接続する限定形式を検査する。候補語彙、状態内容、`change_axes`名、状態復元手順、候補生成規則、因果順序は比較・共通化しない。
 
 ## ■ 4. 将来の分岐候補
 
@@ -388,6 +416,68 @@ action-set exhaustionとして記録する。その後の`stop_search`、
 確認する。`stop_search`と`discard_target`は正式な次状態へ変換せず、停止後のcontroller接続と
 target破棄後の状態表現を未解決ξとして保持する。Coreへ音楽固有のB・Γ・targetを追加しない。
 
+### 5.22 音程分解・10〜22の動態圧縮
+
+記録：`10_検証/23_音程分解_10〜22の動態圧縮_全体構造.md`
+
+10〜17の関係観測・候補生成・実現・再探索枝・採用条件と、18〜22の状態・履歴・empty・action set枯渇・fallback・通常探索復帰を一枚の構造へ圧縮する。候補生成は`physical relation → 12TET coordinate/category → learned description → contextual role / target → realization candidate generation`の層を保ち、現在状態の`B / Γ / target`から候補が生成される入口と混同しない。
+
+`observation_history`、`fallback_transition_history`、`realized_transition_history`を分離したまま、22で実状態化できた`reopen_voice_B_boundary`と、既知のfallback outcome後に未解決として残る接続・状態表現を区別して記録する。23は実験器やCore変数を追加しない。
+
+### 5.23 音程分解・動態Adapterの最小境界
+
+記録：`10_検証/24_音程分解_動態Adapterの最小境界_検証.md`
+
+実装：`10_検証/dynamic_adapter_boundary.py`
+
+23で圧縮した音程Moduleの三履歴を、`observation`・`structural_transition`・`realized_transition`の共通イベントへ投影する。empty観測、fallback構造遷移、具体音実現を別イベントとして保持し、`branch_kind`・`fallback_kind`・`selected_branch_kind`に由来するModule識別子を不透明な`operation_kind`として保存する。`project_state()`の出力は履歴チャンネル別の投影順であり、因果・時系列順を再構成しない。Adapterは状態意味・controller・fallback選択を一般化せず、Coreへ新しい状態変数を追加しない。
+
+### 5.24 リズム候補Module・動態Adapter第二標本
+
+記録：`10_検証/25_リズム候補Module_動態Adapter第二標本.md`
+
+実装：`10_検証/rhythm_dynamic_adapter.py`
+
+表拍・裏拍だけを候補とする既存の単純リズムModuleへ、音程Moduleとは別形式の操作観測・構造遷移・具体実現記録を置き、同じ`observation`・`structural_transition`・`realized_transition`へ投影できるかを検証する。`target_rest`による既知の空候補、`reopen_grid_boundary`によるfallback構造遷移、`select_offbeat`による具体実現を分離し、Module側の識別子を不透明な`operation_kind`として保持する。二標本で共通境界の候補を得たが、Coreへの昇格、候補選択原理、因果順序の再構成は行わない。
+
+### 5.25 リズム境界変更・候補空間再構成
+
+記録：`10_検証/26_リズム境界変更_候補空間再構成_最小実験.md`
+
+実装：`10_検証/rhythm_boundary_reconstruction.py`
+
+25で記録した`reopen_grid_boundary`を、25で使った候補語彙と制約器を再利用する26専用の境界依存候補生成器へ接続する。閉じた境界では空候補になる`target=休符`を、構造遷移後の`grid_open=True`で再評価し、`休符`が候補空間へ追加されることを確認する。03の静的`candidate_space`は変更しない。`structural_transition`が後続の候補生成条件を変更し得ることを示すが、共通projector、共通状態、controller、因果順序は導入しない。
+
+### 5.26 二標本・動態境界の横断契約候補
+
+記録：`10_検証/27_二標本_動態境界の横断不変条件.md`
+
+実装：`10_検証/cross_module_dynamic_invariants.py`
+
+24の音程Moduleと25・26のリズムModuleを個別の既存検証器のまま実行し、`observation`・`structural_transition`・`realized_transition`の三分類、`operation_kind`の保持、実現状態の分離を横断契約候補として再確認する。三分類すべての出現はfixture coverageへ分離し、26の候補空間再構成は別実験として再検査する。共通projector・共通状態・共通controller・因果順序への昇格は行わない。
+
+### 5.27 同一リズム境界遷移の投影・候補再構成
+
+記録：`10_検証/28_同一BoundaryTransition_投影と候補再構成_最小実験.md`
+
+実装：`10_検証/rhythm_transition_projection_reconstruction.py`
+
+26が生成した同じ`BoundaryTransition`を、`structural_transition`のGenericイベントへ投影し、そのrecordが持つ`resulting_grid_open`を26専用の動的候補生成器へ渡す。投影用recordと候補再構成用recordを分けず、同一境界遷移が両方の経路へ接続されることを検証する。03の静的`candidate_space`、共通Adapter、因果順序は変更しない。
+
+### 5.28 動態Adapter候補・二標本と一標本の圧縮
+
+記録：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
+
+24〜30を圧縮し、二標本で確認した三イベント分類・不透明な`operation_kind`保持・`realization_status`分離と、Module固有の構造遷移recordからの投影・候補再構成接続を区別して記録する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通controller・因果順序は追加しない。
+
+### 5.29 同一音程fallback遷移の投影・候補再構成
+
+記録：`10_検証/30_同一音程fallback遷移_投影と候補再構成_最小実験.md`
+
+実装：`10_検証/pitch_transition_projection_reconstruction.py`
+
+22の同じ`FallbackStateTransition`を24の`project_fallback`へ投影し、recordが持つsource／resulting voice B境界差分を19の候補生成器へ反映する。`structural_transition`への投影と、`B_change`・`upstream_target_change`が有効枝として再観測されることを確認する。28のリズムModuleと同じ接続形式を二標本で比較するが、候補生成規則・境界意味・共通状態・因果順序は統一しない。
+
 ## ■ 6. 運用原則
 
 - GitHubリポジトリを保存・版管理の基準とする
@@ -427,6 +517,10 @@ Bから候補空間生成 v0.1 / 実験中
 状態からの再探索枝再生成 v0.1 / Module候補・最小接続検査
 列挙済みaction set枯渇後のfallback outcome観測 v0.1 / Module候補・最小接続検査
 fallback採用後の実状態遷移 v0.1 / Module候補・最小接続検査
+音程分解・10〜22の動態圧縮 v0.1 / Module候補・動態圧縮
 音程分解・動態Adapterの最小境界 v0.1 / Adapter候補・最小接続検査
+リズム候補Module・動態Adapter第二標本 v0.1 / Adapter候補・第二標本検証
+動態Adapter候補・二標本と一標本の圧縮 v0.1 / Adapter候補・証拠範囲圧縮
+同一音程fallback遷移の投影・候補再構成 v0.1 / Module候補・最小接続検査
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```

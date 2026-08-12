@@ -162,6 +162,44 @@ fallback採用後の実状態遷移：`10_検証/22_音程分解_fallback採用�
 
 実験用スクリプト：`10_検証/dynamic_adapter_boundary.py`
 
+リズム候補Module・動態Adapter第二標本：`10_検証/25_リズム候補Module_動態Adapter第二標本.md`
+
+表拍・裏拍だけの候補Moduleに、音程Moduleとは別形式の操作観測・fallback構造遷移・具体実現記録を置き、`observation`・`structural_transition`・`realized_transition`へ投影する。`target_rest`による既知の空候補と`reopen_grid_boundary`による構造遷移を分離し、Module識別子を不透明な`operation_kind`として保持する。これは二標本によるAdapter境界候補の確認であり、CoreやModule横断の因果規則を追加しない。
+
+実験用スクリプト：`10_検証/rhythm_dynamic_adapter.py`
+
+リズム境界変更・候補空間再構成：`10_検証/26_リズム境界変更_候補空間再構成_最小実験.md`
+
+25で記録した`reopen_grid_boundary`を、25で使った候補語彙と制約器を再利用する26専用の境界依存候補生成器へ接続し、閉じた境界では空候補になる`target=休符`が、構造遷移後の再生成で候補となることを確認する。03の静的`candidate_space`は変更しない。これはリズムModule内の実効性検証であり、共通projectorやModule横断の因果規則を追加しない。
+
+実験用スクリプト：`10_検証/rhythm_boundary_reconstruction.py`
+
+二標本・動態境界の横断契約候補：`10_検証/27_二標本_動態境界の横断不変条件.md`
+
+24の音程Moduleと25・26のリズムModuleを個別の検証器のまま実行し、三イベント境界と`operation_kind`の保持を横断的な契約候補として再確認する。三分類すべての出現はfixture coverageとして分離し、26の候補空間再構成も別実験として再検査する。共通projector・共通状態・共通controller・因果順序は導入しない。
+
+実験用スクリプト：`10_検証/cross_module_dynamic_invariants.py`
+
+同一リズム境界遷移の投影・候補再構成：`10_検証/28_同一BoundaryTransition_投影と候補再構成_最小実験.md`
+
+26が生成した同じ`BoundaryTransition`を、`structural_transition`のGenericイベントへ投影し、そのrecordが持つ`resulting_grid_open`を26専用の動的候補生成器へ渡す。投影用recordと候補再構成用recordを分けず、同一境界遷移が両方の経路へ接続されることだけを検証する。03の静的`candidate_space`、共通Adapter、因果順序は変更しない。
+
+実験用スクリプト：`10_検証/rhythm_transition_projection_reconstruction.py`
+
+動態Adapter候補・二標本と一標本の圧縮：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
+
+24〜30を圧縮する。三イベント分類・不透明な`operation_kind`保持・`realization_status`の分離に加え、Module固有の構造遷移recordが投影とrecord由来の候補再生成へ接続する形式を二標本で比較する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通controller・因果順序は保留する。
+
+同一音程fallback遷移の投影・候補再構成：`10_検証/30_同一音程fallback遷移_投影と候補再構成_最小実験.md`
+
+22の同じ`FallbackStateTransition`を24の`project_fallback`へ渡し、そのrecordに保存したvoice B境界の実差分を19の候補再生成器へ渡す。`reopen_voice_B_boundary`は`structural_transition`として投影され、再開後は`B_change`と`upstream_target_change`が有効枝として再観測される。これはリズムの28と比較可能な接続形式の第二標本であり、候補語彙・状態意味・因果順序の共通化ではない。
+
+二標本・構造遷移record接続の横断検査：`10_検証/31_二標本_構造遷移record接続の横断検査.md`
+
+実験用スクリプト：`10_検証/cross_module_transition_connection.py`
+
+28と30を個別に実行し、Module固有の構造遷移recordが`structural_transition / not_realized`への投影と、record由来の後続候補再生成の双方へ接続するという限定形式を横断検査する。候補語彙、状態内容、軸名、候補生成規則、因果順序は比較・共通化しない。
+
 ## 状態
 
 初期検証段階。文書ごとの状態は各ファイルに記録する。

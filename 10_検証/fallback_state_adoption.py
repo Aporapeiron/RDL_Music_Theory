@@ -45,17 +45,16 @@ def adopt_reopen_voice_B_boundary(
     next_state_id = f"{state.state_id}->reopen_voice_B_boundary"
     change_axes = diff_change_axes(state, reopened)
     assert change_axes.boundary_changed is True
+    operation_status = "applied" if change_axes != type(change_axes)() else "no_effect"
     transition = FallbackStateTransition(
         source_state_id=state.state_id,
         fallback_kind=outcome.fallback_kind,
         outcome_status=outcome.outcome_status,
-        operation_status="applied",
+        operation_status=operation_status,
         resulting_state_id=next_state_id,
         change_axes=change_axes,
-        resulting_voice_b_boundary=(
-            f"{reopened.voice_b_boundary.voice_range.low.text}-"
-            f"{reopened.voice_b_boundary.voice_range.high.text}"
-        ),
+        source_voice_b_boundary=state.voice_b_boundary,
+        resulting_voice_b_boundary=reopened.voice_b_boundary,
         next_policy_reason=(
             "fallback changed voice B boundary; ordinary action policy reads "
             "the actual boundary change next"
@@ -93,6 +92,8 @@ def run_checks() -> None:
     assert fallback_record.operation_status == "applied"
     assert fallback_record.resulting_state_id == reopened.state_id
     assert fallback_record.change_axes.boundary_changed is True
+    assert fallback_record.source_voice_b_boundary == exhausted.voice_b_boundary
+    assert fallback_record.resulting_voice_b_boundary == reopened.voice_b_boundary
     assert reopened.realized_transition_history == ()
 
     # fallback後は、同じsource stateからの観測ではなく、実際のS3から再探索する。
