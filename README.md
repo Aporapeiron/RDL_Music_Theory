@@ -186,9 +186,9 @@ fallback採用後の実状態遷移：`10_検証/22_音程分解_fallback採用�
 
 実験用スクリプト：`10_検証/rhythm_transition_projection_reconstruction.py`
 
-動態Adapter候補・二標本と一標本の圧縮：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
+動態Adapter候補・二標本横断契約とModule固有結果の圧縮：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
 
-24〜30を圧縮する。三イベント分類・不透明な`operation_kind`保持・`realization_status`の分離に加え、Module固有の構造遷移recordが投影とrecord由来の候補再生成へ接続する形式を二標本で比較する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通controller・因果順序は保留する。
+24〜34を圧縮する。三イベント分類・不透明な`operation_kind`保持・`realization_status`の分離に加え、Module固有の構造遷移recordが投影とrecord由来の再生成処理へ接続する形式を二標本で比較する。再生成の非空・空はfixture結果、空位置はModule固有観測として分け、共通projector・共通状態・共通empty分類・共通controller・因果順序は保留する。
 
 同一音程fallback遷移の投影・候補再構成：`10_検証/30_同一音程fallback遷移_投影と候補再構成_最小実験.md`
 
@@ -199,6 +199,24 @@ fallback採用後の実状態遷移：`10_検証/22_音程分解_fallback採用�
 実験用スクリプト：`10_検証/cross_module_transition_connection.py`
 
 28と30を個別に実行し、Module固有の構造遷移recordが`structural_transition / not_realized`への投影と、record由来の後続候補再生成の双方へ接続するという限定形式を横断検査する。候補語彙、状態内容、軸名、候補生成規則、因果順序は比較・共通化しない。
+
+同一音程fallback遷移と空の候補再生成：`10_検証/32_同一音程fallback遷移_空の候補再生成_最小実験.md`
+
+実験用スクリプト：`10_検証/pitch_transition_projection_empty_regeneration.py`
+
+実差分を持つ`FallbackStateTransition`を投影と再生成へ接続しつつ、再生成結果が空のまま残る標本を置く。構造遷移recordから再生成処理へ接続できることと、候補が非空になることを分離し、20〜21の空観測をそのまま保持する。
+
+同一リズム境界遷移と空の候補再生成：`10_検証/33_同一リズム境界遷移_空の候補再生成_最小実験.md`
+
+実験用スクリプト：`10_検証/rhythm_transition_projection_empty_regeneration.py`
+
+実差分を持つ`BoundaryTransition`を投影と再生成へ接続し、動的候補空間は開いてもModule固有制約後の候補が空となる標本を置く。03の静的候補生成器は変更せず、再生成実行と候補非空性の分離をリズムModuleでも確認する。
+
+二標本・空結果のModule固有位置：`10_検証/34_二標本_空結果のModule固有位置_横断観測.md`
+
+実験用スクリプト：`10_検証/cross_module_empty_result_locations.py`
+
+32と33を比較し、両方とも生候補が存在したうえで最終結果が空となるが、音程では`B_range_projection`、リズムでは現在値除外とtarget制約の交差で空になることを記録する。共通empty分類は導入しない。
 
 ## 状態
 

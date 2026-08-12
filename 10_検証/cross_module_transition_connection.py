@@ -8,7 +8,13 @@
 
 from dataclasses import dataclass
 
+from pitch_transition_projection_empty_regeneration import (
+    run_empty_regeneration as run_pitch_empty,
+)
 from pitch_transition_projection_reconstruction import run_same_transition as run_pitch
+from rhythm_transition_projection_empty_regeneration import (
+    run_empty_regeneration as run_rhythm_empty,
+)
 from rhythm_transition_projection_reconstruction import run_same_transition as run_rhythm
 
 
@@ -24,7 +30,17 @@ class TransitionConnectionObservation:
     operation_status: str
     source_differs_from_result: bool
     regeneration_status: str
-    regenerated_count: int
+    fixture_result_count: int
+
+
+@dataclass(frozen=True)
+class RegenerationOutcomeCoverage:
+    """接続契約とは別に、今回fixtureの結果分岐を記録する。"""
+
+    module_name: str
+    nonempty_result_count: int
+    empty_result_count: int
+    empty_result_observed: bool
 
 
 def _check_connection(observation: TransitionConnectionObservation) -> None:
@@ -56,7 +72,7 @@ def run_cross_module_connection() -> tuple[TransitionConnectionObservation, ...]
                 != rhythm.transition.resulting_grid_open
             ),
             regeneration_status="executed",
-            regenerated_count=len(rhythm.candidates),
+            fixture_result_count=len(rhythm.candidates),
         ),
         TransitionConnectionObservation(
             module_name="pitch",
@@ -70,7 +86,7 @@ def run_cross_module_connection() -> tuple[TransitionConnectionObservation, ...]
                 != pitch.transition.resulting_voice_b_boundary
             ),
             regeneration_status="executed",
-            regenerated_count=len(pitch.regenerated_pairs),
+            fixture_result_count=len(pitch.regenerated_pairs),
         ),
     )
     for observation in observations:
@@ -78,11 +94,45 @@ def run_cross_module_connection() -> tuple[TransitionConnectionObservation, ...]
     return observations
 
 
+def run_regeneration_outcome_coverage() -> tuple[RegenerationOutcomeCoverage, ...]:
+    """非空・空の両結果はfixture coverageであり、接続契約ではない。"""
+
+    rhythm_nonempty = run_rhythm()
+    rhythm_empty = run_rhythm_empty()
+    pitch_nonempty = run_pitch()
+    pitch_empty = run_pitch_empty()
+    return (
+        RegenerationOutcomeCoverage(
+            module_name="rhythm",
+            nonempty_result_count=len(rhythm_nonempty.candidates),
+            empty_result_count=len(rhythm_empty.constrained_candidates),
+            empty_result_observed=rhythm_empty.status == "no_candidate",
+        ),
+        RegenerationOutcomeCoverage(
+            module_name="pitch",
+            nonempty_result_count=len(pitch_nonempty.regenerated_pairs),
+            empty_result_count=sum(
+                item.observation.selected is not None
+                for item in pitch_empty.observations
+            ),
+            empty_result_observed=all(
+                item.observation.selected is None
+                for item in pitch_empty.observations
+            ),
+        ),
+    )
+
+
 def run_checks() -> None:
     observations = run_cross_module_connection()
     assert tuple(item.module_name for item in observations) == ("rhythm", "pitch")
     # これは接続契約ではなく、28・30の今回のfixture結果である。
-    assert all(item.regenerated_count > 0 for item in observations)
+    assert all(item.fixture_result_count > 0 for item in observations)
+    outcome_coverage = run_regeneration_outcome_coverage()
+    assert tuple(item.module_name for item in outcome_coverage) == ("rhythm", "pitch")
+    assert all(item.nonempty_result_count > 0 for item in outcome_coverage)
+    assert all(item.empty_result_count == 0 for item in outcome_coverage)
+    assert all(item.empty_result_observed for item in outcome_coverage)
 
 
 def main() -> None:
@@ -93,7 +143,15 @@ def main() -> None:
             f"{observation.module_name}: "
             f"operation={observation.record_operation_kind} "
             f"regeneration={observation.regeneration_status} "
-            f"regenerated_count={observation.regenerated_count}"
+            f"fixture_result_count={observation.fixture_result_count}"
+        )
+    print("[fixture outcome coverage]")
+    for coverage in run_regeneration_outcome_coverage():
+        print(
+            f"{coverage.module_name}: "
+            f"nonempty_result_count={coverage.nonempty_result_count} "
+            f"empty_result_count={coverage.empty_result_count} "
+            f"empty_result={coverage.empty_result_observed}"
         )
 
 

@@ -67,11 +67,11 @@ event後の因果順序
 ```text
 rhythm
   operation=reopen_grid_boundary
-  regenerated_count=1
+  fixture_result_count=1
 
 pitch
   operation=reopen_voice_B_boundary
-  regenerated_count=2
+  fixture_result_count=2
 ```
 
 両標本で、record由来の差分が存在し、同じrecordの投影eventは`structural_transition / not_realized`となった。両方で再生成処理を実行し、今回のfixtureでは結果も非空だった。
@@ -81,11 +81,20 @@ pitch
   record由来の再生成処理が executed である
 
 今回のfixture結果
-  rhythm: regenerated_count=1
-  pitch:  regenerated_count=2
+  rhythm: fixture_result_count=1
+  pitch:  fixture_result_count=2
 ```
 
-`executed`であっても結果が空になることは許容する。20〜21で確認した通り、状態条件の変更と候補の非空性は別軸である。
+`executed`であっても結果が空になることは許容する。20〜21で確認した通り、状態条件の変更と候補の非空性は別軸である。32では、この許容範囲を構造遷移recordの同一record経路でも実測する。
+
+```text
+record由来の再生成処理
+  executed
+    ├─ nonempty: rhythm 28 / pitch 30
+    └─ empty:    rhythm 33 / pitch 32
+```
+
+31の検査器は、上記の非空・空を**fixture coverage**として両Moduleで確認する。`fixture_result_count`は各Moduleの今回の最終結果を数える表示値であり、raw候補空間の共通計数ではない。これは再生成接続の契約に`fixture_result_count > 0`を戻すものではない。
 
 ## ■ 4. 確定範囲
 
@@ -102,7 +111,6 @@ Module固有の構造遷移recordは、
 
 - 複数の状態条件が同時に変わるrecordの表現
 - `no_effect`構造遷移と候補再生成の関係
-- 実差分がある構造遷移後も再生成結果が空となる標本
 - 共通状態または共通候補生成器の必要条件
 - eventへ因果順序・復元情報を持たせるべきか
 - 三標本目でも同じ限定形式が成立するか

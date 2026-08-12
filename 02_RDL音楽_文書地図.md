@@ -42,6 +42,9 @@ RDL音楽理論/
 │  ├─ 29_動態Adapter候補_二標本と一標本の圧縮.md
 │  ├─ 30_同一音程fallback遷移_投影と候補再構成_最小実験.md
 │  ├─ 31_二標本_構造遷移record接続の横断検査.md
+│  ├─ 32_同一音程fallback遷移_空の候補再生成_最小実験.md
+│  ├─ 33_同一リズム境界遷移_空の候補再生成_最小実験.md
+│  ├─ 34_二標本_空結果のModule固有位置_横断観測.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -69,6 +72,9 @@ RDL音楽理論/
 │  ├─ rhythm_transition_projection_reconstruction.py
 │  ├─ pitch_transition_projection_reconstruction.py
 │  ├─ cross_module_transition_connection.py
+│  ├─ pitch_transition_projection_empty_regeneration.py
+│  ├─ rhythm_transition_projection_empty_regeneration.py
+│  ├─ cross_module_empty_result_locations.py
 │  └─ cross_module_dynamic_invariants.py
 ```
 
@@ -145,7 +151,7 @@ RDL_Core / SILN ───→ 01 Core ────────┘
 
 ### 29_動態Adapter候補_二標本と一標本の圧縮.md
 
-24〜30で確認した動態Adapter候補を圧縮する。三イベント分類・`operation_kind`の不透明保持・`realization_status`の分離に加え、Module固有の構造遷移recordが投影とrecord由来の候補再生成へ接続する形式を二標本で比較する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通候補生成器・共通controller・因果順序を追加しない。
+24〜34で確認した動態Adapter候補を圧縮する。二標本の横断契約、fixtureで確認した非空・空の結果分岐、Module固有に残す空位置を区別する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通empty分類・共通候補生成器・共通controller・因果順序を追加しない。
 
 ### 30_同一音程fallback遷移_投影と候補再構成_最小実験.md
 
@@ -154,6 +160,18 @@ RDL_Core / SILN ───→ 01 Core ────────┘
 ### 31_二標本_構造遷移record接続の横断検査.md
 
 28のリズムModuleと30の音程Moduleを個別に実行し、Module固有の構造遷移recordが`structural_transition / not_realized`への投影と、record由来の候補再生成の双方へ接続する限定形式を検査する。候補語彙、状態内容、`change_axes`名、状態復元手順、候補生成規則、因果順序は比較・共通化しない。
+
+### 32_同一音程fallback遷移_空の候補再生成_最小実験.md
+
+実差分を持つ音程Module固有`FallbackStateTransition`を、`structural_transition`への投影とrecord由来の候補再生成へ接続する。ただし結果は空のまま残す。構造遷移後の再生成接続と候補非空性を分離し、空観測を候補消滅の診断として保持する。共通Adapter・共通状態・共通候補生成器・共通controllerは追加しない。
+
+### 33_同一リズム境界遷移_空の候補再生成_最小実験.md
+
+実差分を持つリズムModule固有`BoundaryTransition`を、`structural_transition`への投影とrecord由来の候補再生成へ接続する。候補空間自体は開くが、現在値除外とtarget条件の交差によって制約後の候補は空となる。03の静的候補生成器、共通Adapter・共通状態・共通候補生成器・共通controllerは変更しない。
+
+### 34_二標本_空結果のModule固有位置_横断観測.md
+
+32の音程Moduleと33のリズムModuleを比較し、両者の生候補と最終空結果の間にあるModule固有段階を記録する。音程は`B_range_projection`、リズムは現在値除外とtarget制約の交差で空になる。共通empty分類・共通状態・共通候補生成器・共通controllerは追加しない。
 
 ## ■ 4. 将来の分岐候補
 
@@ -464,11 +482,11 @@ target破棄後の状態表現を未解決ξとして保持する。Coreへ音�
 
 26が生成した同じ`BoundaryTransition`を、`structural_transition`のGenericイベントへ投影し、そのrecordが持つ`resulting_grid_open`を26専用の動的候補生成器へ渡す。投影用recordと候補再構成用recordを分けず、同一境界遷移が両方の経路へ接続されることを検証する。03の静的`candidate_space`、共通Adapter、因果順序は変更しない。
 
-### 5.28 動態Adapter候補・二標本と一標本の圧縮
+### 5.28 動態Adapter候補・二標本横断契約とModule固有結果の圧縮
 
 記録：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
 
-24〜30を圧縮し、二標本で確認した三イベント分類・不透明な`operation_kind`保持・`realization_status`分離と、Module固有の構造遷移recordからの投影・候補再構成接続を区別して記録する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通controller・因果順序は追加しない。
+24〜34を圧縮し、二標本で確認した三イベント分類・不透明な`operation_kind`保持・`realization_status`分離と、Module固有の構造遷移recordからの投影・再生成処理接続を記録する。非空・空はfixture結果、空位置はModule固有観測として分離し、共通projector・共通状態・共通empty分類・共通controller・因果順序は追加しない。
 
 ### 5.29 同一音程fallback遷移の投影・候補再構成
 
@@ -520,7 +538,7 @@ fallback採用後の実状態遷移 v0.1 / Module候補・最小接続検査
 音程分解・10〜22の動態圧縮 v0.1 / Module候補・動態圧縮
 音程分解・動態Adapterの最小境界 v0.1 / Adapter候補・最小接続検査
 リズム候補Module・動態Adapter第二標本 v0.1 / Adapter候補・第二標本検証
-動態Adapter候補・二標本と一標本の圧縮 v0.1 / Adapter候補・証拠範囲圧縮
+動態Adapter候補・二標本横断契約とModule固有結果の圧縮 v0.3 / Adapter候補・証拠範囲圧縮
 同一音程fallback遷移の投影・候補再構成 v0.1 / Module候補・最小接続検査
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```
