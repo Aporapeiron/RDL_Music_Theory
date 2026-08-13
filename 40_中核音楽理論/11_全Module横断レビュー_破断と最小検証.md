@@ -377,23 +377,34 @@ selected realization / empty
 
 循環を閉じるのは、controllerを入れたときである。現段階ではcontrollerを未解決ξとして残し、候補生成・観測・選択・履歴の分離が保てるかを最小検証で確認する。
 
-## 9. 次に作る検証
+## 9. 作成済み検証と次候補
 
-最初に作るべき検証は、次である。
-
-```text
-same chord / different key context
-  ↓
-different function annotation
-  ↓
-targetは未生成のまま保持
-```
-
-候補名。
+最初の横断検証として、次を作成した。
 
 ```text
 42_和声機能_同一和音とkey_context分岐_最小実験.md
 harmonic_function_key_context_branch.py
 ```
 
-この検証で、和音Moduleから和声機能Moduleへの接続が、循環せずに成立するかを見る。
+確認したこと。
+
+```text
+same chord candidate
+  + different key context
+  ↓
+different degree annotation
+  ↓
+different function annotation
+  ↓
+targetは未生成のまま保持
+```
+
+この検証で、和音Moduleから和声機能Moduleへの接続は、循環せずに成立する最小例を得た。
+
+次に作る候補は、function annotationからtargetを直生成せず、target候補集合を外部入力または別Module入力として受け取った場合に、`underdetermined` と `selected target` がどこで分かれるかを見る検証である。
+
+```text
+43_和声機能_target候補集合と選択境界_最小実験.md
+harmonic_function_target_candidate_boundary.py
+```
+
