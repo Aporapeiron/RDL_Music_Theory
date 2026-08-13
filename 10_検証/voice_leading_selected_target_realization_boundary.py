@@ -50,7 +50,7 @@ def selected_target_observation() -> TargetCandidateObservation:
     )
 
 
-def external_degree_plan_for_target(selected_target: TargetCandidate) -> TargetDegreePlan:
+def fixture_degree_plan_for_selected_target(selected_target: TargetCandidate) -> TargetDegreePlan:
     """selected targetに外部fixtureとしてtarget degree planを接続する。
 
     selected target labelから音度や具体音を生成しない。
@@ -74,7 +74,7 @@ def connect_to_existing_realization(
     if target_observation.selected is None:
         raise ValueError("selected target is required before this fixture connection")
 
-    degree_plan = external_degree_plan_for_target(target_observation.selected)
+    degree_plan = fixture_degree_plan_for_selected_target(target_observation.selected)
     requests = {
         request.name: request
         for request in build_requests()
@@ -157,3 +157,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

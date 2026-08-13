@@ -119,13 +119,13 @@ upper target degree = 1
 
 ```text
 target degrees = 3 / 1
-  ↓ B_realization
-generated candidates:
-  lower = E3 / E4 / E5
-  upper = C3 / C4 / C5 / C6
-  ↓ Γ_select
+  ↓ existing 14 realization pipeline
+generated / filtered / admissible candidates
+  ↓
 selected concrete target = E4-C5
 ```
+
+ここでは既存14の中間工程、すなわち `B_realization → Γ_spelling → B_range_projection → Γ_ordering → Γ_select` を再定義せず、そのpipelineへ接続する。
 
 ---
 
@@ -161,11 +161,11 @@ concrete pitch realization
 target degree境界:
   外部fixtureとして3 / 1を渡す
 
-声部進行Module / 14:
+具体音実現境界 / 既存14:
   B_realizationとΓにより具体音候補を生成・選択する
 ```
 
-44は、43のselected targetを既存14へ接続する検証であり、声部進行Moduleを新設しない。
+44は、43のselected targetを既存14の具体音実現構造へ接続する検証であり、声部進行Moduleを新設しない。また、既存14そのものを声部進行Module全体として再解釈しない。
 
 ---
 
@@ -218,3 +218,4 @@ function annotation
 ```
 
 次の検証では、44の接続後に、voice leading resultをnext key/context interpretationへ直結しない条件を見る。
+

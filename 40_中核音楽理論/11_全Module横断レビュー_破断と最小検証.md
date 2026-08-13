@@ -463,12 +463,49 @@ function annotation
   ≠ concrete pitch realization
 ```
 
-次に作る候補は、voice leading resultをnext key/context interpretationへ直結しない条件を見る検証である。
+次の接続検証として、次を作成した。
 
 ```text
 45_文脈解釈_voice_leading後のnext_key未確定_最小実験.md
 next_key_context_after_voice_leading_boundary.py
 ```
+
+確認したこと。
+
+```text
+voice leading result = E4-C5
+  + externally supplied next context candidate set
+  ↓
+next context candidates observed
+  ↓
+Γ_selectなし → underdetermined
+Γ_selectあり → selected next context
+```
+
+この接続は自動生成ではない。
+
+```text
+voice leading result
+  ≠ next key/context interpretation
+```
+
+これにより、42〜45で次の分離を確認した。
+
+```text
+function annotation
+  ≠ target candidate generation
+  ≠ target selection
+  ≠ target degree planning
+  ≠ concrete pitch realization
+  ≠ next key/context interpretation
+```
+
+次に作る候補は、42〜45の横断結果を圧縮し、中核音楽理論側から `20_構造抽出` へ送るξを整理する文書である。
+
+```text
+46_中核音楽理論_42〜45横断圧縮_構造抽出準備.md
+```
+
 
 
 
