@@ -35,8 +35,8 @@ voice leading result
   ↓
 next context candidates observed
   ↓
-Γ_selectなし → underdetermined
-Γ_selectあり → selected next context
+Γ_context_selectionなし → underdetermined
+Γ_context_selectionあり → selected next context
 ```
 
 ---
@@ -117,7 +117,7 @@ B_context_interpretation:
 ```text
 voice leading result = E4-C5
   + {C major continuation, A minor reinterpretation}
-  + Γ_selectなし
+  + Γ_context_selectionなし
   ↓
 status = underdetermined
 selected next context = None
@@ -171,7 +171,8 @@ next context candidates observed
   外部fixtureとしてnext context候補集合を受け取る
 
 controller:
-  Γ_selectが明示された場合だけselected next contextを作る
+  Γ_context_selectionが明示された場合だけ
+  selected next contextを作る
 ```
 
 45は、voice leading後の文脈解釈境界を確認する検証であり、転調理論、形式理論、聴取上の調性感判定器を新設しない。
@@ -205,7 +206,7 @@ next context候補集合はfixtureであり、選択規則もfixture用の限定
 voice leading result = E4-C5
   ↓ external next context candidate set
 next context candidates observed
-  ↓ Γ_selectなし
+  ↓ Γ_context_selectionなし
 underdetermined
 ```
 
@@ -232,3 +233,6 @@ function annotation
 ```
 
 次の検証では、42〜45を圧縮し、中核音楽理論横断の接続地図として、どのξを `20_構造抽出` へ送るかを見る。
+
+
+

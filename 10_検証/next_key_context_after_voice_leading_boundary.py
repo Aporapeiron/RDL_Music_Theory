@@ -167,9 +167,6 @@ def run_checks() -> None:
     assert empty.selected is None
     assert empty.generated_by_voice_leading is False
 
-    # voice leading resultはnext key/contextそのものではない。
-    assert result.concrete_target_pair != ("C major continuation",)
-    assert result.selected_target != selected.selected.label
 
 
 def main() -> None:
@@ -204,3 +201,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

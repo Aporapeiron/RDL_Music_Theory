@@ -500,11 +500,15 @@ function annotation
   ≠ next key/context interpretation
 ```
 
-次に作る候補は、42〜45の横断結果を圧縮し、中核音楽理論側から `20_構造抽出` へ送るξを整理する文書である。
+42〜45の横断結果は、次の構造抽出版へ送った。
 
 ```text
-46_中核音楽理論_42〜45横断圧縮_構造抽出準備.md
+20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md
 ```
+
+この抽出版では、循環候補を因果列として閉じず、annotation、generation、observation、selection、planning、realization、reinterpretationの非同一性として整理する。
+
+
 
 
 
