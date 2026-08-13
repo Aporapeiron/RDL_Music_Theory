@@ -32,7 +32,7 @@ class TargetGenerationRule:
 @dataclass(frozen=True)
 class GeneratedTargetCandidateSet:
     function_observation: FunctionObservation
-    generation_rule: TargetGenerationRule
+    generation_rule: TargetGenerationRule | None
     candidates: tuple[TargetCandidate, ...]
     generated_by_function_annotation_alone: bool
     status: str
@@ -56,7 +56,7 @@ def generate_target_candidates_with_rule(
     if generation_rule is None:
         return GeneratedTargetCandidateSet(
             function_observation=function_observation,
-            generation_rule=TargetGenerationRule("none", "no_rule_supplied"),
+            generation_rule=None,
             candidates=tuple(),
             generated_by_function_annotation_alone=False,
             status="no_generation_rule",
@@ -106,6 +106,7 @@ def run_checks() -> None:
 
     without_rule = generate_target_candidates_with_rule(function_observation, None)
     assert without_rule.status == "no_generation_rule"
+    assert without_rule.generation_rule is None
     assert without_rule.candidates == tuple()
     assert without_rule.generated_by_function_annotation_alone is False
 
@@ -149,11 +150,13 @@ def main() -> None:
     print(f"  function_annotation={function_observation.function_annotation}")
     print(f"  key_context={function_observation.key_context.label}")
     print(f"  without_rule={without_rule.status}")
-    print(f"  generation_rule={generated.generation_rule.name}")
-    print(f"  rule_scope={generated.generation_rule.rule_scope}")
+    print(f"  generation_rule={generated.generation_rule.name if generated.generation_rule else None}")
+    print(f"  rule_scope={generated.generation_rule.rule_scope if generated.generation_rule else None}")
     print(f"  generated_by_function_annotation_alone={generated.generated_by_function_annotation_alone}")
     print("  candidates=" + ", ".join(candidate.target_chord for candidate in generated.candidates))
 
 
 if __name__ == "__main__":
     main()
+
+

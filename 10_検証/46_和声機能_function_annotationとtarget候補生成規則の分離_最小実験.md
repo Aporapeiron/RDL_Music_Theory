@@ -215,9 +215,12 @@ generated target candidate set = {C major, A minor}
 
 ただし、この生成はfunction annotation candidate単独から生じたものではない。
 
+今回のfixtureでは、生成規則の適用可能性もfunction annotation単独では決まらず、key contextとの組に依存する。
+
 ```text
 function annotation candidate
   ≠ Γ_target_candidate_generation_fixture
+  ≠ applicability condition
   ≠ generated target candidate set
 ```
 
@@ -231,3 +234,4 @@ generated target candidate set
 したがって46は、42〜45で空けていた `ξ_target_candidate_generation` に、限定fixtureを置いた場合でも、annotationとgenerationの分離が保てることを確認する最小例である。
 
 次の検証では、生成規則を変えた場合に、同じfunction annotation candidateから異なるtarget候補集合が生じるかを見る。
+

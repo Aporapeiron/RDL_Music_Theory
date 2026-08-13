@@ -540,4 +540,29 @@ generated target candidate set
 ```
 
 46により、42〜45で空けていた `ξ_target_candidate_generation` へ限定fixtureを置いても、annotationとgenerationの分離が保てることを確認した。次候補は、生成規則を変えた場合に同じfunction annotation candidateから異なるtarget候補集合が生じるかを見る検証である。
+次のξ検証として、次を作成した。
+
+```text
+47_和声機能_target候補生成規則差し替えによる候補集合分岐_最小実験.md
+harmonic_function_generation_rule_variation.py
+```
+
+確認したこと。
+
+```text
+same function annotation candidate
+  + same key context
+  + different Γ_target_candidate_generation_fixture
+  ↓
+different generated target candidate sets
+```
+
+これにより、target候補集合はfunction annotation candidateの内在属性ではなく、annotation、context、生成規則の関係として生じることを確認した。
+
+```text
+generated target candidate set
+  = C(function annotation candidate, key context; Γ_target_candidate_generation_fixture)
+```
+
+ただし、生成規則はfixtureであり、一般的・文脈依存な `ξ_target_candidate_generation` は未解決である。次候補は、同じfunction annotation candidateと同じ生成規則でも、key contextを変えると候補集合が変わるかを見る検証である。
 
