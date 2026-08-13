@@ -628,5 +628,35 @@ dominant_candidate + C major + Γ_history_sensitive_fixture + deceptive_setup
 ```
 
 ただし、historyはfixtureであり、一般的・文脈依存な `ξ_history_sensitive_generation` は未解決である。selected targetは生成しない。
+次のξ検証として、次を作成した。
 
+```text
+50_和声機能_history粒度差によるtarget候補集合分岐_最小実験.md
+harmonic_function_generation_history_granularity.py
+```
+
+確認したこと。
+
+```text
+same current function observation
+  + same Γ_target_candidate_generation_fixture
+  + same history.broad_pattern
+  + different history.local_pattern
+  ↓
+different generated target candidate sets
+```
+
+49ではhistory.local_patternがcandidate setへ影響しうることを確認した。50では、history大分類が同じでも、Γが読む局所粒度が異なればcandidate setが分岐することを確認した。
+
+```text
+broad_pattern = dominant_preparation
+local_pattern = ordinary_preparation
+  → {C major}
+
+broad_pattern = dominant_preparation
+local_pattern = deceptive_setup
+  → {C major, A minor}
+```
+
+ただし、history粒度はfixtureであり、一般的な `ξ_history_granularity` は未解決である。selected targetは生成しない。
 
