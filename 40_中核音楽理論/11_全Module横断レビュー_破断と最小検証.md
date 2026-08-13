@@ -600,4 +600,32 @@ dominant_candidate + G major + Γ_context_sensitive_fixture
 ```
 
 この抽出版では、`ξ_target_candidate_generation` を完成規則としてではなく、function observation、Γ_target_candidate_generation、applicability check、generated target candidate set、selection boundaryの分離として整理する。
+次のξ検証として、次を作成した。
+
+```text
+49_和声機能_history差し替えによるtarget候補集合分岐_最小実験.md
+harmonic_function_generation_history_variation.py
+```
+
+確認したこと。
+
+```text
+same current function observation
+  + same Γ_target_candidate_generation_fixture
+  + different history
+  ↓
+different generated target candidate sets
+```
+
+46〜48ではannotation、context、Γ_generationの軸を見た。49ではhistoryを追加入力として置き、同じcurrent observationと同じΓでも候補集合が分岐することを確認した。
+
+```text
+dominant_candidate + C major + Γ_history_sensitive_fixture + ordinary_preparation
+  → {C major}
+
+dominant_candidate + C major + Γ_history_sensitive_fixture + deceptive_setup
+  → {C major, A minor}
+```
+
+ただし、historyはfixtureであり、一般的・文脈依存な `ξ_history_sensitive_generation` は未解決である。selected targetは生成しない。
 

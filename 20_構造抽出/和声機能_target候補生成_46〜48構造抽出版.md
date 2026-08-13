@@ -9,7 +9,7 @@
 
 42〜45では、function annotationからtarget候補集合を生成しなかった。
 
-46〜48では、fixture用の限定 `Γ_target_candidate_generation` を置いた場合でも、annotation、生成規則、適用条件、生成済み候補集合、選択を同一視しないことを確認した。
+46〜48では、fixture用の限定 `Γ_target_candidate_generation` を置いた場合でも、annotation、生成規則、規則の適用可否、生成済み候補集合、選択を同一視しないことを確認した。
 
 本書は一般和声規則を追加しない。
 
@@ -47,10 +47,10 @@ function observation ───────────────┐
 function annotation
   ≠ target candidate generation rule
 
-target candidate generation rule
-  ≠ applicability condition
+generation ruleの存在
+  ≠ 現在のfunction observationへの適用可能性
 
-applicability condition
+rule applicability result
   ≠ generated target candidate set
 
 generated target candidate set
@@ -61,12 +61,14 @@ generated target candidate set
 
 ## ■ 4. 依存関係として見えた形
 
-fixture内では、target候補集合は次のように読める。
+fixture内では、target候補集合は次のように読むのが堅い。
 
 ```text
 generated target candidate set
-  = C(function annotation, context; Γ_target_candidate_generation)
+  = C(function observation; Γ_target_candidate_generation)
 ```
+
+今回のfixture用Γは、function observationのうちfunction annotation labelとkey contextを参照した。
 
 47では、function annotationとcontextを固定して、Γを変えた。
 
@@ -152,3 +154,4 @@ selection boundary
 ```
 
 この分離が保てる限り、後で履歴依存、様式依存、形式依存の生成規則を追加しても、function annotationそのものへtarget生成を埋め込まずに済む。
+
