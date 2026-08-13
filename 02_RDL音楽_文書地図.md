@@ -82,6 +82,8 @@ RDL音楽理論/
 │  ├─ pitch_no_effect_transition_regeneration.py
 │  ├─ pitch_no_effect_controller_boundary.py
 │  └─ cross_module_dynamic_invariants.py
+├─ 20_構造抽出/
+│  └─ 動態Adapter候補_構造抽出版.md
 ```
 
 ## ■ 2. 各文書の役割
@@ -108,6 +110,10 @@ RDL音楽理論の入口・全体構造を示す。
 S_t = <B_t, M_{B_t,t}, W_{B_t,t}, F_t, E_{B_t,t}, H_{B_t,t}, ξ_{B_t,t}>
 S_t → Δ → S_t+1
 ```
+
+### 20_構造抽出/動態Adapter候補_構造抽出版.md
+
+24〜41の検証列から、Module固有状態の用途別projection、Module固有recordからGeneric eventと候補再生成への二経路、再探索の動態、保持すべき非同一性を抽出して配置する。29の証拠圧縮とは別に、確定接続・未解決ξ・禁止補完を一枚で読むための設計文書である。
 
 B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)へ省略する。
 
