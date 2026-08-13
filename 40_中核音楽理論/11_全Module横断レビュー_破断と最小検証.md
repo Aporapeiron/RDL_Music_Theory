@@ -565,4 +565,32 @@ generated target candidate set
 ```
 
 ただし、生成規則はfixtureであり、一般的・文脈依存な `ξ_target_candidate_generation` は未解決である。次候補は、同じfunction annotation candidateと同じ生成規則でも、key contextを変えると候補集合が変わるかを見る検証である。
+次のξ検証として、次を作成した。
+
+```text
+48_和声機能_context差し替えによるtarget候補集合分岐_最小実験.md
+harmonic_function_generation_context_variation.py
+```
+
+確認したこと。
+
+```text
+same function annotation label
+  + different key context
+  + same Γ_target_candidate_generation_fixture
+  ↓
+different generated target candidate sets
+```
+
+47では生成規則差し替えで候補集合が分岐した。48では生成規則を固定し、context差し替えで候補集合が分岐することを確認した。
+
+```text
+dominant_candidate + C major + Γ_context_sensitive_fixture
+  → {C major, A minor}
+
+dominant_candidate + G major + Γ_context_sensitive_fixture
+  → {G major, E minor}
+```
+
+ただし、ここで固定したのはfunction annotation labelであり、同一のFunctionObservation objectではない。生成規則はfixtureであり、一般的・文脈依存な `ξ_target_candidate_generation` は未解決である。
 
