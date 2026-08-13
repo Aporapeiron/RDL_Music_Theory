@@ -1,8 +1,8 @@
-# 検証記録：和声機能・history粒度差によるtarget候補集合分岐
+# 検証記録：和声機能・同一history大分類内local_pattern差によるtarget候補集合分岐
 
-*対象：同じhistory大分類でも、Γが読むhistory粒度が違えばtarget候補集合が分岐する条件*  
+*対象：同じhistory大分類内で、local_pattern差によりtarget候補集合が分岐する条件*  
 *状態：DRAFT v0.1 / 49の後続検証*  
-*実装：`10_検証/harmonic_function_generation_history_granularity.py`*
+*実装：`10_検証/harmonic_function_generation_history_local_pattern.py`*
 
 ---
 
@@ -10,7 +10,7 @@
 
 49では、同じcurrent function observationと同じ生成規則でも、`history.local_pattern` を変えるとtarget候補集合が変わることを確認した。
 
-50では、historyの大分類を同じにしたまま、局所粒度だけを変える。
+50では、historyの大分類を同じにしたまま、`local_pattern` の値だけを変える。
 
 ```text
 same current function observation
@@ -21,7 +21,7 @@ same current function observation
 different generated target candidate sets
 ```
 
-ここで確認するのは、history大分類が同じであることだけでは、今回のΓが読む履歴粒度を代替できないことである。
+本検証は、粒度そのものを切り替えるのではない。同一broad_pattern内部に残るlocal_pattern差が、今回のΓに読まれた場合にcandidate setへ影響することを確認する。
 
 ---
 
@@ -57,11 +57,11 @@ function annotation = dominant_candidate
     → {C major, A minor}
 ```
 
-これは一般和声規則ではない。history粒度境界を観測するための限定fixtureである。
+これは一般和声規則ではない。同一history大分類内のlocal_pattern差を観測するための限定fixtureである。
 
 ---
 
-## ■ 3. 差し替えるhistory粒度
+## ■ 3. 差し替えるlocal_pattern
 
 二つのhistory fixtureを用意する。
 
@@ -81,7 +81,7 @@ History B:
 same history.broad_pattern = true
 ```
 
-局所粒度だけが異なる。
+local_patternだけが異なる。
 
 ```text
 same history.local_pattern = false
@@ -113,7 +113,7 @@ dominant_candidate + C major
 generated target candidate set = {C major, A minor}
 ```
 
-同じcurrent function observation、同じ生成規則、同じhistory大分類でも、Γが読むhistory局所粒度が変わると候補集合が変わる。
+同じcurrent function observation、同じ生成規則、同じhistory大分類でも、今回のΓが読むlocal_patternが変わると候補集合が変わる。
 
 ---
 
@@ -135,7 +135,7 @@ same current function observation
 different generated target candidate sets
 ```
 
-したがって、history大分類は今回のfixtureでΓが読むhistory局所粒度を代替しない。
+したがって、history大分類は今回のfixtureでΓが読むlocal_pattern差を代替しない。
 
 ---
 
@@ -176,13 +176,13 @@ local_pattern_sensitive fixtureが一般和声規則であること
 selected targetが決まること
 ```
 
-history粒度はfixtureであり、一般的な `ξ_history_granularity` は未解決である。
+同一大分類内のlocal_pattern差はfixtureであり、一般的な `ξ_history_granularity` は未解決である。
 
 ---
 
 ## ■ 8. 暫定結論
 
-50では、同じcurrent function observation、同じ生成規則、同じhistory大分類でも、history.local_patternを変えると生成されるtarget候補集合が変わることを確認した。
+50では、同じcurrent function observation、同じ生成規則、同じhistory大分類でも、history.local_patternの値を変えると生成されるtarget候補集合が変わることを確認した。
 
 ```text
 dominant_candidate + C major
@@ -198,7 +198,7 @@ dominant_candidate + C major
   → {C major, A minor}
 ```
 
-したがって、今回のfixtureでは、history大分類は候補生成に必要な履歴粒度を代替しない。
+したがって、今回のfixtureでは、history大分類が同じであることは、Γが読むlocal_pattern差を保存しない。
 
 ```text
 generated target candidate set
@@ -206,3 +206,4 @@ generated target candidate set
 ```
 
 ただし、これはfixture内の限定表現であり、一般和声規則ではない。historyをどの粒度で保持し、どの軸をΓが読むかは未解決ξとして残る。
+

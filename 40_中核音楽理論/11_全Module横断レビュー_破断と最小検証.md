@@ -631,8 +631,8 @@ dominant_candidate + C major + Γ_history_sensitive_fixture + deceptive_setup
 次のξ検証として、次を作成した。
 
 ```text
-50_和声機能_history粒度差によるtarget候補集合分岐_最小実験.md
-harmonic_function_generation_history_granularity.py
+50_和声機能_同一history大分類内local_pattern差によるtarget候補集合分岐_最小実験.md
+harmonic_function_generation_history_local_pattern.py
 ```
 
 確認したこと。
@@ -658,5 +658,31 @@ local_pattern = deceptive_setup
   → {C major, A minor}
 ```
 
-ただし、history粒度はfixtureであり、一般的な `ξ_history_granularity` は未解決である。selected targetは生成しない。
+ただし、50は粒度そのものを切り替える検証ではない。同一broad_pattern内のlocal_pattern差が、今回のΓに読まれた場合にcandidate setへ影響することを確認した。selected targetは生成しない。
+次のξ検証として、次を作成した。
+
+```text
+51_和声機能_B_history粒度差によるtarget候補集合分岐_最小実験.md
+harmonic_function_generation_history_boundary_granularity.py
+```
+
+確認したこと。
+
+```text
+same underlying history
+  + same current function observation
+  + same Γ_target_candidate_generation_fixture
+  + different history representation under B_history
+  ↓
+different generated target candidate sets
+```
+
+51では、同じunderlying historyを `B_history_coarse` と `B_history_fine` で異なるhistory representationへ投影し、Γが参照できるhistory featuresの違いによりcandidate setが分岐することを確認した。
+
+```text
+B_history_coarse → broad_pattern only → {C major}
+B_history_fine   → broad_pattern + local_pattern → {C major, A minor}
+```
+
+ただし、B_historyの選択とhistory representation粒度はfixtureであり、一般的な `ξ_history_granularity` は未解決である。selected targetは生成しない。
 

@@ -1,9 +1,9 @@
-"""history粒度差によるtarget候補集合分岐の最小検証。
+"""同一history大分類内のlocal_pattern差によるtarget候補集合分岐。
 
 49では、same current function observation + same Γで、
 history.local_patternを変えるとtarget候補集合が変わることを確認した。
 
-50では、同じhistory broad patternの中でもlocal_patternが変わると、
+50では、同じhistory broad patternの中でlocal_patternの値だけが変わると、
 同じ生成規則でcandidate setが変わることを確認する。
 
     same current function observation
@@ -12,7 +12,7 @@ history.local_patternを変えるとtarget候補集合が変わることを確�
       + different history.local_pattern
       -> different generated target candidate sets
 
-historyの大分類は、今回のfixtureでΓが読む粒度を代替しない。
+historyの大分類は、今回のfixtureでΓが読むlocal_pattern差を代替しない。
 """
 
 from dataclasses import dataclass
@@ -209,3 +209,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
