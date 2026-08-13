@@ -416,7 +416,7 @@ function annotation candidate
   ↓
 target candidates observed
   ↓
-Γ_selectなし → underdetermined
+Γ_context_selectionなし → underdetermined
 Γ_selectあり → selected target
 ```
 
@@ -478,8 +478,8 @@ voice leading result = E4-C5
   ↓
 next context candidates observed
   ↓
-Γ_selectなし → underdetermined
-Γ_selectあり → selected next context
+Γ_context_selectionなし → underdetermined
+Γ_context_selectionあり → selected next context
 ```
 
 この接続は自動生成ではない。
@@ -507,9 +507,37 @@ function annotation
 ```
 
 この抽出版では、循環候補を因果列として閉じず、annotation、generation、observation、selection、planning、realization、reinterpretationの非同一性として整理する。
+次のξ検証として、次を作成した。
 
+```text
+46_和声機能_function_annotationとtarget候補生成規則の分離_最小実験.md
+harmonic_function_target_generation_rule_boundary.py
+```
 
+確認したこと。
 
+```text
+function annotation candidate
+  + key context
+  + Γ_target_candidate_generation_fixture
+  ↓
+generated target candidate set
+```
 
+ただし、この生成はfunction annotation candidate単独から生じたものではない。
 
+```text
+function annotation candidate
+  ≠ Γ_target_candidate_generation_fixture
+  ≠ generated target candidate set
+```
+
+また、生成済みcandidate setはselected targetではない。
+
+```text
+generated target candidate set
+  ≠ selected target
+```
+
+46により、42〜45で空けていた `ξ_target_candidate_generation` へ限定fixtureを置いても、annotationとgenerationの分離が保てることを確認した。次候補は、生成規則を変えた場合に同じfunction annotation candidateから異なるtarget候補集合が生じるかを見る検証である。
 
