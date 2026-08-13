@@ -45,6 +45,9 @@ RDL音楽理論/
 │  ├─ 32_同一音程fallback遷移_空の候補再生成_最小実験.md
 │  ├─ 33_同一リズム境界遷移_空の候補再生成_最小実験.md
 │  ├─ 34_二標本_空結果のModule固有位置_横断観測.md
+│  ├─ 35_リズム_no_effect境界recordと候補再生成_最小実験.md
+│  ├─ 36_音程_no_effectfallback_recordと候補再生成_最小実験.md
+│  ├─ 37_音程_no_effectrecordの候補再構成とcontroller境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -75,6 +78,9 @@ RDL音楽理論/
 │  ├─ pitch_transition_projection_empty_regeneration.py
 │  ├─ rhythm_transition_projection_empty_regeneration.py
 │  ├─ cross_module_empty_result_locations.py
+│  ├─ rhythm_no_effect_transition_regeneration.py
+│  ├─ pitch_no_effect_transition_regeneration.py
+│  ├─ pitch_no_effect_controller_boundary.py
 │  └─ cross_module_dynamic_invariants.py
 ```
 
@@ -147,11 +153,11 @@ RDL_Core / SILN ───→ 01 Core ────────┘
 
 ### 24_音程分解_動態Adapterの最小境界_検証.md
 
-23で圧縮した音程Moduleの三履歴を、`observation`・`structural_transition`・`realized_transition`という音楽語彙を含まない最小イベントへ投影する。empty観測、fallbackを適用した構造遷移、ordinary actionによる具体音実現を別履歴のまま保持し、Module側の操作識別子を不透明な`operation_kind`として残せることを確認する。Adapterは状態意味・controller・fallback選択を一般化せず、Coreへ新しい状態変数を追加しない。
+23で圧縮した音程Moduleの三履歴を、`observation`・`structural_transition`・`realized_transition`という音楽語彙を含まない最小イベントへ投影する。empty観測、fallbackを適用した構造遷移、ordinary actionによる具体音実現を別履歴のまま保持し、Module側の操作識別子を不透明な`operation_kind`として残せることを確認する。`event_kind`は履歴・操作系統の分類であり、実効果は`operation_status`と`change_axes`、具体実現は`realization_status`から別に読む。Adapterは状態意味・controller・fallback選択を一般化せず、Coreへ新しい状態変数を追加しない。
 
 ### 29_動態Adapter候補_二標本と一標本の圧縮.md
 
-24〜34で確認した動態Adapter候補を圧縮する。二標本の横断契約、fixtureで確認した非空・空の結果分岐、Module固有に残す空位置を区別する。候補生成規則と状態意味はModule固有のまま保持し、共通projector・共通状態・共通empty分類・共通候補生成器・共通controller・因果順序を追加しない。
+24〜37で確認した動態Adapter候補を圧縮する。二標本の横断契約、fixtureで確認した非空・空の結果分岐、`event_kind`と実差分の分離、Module固有に残す空位置を区別する。37では、候補再構成stateの候補生成入力とcontroller入力が別であることも音程一標本で観測する。候補生成規則と状態意味はModule固有のまま保持し、state identity・no_effect履歴圧縮は未解決とし、共通projector・共通状態・共通empty分類・共通候補生成器・共通controller・因果順序を追加しない。
 
 ### 30_同一音程fallback遷移_投影と候補再構成_最小実験.md
 
@@ -172,6 +178,18 @@ RDL_Core / SILN ───→ 01 Core ────────┘
 ### 34_二標本_空結果のModule固有位置_横断観測.md
 
 32の音程Moduleと33のリズムModuleを比較し、両者の生候補と最終空結果の間にあるModule固有段階を記録する。音程は`B_range_projection`、リズムは現在値除外とtarget制約の交差で空になる。共通empty分類・共通状態・共通候補生成器・共通controllerは追加しない。
+
+### 35_リズム_no_effect境界recordと候補再生成_最小実験.md
+
+実差分のないリズムModule固有`BoundaryTransition`を投影と再生成へ接続する。eventの履歴分類は`structural_transition`のままでも、`operation_status=no_effect`と空の変更軸から構造条件が変わっていないことを読む。source／resulting候補条件は同じである。03の静的候補生成器、共通Adapter・共通状態・共通controllerは変更しない。
+
+### 36_音程_no_effectfallback_recordと候補再生成_最小実験.md
+
+実差分のない音程Module固有`FallbackStateTransition`を投影と再生成へ接続する。`event_kind=structural_transition`はfallback transition historyの分類を示し、実効果は`operation_status=no_effect`と空の変更軸から別に読む。source／resulting候補結果の一致は今回fixtureとして確認し、共通Adapter・共通状態・共通controller・因果順序は追加しない。
+
+### 37_音程_no_effectrecordの候補再構成とcontroller境界_最小実験.md
+
+実差分のない音程`FallbackStateTransition`をcandidate再構成へ通し、候補生成入力が不変でも`last_change_axes`を読む既存controllerのpolicyは変わり得ることを観測する。`state_after_transition()`はrecord採用履歴を追加しない候補再構成用ヘルパーであり、state identity・no_effect後のcontroller規則・履歴保存規則は決定しない。
 
 ## ■ 4. 将来の分岐候補
 
@@ -486,7 +504,7 @@ target破棄後の状態表現を未解決ξとして保持する。Coreへ音�
 
 記録：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
 
-24〜34を圧縮し、二標本で確認した三イベント分類・不透明な`operation_kind`保持・`realization_status`分離と、Module固有の構造遷移recordからの投影・再生成処理接続を記録する。非空・空はfixture結果、空位置はModule固有観測として分離し、共通projector・共通状態・共通empty分類・共通controller・因果順序は追加しない。
+24〜37を圧縮し、二標本で確認した三イベント分類・不透明な`operation_kind`保持・`realization_status`分離・`event_kind`と実差分の分離、およびModule固有の構造遷移recordからの投影・再生成処理接続を記録する。37の音程一標本では候補再構成とcontroller入力も分離する。非空・空はfixture結果、空位置はModule固有観測、state identity・no_effect履歴圧縮は未解決として分離し、共通projector・共通状態・共通empty分類・共通controller・因果順序は追加しない。
 
 ### 5.29 同一音程fallback遷移の投影・候補再構成
 
@@ -538,7 +556,7 @@ fallback採用後の実状態遷移 v0.1 / Module候補・最小接続検査
 音程分解・10〜22の動態圧縮 v0.1 / Module候補・動態圧縮
 音程分解・動態Adapterの最小境界 v0.1 / Adapter候補・最小接続検査
 リズム候補Module・動態Adapter第二標本 v0.1 / Adapter候補・第二標本検証
-動態Adapter候補・二標本横断契約とModule固有結果の圧縮 v0.3 / Adapter候補・証拠範囲圧縮
+動態Adapter候補・二標本横断契約とModule固有結果の圧縮 v0.5 / Adapter候補・証拠範囲圧縮
 同一音程fallback遷移の投影・候補再構成 v0.1 / Module候補・最小接続検査
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```

@@ -106,6 +106,16 @@ realization_status
   realized
 ```
 
+この四つは同じ意味を重ねて持たない。
+
+| 軸 | 読むこと |
+|---|---|
+| `event_kind` | どの履歴・操作系統のrecordを投影したか |
+| `operation_status` / `change_axes` | record上で実際に作用・変更があったか |
+| `realization_status` | 具体状態の実現まで進んだか |
+
+したがって、`event_kind = structural_transition`は「実際に構造が変わった」という保証ではない。35の同値`BoundaryTransition`のように、構造遷移系の履歴recordとして投影されながら、`operation_status = no_effect`かつ`change_axes = ()`となる場合がある。`event_kind`は改名せず、履歴・操作系統の分類として保持する。
+
 この分類は、次の三つを分けるために置く。
 
 ```text
@@ -167,6 +177,8 @@ project_realized(DynamicStateTransition)
   → operation_kind = transition.selected_branch_kind
   → realization_status = realized
 ```
+
+この投影で`structural_transition`となるのは、fallback transition historyに属するrecordだからである。実差分の有無は、投影後も`operation_status`と`change_axes`を確認して読む。
 
 `project_fallback`は、fallback後に具体音が続けて実現した場合でも、その後続の実現遷移を自身へ吸収しない。同様に、`project_observation`は候補が存在した観測であっても、採用された実現遷移へ昇格しない。
 

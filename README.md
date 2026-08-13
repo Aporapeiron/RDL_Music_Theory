@@ -188,7 +188,7 @@ fallback採用後の実状態遷移：`10_検証/22_音程分解_fallback採用�
 
 動態Adapter候補・二標本横断契約とModule固有結果の圧縮：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
 
-24〜34を圧縮する。三イベント分類・不透明な`operation_kind`保持・`realization_status`の分離に加え、Module固有の構造遷移recordが投影とrecord由来の再生成処理へ接続する形式を二標本で比較する。再生成の非空・空はfixture結果、空位置はModule固有観測として分け、共通projector・共通状態・共通empty分類・共通controller・因果順序は保留する。
+24〜37を圧縮する。三イベント分類・不透明な`operation_kind`保持・`realization_status`の分離に加え、`event_kind`と実差分を分け、Module固有の構造遷移recordが投影とrecord由来の再生成処理へ接続する形式を二標本で比較する。再生成の非空・空はfixture結果、空位置・state identity・no_effect履歴はModule固有または未解決として残す。37では音程側で、候補再構成stateの候補生成入力とcontroller入力が別であることを一標本で観測し、共通projector・共通状態・共通empty分類・共通controller・因果順序は保留する。
 
 同一音程fallback遷移の投影・候補再構成：`10_検証/30_同一音程fallback遷移_投影と候補再構成_最小実験.md`
 
@@ -217,6 +217,26 @@ fallback採用後の実状態遷移：`10_検証/22_音程分解_fallback採用�
 実験用スクリプト：`10_検証/cross_module_empty_result_locations.py`
 
 32と33を比較し、両方とも生候補が存在したうえで最終結果が空となるが、音程では`B_range_projection`、リズムでは現在値除外とtarget制約の交差で空になることを記録する。共通empty分類は導入しない。
+
+リズムのno_effect境界recordと候補再生成：`10_検証/35_リズム_no_effect境界recordと候補再生成_最小実験.md`
+
+実験用スクリプト：`10_検証/rhythm_no_effect_transition_regeneration.py`
+
+すでに開いたgridを再開する同値`BoundaryTransition`を投影と再生成へ通す。`operation_status=no_effect`・変更軸なしのまま再生成は実行でき、source／resulting候補条件は同じであることを確認する。03の静的候補生成器は変更しない。
+
+35により、`event_kind`は履歴・操作系統の分類、`operation_status`／`change_axes`は実効果、`realization_status`は具体実現の進行度として別に読む。したがって`structural_transition`は、それだけで実構造変化を保証しない。
+
+音程のno_effect fallback recordと候補再生成：`10_検証/36_音程_no_effectfallback_recordと候補再生成_最小実験.md`
+
+実験用スクリプト：`10_検証/pitch_no_effect_transition_regeneration.py`
+
+すでに開いたvoice B境界を同値で再適用する`FallbackStateTransition`を投影と再生成へ通す。`event_kind=structural_transition`のまま、`operation_status=no_effect`・変更軸なし・source／resulting候補結果一致となる音程側標本である。
+
+音程no_effect recordの候補再構成とcontroller境界：`10_検証/37_音程_no_effectrecordの候補再構成とcontroller境界_最小実験.md`
+
+実験用スクリプト：`10_検証/pitch_no_effect_controller_boundary.py`
+
+36のno_effect recordから再構成したstateでは候補生成入力が不変でも、`last_change_axes`を読む既存controllerのpolicyは変わり得ることを観測する。これは共通状態やno_effect後のcontroller規則を定めず、候補再構成と永続履歴採用を分離する音程側の境界検査である。
 
 ## 状態
 

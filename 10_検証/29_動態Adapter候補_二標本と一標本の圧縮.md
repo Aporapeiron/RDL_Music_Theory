@@ -1,14 +1,14 @@
 # 検証記録：動態Adapter候補・二標本横断契約とModule固有結果の圧縮
 
-*対象：24〜34で確認した音程Module・リズムModuleの動態境界*
-*状態：DRAFT v0.3 / 二標本横断契約とModule固有結果の圧縮*
-*参照：`10_検証/24_音程分解_動態Adapterの最小境界_検証.md`〜`34_二標本_空結果のModule固有位置_横断観測.md`*
+*対象：24〜37で確認した音程Module・リズムModuleの動態境界*
+*状態：DRAFT v0.5 / 二標本横断契約とModule固有結果の圧縮*
+*参照：`10_検証/24_音程分解_動態Adapterの最小境界_検証.md`〜`37_音程_no_effectrecordの候補再構成とcontroller境界_最小実験.md`*
 
 ---
 
 ## ■ 0. 目的と範囲
 
-24〜34は、音程ModuleとリズムModuleを同じ内部状態や同じ因果規則へ統合するための検証ではない。異なるModule固有記録を、どの最小境界まで共通イベントとして読めるか、また共通化しない結果をどこに残すかを段階的に確かめた記録である。
+24〜37は、音程ModuleとリズムModuleを同じ内部状態や同じ因果規則へ統合するための検証ではない。異なるModule固有記録を、どの最小境界まで共通イベントとして読めるか、また共通化しない結果をどこに残すかを段階的に確かめた記録である。
 
 29の今回の更新は新しい共通実装を追加しない。既存の検証結果を、二標本の横断契約、fixtureで確認した結果分岐、Module固有に残す観測へ分ける。
 
@@ -50,6 +50,21 @@ Module固有記録
 
 ここには、共通の候補生成器、共通の状態遷移、共通のcontrollerは含まれない。
 
+また、`event_kind`は実効果の断言ではない。35・36の二標本により、次を分けて読む必要が確認された。
+
+```text
+event_kind
+  = どの履歴・操作系統のrecordを投影したか
+
+operation_status / change_axes
+  = record上で実際に何が作用・変更されたか
+
+realization_status
+  = 具体状態の実現まで進んだか
+```
+
+したがって、`structural_transition ≠ structural_changed`である。`event_kind=structural_transition`かつ`operation_status=no_effect`、`change_axes=()`は矛盾ではなく、構造遷移系recordへの投影と実差分を別軸に保った記録である。
+
 ## ■ 2. 証拠の配置
 
 | 構造 | 音程Module | リズムModule | 現在の扱い |
@@ -63,6 +78,9 @@ Module固有記録
 | 構造遷移後の候補再構成 | 30 | 26・28 | 二標本で比較したModule固有の実効性 |
 | 再生成実行と最終結果の非空性の分離 | 30・32・31 | 28・33・31 | 非空・空の両結果を二標本のfixtureで確認。契約へは含めない |
 | 生候補あり・最終空の位置 | 32・34 | 33・34 | 生候補は両標本で確認。ただし空位置の共通分類は未検証 |
+| `no_effect`recordの再生成 | 36 | 35 | 再生成は実行でき、今回fixtureでsource / resulting候補結果は同じ。二標本 |
+| `event_kind`と実差分の分離 | 36 | 35 | `structural_transition`は履歴・操作系統の分類。実差分は`operation_status`・`change_axes`から読む。二標本 |
+| 候補再構成stateとcontroller入力の差 | 37 | — | 音程一標本。候補生成入力が同一でも`last_change_axes`とpolicyは変わり得る。横断契約へは含めない |
 
 この表で「未検証」とした欄を、他方のModuleから推定して埋めない。二標本の欄も、候補生成規則や状態意味の共通性を意味しない。
 
@@ -116,6 +134,28 @@ recordが保存するresulting conditionを読む候補再生成の双方へ接�
 
 34では、32・33とも生候補が観測され、空はModule固有の後続段階で生じたことを確認した。音程は`B_range_projection`、リズムは現在値除外とtarget制約の交差である。これは再生成接続の二標本契約を強めるものではなく、空位置の共通分類へ昇格させる根拠にもならない。
 
+35・36では、実差分のない構造遷移系recordも、`structural_transition`へ投影して再生成処理へ接続できることを確認した。`event_kind`は履歴・操作系統の分類であり、実差分は`operation_status`と`change_axes`から読む。source／resulting候補結果の一致は今回fixtureに限る。
+
+```text
+structural-transition系record
+  ├─ applied
+  │    └─ regeneration → final nonempty / final empty
+  └─ no_effect
+       └─ regeneration → source / resulting同一（35・36のfixture）
+```
+
+この分岐は候補結果の一般則ではない。`event_kind`、実効果、再生成結果を別軸として記録できることの現在地である。
+
+37では、36の音程no_effect recordを`state_after_transition()`へ通したとき、候補生成器が読む入力はsourceと同一でも、controllerが読む`last_change_axes`は`boundary_changed=True`から空へ変わることを観測した。その結果、既存の`select_policy()`は別の方針を返す。さらにこのヘルパーはfallback履歴へrecordを追加しない。
+
+```text
+record由来の候補再構成
+  ≠ controller状態の安全な再構成
+  ≠ recordを永続履歴へ採用すること
+```
+
+これは音程一標本のModule固有境界であり、state identityやno_effect後のcontroller規則を決定する根拠ではない。
+
 ## ■ 4. 現時点で昇格しないもの
 
 次は、29でもAdapter候補へ含めない。
@@ -129,6 +169,8 @@ recordが保存するresulting conditionを読む候補再生成の双方へ接�
 fallbackの選択原理
 Module間の因果・時系列順
 二標本のrecordから共通状態を再構成すること
+状態内容と履歴を含めたstate identityの定義
+連続するno_effect recordの保持・圧縮・忘却
 ```
 
 特に、24・25の`project_state()`出力は履歴チャンネルごとの投影順であり、実際の時系列や因果順を表さない。29は`sequence_id`・`event_id`・`caused_by`を追加しない。
@@ -141,13 +183,14 @@ Module間の因果・時系列順
 
 ## ■ 6. 暫定結論
 
-24〜34から、次の三層を区別して保持する。
+24〜36から、次の三層を区別して保持する。
 
 ```text
 二標本で確認したAdapter候補境界
   三イベント分類
   operation_kindの不透明保持
   realization_statusの分離
+  event_kindと実差分の分離
 
 二標本で比較した接続形式
   Module固有の構造遷移record
@@ -163,6 +206,8 @@ Module固有に残る観測
   リズム：raw candidate spaceと制約後候補の差
   音程：声部範囲投影後の空
   空結果が生じる位置
+state identityとno_effect履歴の扱い
+候補再構成stateとcontroller stateの関係
 ```
 
 この区別を保つ限り、`structural_transition`は単なる分類名に留まらず、二つのModuleで後続候補生成処理へ接続された実遷移の投影として読める。一方で、その接続を共通Adapter・共通状態・共通empty分類・共通因果構造へ一般化する根拠は、まだ存在しない。

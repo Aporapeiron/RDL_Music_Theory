@@ -32,7 +32,12 @@ from state_rebased_reexploration import (
 
 @dataclass(frozen=True)
 class GenericDynamicEvent:
-    """Module記録を読むための、音楽語彙を含まない最小イベント。"""
+    """Module記録を読むための、音楽語彙を含まない最小イベント。
+
+    ``event_kind`` は投影元の履歴・操作系統を示す分類であり、実差分そのものを
+    保証しない。実際に作用したかは ``operation_status`` と ``change_axes``、
+    具体状態まで進んだかは ``realization_status`` から別に読む。
+    """
 
     event_kind: str
     history_channel: str
