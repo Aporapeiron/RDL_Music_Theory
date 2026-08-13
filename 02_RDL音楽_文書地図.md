@@ -190,7 +190,7 @@ S_t → Δ → S_t+1
 
 ### 20_構造抽出/和声機能_target候補生成_46〜49構造抽出版.md
 
-46〜49の横断検証から、`ξ_target_candidate_generation` とhistory入力の現在地を抽出する。function annotation、target候補生成規則、適用条件、生成済み候補集合、selected targetを非同一として保持し、candidate setが `C(function annotation, context; Γ_target_candidate_generation)` としてfixture上で現れることを整理する。
+46〜49の横断検証から、`ξ_target_candidate_generation` とhistory入力の現在地を抽出する。function annotation、target候補生成規則、規則の適用可否、history fixture、生成済み候補集合、selected targetを非同一として保持し、candidate setが `C(function observation, history fixture; Γ_target_candidate_generation)` としてfixture上で現れることを整理する。
 
 ### 30_既知音楽理論参照/
 
@@ -655,6 +655,7 @@ fallback採用後の実状態遷移 v0.1 / Module候補・最小接続検査
 同一音程fallback遷移の投影・候補再構成 v0.1 / Module候補・最小接続検査
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```
+
 
 
 

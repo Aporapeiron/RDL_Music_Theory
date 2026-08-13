@@ -136,7 +136,8 @@ history境界:
 
 target候補生成境界:
   同じΓ_history_sensitive_fixtureを適用する
-  current observationとhistoryに応じて候補集合を生成する
+  current observationと、
+  今回参照するhistory.local_patternに応じて候補集合を生成する
 
 選択境界:
   今回は未接続
@@ -185,4 +186,5 @@ generated target candidate set
 ```
 
 ただし、これはfixture内の限定表現であり、一般和声規則ではない。history全体のどの軸を読むかは未解決ξとして残る。
+
 
