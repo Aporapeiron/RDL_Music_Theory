@@ -1,15 +1,15 @@
-# 和声機能｜target候補生成 46〜48構造抽出版
+# 和声機能｜target候補生成 46〜49構造抽出版
 
-*対象：46〜48で確認した `ξ_target_candidate_generation` の最小構造*  
+*対象：46〜49で確認した `ξ_target_candidate_generation` の最小構造*  
 *状態：DRAFT v0.1 / 42〜45循環分解後の局所構造抽出*
 
 ## ■ 0. 位置づけ
 
-本書は、46〜48の最小検証列から、function annotation candidateの後段にあるtarget候補生成境界を抽出する。
+本書は、46〜49の最小検証列から、function annotation candidateの後段にあるtarget候補生成境界を抽出する。
 
 42〜45では、function annotationからtarget候補集合を生成しなかった。
 
-46〜48では、fixture用の限定 `Γ_target_candidate_generation` を置いた場合でも、annotation、生成規則、規則の適用可否、生成済み候補集合、選択を同一視しないことを確認した。
+46〜49では、fixture用の限定 `Γ_target_candidate_generation` を置いた場合でも、annotation、生成規則、規則の適用可否、history入力、生成済み候補集合、選択を同一視しないことを確認した。
 
 本書は一般和声規則を追加しない。
 
@@ -20,6 +20,8 @@ function observation ───────────────┐
   ├─ function annotation label       │
   └─ key context                     │
                                     ├→ applicability check
+history fixture ────────────────────┤
+  └─ local_pattern                   │
 Γ_target_candidate_generation ──────┘
                                     ↓
                          generated target candidate set
@@ -29,7 +31,7 @@ function observation ───────────────┐
                          selection boundaryへ渡す
 ```
 
-この地図は、function annotation labelからtarget候補集合が直に生えることを示さない。生成済み候補集合は、少なくともfunction observationと生成規則の組に依存する。
+この地図は、function annotation labelからtarget候補集合が直に生えることを示さない。49により、生成済み候補集合はfunction observationと生成規則だけでなく、fixtureとして与えたhistoryの読まれ方にも依存しうることを確認した。
 
 ## ■ 2. 検証ごとの担当
 
@@ -38,10 +40,11 @@ function observation ───────────────┐
 | 46 | annotation / generation rule / generated setの分離 | function annotation単独では候補生成しない |
 | 47 | same annotation + same context + different Γ | 生成規則差し替えで候補集合が変わる |
 | 48 | same annotation label + different context + same Γ | context差し替えで候補集合が変わる |
+| 49 | same current observation + same Γ + different history | history差し替えで候補集合が変わる |
 
 ## ■ 3. 保持する非同一性
 
-46〜48から、次の非同一性を保持する。
+46〜49から、次の非同一性を保持する。
 
 ```text
 function annotation
@@ -53,11 +56,14 @@ generation ruleの存在
 rule applicability result
   ≠ generated target candidate set
 
+history fixture
+  ≠ generated target candidate set
+
 generated target candidate set
   ≠ selected target
 ```
 
-特に46で、生成規則の適用可能性もfunction annotation単独では決まらず、key contextとの組に依存することを確認した。
+特に46で、生成規則の適用可能性もfunction annotation単独では決まらず、key contextとの組に依存することを確認した。49ではhistoryがcurrent function observationとは別入力としてcandidate setへ影響しうることを確認した。ただし今回のfixtureで読んだのはhistory全体ではなく `history.local_pattern` である。
 
 ## ■ 4. 依存関係として見えた形
 
@@ -65,10 +71,10 @@ fixture内では、target候補集合は次のように読むのが堅い。
 
 ```text
 generated target candidate set
-  = C(function observation; Γ_target_candidate_generation)
+  = C(function observation, history fixture; Γ_target_candidate_generation)
 ```
 
-今回のfixture用Γは、function observationのうちfunction annotation labelとkey contextを参照した。
+46〜48のfixture用Γは、function observationのうちfunction annotation labelとkey contextを参照した。49のfixture用Γは、さらに `history.local_pattern` を参照した。
 
 47では、function annotationとcontextを固定して、Γを変えた。
 
@@ -90,7 +96,17 @@ same Γ
 different candidate set
 ```
 
-したがって、candidate setはfunction annotationの属性ではない。
+49では、current function observationとΓを固定して、historyを変えた。
+
+```text
+same current observation
+same Γ
+different history
+↓
+different candidate set
+```
+
+したがって、candidate setはfunction annotation、current function observation、history、生成規則のいずれか単独の属性ではない。
 
 ## ■ 5. 確定接続
 
@@ -100,9 +116,11 @@ different candidate set
 
 **48**：同じ `dominant_candidate` labelと同じ文脈依存fixture規則でも、contextを `C major` から `G major` へ変えると `{C major, A minor}` と `{G major, E minor}` へ分岐する。
 
+**49**：同じcurrent function observationと同じhistory-sensitive fixture規則でも、`history.local_pattern` を `ordinary_preparation` から `deceptive_setup` へ変えると `{C major}` と `{C major, A minor}` へ分岐する。
+
 ## ■ 6. 未解決ξ
 
-46〜48の後に残る主なξは次である。
+46〜49の後に残る主なξは次である。
 
 ```text
 ξ_target_candidate_generation_controller:
@@ -114,8 +132,11 @@ different candidate set
 ξ_applicability_condition:
   function observation内のどの情報を適用条件として読むか
 
+ξ_history_granularity:
+  historyをどの長さ・粒度・軸で保持するか
+
 ξ_history_sensitive_generation:
-  同じannotation・context・Γでも履歴により候補集合が変わるか
+  historyのどの軸をΓ_target_candidate_generationが読むか
 
 ξ_target_candidate_prioritization:
   生成された候補集合に優先順位や重みを与えるか
@@ -132,18 +153,20 @@ different candidate set
 dominant_candidateからtarget候補集合を自動生成しない
 生成規則が存在することを一般和声規則の完成とみなさない
 fixtureで生成された候補集合を正しい解決候補集合とみなさない
+history fixtureをselected targetやcurrent contextと同一視しない
 候補集合の生成をselected targetと同一視しない
 生成規則の選択controllerをCoreへ昇格しない
 ```
 
 ## ■ 8. 現時点の読み方
 
-46〜48の成果は、`ξ_target_candidate_generation` を完成させたことではない。
+46〜49の成果は、`ξ_target_candidate_generation` を完成させたことではない。
 
-むしろ、target候補生成が次の関係として現れることを、fixture上で二方向から確認したことである。
+むしろ、target候補生成が次の関係として現れることを、fixture上で複数方向から確認したことである。
 
 ```text
 function observation
+  + history fixture
   + Γ_target_candidate_generation
   ↓
 applicability check
@@ -154,4 +177,3 @@ selection boundary
 ```
 
 この分離が保てる限り、後で履歴依存、様式依存、形式依存の生成規則を追加しても、function annotationそのものへtarget生成を埋め込まずに済む。
-

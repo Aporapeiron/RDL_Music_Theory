@@ -177,9 +177,12 @@ dominant_candidate + C major + Γ_history_sensitive_fixture + deceptive_setup
 
 これにより、target候補集合はcurrent function observationの内在属性ではなく、current observation、history、生成規則の関係として生じることを確認した。
 
+今回のfixtureでは、生成規則がhistoryのうち `local_pattern` を参照した。
+
 ```text
 generated target candidate set
-  = C(current function observation, history; Γ_target_candidate_generation_fixture)
+  = C(current function observation, history.local_pattern; Γ_target_candidate_generation_fixture)
 ```
 
-ただし、これはfixture内の限定表現であり、一般和声規則ではない。
+ただし、これはfixture内の限定表現であり、一般和声規則ではない。history全体のどの軸を読むかは未解決ξとして残る。
+
