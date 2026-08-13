@@ -593,4 +593,11 @@ dominant_candidate + G major + Γ_context_sensitive_fixture
 ```
 
 ただし、ここで固定したのはfunction annotation labelであり、同一のFunctionObservation objectではない。生成規則はfixtureであり、一般的・文脈依存な `ξ_target_candidate_generation` は未解決である。
+46〜48の横断結果は、次の構造抽出版へ送った。
+
+```text
+20_構造抽出/和声機能_target候補生成_46〜48構造抽出版.md
+```
+
+この抽出版では、`ξ_target_candidate_generation` を完成規則としてではなく、function observation、Γ_target_candidate_generation、applicability check、generated target candidate set、selection boundaryの分離として整理する。
 

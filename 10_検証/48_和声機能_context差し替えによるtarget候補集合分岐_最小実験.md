@@ -116,10 +116,12 @@ different generated target candidate sets
 
 ```text
 和声機能Module:
-  function annotation label = dominant_candidateを渡す
+  function observationを渡す
+  今回比較するannotation labelはdominant_candidateで一致する
 
 音階・調Module:
-  key context = C major / G majorを渡す
+  function observation内のkey contextとして
+  C major / G majorを渡す
 
 target候補生成境界:
   同じΓ_context_sensitive_fixtureを適用する
@@ -182,3 +184,4 @@ function annotation
 generated target candidate set
   = C(function annotation, context; Γ_generation)
 ```
+
