@@ -199,7 +199,7 @@ RDL_Core / SILN ───→ 01 Core ────────┘
 
 ### 29_動態Adapter候補_二標本と一標本の圧縮.md
 
-24〜37で確認した動態Adapter候補を圧縮する。二標本の横断契約、fixtureで確認した非空・空の結果分岐、`event_kind`と実差分の分離、Module固有に残す空位置を区別する。37では、候補再構成stateの候補生成入力とcontroller入力が別であることも音程一標本で観測する。候補生成規則と状態意味はModule固有のまま保持し、state identity・no_effect履歴圧縮は未解決とし、共通projector・共通状態・共通empty分類・共通候補生成器・共通controller・因果順序を追加しない。
+24〜41で確認した動態Adapter候補を圧縮する。二標本の横断契約、fixtureで確認した非空・空の結果分岐、`event_kind`と実差分の分離、Module固有に残す空位置を区別する。37〜41では、用途別状態同一性と候補生成同一性、再生成実行の非同一性も音程一標本で観測する。候補生成規則と状態意味はModule固有のまま保持し、state identity・no_effect履歴圧縮は未解決とし、共通projector・共通状態・共通empty分類・共通候補生成器・共通controller・因果順序を追加しない。
 
 ### 30_同一音程fallback遷移_投影と候補再構成_最小実験.md
 
@@ -546,7 +546,7 @@ target破棄後の状態表現を未解決ξとして保持する。Coreへ音�
 
 記録：`10_検証/29_動態Adapter候補_二標本と一標本の圧縮.md`
 
-24〜37を圧縮し、二標本で確認した三イベント分類・不透明な`operation_kind`保持・`realization_status`分離・`event_kind`と実差分の分離、およびModule固有の構造遷移recordからの投影・再生成処理接続を記録する。37の音程一標本では候補再構成とcontroller入力も分離する。非空・空はfixture結果、空位置はModule固有観測、state identity・no_effect履歴圧縮は未解決として分離し、共通projector・共通状態・共通empty分類・共通controller・因果順序は追加しない。
+24〜41を圧縮し、二標本で確認した三イベント分類・不透明な`operation_kind`保持・`realization_status`分離・`event_kind`と実差分の分離、およびModule固有の構造遷移recordからの投影・再生成処理接続を記録する。37〜41の音程一標本では候補再構成、controller入力、用途別状態同一性、候補生成同一性、再生成実行を分離する。非空・空はfixture結果、空位置はModule固有観測、state identity・no_effect履歴圧縮は未解決として分離し、共通projector・共通状態・共通empty分類・共通controller・因果順序は追加しない。
 
 ### 5.29 同一音程fallback遷移の投影・候補再構成
 
