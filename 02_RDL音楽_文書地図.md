@@ -53,6 +53,7 @@ RDL音楽理論/
 │  ├─ 40_候補再構成呼出し側の用途別同一性_最小検査.md
 │  ├─ 41_候補生成同一性と再生成実行の分離_最小検査.md
 │  ├─ 42_和声機能_同一和音とkey_context分岐_最小実験.md
+│  ├─ 43_和声機能_target候補集合と選択境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -89,7 +90,8 @@ RDL音楽理論/
 │  ├─ cross_module_dynamic_invariants.py
 │  ├─ state_signature_observation.py
 │  ├─ state_signature_views.py
-│  └─ harmonic_function_key_context_branch.py
+│  ├─ harmonic_function_key_context_branch.py
+│  └─ harmonic_function_target_candidate_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -182,7 +184,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md` / 次：`10_検証/43_和声機能_target候補集合と選択境界_最小実験.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`、`10_検証/43_和声機能_target候補集合と選択境界_最小実験.md` / 次：`10_検証/44_声部進行_selected_targetから具体音実現境界_最小実験.md`
 
 ### 02_RDL音楽_文書地図.md
 
@@ -631,6 +633,7 @@ fallback採用後の実状態遷移 v0.1 / Module候補・最小接続検査
 同一音程fallback遷移の投影・候補再構成 v0.1 / Module候補・最小接続検査
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```
+
 
 
 

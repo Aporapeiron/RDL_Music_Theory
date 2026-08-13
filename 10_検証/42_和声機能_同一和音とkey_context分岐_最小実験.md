@@ -34,7 +34,7 @@ same chord candidate
   ↓
 different degree annotation
   ↓
-different function annotation
+different function annotation candidate
   ↓
 targetは未生成のまま保持
 ```
@@ -201,27 +201,31 @@ target候補をどのcontrollerが選ぶか
 voice leading後にnext key contextが自動確定すること
 ```
 
+加えて、今回の`FUNCTION_BY_MAJOR_DEGREE`はfixture用の限定Γであり、quality、spelling、bass、履歴、前後関係を含む一般的な和声機能規則ではない。
+
 これらは未解決ξとして残す。
 
 ---
 
 ## ■ 7. 暫定結論
 
-同じ和音候補でも、key contextを変えるとdegree annotationとfunction annotationは分岐する。
+今回固定したfixtureでは、同じ和音候補に異なるkey contextを与えることでdegree annotationが分岐し、現在の限定的な`Γ_function_annotation`に従ってfunction annotation候補も分岐した。
 
 ```text
 G major triad
   + C major
   → degree 5
+  → Γ_function_annotation（限定表）
   → dominant_candidate
 
 G major triad
   + G major
   → degree 1
+  → Γ_function_annotation（限定表）
   → tonic_candidate
 ```
 
-ただし、この分岐はtarget生成や声部進行生成ではない。
+ただし、この分岐は一般的な和声機能規則の完成でも、target生成や声部進行生成でもない。
 
 ```text
 function annotation candidate
@@ -232,3 +236,5 @@ target未生成
 したがって、今回の検証は、和音Moduleから和声機能Moduleへの接続を、循環させずに閉じる最小例である。
 
 次の検証では、`dominant_candidate` からtargetを直接生成せず、target候補集合を外部または別Moduleから与えた場合に、どの時点で `underdetermined` と `selected target` が分かれるかを見る。
+
+

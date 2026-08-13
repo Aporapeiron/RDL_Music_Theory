@@ -401,10 +401,38 @@ targetは未生成のまま保持
 
 この検証で、和音Moduleから和声機能Moduleへの接続は、循環せずに成立する最小例を得た。
 
-次に作る候補は、function annotationからtargetを直生成せず、target候補集合を外部入力または別Module入力として受け取った場合に、`underdetermined` と `selected target` がどこで分かれるかを見る検証である。
+次の横断検証として、次を作成した。
 
 ```text
 43_和声機能_target候補集合と選択境界_最小実験.md
 harmonic_function_target_candidate_boundary.py
 ```
+
+確認したこと。
+
+```text
+function annotation candidate
+  + externally supplied target candidate set
+  ↓
+target candidates observed
+  ↓
+Γ_selectなし → underdetermined
+Γ_selectあり → selected target
+```
+
+これにより、42〜43で次の三分離を確認した。
+
+```text
+function annotation
+  ≠ target candidate generation
+  ≠ target selection
+```
+
+次に作る候補は、selected targetを声部進行Moduleへ渡す前に、target degreeとconcrete realizationの境界を再検査する検証である。
+
+```text
+44_声部進行_selected_targetから具体音実現境界_最小実験.md
+voice_leading_selected_target_realization_boundary.py
+```
+
 

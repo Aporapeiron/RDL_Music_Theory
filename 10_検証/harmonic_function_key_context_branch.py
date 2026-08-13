@@ -2,7 +2,8 @@
 
 この検証では、和音候補を物理音響や声部進行へ拡張しない。
 同じrooted chord candidateに異なるkey contextを接続したとき、
-degree annotationとfunctional annotationが分岐することだけを確認する。
+degree annotationが分岐し、今回固定した限定的なdegree→function対応表によって
+functional annotation候補も分岐することだけを確認する。
 
     chord candidate
       + key context
@@ -41,6 +42,7 @@ MAJOR_SCALE_DEGREES = {
     11: 7,
 }
 
+# 今回のfixture用の限定Γであり、一般的な和声機能規則ではない。
 FUNCTION_BY_MAJOR_DEGREE = {
     1: "tonic_candidate",
     2: "predominant_candidate",
@@ -103,7 +105,7 @@ def annotate_root_degree(chord: ChordCandidate, key_context: KeyContext) -> int:
         raise ValueError("only major key context is modeled in this minimal test")
     relative_pc = (PITCH_CLASS[chord.root] - key_context.tonic_pc) % 12
     if relative_pc not in MAJOR_SCALE_DEGREES:
-        raise ValueError(f"{chord.root} is outside {key_context.label} major scale")
+        raise ValueError(f"{chord.root} is outside {key_context.label}")
     return MAJOR_SCALE_DEGREES[relative_pc]
 
 
@@ -204,3 +206,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
