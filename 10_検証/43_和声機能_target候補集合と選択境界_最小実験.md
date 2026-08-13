@@ -153,6 +153,8 @@ selection policy
   → selected target
 ```
 
+今回のfixtureでは、`Γ_select`はfunction annotationを再参照せず、外部候補に付与された`source`属性だけを読む。したがって、function annotationはtarget候補生成器ではなく、今回の選択controllerでもない。
+
 ---
 
 ## ■ 5. Module責務の確認
@@ -173,7 +175,7 @@ target候補境界:
   今回は未接続
 ```
 
-声部進行Moduleへ渡せるのは、selected targetが生じた後である。
+今回の経路では、selected targetが生じた後に声部進行Moduleへ渡す。
 
 ---
 
@@ -233,3 +235,4 @@ function annotation
 ```
 
 次の検証では、selected targetを声部進行Moduleへ渡した場合に、target degreeとconcrete pitch realizationがどこで分かれるかを見る。
+

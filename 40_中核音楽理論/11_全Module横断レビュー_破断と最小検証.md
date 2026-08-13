@@ -428,11 +428,47 @@ function annotation
   ≠ target selection
 ```
 
-次に作る候補は、selected targetを声部進行Moduleへ渡す前に、target degreeとconcrete realizationの境界を再検査する検証である。
+次の接続検証として、次を作成した。
 
 ```text
 44_声部進行_selected_targetから具体音実現境界_最小実験.md
 voice_leading_selected_target_realization_boundary.py
 ```
+
+確認したこと。
+
+```text
+selected target = C major
+  ↓ external target degree plan
+target degrees = 3 / 1
+  ↓ existing 14 realization
+selected concrete target = E4-C5
+```
+
+この接続は自動生成ではない。
+
+```text
+selected target
+  ≠ target degree plan
+  ≠ concrete pitch realization
+```
+
+これにより、42〜44で次の分離を確認した。
+
+```text
+function annotation
+  ≠ target candidate generation
+  ≠ target selection
+  ≠ target degree planning
+  ≠ concrete pitch realization
+```
+
+次に作る候補は、voice leading resultをnext key/context interpretationへ直結しない条件を見る検証である。
+
+```text
+45_文脈解釈_voice_leading後のnext_key未確定_最小実験.md
+next_key_context_after_voice_leading_boundary.py
+```
+
 
 
