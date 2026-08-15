@@ -68,6 +68,7 @@ RDL音楽理論/
 │  ├─ 55_基層解釈_周波数差と弁別可能性_最小実験.md
 │  ├─ 56_基層解釈_時間間隔差と統合分離応答_最小実験.md
 │  ├─ 57_基層_learned_bridge_human_responseとcategory候補境界_最小実験.md
+│  ├─ 58_基層_learned_bridge_Gamma差し替えによるbridge候補分岐_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -119,7 +120,8 @@ RDL音楽理論/
 │  ├─ base_frequency_selective_response_candidate.py
 │  ├─ base_frequency_discriminability_candidate.py
 │  ├─ base_temporal_integration_candidate.py
-│  └─ base_to_learned_bridge_candidate.py
+│  ├─ base_to_learned_bridge_candidate.py
+│  └─ base_to_learned_bridge_gamma_variation.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -230,7 +232,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/57_基層_learned_bridge_human_responseとcategory候補境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/58_基層_learned_bridge_Gamma差し替えによるbridge候補分岐_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
