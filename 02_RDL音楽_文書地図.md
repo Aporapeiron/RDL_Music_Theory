@@ -93,6 +93,9 @@ RDL音楽理論/
 │  ├─ 80_音程Module_concrete_voice_leadingとnext_context候補境界_最小実験.md
 │  ├─ 81_音程Module_next_context候補集合とselection境界_最小実験.md
 │  ├─ 82_音程Module_harmonic_bridgeとfunction_annotation境界_最小実験.md
+│  ├─ 83_音程Module_next_contextとharmonic_annotation整合候補境界_最小実験.md
+│  ├─ 84_音程Module_context_harmony整合候補とselection境界_最小実験.md
+│  ├─ 85_音程Module_selected_consistencyとmodule_state_record境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -169,7 +172,10 @@ RDL音楽理論/
 │  ├─ interval_module_harmonic_bridge_boundary.py
 │  ├─ interval_module_next_context_candidate_boundary.py
 │  ├─ interval_module_next_context_selection_boundary.py
-│  └─ interval_module_harmonic_function_annotation_boundary.py
+│  ├─ interval_module_harmonic_function_annotation_boundary.py
+│  ├─ interval_module_context_harmony_consistency_boundary.py
+│  ├─ interval_module_context_harmony_consistency_selection.py
+│  └─ interval_module_state_record_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -188,6 +194,7 @@ RDL音楽理論/
 │  └─ 音程selected_targetから実現_bridge境界_77〜79構造抽出版.md
 │  └─ 音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md
 │  └─ 音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md
+│  └─ 音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -388,6 +395,22 @@ harmonic function bridge candidateに対して、外部function vocabularyと`Ga
 
 69〜82の検証列と四つの構造抽出版を統合し、core module input candidateから音程Module受理、内部B/Gamma接続、generic / quality / interval label生成、contextual role、target候補集合、selection、voice leading realization、next context selection、harmonic function annotationまでの境界列を一枚にまとめる。音程Moduleを物理差やlearned labelから意味・target・文脈・和声機能を自動生成する装置とせず、payload、context、inventory、plan、boundary、vocabulary、Gamma、controllerが横から入る多段境界列として整理する。
 
+### 10_検証/83_音程Module_next_contextとharmonic_annotation整合候補境界_最小実験.md
+
+selected next context candidateとharmonic function annotation candidateに対して、外部consistency evidenceと`Gamma_context_harmony_consistency`を与えた場合だけcontext-harmony consistency candidateが生じることを検証する。selected next context、harmonic function annotation、consistency evidence、整合候補、selected consistencyを分離し、二候補を自動整合済みにしない。実装は`interval_module_context_harmony_consistency_boundary.py`。
+
+### 10_検証/84_音程Module_context_harmony整合候補とselection境界_最小実験.md
+
+context-harmony consistency candidatesに対して、`Gamma_context_harmony_consistency_selection`を与えた場合だけselected consistency candidateが生じることを検証する。整合候補、selected consistency、module state record、Core昇格を分離し、整合候補を選択済み整合へ自動昇格しない。実装は`interval_module_context_harmony_consistency_selection.py`。
+
+### 10_検証/85_音程Module_selected_consistencyとmodule_state_record境界_最小実験.md
+
+selected consistency candidateに対して、外部record boundaryと`Gamma_interval_module_state_record`を与えた場合だけinterval module state record candidateが生じることを検証する。selected consistency、record boundary、module state record、confirmed M_B、Core昇格を分離し、record候補を確定M_BやCoreへ自動昇格しない。実装は`interval_module_state_record_boundary.py`。
+
+### 20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md
+
+83〜85の検証列から、selected next context candidateとharmonic function annotation candidateの整合候補、整合selection、module state record候補への境界を横断抽出する。selected next contextとharmonic annotationを自動整合済みにせず、外部evidence、selection controller、record boundary、Gammaが横から入る構造として整理し、confirmed M_BやCore昇格へ自動接続しない禁止線を保持する。
+
 ### 20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md
 
 57〜68の検証列から、learned候補集合生成、bridge形成、prioritization、selection、category confirmation、musical interpretation、中核Module bridge、core module input adoptionの境界を横断抽出する。`base response → core module input candidate` を自動因果列にせず、各段階にsource・evidence・context・Γ・controllerが横から入る構造として整理し、中核Module内部処理、B/Γ更新、Core昇格へ自動接続しない禁止線を保持する。
@@ -406,7 +429,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/82_音程Module_harmonic_bridgeとfunction_annotation境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/85_音程Module_selected_consistencyとmodule_state_record境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
