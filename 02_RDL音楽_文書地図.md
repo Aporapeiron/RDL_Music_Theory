@@ -80,6 +80,7 @@ RDL音楽理論/
 │  ├─ 67_基層_learned_musical_interpretationと中核Module候補接続境界_最小実験.md
 │  ├─ 68_基層_learned_core_module_bridgeとinput_adoption境界_最小実験.md
 │  ├─ 69_基層_learned_core_inputと音程Module受理境界_最小実験.md
+│  ├─ 70_音程Module_boundary_inputと内部B_Gamma接続境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -143,7 +144,8 @@ RDL音楽理論/
 │  ├─ base_to_learned_musical_interpretation_boundary.py
 │  ├─ base_to_core_music_module_bridge_boundary.py
 │  ├─ base_to_core_music_module_input_adoption_boundary.py
-│  └─ base_to_interval_module_reception_boundary.py
+│  ├─ base_to_interval_module_reception_boundary.py
+│  └─ interval_module_internal_boundary_activation.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -244,39 +246,55 @@ S_t → Δ → S_t+1
 ### 20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md
 
 54〜56の基層候補検証から、既知参照点、物理入力関係、B_base、Γ_base、人間側応答観測、M_B^base候補、confirmed M_B、learned音楽カテゴリーの境界を抽出する。既知参照点を基層M_Bへ直結せず、`physical difference ≠ human-side response difference ≠ learned musical category` を保持する共通型として整理する。
+
 ### 20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md
 
 57〜59のbridge検証から、human-side response difference、external learned category candidates、Γ_bridge、bridge candidate、confirmed learned category、selected musical interpretationの境界を抽出する。`human-side response difference × external learned category candidates × Γ_bridge → bridge candidate` をfixture内の三者関係として整理し、learned category生成や音楽解釈選択へ自動昇格しない禁止線を保持する。
+
 ### 20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md
 
 60〜62のlearned候補集合生成検証から、human-side response difference、learned candidate generation source、Γ_learned_candidate_generation、learned category candidate set、bridge candidate、confirmed learned category、selected musical interpretationの境界を抽出する。`learned candidate generation source × Γ_learned_candidate_generation → learned category candidate set` をfixture内の関係として整理し、候補集合をbridge候補・learned category確定・音楽解釈選択へ自動昇格しない禁止線を保持する。
+
 ### 10_検証/63_基層_learned_bridge候補集合と優先順位付け境界_最小実験.md
 
 複数bridge候補が観測された後、`Γ_bridge_prioritization`を与えた場合だけprioritized bridge orderingが生じることを検証する。bridge candidates observed、prioritized bridge ordering、selected musical interpretation、confirmed learned categoryを分離し、`priority_rank = 1`を選択済み解釈や確定カテゴリーへ自動昇格しない。実装は`base_to_learned_bridge_candidate_prioritization_boundary.py`。
+
 ### 10_検証/64_基層_learned_bridge優先候補列とselection_controller境界_最小実験.md
 
 同じprioritized bridge orderingに対して、selection controllerなしではunselectedに留まり、`Γ_bridge_selection`を与えた場合だけselected bridge candidateが生じることを検証する。prioritized bridge ordering、selected bridge candidate、confirmed learned category、selected musical interpretationを分離し、selected bridge candidateをlearned category確定や音楽解釈選択へ自動昇格しない。実装は`base_to_learned_bridge_selection_controller_boundary.py`。
+
 ### 20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md
 
 57〜64の検証列から、learned candidate generation、bridge candidate observation、bridge prioritization、bridge selectionの境界を横断抽出する。`learned candidate set → bridge candidates → prioritized bridge ordering → selected bridge candidate` を自動因果列にせず、各段階にsource・Γ・controllerが横から入る構造として整理し、confirmed learned categoryやselected musical interpretationへ自動昇格しない禁止線を保持する。
+
 ### 10_検証/65_基層_learned_selected_bridgeとcategory_confirmation境界_最小実験.md
 
 selected bridge candidateに対して、外部confirmation evidenceと`Γ_category_confirmation`を与えた場合だけconfirmed learned category candidateが生じることを検証する。selected bridge candidate、confirmation evidence、confirmed learned category candidate、selected musical interpretationを分離し、confirmed learned category candidateを音楽解釈選択や中核音楽理論Module接続へ自動昇格しない。実装は`base_to_learned_category_confirmation_boundary.py`。
+
 ### 10_検証/66_基層_learned_confirmed_categoryとmusical_interpretation境界_最小実験.md
 
 confirmed learned category candidateに対して、外部interpretation contextと`Γ_musical_interpretation`を与えた場合だけselected musical interpretation candidateが生じることを検証する。confirmed learned category candidate、interpretation context、selected musical interpretation candidate、中核音楽理論Module接続を分離し、音楽解釈候補を中核音楽理論側の確定入力へ自動昇格しない。実装は`base_to_learned_musical_interpretation_boundary.py`。
+
 ### 10_検証/67_基層_learned_musical_interpretationと中核Module候補接続境界_最小実験.md
 
 selected musical interpretation candidateに対して、外部core music module candidate setと`Γ_core_module_bridge`を与えた場合だけcore module bridge candidateが生じることを検証する。selected musical interpretation candidate、core module candidate set、core module bridge candidate、core module inputを分離し、bridge候補を中核音楽理論Module入力やCore昇格へ自動確定しない。実装は`base_to_core_music_module_bridge_boundary.py`。
+
 ### 10_検証/68_基層_learned_core_module_bridgeとinput_adoption境界_最小実験.md
 
 core module bridge candidateに対して、`Γ_core_module_input_adoption`を与えた場合だけcore module input candidateが生じることを検証する。core module bridge candidate、core module input candidate、中核Module内部処理開始、Core昇格を分離し、入力候補を中核ModuleのB/Γ更新や処理開始へ自動昇格しない。実装は`base_to_core_music_module_input_adoption_boundary.py`。
+
 ### 10_検証/69_基層_learned_core_inputと音程Module受理境界_最小実験.md
 
 core module input candidateに対して、`B_interval_module_reception`と`Γ_interval_module_reception`を与えた場合だけinterval module boundary input candidateが生じることを検証する。core module input candidate、interval module boundary input candidate、音程Module内部処理開始、音程ModuleのB/Γ更新、interval label generationを分離し、受理候補を音程Module内部処理やCore昇格へ自動接続しない。実装は`base_to_interval_module_reception_boundary.py`。
+
+### 10_検証/70_音程Module_boundary_inputと内部B_Gamma接続境界_最小実験.md
+
+interval module boundary input candidateに対して、外部payload、`B_chromatic`、`B_spelling`、`Gamma_interval_processing_frame`を与えた場合だけinterval module processing frame candidateが生じることを検証する。boundary input、payload生成、内部B/Gamma接続、generic interval generation、quality generation、interval label generation、contextual role annotationを分離し、処理フレームを音程ラベル生成やCore昇格へ自動接続しない。実装は`interval_module_internal_boundary_activation.py`。
+
 ### 20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md
 
 57〜68の検証列から、learned候補集合生成、bridge形成、prioritization、selection、category confirmation、musical interpretation、中核Module bridge、core module input adoptionの境界を横断抽出する。`base response → core module input candidate` を自動因果列にせず、各段階にsource・evidence・context・Γ・controllerが横から入る構造として整理し、中核Module内部処理、B/Γ更新、Core昇格へ自動接続しない禁止線を保持する。
+
 ### 30_既知音楽理論参照/
 
 既存の音楽理論を、物理法則・普遍知覚・RDL Core・RDL検証結論と同一視せず、参照用の構造化辞書として置く。最初は音程の分類と綴りによる分岐だけを収録し、検証・構造抽出へのリンクで接続する。
@@ -291,7 +309,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/69_基層_learned_core_inputと音程Module受理境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/70_音程Module_boundary_inputと内部B_Gamma接続境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
@@ -305,6 +323,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 ```
 
 現在の入口：`50_既知基層解釈参照/00_既知基層解釈参照_地図.md` / 初期基準表：`50_既知基層解釈参照/01_基層解釈_参照基準点.md` / 高優先候補：`50_既知基層解釈参照/02_高優先M_B候補_硬い関係.md`
+
 ### 02_RDL音楽_文書地図.md
 
 各文書の役割、依存関係、分岐条件を管理する。
