@@ -119,7 +119,7 @@ RDL音楽理論/
 │  └─ 物理音高から音楽ラベルへの分岐構造抽出版.md
 │  └─ 音程Module構造地図.md
 │  └─ 中核音楽理論_42〜45循環分解_構造抽出版.md
-│  └─ 和声機能_target候補生成_46〜49構造抽出版.md
+│  └─ 和声機能_target候補生成からselection境界_46〜53構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -196,9 +196,9 @@ S_t → Δ → S_t+1
 
 42〜45の横断検証から、`key context → chord candidate → function annotation → target → voice leading → next key/context` の循環候補を分解する。function annotation、target候補生成、target選択、target degree planning、具体音実現、next context候補生成、next context選択を非同一の責務として保持し、残るξと禁止補完を整理する。
 
-### 20_構造抽出/和声機能_target候補生成_46〜49構造抽出版.md
+### 20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md
 
-46〜49の横断検証から、`ξ_target_candidate_generation` とhistory入力の現在地を抽出する。function annotation、target候補生成規則、規則の適用可否、history fixture、生成済み候補集合、selected targetを非同一として保持し、candidate setが `C(function observation, history fixture; Γ_target_candidate_generation)` としてfixture上で現れることを整理する。
+46〜53の横断検証から、target候補生成、history / B_history representation、prioritization、selection controllerの現在地を抽出する。function observation、生成規則、適用可否、history representation、生成済み候補集合、prioritized ordering、selected target、target degree planを非同一として保持し、`representation → generation → prioritization → selection → planning` の分解系列として整理する。
 
 ### 30_既知音楽理論参照/
 
@@ -214,7 +214,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/53_和声機能_prioritized候補列とselection_controller境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成_46〜49構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/53_和声機能_prioritized候補列とselection_controller境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md`
 
 ### 02_RDL音楽_文書地図.md
 
