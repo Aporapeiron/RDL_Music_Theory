@@ -73,6 +73,7 @@ RDL音楽理論/
 │  ├─ 60_基層_learned_candidate_generation_sourceと候補集合境界_最小実験.md
 │  ├─ 61_基層_learned_candidate_generation_source差し替えによる候補集合分岐_最小実験.md
 │  ├─ 62_基層_learned_candidate_generation_Gamma差し替えによる候補集合分岐_最小実験.md
+│  ├─ 63_基層_learned_bridge候補集合と優先順位付け境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -129,7 +130,8 @@ RDL音楽理論/
 │  ├─ base_to_learned_bridge_candidate_set_variation.py
 │  ├─ learned_candidate_generation_boundary.py
 │  ├─ learned_candidate_source_variation.py
-│  └─ learned_candidate_generation_gamma_variation.py
+│  ├─ learned_candidate_generation_gamma_variation.py
+│  └─ base_to_learned_bridge_candidate_prioritization_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -234,6 +236,9 @@ S_t → Δ → S_t+1
 ### 20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md
 
 60〜62のlearned候補集合生成検証から、human-side response difference、learned candidate generation source、Γ_learned_candidate_generation、learned category candidate set、bridge candidate、confirmed learned category、selected musical interpretationの境界を抽出する。`learned candidate generation source × Γ_learned_candidate_generation → learned category candidate set` をfixture内の関係として整理し、候補集合をbridge候補・learned category確定・音楽解釈選択へ自動昇格しない禁止線を保持する。
+### 10_検証/63_基層_learned_bridge候補集合と優先順位付け境界_最小実験.md
+
+複数bridge候補が観測された後、`Γ_bridge_prioritization`を与えた場合だけprioritized bridge orderingが生じることを検証する。bridge candidates observed、prioritized bridge ordering、selected musical interpretation、confirmed learned categoryを分離し、`priority_rank = 1`を選択済み解釈や確定カテゴリーへ自動昇格しない。実装は`base_to_learned_bridge_candidate_prioritization_boundary.py`。
 ### 30_既知音楽理論参照/
 
 既存の音楽理論を、物理法則・普遍知覚・RDL Core・RDL検証結論と同一視せず、参照用の構造化辞書として置く。最初は音程の分類と綴りによる分岐だけを収録し、検証・構造抽出へのリンクで接続する。
@@ -248,7 +253,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/62_基層_learned_candidate_generation_Gamma差し替えによる候補集合分岐_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/63_基層_learned_bridge候補集合と優先順位付け境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
