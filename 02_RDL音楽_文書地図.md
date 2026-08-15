@@ -111,6 +111,21 @@ RDL音楽理論/
 │  ├─ 98_音程Module_adoption_recordとcontract_update候補境界_最小実験.md
 │  ├─ 99_音程Module_contract_update候補とregression診断境界_最小実験.md
 │  ├─ 100_音程Module_regression診断と次検証計画候補境界_最小実験.md
+│  ├─ 101_音程Module_next_plan候補とplan_commitment境界_最小実験.md
+│  ├─ 102_音程Module_committed_planとexecution_packet境界_最小実験.md
+│  ├─ 103_音程Module_execution_packetとreadiness診断境界_最小実験.md
+│  ├─ 104_音程Module_readiness診断とverification_run観測境界_最小実験.md
+│  ├─ 105_音程Module_verification_runとresult分類境界_最小実験.md
+│  ├─ 106_音程Module_result候補と構造破断診断境界_最小実験.md
+│  ├─ 107_音程Module_構造破断診断とintegration候補境界_最小実験.md
+│  ├─ 108_音程Module_integration候補とdocument_update_proposal境界_最小実験.md
+│  ├─ 109_音程Module_document_update_proposalとreview診断境界_最小実験.md
+│  ├─ 110_音程Module_update_review診断とaccepted_update_record境界_最小実験.md
+│  ├─ 111_音程Module_accepted_update_recordとcommit候補境界_最小実験.md
+│  ├─ 112_音程Module_commit候補とpush_readiness診断境界_最小実験.md
+│  ├─ 113_音程Module_push_readiness診断とpublication_plan候補境界_最小実験.md
+│  ├─ 114_音程Module_publication_plan候補とnext_xi選択境界_最小実験.md
+│  ├─ 115_音程Module_selected_next_xiとhandoff_summary候補境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -205,7 +220,22 @@ RDL音楽理論/
 │  ├─ interval_module_core_adoption_record_boundary.py
 │  ├─ interval_module_contract_update_boundary.py
 │  ├─ interval_module_contract_regression_diagnostic.py
-│  └─ interval_module_next_verification_plan_boundary.py
+│  ├─ interval_module_next_verification_plan_boundary.py
+│  ├─ interval_module_plan_commitment_boundary.py
+│  ├─ interval_module_execution_packet_boundary.py
+│  ├─ interval_module_execution_readiness_boundary.py
+│  ├─ interval_module_execution_run_boundary.py
+│  ├─ interval_module_result_classification_boundary.py
+│  ├─ interval_module_break_diagnostic_boundary.py
+│  ├─ interval_module_integration_candidate_boundary.py
+│  ├─ interval_module_document_update_proposal_boundary.py
+│  ├─ interval_module_update_review_boundary.py
+│  ├─ interval_module_update_acceptance_boundary.py
+│  ├─ interval_module_commit_candidate_boundary.py
+│  ├─ interval_module_push_readiness_boundary.py
+│  ├─ interval_module_publication_plan_boundary.py
+│  ├─ interval_module_next_xi_selection_boundary.py
+│  └─ interval_module_handoff_summary_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -231,6 +261,11 @@ RDL音楽理論/
 │  └─ 音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md
 │  └─ 音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md
 │  └─ 音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md
+│  └─ 音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md
+│  └─ 音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md
+│  └─ 音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md
+│  └─ 音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md
+│  └─ 音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -524,6 +559,87 @@ module contract update candidateにregression fixture setを与え、既存境�
 
 regression diagnosticにplanning controllerを与えた場合だけnext verification plan candidateが生じることを検証する。committed planではない。実装は`interval_module_next_verification_plan_boundary.py`。
 
+
+### 10_検証/101_音程Module_next_plan候補とplan_commitment境界_最小実験.md
+
+next verification plan candidateに外部commitment controllerを与えた場合だけcommitted plan candidateが生じることを検証する。committed plan candidateは実行済み検証ではない。実装は`interval_module_plan_commitment_boundary.py`。
+
+### 10_検証/102_音程Module_committed_planとexecution_packet境界_最小実験.md
+
+committed plan candidateに外部execution scope boundaryを与えた場合だけexecution packet candidateが生じることを検証する。execution packetは実行結果ではない。実装は`interval_module_execution_packet_boundary.py`。
+
+### 10_検証/103_音程Module_execution_packetとreadiness診断境界_最小実験.md
+
+execution packet candidateに外部resource checkを与え、execution readiness diagnosticを作る境界を検証する。readinessは実行そのものではない。実装は`interval_module_execution_readiness_boundary.py`。
+
+### 20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md
+
+101〜103から、next plan candidate、committed plan candidate、execution packet candidate、execution readiness diagnosticを分離する。
+
+### 10_検証/104_音程Module_readiness診断とverification_run観測境界_最小実験.md
+
+execution readiness diagnosticに外部execution controllerを与えた場合だけverification run observation candidateが生じることを検証する。run observationはresult分類ではない。実装は`interval_module_execution_run_boundary.py`。
+
+### 10_検証/105_音程Module_verification_runとresult分類境界_最小実験.md
+
+verification run observationに`Gamma_result_classifier`を与えた場合だけverification result candidateが生じることを検証する。result candidateは構造破断診断ではない。実装は`interval_module_result_classification_boundary.py`。
+
+### 10_検証/106_音程Module_result候補と構造破断診断境界_最小実験.md
+
+verification result candidateに`Gamma_structural_break_diagnostic`を与えた場合だけstructural break diagnostic candidateが生じることを検証する。反証可能性ではなく構造破断診断として扱う。実装は`interval_module_break_diagnostic_boundary.py`。
+
+### 20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md
+
+104〜106から、execution readiness、run observation、result candidate、structural break diagnosticを非同一として整理する。
+
+### 10_検証/107_音程Module_構造破断診断とintegration候補境界_最小実験.md
+
+structural break diagnostic candidateに外部integration policyを与えた場合だけintegration candidateが生じることを検証する。document updateは未生成である。実装は`interval_module_integration_candidate_boundary.py`。
+
+### 10_検証/108_音程Module_integration候補とdocument_update_proposal境界_最小実験.md
+
+integration candidateに外部document target boundaryを与えた場合だけdocument update proposal candidateが生じることを検証する。文書本文は未変更である。実装は`interval_module_document_update_proposal_boundary.py`。
+
+### 10_検証/109_音程Module_document_update_proposalとreview診断境界_最小実験.md
+
+document update proposal candidateに外部review checklistを与え、update review diagnosticを作る境界を検証する。実装は`interval_module_update_review_boundary.py`。
+
+### 20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md
+
+107〜109から、break diagnostic、integration candidate、document update proposal、update review diagnosticを分離する。
+
+### 10_検証/110_音程Module_update_review診断とaccepted_update_record境界_最小実験.md
+
+update review diagnosticに外部acceptance controllerを与えた場合だけaccepted update record candidateが生じることを検証する。文書本文は未変更である。実装は`interval_module_update_acceptance_boundary.py`。
+
+### 10_検証/111_音程Module_accepted_update_recordとcommit候補境界_最小実験.md
+
+accepted update record candidateに外部commit boundaryを与えた場合だけcommit candidateが生じることを検証する。これはgit commitではない。実装は`interval_module_commit_candidate_boundary.py`。
+
+### 10_検証/112_音程Module_commit候補とpush_readiness診断境界_最小実験.md
+
+commit candidateに外部push boundaryを与え、push readiness diagnosticを作る境界を検証する。これはgit pushではない。実装は`interval_module_push_readiness_boundary.py`。
+
+### 20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md
+
+110〜112から、accepted update record、commit candidate、push readiness diagnosticを分離し、実際のGit操作へ自動接続しない。
+
+### 10_検証/113_音程Module_push_readiness診断とpublication_plan候補境界_最小実験.md
+
+push readiness diagnosticに外部branch policyを与えた場合だけpublication plan candidateが生じることを検証する。未公開である。実装は`interval_module_publication_plan_boundary.py`。
+
+### 10_検証/114_音程Module_publication_plan候補とnext_xi選択境界_最小実験.md
+
+publication plan candidateに外部next ξ inventoryを与えた場合だけselected next ξ candidateが生じることを検証する。次作業は未開始である。実装は`interval_module_next_xi_selection_boundary.py`。
+
+### 10_検証/115_音程Module_selected_next_xiとhandoff_summary候補境界_最小実験.md
+
+selected next ξ candidateに外部handoff record boundaryを与えた場合だけhandoff summary candidateが生じることを検証する。次作業は未開始である。実装は`interval_module_handoff_summary_boundary.py`。
+
+### 20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md
+
+113〜115から、push readiness、publication plan、selected next ξ、handoff summaryを分離する。
+
 ### 20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md
 
 98〜100から、Core adoption record candidate、module contract update candidate、regression diagnostic、next verification plan candidateを分離する。Module mutationや計画確定へ直結しない。
@@ -550,7 +666,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/100_音程Module_regression診断と次検証計画候補境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/115_音程Module_selected_next_xiとhandoff_summary候補境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
