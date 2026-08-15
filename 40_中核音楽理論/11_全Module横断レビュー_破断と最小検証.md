@@ -686,3 +686,35 @@ B_history_fine   → broad_pattern + local_pattern → {C major, A minor}
 
 ただし、B_historyの選択とhistory representation粒度はfixtureであり、一般的な `ξ_history_granularity` は未解決である。selected targetは生成しない。
 
+
+次のξ検証として、次を作成した。
+
+```text
+52_和声機能_target候補集合と優先順位付け境界_最小実験.md
+harmonic_function_target_candidate_prioritization_boundary.py
+```
+
+確認したこと。
+
+```text
+same generated target candidate set
+  + different Γ_target_candidate_prioritization_fixture
+  ↓
+different prioritized candidate ordering
+  ↓
+selected targetは未生成
+```
+
+52では、51のfine history representationから得た同じ `{C major, A minor}` を固定入力にし、prioritization policyだけを差し替えた。
+
+```text
+{C major, A minor}
+  + Γ_prioritize_primary_fixture
+  → C major, A minor
+
+{C major, A minor}
+  + Γ_prioritize_deceptive_fixture
+  → A minor, C major
+```
+
+ただし、prioritized orderの先頭候補をselected targetとは扱わない。これにより、generated target candidate set、prioritized candidate ordering、selected targetの非同一性を保持した。prioritization policyの由来とselection controllerは未解決ξとして残る。
