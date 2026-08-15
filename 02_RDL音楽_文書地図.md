@@ -84,6 +84,9 @@ RDL音楽理論/
 │  ├─ 71_音程Module_processing_frameとgeneric_interval生成境界_最小実験.md
 │  ├─ 72_音程Module_generic_intervalとquality生成境界_最小実験.md
 │  ├─ 73_音程Module_qualityとinterval_label生成境界_最小実験.md
+│  ├─ 74_音程Module_interval_labelとcontextual_role注釈境界_最小実験.md
+│  ├─ 75_音程Module_contextual_roleとtarget候補集合境界_最小実験.md
+│  ├─ 76_音程Module_target候補集合とselection_controller境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -151,7 +154,10 @@ RDL音楽理論/
 │  ├─ interval_module_internal_boundary_activation.py
 │  ├─ interval_module_generic_interval_boundary.py
 │  ├─ interval_module_quality_boundary.py
-│  └─ interval_module_label_boundary.py
+│  ├─ interval_module_label_boundary.py
+│  ├─ interval_module_contextual_role_boundary.py
+│  ├─ interval_module_target_candidate_boundary.py
+│  └─ interval_module_target_selection_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -166,6 +172,7 @@ RDL音楽理論/
 │  └─ 基層_learned_bridgeからselection境界_57〜64構造抽出版.md
 │  └─ 基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md
 │  └─ 基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md
+│  └─ 音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -314,6 +321,22 @@ generic interval candidateとquality candidateに対して、`Gamma_interval_lab
 
 69〜73の検証列から、core module input candidate、interval module reception、processing frame activation、generic interval generation、quality generation、interval label generationの境界を横断抽出する。音程ラベル候補を単一の物理差・learned category・core input・半音距離の属性にせず、入力候補、外部payload、内部B、複数Gammaの関係から生じる候補として整理し、contextual role、target候補、harmonic function、Core昇格へ自動接続しない禁止線を保持する。
 
+### 10_検証/74_音程Module_interval_labelとcontextual_role注釈境界_最小実験.md
+
+interval label candidateに対して、外部interval contextと`Gamma_contextual_role`を与えた場合だけcontextual role annotation candidateが生じることを検証する。interval label、contextual role、target candidate generation、harmonic function、Core昇格を分離し、音程ラベルを文脈役割へ自動接続しない。実装は`interval_module_contextual_role_boundary.py`。
+
+### 10_検証/75_音程Module_contextual_roleとtarget候補集合境界_最小実験.md
+
+contextual role annotation candidateに対して、外部target candidate inventoryと`Gamma_interval_target_candidate_filter`を与えた場合だけtarget candidate set observedが生じることを検証する。contextual role、外部inventory、target候補集合、selected targetを分離し、文脈役割からtarget候補を自動生成しない。実装は`interval_module_target_candidate_boundary.py`。
+
+### 10_検証/76_音程Module_target候補集合とselection_controller境界_最小実験.md
+
+target candidate set observedに対して、`Gamma_interval_target_selection`を与えた場合だけselected interval target candidateが生じることを検証する。target候補集合、selected target、voice leading realization、harmonic function、Core昇格を分離し、候補集合を選択済みtargetへ自動昇格しない。実装は`interval_module_target_selection_boundary.py`。
+
+### 20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md
+
+74〜76の検証列から、interval label candidate、contextual role annotation、target candidate set observation、target selectionの境界を横断抽出する。音程ラベルからtargetへ向かう道筋を自動列にせず、context、候補inventory、filter、selection controllerが横から入る構造として整理し、voice leading、harmonic function、Core昇格へ自動接続しない禁止線を保持する。
+
 ### 20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md
 
 57〜68の検証列から、learned候補集合生成、bridge形成、prioritization、selection、category confirmation、musical interpretation、中核Module bridge、core module input adoptionの境界を横断抽出する。`base response → core module input candidate` を自動因果列にせず、各段階にsource・evidence・context・Γ・controllerが横から入る構造として整理し、中核Module内部処理、B/Γ更新、Core昇格へ自動接続しない禁止線を保持する。
@@ -332,7 +355,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/73_音程Module_qualityとinterval_label生成境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/76_音程Module_target候補集合とselection_controller境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
