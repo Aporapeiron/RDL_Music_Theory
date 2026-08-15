@@ -96,6 +96,21 @@ RDL音楽理論/
 │  ├─ 83_音程Module_next_contextとharmonic_annotation整合候補境界_最小実験.md
 │  ├─ 84_音程Module_context_harmony整合候補とselection境界_最小実験.md
 │  ├─ 85_音程Module_selected_consistencyとmodule_state_record境界_最小実験.md
+│  ├─ 86_音程Module_state_record候補とvalidation_evidence境界_最小実験.md
+│  ├─ 87_音程Module_validated_recordとM_B候補投影境界_最小実験.md
+│  ├─ 88_音程Module_M_B候補とCore昇格診断境界_最小実験.md
+│  ├─ 89_音程Module_M_B候補とconfirmation_readiness境界_最小実験.md
+│  ├─ 90_音程Module_confirmation_evidence差し替えによるreadiness分岐_最小実験.md
+│  ├─ 91_音程Module_confirmation_Gamma差し替えによるreadiness分岐_最小実験.md
+│  ├─ 92_音程Module_confirmation_readinessとconfirmed_M_B境界_最小実験.md
+│  ├─ 93_音程Module_confirmed_M_BとCore整合候補境界_最小実験.md
+│  ├─ 94_音程Module_Core整合Gamma差し替えによる整合候補分岐_最小実験.md
+│  ├─ 95_音程Module_Core整合候補とadoption_proposal境界_最小実験.md
+│  ├─ 96_音程Module_adoption_proposalとCore互換性診断境界_最小実験.md
+│  ├─ 97_音程Module_Core互換性診断とadoption_record境界_最小実験.md
+│  ├─ 98_音程Module_adoption_recordとcontract_update候補境界_最小実験.md
+│  ├─ 99_音程Module_contract_update候補とregression診断境界_最小実験.md
+│  ├─ 100_音程Module_regression診断と次検証計画候補境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -175,7 +190,22 @@ RDL音楽理論/
 │  ├─ interval_module_harmonic_function_annotation_boundary.py
 │  ├─ interval_module_context_harmony_consistency_boundary.py
 │  ├─ interval_module_context_harmony_consistency_selection.py
-│  └─ interval_module_state_record_boundary.py
+│  ├─ interval_module_state_record_boundary.py
+│  ├─ interval_module_record_validation_boundary.py
+│  ├─ interval_module_mb_candidate_boundary.py
+│  ├─ interval_module_core_promotion_diagnostic.py
+│  ├─ interval_module_confirmation_readiness_boundary.py
+│  ├─ interval_module_confirmation_evidence_variation.py
+│  ├─ interval_module_confirmation_gamma_variation.py
+│  ├─ interval_module_confirmed_mb_boundary.py
+│  ├─ interval_module_core_alignment_boundary.py
+│  ├─ interval_module_core_alignment_gamma_variation.py
+│  ├─ interval_module_core_adoption_proposal_boundary.py
+│  ├─ interval_module_core_compatibility_boundary.py
+│  ├─ interval_module_core_adoption_record_boundary.py
+│  ├─ interval_module_contract_update_boundary.py
+│  ├─ interval_module_contract_regression_diagnostic.py
+│  └─ interval_module_next_verification_plan_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -196,6 +226,11 @@ RDL音楽理論/
 │  └─ 音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md
 │  └─ 音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md
 │  └─ 音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md
+│  └─ 音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md
+│  └─ 音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md
+│  └─ 音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md
+│  └─ 音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md
+│  └─ 音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -412,6 +447,87 @@ selected consistency candidateに対して、外部record boundaryと`Gamma_inte
 
 83〜85の検証列から、selected next context candidateとharmonic function annotation candidateの整合候補、整合selection、module state record候補への境界を横断抽出する。selected next contextとharmonic annotationを自動整合済みにせず、外部evidence、selection controller、record boundary、Gammaが横から入る構造として整理し、confirmed M_BやCore昇格へ自動接続しない禁止線を保持する。
 
+
+### 10_検証/86_音程Module_state_record候補とvalidation_evidence境界_最小実験.md
+
+state record candidateに外部validation evidenceと`Gamma_interval_record_validation`を与えた場合だけvalidated state record candidateが生じることを検証する。validated record候補をM_B候補やCore昇格へ自動接続しない。実装は`interval_module_record_validation_boundary.py`。
+
+### 10_検証/87_音程Module_validated_recordとM_B候補投影境界_最小実験.md
+
+validated state record candidateに外部M_B candidate criteriaと`Gamma_interval_M_B_candidate_projection`を与えた場合だけ`M_B^interval candidate`が生じることを検証する。ここで得るものはconfirmed M_Bではない。実装は`interval_module_mb_candidate_boundary.py`。
+
+### 10_検証/88_音程Module_M_B候補とCore昇格診断境界_最小実験.md
+
+`M_B^interval candidate`にCore promotion criteriaと`Gamma_interval_core_promotion_diagnostic`を与え、未confirmed候補がCore昇格不可診断へ分岐することを検証する。Core mutationは行わない。実装は`interval_module_core_promotion_diagnostic.py`。
+
+### 20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md
+
+86〜88から、state record candidate、validation evidence、validated record candidate、M_B candidate criteria、M_B^interval candidate、Core promotion diagnosticを分離する。record候補からconfirmed M_BやCore mutationへ直結しない境界を整理する。
+
+### 10_検証/89_音程Module_M_B候補とconfirmation_readiness境界_最小実験.md
+
+M_B^interval candidateに外部confirmation evidence bundleと`Gamma_confirmation_readiness`を与えた場合だけreadiness diagnosticが生じることを検証する。readiness diagnosticはconfirmed M_Bではない。実装は`interval_module_confirmation_readiness_boundary.py`。
+
+### 10_検証/90_音程Module_confirmation_evidence差し替えによるreadiness分岐_最小実験.md
+
+同じM_B^interval candidateと同じΓで、confirmation evidence bundleだけを差し替えるとreadiness診断が分岐することを検証する。実装は`interval_module_confirmation_evidence_variation.py`。
+
+### 10_検証/91_音程Module_confirmation_Gamma差し替えによるreadiness分岐_最小実験.md
+
+同じM_B^interval candidateと同じevidenceで、Γ_confirmation_readinessだけを差し替えるとreadiness診断が分岐することを検証する。実装は`interval_module_confirmation_gamma_variation.py`。
+
+### 20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md
+
+89〜91から、M_B^interval candidate、confirmation evidence bundle、Γ_confirmation_readiness、readiness diagnostic、confirmed M_Bを非同一として整理する。
+
+### 10_検証/92_音程Module_confirmation_readinessとconfirmed_M_B境界_最小実験.md
+
+readiness diagnosticに外部confirmation controllerを与えた場合だけconfirmed M_B^interval candidateが生じることを検証する。Core昇格は生成しない。実装は`interval_module_confirmed_mb_boundary.py`。
+
+### 10_検証/93_音程Module_confirmed_M_BとCore整合候補境界_最小実験.md
+
+confirmed M_B^interval candidateにCore surface inventoryとΓ_core_alignmentを与え、Core alignment candidateを作る境界を検証する。Core adoptionではない。実装は`interval_module_core_alignment_boundary.py`。
+
+### 10_検証/94_音程Module_Core整合Gamma差し替えによる整合候補分岐_最小実験.md
+
+同じconfirmed M_Bと同じCore inventoryで、Γ_core_alignmentを差し替えるとalignment targetが分岐することを検証する。実装は`interval_module_core_alignment_gamma_variation.py`。
+
+### 20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md
+
+92〜94から、readiness diagnostic、confirmation controller、confirmed M_B^interval candidate、Core surface inventory、Core alignment candidateを分離する。confirmed M_BからCore採用へ直結しない。
+
+### 10_検証/95_音程Module_Core整合候補とadoption_proposal境界_最小実験.md
+
+Core alignment candidateに外部adoption policyを与えた場合だけCore adoption proposal candidateが生じることを検証する。Core mutationではない。実装は`interval_module_core_adoption_proposal_boundary.py`。
+
+### 10_検証/96_音程Module_adoption_proposalとCore互換性診断境界_最小実験.md
+
+Core adoption proposal candidateに外部compatibility checkを与え、Core compatibility diagnosticを作る境界を検証する。実装は`interval_module_core_compatibility_boundary.py`。
+
+### 10_検証/97_音程Module_Core互換性診断とadoption_record境界_最小実験.md
+
+Core compatibility diagnosticにgovernance boundaryを与えた場合だけCore adoption record candidateが生じることを検証する。Core mutationは行わない。実装は`interval_module_core_adoption_record_boundary.py`。
+
+### 20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md
+
+95〜97から、Core alignment candidate、adoption policy、proposal、compatibility diagnostic、governance boundary、adoption record candidateを分離する。adoption record candidateはCore mutationではない。
+
+### 10_検証/98_音程Module_adoption_recordとcontract_update候補境界_最小実験.md
+
+Core adoption record candidateに外部module contract update boundaryを与えた場合だけmodule contract update candidateが生じることを検証する。Module本文は変更しない。実装は`interval_module_contract_update_boundary.py`。
+
+### 10_検証/99_音程Module_contract_update候補とregression診断境界_最小実験.md
+
+module contract update candidateにregression fixture setを与え、既存境界保持のdiagnosticを作ることを検証する。実装は`interval_module_contract_regression_diagnostic.py`。
+
+### 10_検証/100_音程Module_regression診断と次検証計画候補境界_最小実験.md
+
+regression diagnosticにplanning controllerを与えた場合だけnext verification plan candidateが生じることを検証する。committed planではない。実装は`interval_module_next_verification_plan_boundary.py`。
+
+### 20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md
+
+98〜100から、Core adoption record candidate、module contract update candidate、regression diagnostic、next verification plan candidateを分離する。Module mutationや計画確定へ直結しない。
+
 ### 20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md
 
 69〜85の検証列と五つの構造抽出版を統合し、core module input candidateから音程Module受理、内部B/Gamma接続、interval label生成、contextual role、target selection、voice leading、next context selection、harmonic function annotation、context-harmony consistency、interval module state record candidateまでの境界列を一枚にまとめる。音程Moduleを物理差やlearned labelから意味・target・文脈・和声機能・状態recordを自動生成する装置とせず、payload、context、inventory、plan、boundary、vocabulary、evidence、Gamma、controllerが横から入る多段境界列として整理する。
@@ -434,7 +550,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/85_音程Module_selected_consistencyとmodule_state_record境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/100_音程Module_regression診断と次検証計画候補境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
