@@ -90,6 +90,9 @@ RDL音楽理論/
 │  ├─ 77_音程Module_selected_targetとvoice_leading計画境界_最小実験.md
 │  ├─ 78_音程Module_voice_leading_requestと具体実現境界_最小実験.md
 │  ├─ 79_音程Module_selected_targetと和声機能bridge境界_最小実験.md
+│  ├─ 80_音程Module_concrete_voice_leadingとnext_context候補境界_最小実験.md
+│  ├─ 81_音程Module_next_context候補集合とselection境界_最小実験.md
+│  ├─ 82_音程Module_harmonic_bridgeとfunction_annotation境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -163,7 +166,10 @@ RDL音楽理論/
 │  ├─ interval_module_target_selection_boundary.py
 │  ├─ interval_module_voice_leading_plan_boundary.py
 │  ├─ interval_module_voice_leading_realization_boundary.py
-│  └─ interval_module_harmonic_bridge_boundary.py
+│  ├─ interval_module_harmonic_bridge_boundary.py
+│  ├─ interval_module_next_context_candidate_boundary.py
+│  ├─ interval_module_next_context_selection_boundary.py
+│  └─ interval_module_harmonic_function_annotation_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -180,6 +186,7 @@ RDL音楽理論/
 │  └─ 基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md
 │  └─ 音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md
 │  └─ 音程selected_targetから実現_bridge境界_77〜79構造抽出版.md
+│  └─ 音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -360,6 +367,22 @@ selected interval target candidateに対して、外部harmonic bridge inventory
 
 77〜79の検証列から、selected interval target candidateの後段をvoice leading request / concrete realizationとharmonic function bridgeの二経路として横断抽出する。selected targetから具体声部進行や和声機能へ向かう道筋を自動列にせず、plan、boundary、inventory、Gammaが横から入る構造として整理し、next context interpretation、harmonic function annotation、Core昇格へ自動接続しない禁止線を保持する。
 
+### 10_検証/80_音程Module_concrete_voice_leadingとnext_context候補境界_最小実験.md
+
+concrete voice leading observationに対して、外部next context inventoryと`Gamma_next_context_candidate_filter`を与えた場合だけnext context candidate set observedが生じることを検証する。concrete voice leading、next context inventory、next context候補集合、selected next context、harmonic functionを分離し、具体声部進行からnext context候補を自動生成しない。実装は`interval_module_next_context_candidate_boundary.py`。
+
+### 10_検証/81_音程Module_next_context候補集合とselection境界_最小実験.md
+
+next context candidate set observedに対して、`Gamma_next_context_selection`を与えた場合だけselected next context candidateが生じることを検証する。next context候補集合、selected next context、harmonic function、Core昇格を分離し、候補集合を選択済み文脈へ自動昇格しない。実装は`interval_module_next_context_selection_boundary.py`。
+
+### 10_検証/82_音程Module_harmonic_bridgeとfunction_annotation境界_最小実験.md
+
+harmonic function bridge candidateに対して、外部function vocabularyと`Gamma_harmonic_function_annotation`を与えた場合だけharmonic function annotation candidateが生じることを検証する。harmonic bridge、function vocabulary、harmonic function annotation、target generation、voice leading generationを分離し、bridge候補を和声機能注釈へ自動昇格しない。実装は`interval_module_harmonic_function_annotation_boundary.py`。
+
+### 20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md
+
+80〜82の検証列から、concrete voice leading observationからnext context candidate observation / selectionへ進む境界と、harmonic function bridge candidateからharmonic function annotationへ進む境界を横断抽出する。具体声部進行やbridgeから上位文脈へ向かう道筋を自動列にせず、inventory、vocabulary、Gamma、selection controllerが横から入る構造として整理し、target generation、voice leading generation、Core昇格へ自動接続しない禁止線を保持する。
+
 ### 20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md
 
 57〜68の検証列から、learned候補集合生成、bridge形成、prioritization、selection、category confirmation、musical interpretation、中核Module bridge、core module input adoptionの境界を横断抽出する。`base response → core module input candidate` を自動因果列にせず、各段階にsource・evidence・context・Γ・controllerが横から入る構造として整理し、中核Module内部処理、B/Γ更新、Core昇格へ自動接続しない禁止線を保持する。
@@ -378,7 +401,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/79_音程Module_selected_targetと和声機能bridge境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/82_音程Module_harmonic_bridgeとfunction_annotation境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
