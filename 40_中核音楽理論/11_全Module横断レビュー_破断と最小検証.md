@@ -718,3 +718,38 @@ selected targetは未生成
 ```
 
 ただし、prioritized orderの先頭候補をselected targetとは扱わない。これにより、generated target candidate set、prioritized candidate ordering、selected targetの非同一性を保持した。prioritization policyの由来とselection controllerは未解決ξとして残る。
+次のξ検証として、次を作成した。
+
+```text
+53_和声機能_prioritized候補列とselection_controller境界_最小実験.md
+harmonic_function_prioritized_candidate_selection_boundary.py
+```
+
+確認したこと。
+
+```text
+same prioritized target candidate ordering
+  + different Γ_selection_fixture
+  ↓
+different selected target
+  ↓
+target degree planは未生成
+```
+
+53では、52のprimary優先fixtureから得た同じ `C major(rank 1), A minor(rank 2)` を固定入力にし、selection controllerだけを差し替えた。
+
+```text
+C major(rank 1), A minor(rank 2)
+  + Γ_selectionなし
+  → selected targetなし
+
+C major(rank 1), A minor(rank 2)
+  + Γ_select_top_rank_fixture
+  → C major
+
+C major(rank 1), A minor(rank 2)
+  + Γ_select_deceptive_source_fixture
+  → A minor
+```
+
+これにより、prioritized candidate orderingとselected targetを同一視せず、rank 1候補が常にselected targetになるとも扱わない。selection controllerの由来、適用条件、上位controllerとの接続は未解決ξとして残る。

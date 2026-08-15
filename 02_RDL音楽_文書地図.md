@@ -63,6 +63,7 @@ RDL音楽理論/
 │  ├─ 50_和声機能_同一history大分類内local_pattern差によるtarget候補集合分岐_最小実験.md
 │  ├─ 51_和声機能_B_history粒度差によるtarget候補集合分岐_最小実験.md
 │  ├─ 52_和声機能_target候補集合と優先順位付け境界_最小実験.md
+│  ├─ 53_和声機能_prioritized候補列とselection_controller境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -109,7 +110,8 @@ RDL音楽理論/
 │  ├─ harmonic_function_generation_history_variation.py
 │  ├─ harmonic_function_generation_history_local_pattern.py
 │  ├─ harmonic_function_generation_history_boundary_granularity.py
-│  └─ harmonic_function_target_candidate_prioritization_boundary.py
+│  ├─ harmonic_function_target_candidate_prioritization_boundary.py
+│  └─ harmonic_function_prioritized_candidate_selection_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -212,7 +214,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/52_和声機能_target候補集合と優先順位付け境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成_46〜49構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/53_和声機能_prioritized候補列とselection_controller境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成_46〜49構造抽出版.md`
 
 ### 02_RDL音楽_文書地図.md
 
