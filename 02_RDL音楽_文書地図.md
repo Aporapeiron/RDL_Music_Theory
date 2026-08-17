@@ -133,6 +133,9 @@ RDL音楽理論/
 │  ├─ 119_音程Module_selected_input_reception_clauseとinput_source契約候補境界_最小実験.md
 │  ├─ 120_音程Module_input_source契約候補とpayload_schema契約候補境界_最小実験.md
 │  ├─ 121_音程Module_payload_schema契約候補集合とinput_contract_adoption境界_最小実験.md
+│  ├─ 122_音程Module_adopted_input_contractとpayload_instance束縛境界_最小実験.md
+│  ├─ 123_音程Module_bound_payloadとinput_validation診断境界_最小実験.md
+│  ├─ 124_音程Module_validation診断とprocessing_request候補境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -248,7 +251,10 @@ RDL音楽理論/
 │  ├─ interval_module_contract_clause_selection.py
 │  ├─ interval_module_input_source_contract.py
 │  ├─ interval_module_input_payload_schema_contract.py
-│  └─ interval_module_input_contract_adoption.py
+│  ├─ interval_module_input_contract_adoption.py
+│  ├─ interval_module_input_payload_instance.py
+│  ├─ interval_module_input_payload_validation.py
+│  └─ interval_module_processing_request_boundary.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -281,6 +287,7 @@ RDL音楽理論/
 │  └─ 音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md
 │  └─ 音程Module_contract_generalization入口境界_116〜118構造抽出版.md
 │  └─ 音程Module_input_reception契約定義境界_119〜121構造抽出版.md
+│  └─ 音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -682,6 +689,23 @@ input source contract候補集合に外部payload schema inventoryと`Gamma_inte
 
 payload schema contract候補集合に外部adoption controllerを与えた場合だけadopted input reception contract candidateが生じることを検証する。今回の採用候補は`pitch_relation_payload`であり、Module処理開始やModule本文更新ではない。実装は`interval_module_input_contract_adoption.py`。
 
+
+### 10_検証/122_音程Module_adopted_input_contractとpayload_instance束縛境界_最小実験.md
+
+adopted input reception contract candidateに外部payload instanceと`Gamma_interval_payload_instance_binding`を与えた場合だけbound payload instance candidateが生じることを検証する。payload instanceは契約から自動生成せず、validationやModule処理開始もまだ行わない。実装は`interval_module_input_payload_instance.py`。
+
+### 10_検証/123_音程Module_bound_payloadとinput_validation診断境界_最小実験.md
+
+bound payload instance candidateに`Gamma_interval_payload_validation`を与え、必要fieldを持つかをpayload validation diagnosticとして観測する。processing requestはまだ生成しない。実装は`interval_module_input_payload_validation.py`。
+
+### 10_検証/124_音程Module_validation診断とprocessing_request候補境界_最小実験.md
+
+payload validation diagnosticに外部processing request controllerを与えた場合だけprocessing request candidateが生じることを検証する。requested stageは`processing_frame_activation`だが、Module処理はまだ開始しない。実装は`interval_module_processing_request_boundary.py`。
+
+### 20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md
+
+122〜124から、adopted input reception contract、payload instance、bound payload instance、validation diagnostic、processing request candidateを分離する。契約からpayloadを生成せず、requestからprocessing frame activationを自動実行しない停止線を保持する。
+
 ### 20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md
 
 119〜121から、input_reception clause、input source inventory、input source contract candidates、payload schema inventory、payload schema contract candidates、adopted input reception contractを分離する。音程Moduleの入力受理契約を`surface → source → payload schema → adoption`として整理する。
@@ -720,7 +744,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/121_音程Module_payload_schema契約候補集合とinput_contract_adoption境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/124_音程Module_validation診断とprocessing_request候補境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md` / `20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
