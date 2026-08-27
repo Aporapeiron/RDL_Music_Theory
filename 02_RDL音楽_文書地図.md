@@ -160,6 +160,16 @@ RDL音楽理論/
 │  ├─ 146_音程Module_reentered_M_B候補からconfirmation_readiness境界_最小実験.md
 │  ├─ 147_音程Module_reentered_confirmation_evidence差し替え境界_最小実験.md
 │  ├─ 148_音程Module_reentered_confirmation_Gamma差し替え境界_最小実験.md
+│  ├─ 149_音程Module_reentered_confirmation_readinessからconfirmed_M_B境界_最小実験.md
+│  ├─ 150_音程Module_reentered_confirmed_M_BからCore整合候補境界_最小実験.md
+│  ├─ 151_音程Module_reentered_Core整合Gamma差し替え境界_最小実験.md
+│  ├─ 152_音程Module_reentered_Core整合候補からadoption_proposal境界_最小実験.md
+│  ├─ 153_音程Module_reentered_adoption_proposalからcompatibility診断境界_最小実験.md
+│  ├─ 154_音程Module_reentered_compatibility診断からadoption_record境界_最小実験.md
+│  ├─ 155_音程Module_reentered_adoption_recordからcontract_update境界_最小実験.md
+│  ├─ 156_音程Module_reentered_contract_updateからregression診断境界_最小実験.md
+│  ├─ 157_音程Module_reentered_regression診断からnext_plan境界_最小実験.md
+│  ├─ 158_音程Module_reentered_next_planからcommitment境界_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -302,7 +312,17 @@ RDL音楽理論/
 │  ├─ interval_module_core_promotion_diagnostic_reentry.py
 │  ├─ interval_module_confirmation_readiness_reentry.py
 │  ├─ interval_module_confirmation_evidence_variation_reentry.py
-│  └─ interval_module_confirmation_gamma_variation_reentry.py
+│  ├─ interval_module_confirmation_gamma_variation_reentry.py
+│  ├─ interval_module_confirmed_mb_reentry.py
+│  ├─ interval_module_core_alignment_reentry.py
+│  ├─ interval_module_core_alignment_gamma_variation_reentry.py
+│  ├─ interval_module_core_adoption_proposal_reentry.py
+│  ├─ interval_module_core_compatibility_reentry.py
+│  ├─ interval_module_core_adoption_record_reentry.py
+│  ├─ interval_module_contract_update_reentry.py
+│  ├─ interval_module_contract_regression_reentry.py
+│  ├─ interval_module_next_verification_plan_reentry.py
+│  └─ interval_module_plan_commitment_reentry.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -848,6 +868,46 @@ activation input bundle candidateに`Gamma_existing_70_activation_bridge`を与�
 
 146の再入confirmation readiness診断で、Gamma差し替えによりreadinessが分岐し、confirmed M_Bは生成されないことを検証する。実装は`interval_module_confirmation_gamma_variation_reentry.py`。
 
+### 10_検証/149_音程Module_reentered_confirmation_readinessからconfirmed_M_B境界_最小実験.md
+
+146で再入生成したconfirmation readiness diagnosticにconfirmation controllerを与え、既存92のconfirmed M_B境界へ接続できることを検証する。実装は`interval_module_confirmed_mb_reentry.py`。
+
+### 10_検証/150_音程Module_reentered_confirmed_M_BからCore整合候補境界_最小実験.md
+
+149で再入生成したconfirmed M_B candidateに外部Core surface inventoryとGammaを与え、既存93のCore alignment候補境界へ接続できることを検証する。実装は`interval_module_core_alignment_reentry.py`。
+
+### 10_検証/151_音程Module_reentered_Core整合Gamma差し替え境界_最小実験.md
+
+150の再入Core alignmentで、Gamma差し替えによりalignment targetが分岐し、Core mutationは起こらないことを検証する。実装は`interval_module_core_alignment_gamma_variation_reentry.py`。
+
+### 10_検証/152_音程Module_reentered_Core整合候補からadoption_proposal境界_最小実験.md
+
+150で再入生成したCore alignment candidateにadoption policyを与え、既存95のCore adoption proposal境界へ接続できることを検証する。実装は`interval_module_core_adoption_proposal_reentry.py`。
+
+### 10_検証/153_音程Module_reentered_adoption_proposalからcompatibility診断境界_最小実験.md
+
+152で再入生成したCore adoption proposalにcompatibility checkを与え、既存96のCore compatibility診断境界へ接続できることを検証する。実装は`interval_module_core_compatibility_reentry.py`。
+
+### 10_検証/154_音程Module_reentered_compatibility診断からadoption_record境界_最小実験.md
+
+153で再入生成したCore compatibility diagnosticにgovernanceを与え、既存97のCore adoption record境界へ接続できることを検証する。実装は`interval_module_core_adoption_record_reentry.py`。
+
+### 10_検証/155_音程Module_reentered_adoption_recordからcontract_update境界_最小実験.md
+
+154で再入生成したCore adoption record candidateにcontract update boundaryを与え、既存98のModule contract update候補境界へ接続できることを検証する。実装は`interval_module_contract_update_reentry.py`。
+
+### 10_検証/156_音程Module_reentered_contract_updateからregression診断境界_最小実験.md
+
+155で再入生成したModule contract update candidateにregression fixturesを与え、既存99のregression診断境界へ接続できることを検証する。実装は`interval_module_contract_regression_reentry.py`。
+
+### 10_検証/157_音程Module_reentered_regression診断からnext_plan境界_最小実験.md
+
+156で再入生成したregression diagnosticにplanning controllerを与え、既存100のnext verification plan境界へ接続できることを検証する。実装は`interval_module_next_verification_plan_reentry.py`。
+
+### 10_検証/158_音程Module_reentered_next_planからcommitment境界_最小実験.md
+
+157で再入生成したnext verification plan candidateにcommitment controllerを与え、既存101のplan commitment境界へ接続できることを検証する。実装は`interval_module_plan_commitment_reentry.py`。
+
 ### 20_構造抽出/音程Module_processing_requestから既存70_activation接続境界_125〜127構造抽出版.md
 
 125〜127から、processing request、adopted processing request、activation input bundle、既存70 activation execution、processing frame candidateを分離する。新しい音程処理器を作らず、既存70への接続検証として整理する。
@@ -894,7 +954,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/148_音程Module_reentered_confirmation_Gamma差し替え境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md` / `20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md` / `20_構造抽出/音程Module_processing_requestから既存70_activation接続境界_125〜127構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/158_音程Module_reentered_next_planからcommitment境界_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md` / `20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md` / `20_構造抽出/音程Module_processing_requestから既存70_activation接続境界_125〜127構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
