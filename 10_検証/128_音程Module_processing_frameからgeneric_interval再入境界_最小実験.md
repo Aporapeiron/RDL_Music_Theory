@@ -67,6 +67,8 @@ processing frame candidate
 
 再入Gammaは、既存70 bridgeが自動生成するものではない。
 
+ここでのreentry / contract系の名称はMusic側検証列の局所境界であり、RDL Core Primitiveではない。
+
 ## ■ 3. 観測結果
 
 ```text

@@ -9,15 +9,16 @@ from interval_module_existing_70_activation_bridge import (
     run_existing_70_activation,
 )
 from interval_module_generic_interval_boundary import (
-    GenericIntervalObservation,
+    GenericIntervalCandidate,
+    GenericIntervalGamma,
     gamma_generic_fixture,
-    generate_generic_interval,
 )
 from interval_module_internal_boundary_activation import (
-    IntervalInternalActivationObservation,
     IntervalModuleProcessingFrameCandidate,
     PitchRelationPayload,
 )
+
+LETTER_INDEX = {"C": 0, "D": 1, "E": 2, "F": 3, "G": 4, "A": 5, "B": 6}
 
 
 @dataclass(frozen=True)
@@ -28,10 +29,29 @@ class ProcessingFrameReentryGamma:
 
 
 @dataclass(frozen=True)
+class ProcessingFramePayloadView:
+    processing_frame: IntervalModuleProcessingFrameCandidate
+    pitch_payload: PitchRelationPayload
+
+
+@dataclass(frozen=True)
+class ReenteredGenericIntervalObservation:
+    frame_payload_view: ProcessingFramePayloadView
+    gamma_generic: GenericIntervalGamma | None
+    generic_interval: GenericIntervalCandidate | None
+    quality_generated: bool
+    interval_label_generated: bool
+    contextual_role_generated: bool
+    core_promoted: bool
+    status: str
+    generation_reason: str | None
+
+
+@dataclass(frozen=True)
 class ProcessingFrameReentryObservation:
     bridge_observation: Existing70ActivationBridgeObservation
     reentry_gamma: ProcessingFrameReentryGamma | None
-    generic_observation: GenericIntervalObservation | None
+    generic_observation: ReenteredGenericIntervalObservation | None
     same_processing_frame_label: bool
     same_spelling_pair: bool
     generic_interval_generated: bool
@@ -52,9 +72,9 @@ def reentry_gamma_fixture() -> ProcessingFrameReentryGamma:
     )
 
 
-def activation_view_from_bridge(
+def frame_payload_view_from_bridge(
     bridge_obs: Existing70ActivationBridgeObservation,
-) -> IntervalInternalActivationObservation | None:
+) -> ProcessingFramePayloadView | None:
     bundle = bridge_obs.bundle_observation.activation_bundle
     if bundle is None or bridge_obs.processing_frame_label is None:
         return None
@@ -78,20 +98,46 @@ def activation_view_from_bridge(
         interval_label_generated=False,
         contextual_role_generated=False,
     )
-    return IntervalInternalActivationObservation(
-        reception_observation=bridge_obs.bundle_observation,
-        pitch_payload=payload,
-        b_chromatic=None,
-        b_spelling=None,
-        processing_gamma=None,
-        processing_frame=frame,
-        generic_interval_generated=False,
+    return ProcessingFramePayloadView(processing_frame=frame, pitch_payload=payload)
+
+
+def generate_reentered_generic_interval(
+    view: ProcessingFramePayloadView,
+    gamma_generic: GenericIntervalGamma | None,
+) -> ReenteredGenericIntervalObservation:
+    if gamma_generic is None:
+        return ReenteredGenericIntervalObservation(
+            frame_payload_view=view,
+            gamma_generic=None,
+            generic_interval=None,
+            quality_generated=False,
+            interval_label_generated=False,
+            contextual_role_generated=False,
+            core_promoted=False,
+            status="generic_interval_not_generated_without_gamma",
+            generation_reason=None,
+        )
+
+    lower, upper = view.pitch_payload.spelling_pair
+    generic = GenericIntervalCandidate(
+        label="generic_interval_fifth_candidate",
+        source_processing_frame_label=view.processing_frame.label,
+        spelling_pair=view.pitch_payload.spelling_pair,
+        generic_number=LETTER_INDEX[upper] - LETTER_INDEX[lower] + 1,
+        quality_generated=False,
+        interval_label_generated=False,
+        contextual_role_generated=False,
+    )
+    return ReenteredGenericIntervalObservation(
+        frame_payload_view=view,
+        gamma_generic=gamma_generic,
+        generic_interval=generic,
         quality_generated=False,
         interval_label_generated=False,
         contextual_role_generated=False,
         core_promoted=False,
-        status=bridge_obs.existing70_status or "existing70_activation_status_missing",
-        activation_reason="reentered_from_existing70_bridge_observation",
+        status="generic_interval_candidate_observed_not_qualified",
+        generation_reason="reentered_processing_frame_read_by_Gamma_generic",
     )
 
 
@@ -99,7 +145,8 @@ def reenter_processing_frame_to_generic(
     bridge_obs: Existing70ActivationBridgeObservation,
     reentry_gamma: ProcessingFrameReentryGamma | None,
 ) -> ProcessingFrameReentryObservation:
-    if bridge_obs.processing_frame_label is None:
+    view = frame_payload_view_from_bridge(bridge_obs)
+    if view is None:
         return ProcessingFrameReentryObservation(
             bridge_obs,
             reentry_gamma,
@@ -124,21 +171,7 @@ def reenter_processing_frame_to_generic(
             "processing_frame_not_reentered_without_reentry_gamma",
         )
 
-    activation_view = activation_view_from_bridge(bridge_obs)
-    if activation_view is None:
-        return ProcessingFrameReentryObservation(
-            bridge_obs,
-            reentry_gamma,
-            None,
-            False,
-            False,
-            False,
-            False,
-            False,
-            "activation_view_not_constructed",
-        )
-
-    generic_obs = generate_generic_interval(activation_view, gamma_generic_fixture())
+    generic_obs = generate_reentered_generic_interval(view, gamma_generic_fixture())
     generic = generic_obs.generic_interval
     bundle = bridge_obs.bundle_observation.activation_bundle
     return ProcessingFrameReentryObservation(
