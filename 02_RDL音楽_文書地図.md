@@ -199,6 +199,7 @@ RDL音楽理論/
 │  ├─ 279〜288_四Module音楽的固有性_相互作用面_10工程_最小実験.md
 │  ├─ 289〜298_音高調律から音程綴り境界_片方向stress_test_10工程_最小実験.md
 │  ├─ 299〜348_四Module相互作用面_stress_test_50工程_最小実験.md
+│  ├─ 349〜398_四Module相互作用面_予測分岐と複数解釈保持_50工程_最小実験.md
 │  ├─ c_major_operations.py
 │  ├─ rhythm_candidate_operations.py
 │  ├─ generic_candidate_operations.py
@@ -380,7 +381,8 @@ RDL音楽理論/
 │  ├─ cross_module_music_specific_relation_269_278.py
 │  ├─ cross_module_interaction_surface_279_288.py
 │  ├─ tuning_to_interval_spelling_stress_289_298.py
-│  └─ cross_module_interaction_stress_299_348.py
+│  ├─ cross_module_interaction_stress_299_348.py
+│  └─ cross_module_prediction_split_349_398.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -424,6 +426,7 @@ RDL音楽理論/
 │  └─ 四Module音楽的固有性_相互作用面_279〜288構造抽出版.md
 │  └─ 音高調律から音程綴り境界_片方向stress_test_289〜298構造抽出版.md
 │  └─ 四Module相互作用面_stress_test_299〜348構造抽出版.md
+│  └─ 四Module相互作用面_予測分岐と複数解釈保持_349〜398構造抽出版.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -1087,6 +1090,14 @@ activation input bundle candidateに`Gamma_existing_70_activation_bridge`を与�
 
 279〜288で選んだ音高調律→音程のdirected relationを、実データ列でstress testする。3:2 frequency ratioから12TET 7 semitonesを得て、それを音程の綴り境界へ渡す。ただし、12TETカテゴリーを音程名へ自動昇格せず、綴り境界により完全五度 / 減六度へ分岐することを確認する。実装は`tuning_to_interval_spelling_stress_289_298.py`。
 
+### 10_検証/349〜398_四Module相互作用面_予測分岐と複数解釈保持_50工程_最小実験.md
+
+299〜348で観測した四Module相互作用面から、同じevidence bundleが一意予測へ潰れず、C major continuation / A minor reinterpretationの複数解釈として残るかを検査する。policyなしではunderdetermined、外部policyありで選択可能だが、未選択解釈を消去しない。実装は`cross_module_prediction_split_349_398.py`。
+
+### 20_構造抽出/四Module相互作用面_予測分岐と複数解釈保持_349〜398構造抽出版.md
+
+349〜398から、source_reentry、prediction_request、candidate_set、split_point、underdetermination、policy_boundary、prediction_content、non_confluent、relation_grid、difference_retention、summary、next_planの位相を抽出する。same evidence、voice leading result、prediction candidate、policy selection、multiple interpretationの停止線を保持する。
+
 ### 10_検証/299〜348_四Module相互作用面_stress_test_50工程_最小実験.md
 
 279〜288で観測した四Module相互作用面を、289〜298の音高調律→音程stress testから継続し、50工程で通す。音高調律→音程、音程→和声機能、和声機能→声部進行/next context、リズム拍節→和声機能、非合流面、停止線、次ξ選択をまとめて検査する。ただし、相互作用を統合ModuleやCore primitiveへ昇格せず、差異保存つきの接続として扱う。実装は`cross_module_interaction_stress_299_348.py`。
@@ -1173,7 +1184,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/299〜348_四Module相互作用面_stress_test_50工程_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md` / `20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md` / `20_構造抽出/音程Module_processing_requestから既存70_activation接続境界_125〜127構造抽出版.md` / `20_構造抽出/音程Module_reentered_input_contractから螺旋型再入循環_179〜228構造抽出版.md` / `20_構造抽出/和声機能Module_螺旋型再入循環移植_229〜238構造抽出版.md` / `20_構造抽出/リズム拍節Module_螺旋型再入循環移植_239〜248構造抽出版.md` / `20_構造抽出/音高調律Module_螺旋型再入循環移植_249〜258構造抽出版.md` / `20_構造抽出/螺旋型再入循環_四Module差異抽出_259〜268構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_関係検査_269〜278構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_相互作用面_279〜288構造抽出版.md` / `20_構造抽出/音高調律から音程綴り境界_片方向stress_test_289〜298構造抽出版.md` / `20_構造抽出/四Module相互作用面_stress_test_299〜348構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/349〜398_四Module相互作用面_予測分岐と複数解釈保持_50工程_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md` / `20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md` / `20_構造抽出/音程Module_processing_requestから既存70_activation接続境界_125〜127構造抽出版.md` / `20_構造抽出/音程Module_reentered_input_contractから螺旋型再入循環_179〜228構造抽出版.md` / `20_構造抽出/和声機能Module_螺旋型再入循環移植_229〜238構造抽出版.md` / `20_構造抽出/リズム拍節Module_螺旋型再入循環移植_239〜248構造抽出版.md` / `20_構造抽出/音高調律Module_螺旋型再入循環移植_249〜258構造抽出版.md` / `20_構造抽出/螺旋型再入循環_四Module差異抽出_259〜268構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_関係検査_269〜278構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_相互作用面_279〜288構造抽出版.md` / `20_構造抽出/音高調律から音程綴り境界_片方向stress_test_289〜298構造抽出版.md` / `20_構造抽出/四Module相互作用面_stress_test_299〜348構造抽出版.md` / `20_構造抽出/四Module相互作用面_予測分岐と複数解釈保持_349〜398構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 
