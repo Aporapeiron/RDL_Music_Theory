@@ -1,8 +1,8 @@
-# 検証記録：reentered input contractから閉じた再入循環 50工程
+# 検証記録：reentered input contractから螺旋型再入循環 50工程
 
 *対象：178で得たadopted input contractから、payload bindingへ戻り、processing request、activation、音程生成、文脈接続、Core候補、実行準備、更新候補、contract generalization側へ再び到達する50工程*  
-*状態：DRAFT v0.1 / 178後の閉じた再入循環検証*  
-*実装：`10_検証/interval_module_closed_reentry_cycle_179_228.py`*
+*状態：DRAFT v0.2 / 178後の螺旋型再入循環検証*  
+*実装：`10_検証/interval_module_spiral_reentry_cycle_179_228.py`*
 
 ---
 
@@ -10,7 +10,7 @@
 
 178では、reentered payload schema contract candidatesからadopted input reception contract candidateを生成できることを確認した。
 
-179〜228では、そのadopted input contractを起点に、再びpayload instance bindingへ戻し、processing requestから後続境界を一巡できるかを確認する。
+179〜228では、そのadopted input contractを起点に、再びpayload instance bindingへ戻し、processing requestから後続境界をhandoff ready contract targetまで通せるかを確認する。
 
 ```text
 178 adopted input contract
@@ -26,9 +26,13 @@
 ...
   ↓
 228 handoff ready contract target
+  ↓
+next ξ / contract generalization target
+  ↓
+cycle_n+1 の input contract 系入口
 ```
 
-ここでの目的は、50個の新しい処理器を作ることではない。125〜178で分離した境界列を、閉じた循環として再観測できることを確認する。
+ここで確認するのは、終端的に閉じた循環ではない。確認するのは、125〜178で分離した境界列が、同型の入口へ戻れる螺旋型再入循環として観測できることである。
 
 ---
 
@@ -92,7 +96,7 @@
 ## ■ 2. 実行結果
 
 ```text
-closed_reentry_cycle_179_228_observed_without_mutation
+spiral_reentry_cycle_179_228_observed_without_terminal_closure_or_mutation
 ```
 
 確認したこと。
@@ -101,8 +105,9 @@ closed_reentry_cycle_179_228_observed_without_mutation
 step count = 50
 first step = 179
 last step = 228
-closed_to_processing_request = True
+returns_to_isomorphic_entry = True
 reached_handoff_boundary = True
+terminally_closed = False
 generated_mutation = False
 ```
 
@@ -110,8 +115,15 @@ generated_mutation = False
 
 ## ■ 3. 暫定結論
 
-179〜228では、178のadopted input contractから、payload binding、validation、processing requestへ戻り、その後の再入境界列を再びhandoff/contract target側へ到達させられることを確認した。
+179〜228では、178のadopted input contractから、payload binding、validation、processing requestへ戻り、その後の再入境界列をhandoff/contract target側へ到達させられることを確認した。
 
-この検証は、各工程の詳細実装を増やすのではなく、125〜178で抽出した境界列が閉じた循環として扱えるかを見るための圧縮検証である。
+この検証は、各工程の詳細実装を増やすのではなく、125〜178で抽出した境界列が次のinput contract系入口へ再接続できるかを見るための圧縮検証である。
 
-したがって、今回生成したのは新しいCore primitiveではなく、RDL Music Theory側のローカルなcontract/reentry boundary cycleである。
+したがって、今回生成したのは新しいCore primitiveではなく、RDL Music Theory側のローカルなcontract/reentry boundary spiralである。
+
+```text
+cycle_n
+→ next ξ
+→ contract generalization
+→ cycle_n+1
+```

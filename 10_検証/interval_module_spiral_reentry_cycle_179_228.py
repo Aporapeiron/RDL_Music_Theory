@@ -1,4 +1,4 @@
-"""178 adopted input contractから閉じた再入循環を50工程で確認する最小検証。"""
+"""178 adopted input contractから螺旋型再入循環を50工程で確認する最小検証。"""
 
 from dataclasses import dataclass
 
@@ -8,7 +8,7 @@ from interval_module_input_contract_adoption_reentry import (
 
 
 @dataclass(frozen=True)
-class ClosedReentryCycleStep:
+class SpiralReentryCycleStep:
     number: int
     name: str
     source: str
@@ -17,11 +17,12 @@ class ClosedReentryCycleStep:
 
 
 @dataclass(frozen=True)
-class ClosedReentryCycleObservation:
+class SpiralReentryCycleObservation:
     source_status: str
-    steps: tuple[ClosedReentryCycleStep, ...]
-    closed_to_processing_request: bool
+    steps: tuple[SpiralReentryCycleStep, ...]
+    returns_to_isomorphic_entry: bool
     reached_handoff_boundary: bool
+    terminally_closed: bool
     generated_mutation: bool
     status: str
 
@@ -80,7 +81,7 @@ STEP_DEFINITIONS: tuple[tuple[int, str, str], ...] = (
 )
 
 
-def observe_closed_reentry_cycle() -> ClosedReentryCycleObservation:
+def observe_spiral_reentry_cycle() -> SpiralReentryCycleObservation:
     adopted = compare_input_contract_adoption_reentry()[1]
     assert adopted.adopted_contract is not None
 
@@ -88,7 +89,7 @@ def observe_closed_reentry_cycle() -> ClosedReentryCycleObservation:
     steps = []
     for number, name, result in STEP_DEFINITIONS:
         steps.append(
-            ClosedReentryCycleStep(
+            SpiralReentryCycleStep(
                 number=number,
                 name=name,
                 source=previous,
@@ -99,26 +100,28 @@ def observe_closed_reentry_cycle() -> ClosedReentryCycleObservation:
         previous = result
 
     observed = tuple(steps)
-    return ClosedReentryCycleObservation(
+    return SpiralReentryCycleObservation(
         source_status=adopted.status,
         steps=observed,
-        closed_to_processing_request=observed[2].result == "processing_request_candidate",
+        returns_to_isomorphic_entry=observed[2].result == "processing_request_candidate",
         reached_handoff_boundary=observed[-1].result == "handoff_ready_contract_target",
+        terminally_closed=False,
         generated_mutation=any(step.generated_mutation for step in observed),
-        status="closed_reentry_cycle_179_228_observed_without_mutation",
+        status="spiral_reentry_cycle_179_228_observed_without_terminal_closure_or_mutation",
     )
 
 
 def run_checks() -> None:
-    observation = observe_closed_reentry_cycle()
+    observation = observe_spiral_reentry_cycle()
     assert observation.source_status == (
         "adopted_input_contract_observed_from_reentered_payload_schema_not_processed"
     )
     assert len(observation.steps) == 50
     assert observation.steps[0].number == 179
     assert observation.steps[-1].number == 228
-    assert observation.closed_to_processing_request is True
+    assert observation.returns_to_isomorphic_entry is True
     assert observation.reached_handoff_boundary is True
+    assert observation.terminally_closed is False
     assert observation.generated_mutation is False
     assert observation.steps[0].source == "adopted_input_contract"
     assert observation.steps[2].result == "processing_request_candidate"
@@ -127,4 +130,8 @@ def run_checks() -> None:
 
 if __name__ == "__main__":
     run_checks()
-    print(observe_closed_reentry_cycle().status)
+    print(observe_spiral_reentry_cycle().status)
+
+
+
+
