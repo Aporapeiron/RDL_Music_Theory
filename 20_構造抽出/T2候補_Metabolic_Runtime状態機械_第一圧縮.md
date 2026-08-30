@@ -1,4 +1,4 @@
-# T2候補 Metabolic Runtime状態機械 第一圧縮
+﻿# T2候補 Metabolic Runtime状態機械 第一圧縮
 
 ## 位置づけ
 
@@ -30,7 +30,7 @@ output
 
 工程番号、音楽語彙、Module名は、ここではfixture由来の痕跡として扱い、状態機械のprimitiveにはしない。
 
-## 最小状態列
+## 第一圧縮状態列
 
 ```text
 Input
@@ -68,7 +68,64 @@ ReentryReady
 NextInput
 ```
 
-この列は単線の実行命令ではない。分岐、保留、非合流、再入を許す状態配置である。
+この列は3398工程から抜いた第一圧縮であり、最終的な最小状態機械ではない。
+
+すべての実行で `commitment`、`conflict`、`mediation`、`alternative memory` が必須になるとは限らない。これらは主幹Runtimeに常時含まれるprimitiveではなく、必要時に接続されるMechanism branchとして再圧縮される可能性がある。
+
+## 主幹候補と任意branch
+
+現時点のより小さい主幹候補は以下である。
+
+```text
+Input
+↓
+Bound
+↓
+Validated
+↓
+Candidate
+↓
+Evaluated
+↓
+Recorded / Updated
+↓
+ReentryReady
+↓
+NextInput
+```
+
+必要時に接続されるbranch候補:
+
+```text
+Selection branch:
+  Evaluated
+  ↓
+  Selected
+  ↓
+  CommitmentReady
+  ↓
+  CommitmentAttempted
+  ↓
+  Committed
+
+Alternative branch:
+  Candidate / Selected / Recorded
+  ↓
+  AlternativeRetained
+  ↓
+  Reactivated
+
+Conflict mediation branch:
+  Reactivated / Recorded
+  ↓
+  ConflictObserved
+  ↓
+  Mediated
+  ↓
+  OutcomeObserved
+```
+
+したがって第一圧縮状態列は、単線の実行命令ではなく、分岐、保留、非合流、再入を許す状態配置である。
 
 ## 遷移
 
@@ -128,7 +185,8 @@ ReentryReady -> NextInput
 
 ```text
 has_input
-has_boundary_or_contract
+has_boundary
+has_contract_if_required
 validation_passed_or_failure_recorded
 candidate_set_available_or_empty_recorded
 evaluation_policy_available
@@ -143,7 +201,7 @@ outcome_observation_boundary_available
 reentry_target_available
 ```
 
-guardがない場合、遷移を実行せず、failure / pending / ξとして残す。
+guardがない場合、遷移を実行せず、failureまたはpendingとして記録する。guard不足をそのままξへ同一視しない。停止状態を現在のBで記述してもなお未回収の関係が残る場合だけ、ξとして保持されうる。
 
 ## stop line
 
@@ -175,7 +233,8 @@ reentry ≠ terminal closure
 ```text
 input:
   payload
-  boundary / contract
+  boundary B
+  contract if required
   context
   prior record
   controller
@@ -198,15 +257,24 @@ output:
 
 ```text
 ξ =
-  guard不足
-  未回収関係
-  未選択だが削除されない候補
-  後続文脈待ちのalternative
-  conflict未解決成分
-  reentry先未確定成分
+  有限境界Bを引いたことに伴って残る未回収関係
 ```
 
-ξは次の入力、別boundary、別controller、別fixtureで再回収されうる。
+guard不足、未選択候補、後続文脈待ちのalternative、conflict未解決成分、reentry先未確定成分は、それ自体が直ちにξではない。
+
+```text
+guard不足
+↓
+failure / pendingとして記録
+↓
+その停止状態を現在のBで記述してもなお未回収の関係が残る
+↓
+ξとして保持されうる
+```
+
+同様に、未選択候補そのものはξではない。未選択候補を現在の処理で回収しきれず、有限境界Bの外側または境界上に残る関係がある場合に、ξとして保持されうる。
+
+ξは次の入力、別boundary、別controller、別fixtureで再回収されうるが、処理できなかったもの全体を入れる箱ではない。
 
 ## Music fixtureとの関係
 
@@ -258,4 +326,4 @@ Metabolic Runtime =
   reentry / handoff
 ```
 
-次段階では、この骨格を非Music対象に食わせ、どの状態・guard・stop lineが残るかを検査する。
+次段階では、この骨格を非Music対象に食わせ、主幹として残る状態と、任意branchとしてのみ残るMechanismを分けて検査する。
