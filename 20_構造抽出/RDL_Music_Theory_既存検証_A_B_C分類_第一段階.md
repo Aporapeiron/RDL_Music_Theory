@@ -1,10 +1,17 @@
-# RDL_Music_Theory 既存検証 A/B/C分類 第一段階
+﻿# RDL_Music_Theory 既存検証 A/B/C分類 第一段階
 
 ## 位置づけ
 
 `60_今後の展望/RDL_Music_Theory_方針修正計画書.md` の第一段階に従い、既存検証を削除・移動せず、主対象によって暫定分類する。
 
 この分類は正式移管ではない。
+
+また、A/B/Cは完全な排他分類ではない。各範囲には主分類を一つ置き、必要に応じて補助タグを付ける。
+
+```text
+primary = A / B / C
+secondary tags = Music-specific / T2-candidate / fixture
+```
 
 ```text
 分類

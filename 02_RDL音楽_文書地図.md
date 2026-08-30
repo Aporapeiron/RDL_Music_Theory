@@ -660,7 +660,7 @@ RDL音楽理論の入口・全体構造を示す。
 
 ### 01_RDL音楽_Core.md
 
-音楽領域で共通して使用する最小の状態記述と操作を定める。Eは更新前の同一M_Bによる現在解釈・後続予測と、同じM_Bで読んだF'(t+Δ)との不整合として扱い、ξは有限境界Bに伴う未回収関係としてT0定義を継承する。
+音楽領域で共通して使用する最小の状態記述と操作を定める。EはT0に合わせてF(t)=interp(M_B,EFP(t))とF'(t+Δ)=interp(M_B,EFP(t+Δ))を維持し、F内に含まれる後続予測とF'の不整合として扱う。ξは有限境界Bに伴う未回収関係としてT0定義を継承する。
 
 ```text
 S_t = <B_t, M_{B_t,t}, W_{B_t,t}, F_t, E_{B_t,t}, H_{B_t,t}, ξ_{B_t,t}>
@@ -1280,7 +1280,7 @@ activation input bundle candidateに`Gamma_existing_70_activation_bridge`を与�
 
 ### 20_構造抽出/RDL_Music_Theory_既存検証_A_B_C分類_第一段階.md
 
-方針修正計画書の第一段階に従い、3398工程までの既存検証をA Music固有、B Music起源だがT2汎用化候補、C 両者の接続検証へ暫定分類する。既存文書は削除・移動せず、分類、圧縮、非Music対象での再使用、T2昇格判定の順序を保持する。次段階ではB分類をstate、transition、guard、stop line、input、output、ξへ圧縮する。
+方針修正計画書の第一段階に従い、3398工程までの既存検証をA Music固有、B Music起源だがT2汎用化候補、C 両者の接続検証へ暫定分類する。A/B/Cは完全排他ではなく、primary分類とsecondary tagを分ける。既存文書は削除・移動せず、分類、圧縮、非Music対象での再使用、T2昇格判定の順序を保持する。次段階ではB分類をstate、transition、guard、stop line、input、output、ξへ圧縮する。
 
 ### 20_構造抽出/mediation_post_commitment_alternative_retention_3349〜3398構造抽出版.md
 

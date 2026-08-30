@@ -156,26 +156,35 @@ F_device ≠ F_human
 
 ## ■ 6. E：現在構造との差
 
-\(E\) は、同一の更新前 \(M_B\) によって形成された現在解釈・後続予測と、同じ \(M_B\) で解釈した後続入力 \(F'\) との不整合として扱う。
+\(E\) は、同一の更新前 \(M_B\) によって形成された \(F(t)\) と、同じ \(M_B\) で解釈した後続入力 \(F'\) との不整合として扱う。
 
 ```text
-F(t)        = interp(M_B, EFP(t)) + predict(M_B, context_t)
+F(t)        = interp(M_B, EFP(t))
 F'(t+Δ)    = interp(M_B, EFP(t+Δ))
-E(t+Δ)     = Δ(prediction_in_F, F')
+E(t+Δ)     = Δ(F, F')
 ```
+
+\(F(t)\) は単なる現在入力の読みに限らず、現在解釈と後続関係の予測を含む。加法的な内部構造を仮定せず、必要な場合だけ \(F\) 内の予測成分を `prediction_in_F` として参照する。
 
 ここで \(F'\) は更新後の \(M_B'\) による解釈ではない。更新前の同一 \(M_B\) を使うことで、差分 \(E\) を「モデル更新後の説明」ではなく「現行境界内で予測されていた関係と、実際に後続入力から読まれた関係の破断」として保持する。
 
 ```text
-same M_B + EFP(t) + context_t
+same M_B + EFP(t)
           ↓
-          F(t): current interpretation + prediction
+          F(t)
+          includes:
+            current interpretation
+            prediction of subsequent relation
 
 same M_B + EFP(t+Δ)
           ↓
           F'(t+Δ)
           ↓
-          E(t+Δ): prediction mismatch
+          E(t+Δ)
+
+optional:
+  prediction_in_F = pred(F)
+  E = Δ(prediction_in_F, F')
 ```
 
 音楽的には、予想していた解決、拍位置、旋律継続、和声機能、音程の扱いと、実際に来た後続関係との不整合もEとして扱える。
