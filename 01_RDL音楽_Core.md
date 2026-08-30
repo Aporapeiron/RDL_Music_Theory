@@ -1,4 +1,4 @@
-# RDL音楽_Core
+﻿# RDL音楽_Core
 
 *T3：応用層 / CREATE・MATH / DRAFT v0.1*
 *依存：RDL_Core / T1_SILN操作層*
@@ -156,14 +156,26 @@ F_device ≠ F_human
 
 ## ■ 6. E：現在構造との差
 
-\(E\) は、現在のM_Bから維持・予測される関係とFとの差である。
+\(E\) は、同一の更新前 \(M_B\) によって解釈された現在入力と次入力の関係差として扱う。
 
 ```text
-predicted / inertial relation
+F(t)        = interp(M_B, EFP(t))
+F'(t+Δ)    = interp(M_B, EFP(t+Δ))
+E(t+Δ)     = Δ(F, F')
+```
+
+ここで \(F'\) は更新後の \(M_B'\) による解釈ではない。更新前の同一 \(M_B\) を使うことで、差分 \(E\) を「モデル更新後の説明」ではなく「現行境界内で観測された変化」として保持する。
+
+```text
+same M_B + EFP(t)
           ↓
-          E
-          ↑
-observed F
+          F(t)
+
+same M_B + EFP(t+Δ)
+          ↓
+          F'(t+Δ)
+          ↓
+          E(t+Δ)
 ```
 
 Eの存在を、直ちに誤りとはみなさない。
@@ -192,11 +204,14 @@ H ≠ 不協和
 
 ## ■ 8. ξ：未回収成分
 
-ξは、現在のBとM_Bでは十分に記述できない成分である。
+ξは、有限境界Bを引いたことに伴って残る未回収関係である。
+
+現在のBとM_Bでは十分に記述できない成分として現れるが、単なる記述不能成分ではない。
 
 ```text
 ξ ≠ mistake
 ξ ≠ noise
+ξ ≠ mere indescribable residue
 ```
 
 別のBを引いたとき、
