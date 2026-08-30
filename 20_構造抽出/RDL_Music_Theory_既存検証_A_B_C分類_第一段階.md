@@ -43,18 +43,28 @@ Music側へ残す主領域。
 
 ```text
 01〜04
+  primary = A
+  secondary = Music-specific
   C6 / Am7、C major、単純リズム、純粋候補集合の初期観測。
 
 06〜15
+  primary = A
+  secondary = Music-specific
   波形関係、周波数比、12TET半音数、音程綴り、トライトーン解決方向、音度から具体音への実現。
 
 42〜53
+  primary = A
+  secondary = Music-specific
   和声機能、key context、function annotation、target候補、voice leading、next context。
 
 54〜68
+  primary = A
+  secondary = Music-specific / fixture
   基層解釈、frequency response、temporal integration、learned bridge、音楽的解釈から中核Module入力への接続。
 
 69〜85
+  primary = A
+  secondary = Music-specific / fixture
   音程Moduleの入力、generic interval、quality、interval label、contextual role、target、voice leading、harmonic bridge、next context。
 ```
 
@@ -80,21 +90,33 @@ T2 Mechanism候補としてマークする主領域。
 
 ```text
 86〜127
+  primary = B
+  secondary = T2-candidate / fixture
   state record、validation、M_B候補、Core整合候補、adoption、plan、execution readiness、update review、push readiness、handoff、contract generalization、input contract、payload binding、activation bridge。
 
 179〜228
+  primary = B
+  secondary = T2-candidate
   螺旋型再入循環。T1代謝を連続運用すると現れるT2実行パターン候補。
 
 399〜998
+  primary = B
+  secondary = T2-candidate / fixture
   policy、multiple interpretation record schema、B依存選択、weighting、threshold、candidate lifecycle、selection controller、post selection lifecycle、alternative memory、memory limit。
 
 999〜1598
+  primary = B
+  secondary = T2-candidate
   memory reactivation、refrain identity、variation lifecycle、variation sequence、branch reentry、parallel variation memory、polyphonic memory coordination、deferred resolution、resolution return、post resolution memory update、post resolution reentry。
 
 1599〜2598
+  primary = B
+  secondary = T2-candidate
   drift、threshold、split candidate reintegration、context pressure、delayed selection、commitment、revision memory、conflict detection、policy execution、attempt outcome、interpretation commitment、record、trace update、post commitment alternative retention。
 
 2599〜3398
+  primary = B
+  secondary = T2-candidate / fixture
   alternative reactivation after commitment、commitment conflict、conflict mediation、mediation outcome readiness、attempt、observation、record boundary、selection readiness、selection controller、selected outcome、commitment readiness、commitment attempt、commitment record、post commitment alternative retention。
 ```
 
@@ -130,21 +152,33 @@ Music側のfixtureとして残しつつ、T2候補抽出の入口にもなる領
 
 ```text
 05
+  primary = C
+  secondary = Music-specific / T2-candidate / fixture
   Bから候補空間生成。Music固有の候補生成でありつつ、candidate generation一般化の入口でもある。
 
 16〜41
+  primary = C
+  secondary = Music-specific / T2-candidate / fixture
   empty、fallback、再探索、動態Adapter、二標本横断、不変条件、no_effect、状態signature、候補再生成。
 
 74〜85
+  primary = C
+  secondary = Music-specific / fixture
   音程Moduleのtarget selectionからvoice leading、harmonic bridge、state recordへ至る接続。
 
 128〜178
+  primary = C
+  secondary = Music-specific / T2-candidate / fixture
   音程Module reentry列。音程固有処理へ戻りつつ、契約・実行境界・再入パターンを観測する。
 
 229〜268
+  primary = C
+  secondary = Music-specific / T2-candidate / fixture
   和声機能、リズム拍節、音高調律への螺旋型再入循環移植と四Module差異抽出。
 
 269〜398
+  primary = C
+  secondary = Music-specific / T2-candidate / fixture
   四Module音楽的固有性、相互作用面、音高調律から音程綴り境界、予測分岐と複数解釈保持。
 ```
 
