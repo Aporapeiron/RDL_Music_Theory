@@ -131,7 +131,7 @@ Conflict mediation branch:
 
 ```text
 Input -> Bound
-  input payloadが境界Bまたはcontractへ束縛される。
+  input payloadが有限境界Bへ束縛される。contractはBの代替ではなく、B内部でinputを受け渡す局所規則として必要時に参照される。
 
 Bound -> Validated
   inputが現行境界で読めるかを検査する。
@@ -313,17 +313,36 @@ B分類は、現時点では以下のT2候補として読める。
 
 ```text
 Metabolic Runtime =
-  bounded input
-  validation
-  candidate lifecycle
-  selection control
-  commitment
-  record
-  alternative memory
-  reactivation
-  conflict mediation
-  outcome observation
-  reentry / handoff
+  core trunk candidate:
+    bounded input
+    validation
+    processable state formation
+    test / compare
+    maintain / record / update
+    reentry / handoff
+
+  optional mechanism candidates:
+    candidate lifecycle
+    selection control
+    commitment
+    record trace specialization
+    alternative memory
+    reactivation
+    conflict mediation
+    outcome observation
+```
+
+`Candidate`、`Evaluated`、`Recorded / Updated` は主幹primitiveとして確定しない。これらは非Music耐久検査で最優先に壊す仮置き状態である。
+
+```text
+Candidate
+→ Processable State へ圧縮できるか。
+
+Evaluated
+→ Test / Compare へ圧縮できるか。
+
+Recorded / Updated
+→ Maintain / Record / Update の分岐へ分解できるか。
 ```
 
 次段階では、この骨格を非Music対象に食わせ、主幹として残る状態と、任意branchとしてのみ残るMechanismを分けて検査する。

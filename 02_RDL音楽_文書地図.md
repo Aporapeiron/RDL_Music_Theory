@@ -1281,7 +1281,7 @@ activation input bundle candidateに`Gamma_existing_70_activation_bridge`を与�
 
 ### 20_構造抽出/T2候補_Metabolic_Runtime状態機械_第一圧縮.md
 
-A/B/C分類のB分類を、3398工程の時系列から切り離し、T2候補の第一圧縮状態機械として整理する。Bは必須境界、contractはB内部の局所規則として分け、guard不足や未選択候補を直ちにξへ同一視しない。Input、Bound、Validated、Candidate、Evaluated、Recorded/Updated、ReentryReady、NextInputを主幹候補とし、selection、commitment、alternative retention、reactivation、conflict mediation、outcome observationは必要時に接続されるbranch候補として保持する。
+A/B/C分類のB分類を、3398工程の時系列から切り離し、T2候補の第一圧縮状態機械として整理する。Bは必須境界、contractはB内部の局所規則として分け、guard不足や未選択候補を直ちにξへ同一視しない。Input、Bound、Validated、Candidate、Evaluated、Recorded/Updated、ReentryReady、NextInputを第一圧縮上の主幹候補としつつ、Candidate、Evaluated、Recorded/Updatedは非Music耐久検査でProcessable State、Test/Compare、Maintain/Record/Updateへ壊す対象として保持する。selection、commitment、alternative retention、reactivation、conflict mediation、outcome observationは必要時に接続されるbranch候補として扱う。
 
 ### 20_構造抽出/RDL_Music_Theory_既存検証_A_B_C分類_第一段階.md
 
