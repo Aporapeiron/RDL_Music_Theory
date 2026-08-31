@@ -18,6 +18,8 @@ import wave
 
 SAMPLE_RATE = 44_100
 PITCH_CLASS_SET = frozenset({"C", "E", "G", "A"})
+DEVICE_AUDIO_RELATIVE_PATH = "artifacts/audio/music_v02_c6_am7_rehearing_loop.wav"
+MANIFEST_RELATIVE_PATH = "artifacts/json/music_v02_c6_am7_rehearing_observation.json"
 
 NOTE_FREQUENCY = {
     "A2": 110.00,
@@ -57,6 +59,7 @@ class LoopObservation:
     perceptual_hypothesis: str
     actual_listening_observation: str | None
     device_audio_path: str
+    observation_discrepancy_route: tuple[str, ...]
 
 
 def c6_state() -> VoicedState:
@@ -131,7 +134,10 @@ def observation_to_manifest(observation: LoopObservation) -> dict[str, object]:
         "perceptual_hypothesis": observation.perceptual_hypothesis,
         "actual_listening_observation": observation.actual_listening_observation,
         "device_audio_path": observation.device_audio_path,
+        "observation_discrepancy_route": list(observation.observation_discrepancy_route),
         "stop_lines": [
+            "discrepancy_is_not_immediate_prediction_failure",
+            "discrepancy_is_not_immediate_xi",
             "structural_prediction_is_not_actual_human_listening",
             "device_audio_fixture_is_not_F_human",
             "Am7_candidate_is_not_confirmed_hearing",
@@ -147,7 +153,7 @@ def write_manifest(path: Path, observation: LoopObservation) -> None:
     )
 
 
-def run_loop(output_path: Path) -> LoopObservation:
+def run_loop(output_path: Path, device_audio_path: str = DEVICE_AUDIO_RELATIVE_PATH) -> LoopObservation:
     source = c6_state()
     generated = am7_tilt_state()
 
@@ -170,19 +176,26 @@ def run_loop(output_path: Path) -> LoopObservation:
         changed_relations=(
             "bass_relation:C->A",
             "register_gravity:C3->A2",
+            "preceding_context:C-centered arrival->C-centered memory retained",
             "following_context:C-centered expectation->A-centered availability",
         ),
         structural_prediction="C6_candidate -> C6/Am7 ambiguity pressure -> Am7_candidate becomes available",
         perceptual_hypothesis="listener may hear the second chord as a bass-driven tilt toward Am7, while C-centered memory remains active",
         actual_listening_observation=None,
-        device_audio_path=str(output_path),
+        device_audio_path=device_audio_path,
+        observation_discrepancy_route=(
+            "record_discrepancy_between_prediction_hypothesis_and_observation",
+            "test_absorbability_in_current_M_B",
+            "if_absorbable_hold_as_E_H_or_update_candidate",
+            "if_unabsorbed_after_current_B_hold_as_xi",
+        ),
     )
 
 
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[2]
-    output_path = repo_root / "artifacts" / "audio" / "music_v02_c6_am7_rehearing_loop.wav"
-    manifest_path = repo_root / "artifacts" / "json" / "music_v02_c6_am7_rehearing_observation.json"
+    output_path = repo_root / DEVICE_AUDIO_RELATIVE_PATH
+    manifest_path = repo_root / MANIFEST_RELATIVE_PATH
     observation = run_loop(output_path)
     write_manifest(manifest_path, observation)
 
@@ -194,6 +207,7 @@ def main() -> None:
     print(f"structural_prediction={observation.structural_prediction}")
     print(f"perceptual_hypothesis={observation.perceptual_hypothesis}")
     print(f"actual_listening_observation={observation.actual_listening_observation}")
+    print("observation_discrepancy_route=" + " -> ".join(observation.observation_discrepancy_route))
     print(f"device_audio_file={Path(observation.device_audio_path).name}")
     print(f"observation_manifest_file={manifest_path.name}")
 

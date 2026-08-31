@@ -32,13 +32,22 @@
   "changed_relations": [
     "bass_relation:C->A",
     "register_gravity:C3->A2",
+    "preceding_context:C-centered arrival->C-centered memory retained",
     "following_context:C-centered expectation->A-centered availability"
   ],
   "structural_prediction": "C6_candidate -> C6/Am7 ambiguity pressure -> Am7_candidate becomes available",
   "perceptual_hypothesis": "listener may hear the second chord as a bass-driven tilt toward Am7, while C-centered memory remains active",
   "actual_listening_observation": null,
-  "device_audio_path": "D:\\GitHub\\RDL_Music_Theory\\artifacts\\audio\\music_v02_c6_am7_rehearing_loop.wav",
+  "device_audio_path": "artifacts/audio/music_v02_c6_am7_rehearing_loop.wav",
+  "observation_discrepancy_route": [
+    "record_discrepancy_between_prediction_hypothesis_and_observation",
+    "test_absorbability_in_current_M_B",
+    "if_absorbable_hold_as_E_H_or_update_candidate",
+    "if_unabsorbed_after_current_B_hold_as_xi"
+  ],
   "stop_lines": [
+    "discrepancy_is_not_immediate_prediction_failure",
+    "discrepancy_is_not_immediate_xi",
     "structural_prediction_is_not_actual_human_listening",
     "device_audio_fixture_is_not_F_human",
     "Am7_candidate_is_not_confirmed_hearing"

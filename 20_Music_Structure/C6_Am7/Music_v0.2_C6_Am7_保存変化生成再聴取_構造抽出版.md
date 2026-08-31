@@ -113,7 +113,31 @@ structural prediction
 
 ---
 
-## 6. F_device fixture
+## 6. discrepancy route
+
+actual listening observationが入った後、不一致を一段で予測失敗やξへ送らない。
+
+```text
+prediction / hypothesis
+↓
+actual observation
+↓
+discrepancy
+↓
+test absorbability in current M_B
+├─ absorbable -> E / H / Update candidate
+└─ unabsorbed after current B -> ξ
+```
+
+```text
+discrepancy
+  ≠ immediate prediction failure
+  ≠ immediate ξ
+```
+
+この経路は、Music Coreが人間聴取から修正される余地を保持する。
+
+## 7. F_device fixture
 
 実装は、次の音声提示物を生成する。
 
@@ -136,7 +160,7 @@ artifacts/json/music_v02_c6_am7_rehearing_observation.json
 
 ---
 
-## 7. Music Core v0.2への返却
+## 8. Music Core v0.2への返却
 
 この検証からMusic Core v0.2へ返す最小更新候補:
 
@@ -160,7 +184,7 @@ preserve material
 
 ---
 
-## 8. 停止線
+## 9. 停止線
 
 この検証では次を行わない。
 
