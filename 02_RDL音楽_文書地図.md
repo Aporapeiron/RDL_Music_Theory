@@ -18,13 +18,16 @@ RDL音楽理論/
 │  └─ C6_Am7/
 │     ├─ README.md
 │     ├─ Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
+│     ├─ Music_v0.2_C6_Am7_介入分離_最小ループ.md
 │     ├─ actual_listening_observation_template.md
-│     └─ music_v02_c6_am7_rehearing_loop.py
+│     ├─ music_v02_c6_am7_rehearing_loop.py
+│     └─ music_v02_c6_am7_intervention_separation.py
 ├─ 20_Music_Structure/
 │  ├─ README.md
 │  └─ C6_Am7/
 │     ├─ README.md
-│     └─ Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md
+│     ├─ Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md
+│     └─ Music_v0.2_C6_Am7_介入分離_構造抽出版.md
 ├─ 30_Reference/
 │  └─ README.md
 ├─ 40_Music_Modules/
@@ -43,10 +46,12 @@ RDL音楽理論/
 │  ├─ README.md
 │  ├─ audio/
 │  │  ├─ README.md
-│  │  └─ music_v02_c6_am7_rehearing_loop.wav
+│  │  ├─ music_v02_c6_am7_rehearing_loop.wav
+│  │  └─ music_v02_c6_am7_intervention_separation.wav
 │  └─ json/
 │     ├─ README.md
-│     └─ music_v02_c6_am7_rehearing_observation.json
+│     ├─ music_v02_c6_am7_rehearing_observation.json
+│     └─ music_v02_c6_am7_intervention_separation.json
 ├─ 10_検証/
 │  ├─ 01_C6とAm7.md
 │  ├─ 02_C_major_候補集合と制約.md
@@ -1355,6 +1360,13 @@ C6 / Am7題材をMusic v0.2本線の小さい実音楽ループとして再実�
 
 Music v0.2 C6 / Am7最小ループから、B、保存関係、変更関係、生成された状態候補、再聴取の三分割、F_device fixture、JSON manifest、Music Core v0.2への返却点を抽出する。50工程列へ拡張せず、同一材料の保存と関係配置の変更によって別の音楽状態候補を生成できることだけを保持する。
 
+### 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_介入分離_最小ループ.md
+
+C6 / Am7題材で、同一音集合 `{C,E,G,A}` を保存したまま、context only、register only、bass primary、full tiltを分けて観測するMusic v0.2検証。音響実現上の純粋介入の難しさを `residual_changes` として保持し、どの関係を主に変えたかと、どの状態候補が前景化したかを分ける。実装は`music_v02_c6_am7_intervention_separation.py`。
+
+### 20_Music_Structure/C6_Am7/Music_v0.2_C6_Am7_介入分離_構造抽出版.md
+
+C6 / Am7介入分離検証から、保存材料、primary intervention、residual changes、状態候補の勾配、actual listening observation slotを抽出する。C6 / Am7を二値判定せず、同一材料を保存したまま関係介入によって候補の前景化が変わることを保持する。
 ### 20_構造抽出/RDL_Music_Core_v0.2再構成入口.md
 
 T2候補抽出後に、RDL_Music_Theoryを音楽固有理論として立て直すための入口文書。汎用状態遷移だけを目的にした新規長大工程列をMusic本線では原則増やさず、音楽的境界、音楽的関係、保存されるもの、変化するもの、状態遷移、複数解釈、分析、生成へ戻る。初期対象は音高・音程、和声機能・声部進行、リズム・拍節とし、Bを置く、関係を抽出する、保存関係を指定する、一つだけ変える、生成する、聴取上の変化を確認する、Music Coreを修正する、という小さい実音楽ループを優先する。
