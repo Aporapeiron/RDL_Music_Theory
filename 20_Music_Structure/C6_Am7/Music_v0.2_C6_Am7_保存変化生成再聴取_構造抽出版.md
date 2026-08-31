@@ -57,6 +57,7 @@ preserved_relations:
 changed_relations:
   bass_relation:C->A
   register_gravity:C3->A2
+  preceding_context:C-centered arrival->C-centered memory retained
   following_context:C-centered expectation->A-centered availability
 ```
 
