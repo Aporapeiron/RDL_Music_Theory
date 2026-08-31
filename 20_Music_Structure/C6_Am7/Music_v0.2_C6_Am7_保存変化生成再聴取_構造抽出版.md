@@ -122,20 +122,32 @@ prediction / hypothesis
 ↓
 actual observation
 ↓
-discrepancy
+E: discrepancy
 ↓
 test absorbability in current M_B
-├─ absorbable -> E / H / Update candidate
-└─ unabsorbed after current B -> ξ
+↓
+H: residual not absorbed by M_B
+↓
+θ: maintain / reorganize / Update decision
+↓
+unrecovered relation due to finite B
+↓
+ξ
 ```
 
 ```text
 discrepancy
   ≠ immediate prediction failure
   ≠ immediate ξ
+
+E
+  ≠ only an absorbable case
+
+H
+  ≠ ξ
 ```
 
-この経路は、Music Coreが人間聴取から修正される余地を保持する。
+この経路は、Music Coreが人間聴取から修正される余地を保持する。Eは差の発生点、Hは現行M_Bで未吸収の差、ξは有限Bに伴いなお残る未回収関係として分ける。
 
 ## 7. F_device fixture
 

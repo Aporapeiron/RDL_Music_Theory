@@ -182,7 +182,7 @@ F_device
   ≠ F_human
 ```
 
-今回の記録では、`actual listening observation` は未実施として保持する。実聴取を行う場合は、`10_Music_Validation/C6_Am7/actual_listening_observation_template.md` のslotへ、構造予測とは分けて記録する。不一致は、即予測失敗でも即ξでもない。まずdiscrepancyとして記録し、現在のM_Bで吸収可能かを検査してから、E / H / Update候補またはξへ分岐させる。
+今回の記録では、`actual listening observation` は未実施として保持する。実聴取を行う場合は、`10_Music_Validation/C6_Am7/actual_listening_observation_template.md` のslotへ、構造予測とは分けて記録する。不一致は、即予測失敗でも即ξでもない。まず `E: discrepancy` として記録し、現在のM_Bで吸収可能かを検査する。M_Bで未吸収の差はHとして保持し、θがmaintain / reorganize / Updateを判断する。有限Bに伴いなお未回収の関係が残る場合だけξとして保持する。
 
 ---
 

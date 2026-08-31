@@ -107,11 +107,17 @@ Coreへ返すのは、次が分離して記録できた場合である。
 ↓
 actual observation
 ↓
-discrepancy
+E: discrepancy
 ↓
 現在のM_Bで吸収可能か検査
-├─ 吸収可能 → E / H / Update候補
-└─ なお未回収関係が残る → ξ
+↓
+H: M_Bで未吸収の差
+↓
+θ: maintain / reorganize / Update判断
+↓
+有限Bに伴いなお未回収の関係
+↓
+ξ
 ```
 
 したがって、次の二つを同時に守る。
@@ -120,6 +126,12 @@ discrepancy
 不一致
   ≠ 即予測失敗
   ≠ 即ξ
+
+E
+  ≠ 吸収可能だった場合だけ出るもの
+
+H
+  ≠ ξ
 ```
 
 この不一致は、Music Coreが人間聴取から修正される可能性を持つ学習信号として保持する。

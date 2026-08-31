@@ -184,10 +184,11 @@ def run_loop(output_path: Path, device_audio_path: str = DEVICE_AUDIO_RELATIVE_P
         actual_listening_observation=None,
         device_audio_path=device_audio_path,
         observation_discrepancy_route=(
-            "record_discrepancy_between_prediction_hypothesis_and_observation",
+            "record_E_as_discrepancy_between_prediction_hypothesis_and_observation",
             "test_absorbability_in_current_M_B",
-            "if_absorbable_hold_as_E_H_or_update_candidate",
-            "if_unabsorbed_after_current_B_hold_as_xi",
+            "if_not_absorbed_hold_residual_as_H",
+            "theta_decides_maintain_or_reorganize_update",
+            "if_unrecovered_relation_remains_due_to_finite_B_hold_as_xi",
         ),
     )
 

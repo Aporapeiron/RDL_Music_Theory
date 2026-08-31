@@ -40,10 +40,11 @@
   "actual_listening_observation": null,
   "device_audio_path": "artifacts/audio/music_v02_c6_am7_rehearing_loop.wav",
   "observation_discrepancy_route": [
-    "record_discrepancy_between_prediction_hypothesis_and_observation",
+    "record_E_as_discrepancy_between_prediction_hypothesis_and_observation",
     "test_absorbability_in_current_M_B",
-    "if_absorbable_hold_as_E_H_or_update_candidate",
-    "if_unabsorbed_after_current_B_hold_as_xi"
+    "if_not_absorbed_hold_residual_as_H",
+    "theta_decides_maintain_or_reorganize_update",
+    "if_unrecovered_relation_remains_due_to_finite_B_hold_as_xi"
   ],
   "stop_lines": [
     "discrepancy_is_not_immediate_prediction_failure",
