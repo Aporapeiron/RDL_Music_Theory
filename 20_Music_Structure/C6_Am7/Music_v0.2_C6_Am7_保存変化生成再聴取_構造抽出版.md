@@ -7,6 +7,7 @@
 ```text
 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
 10_Music_Validation/C6_Am7/music_v02_c6_am7_rehearing_loop.py
+10_Music_Validation/C6_Am7/actual_listening_observation_template.md
 ```
 
 この抽出は、3398工程型のT2候補列を延長しない。
@@ -128,6 +129,7 @@ C6_candidate
 
 ```text
 artifacts/audio/music_v02_c6_am7_rehearing_loop.wav
+artifacts/json/music_v02_c6_am7_rehearing_observation.json
 ```
 
 これは人間聴取の証明ではなく、actual listening observationへ渡すためのdevice-side fixtureである。

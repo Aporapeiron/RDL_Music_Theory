@@ -18,6 +18,7 @@ RDL音楽理論/
 │  └─ C6_Am7/
 │     ├─ README.md
 │     ├─ Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
+│     ├─ actual_listening_observation_template.md
 │     └─ music_v02_c6_am7_rehearing_loop.py
 ├─ 20_Music_Structure/
 │  ├─ README.md
@@ -40,9 +41,12 @@ RDL音楽理論/
 │  └─ README.md
 ├─ artifacts/
 │  ├─ README.md
-│  └─ audio/
+│  ├─ audio/
+│  │  ├─ README.md
+│  │  └─ music_v02_c6_am7_rehearing_loop.wav
+│  └─ json/
 │     ├─ README.md
-│     └─ music_v02_c6_am7_rehearing_loop.wav
+│     └─ music_v02_c6_am7_rehearing_observation.json
 ├─ 10_検証/
 │  ├─ 01_C6とAm7.md
 │  ├─ 02_C_major_候補集合と制約.md
@@ -1345,11 +1349,11 @@ activation input bundle candidateに`Gamma_existing_70_activation_bridge`を与�
 
 ### 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
 
-C6 / Am7題材をMusic v0.2本線の小さい実音楽ループとして再実行する。音集合 `{C,E,G,A}` と一部上部関係を保存し、低音・配置・後続文脈だけを変えることで、C6候補からAm7方向の候補を生成する。再聴取は `structural prediction / perceptual hypothesis / actual listening observation` に分け、`F_device` 側の音声生成を人間聴取の確認と同一視しない。実装は`music_v02_c6_am7_rehearing_loop.py`。
+C6 / Am7題材をMusic v0.2本線の小さい実音楽ループとして再実行する。音集合 `{C,E,G,A}` と一部上部関係を保存し、低音・配置・後続文脈だけを変えることで、C6候補からAm7方向の候補を生成する。再聴取は `structural prediction / perceptual hypothesis / actual listening observation` に分け、`F_device` 側の音声生成を人間聴取の確認と同一視しない。actual observationは`actual_listening_observation_template.md`へ後続記録する。実装は`music_v02_c6_am7_rehearing_loop.py`。
 
 ### 20_Music_Structure/C6_Am7/Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md
 
-Music v0.2 C6 / Am7最小ループから、B、保存関係、変更関係、生成された状態候補、再聴取の三分割、F_device fixture、Music Core v0.2への返却点を抽出する。50工程列へ拡張せず、同一材料の保存と関係配置の変更によって別の音楽状態候補を生成できることだけを保持する。
+Music v0.2 C6 / Am7最小ループから、B、保存関係、変更関係、生成された状態候補、再聴取の三分割、F_device fixture、JSON manifest、Music Core v0.2への返却点を抽出する。50工程列へ拡張せず、同一材料の保存と関係配置の変更によって別の音楽状態候補を生成できることだけを保持する。
 
 ### 20_構造抽出/RDL_Music_Core_v0.2再構成入口.md
 

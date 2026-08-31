@@ -182,7 +182,7 @@ F_device
   ≠ F_human
 ```
 
-今回の記録では、`actual listening observation` は未実施として保持する。
+今回の記録では、`actual listening observation` は未実施として保持する。実聴取を行う場合は、`10_Music_Validation/C6_Am7/actual_listening_observation_template.md` のslotへ、構造予測とは分けて記録する。
 
 ---
 
@@ -204,6 +204,7 @@ C3 E3 G3 A3
 
 ```text
 artifacts/audio/music_v02_c6_am7_rehearing_loop.wav
+artifacts/json/music_v02_c6_am7_rehearing_observation.json
 ```
 
 ---

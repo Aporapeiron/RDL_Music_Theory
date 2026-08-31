@@ -1,0 +1,46 @@
+{
+  "schema": "rdl_music_v02_rehearing_observation_v0_1",
+  "subject": "C6_Am7_bass_relation_tilt",
+  "source": {
+    "name": "C6_stable",
+    "notes": [
+      "C3",
+      "E3",
+      "G3",
+      "A3"
+    ],
+    "bass": "C",
+    "preceding_context": "C-centered arrival",
+    "following_context": "C-centered continuation expected"
+  },
+  "generated": {
+    "name": "Am7_tilt_candidate",
+    "notes": [
+      "A2",
+      "C3",
+      "E3",
+      "G3"
+    ],
+    "bass": "A",
+    "preceding_context": "C-centered memory retained",
+    "following_context": "A-centered continuation becomes available"
+  },
+  "preserved_relations": [
+    "pitch_class_set:{C,E,G,A}",
+    "upper_common_relation:C-E-G retained across the tilt"
+  ],
+  "changed_relations": [
+    "bass_relation:C->A",
+    "register_gravity:C3->A2",
+    "following_context:C-centered expectation->A-centered availability"
+  ],
+  "structural_prediction": "C6_candidate -> C6/Am7 ambiguity pressure -> Am7_candidate becomes available",
+  "perceptual_hypothesis": "listener may hear the second chord as a bass-driven tilt toward Am7, while C-centered memory remains active",
+  "actual_listening_observation": null,
+  "device_audio_path": "D:\\GitHub\\RDL_Music_Theory\\artifacts\\audio\\music_v02_c6_am7_rehearing_loop.wav",
+  "stop_lines": [
+    "structural_prediction_is_not_actual_human_listening",
+    "device_audio_fixture_is_not_F_human",
+    "Am7_candidate_is_not_confirmed_hearing"
+  ]
+}

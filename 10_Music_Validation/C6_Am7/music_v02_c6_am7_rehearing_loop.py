@@ -8,7 +8,8 @@ observation.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
+import json
 from math import pi, sin
 from pathlib import Path
 import struct
@@ -30,9 +31,7 @@ NOTE_FREQUENCY = {
     "A4": 440.00,
 }
 
-PITCH_CLASS = {
-    note: note.rstrip("0123456789") for note in NOTE_FREQUENCY
-}
+PITCH_CLASS = {note: note.rstrip("0123456789") for note in NOTE_FREQUENCY}
 
 
 @dataclass(frozen=True)
@@ -120,6 +119,34 @@ def write_wave(path: Path, segments: tuple[tuple[str, ...], ...]) -> None:
         wav.writeframes(b"".join(struct.pack("<h", frame) for frame in frames))
 
 
+def observation_to_manifest(observation: LoopObservation) -> dict[str, object]:
+    return {
+        "schema": "rdl_music_v02_rehearing_observation_v0_1",
+        "subject": "C6_Am7_bass_relation_tilt",
+        "source": asdict(observation.source),
+        "generated": asdict(observation.generated),
+        "preserved_relations": list(observation.preserved_relations),
+        "changed_relations": list(observation.changed_relations),
+        "structural_prediction": observation.structural_prediction,
+        "perceptual_hypothesis": observation.perceptual_hypothesis,
+        "actual_listening_observation": observation.actual_listening_observation,
+        "device_audio_path": observation.device_audio_path,
+        "stop_lines": [
+            "structural_prediction_is_not_actual_human_listening",
+            "device_audio_fixture_is_not_F_human",
+            "Am7_candidate_is_not_confirmed_hearing",
+        ],
+    }
+
+
+def write_manifest(path: Path, observation: LoopObservation) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(observation_to_manifest(observation), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 def run_loop(output_path: Path) -> LoopObservation:
     source = c6_state()
     generated = am7_tilt_state()
@@ -155,7 +182,9 @@ def run_loop(output_path: Path) -> LoopObservation:
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[2]
     output_path = repo_root / "artifacts" / "audio" / "music_v02_c6_am7_rehearing_loop.wav"
+    manifest_path = repo_root / "artifacts" / "json" / "music_v02_c6_am7_rehearing_observation.json"
     observation = run_loop(output_path)
+    write_manifest(manifest_path, observation)
 
     print("music_v02_c6_am7_rehearing_loop_observed")
     print(f"source={observation.source.name}:{classify_chord(observation.source)}")
@@ -166,6 +195,7 @@ def main() -> None:
     print(f"perceptual_hypothesis={observation.perceptual_hypothesis}")
     print(f"actual_listening_observation={observation.actual_listening_observation}")
     print(f"device_audio_file={Path(observation.device_audio_path).name}")
+    print(f"observation_manifest_file={manifest_path.name}")
 
 
 if __name__ == "__main__":
