@@ -153,8 +153,8 @@ def run_loop(output_path: Path) -> LoopObservation:
 
 
 def main() -> None:
-    repo_root = Path(__file__).resolve().parents[1]
-    output_path = repo_root / "10_検証" / "artifacts" / "music_v02_c6_am7_rehearing_loop.wav"
+    repo_root = Path(__file__).resolve().parents[2]
+    output_path = repo_root / "artifacts" / "audio" / "music_v02_c6_am7_rehearing_loop.wav"
     observation = run_loop(output_path)
 
     print("music_v02_c6_am7_rehearing_loop_observed")

@@ -11,6 +11,38 @@ RDL音楽理論/
 ├─ 02_RDL音楽_文書地図.md
 ├─ 03_RDL音楽_全体設計方針.md
 ├─ 04_汎用分解再結晶化方法論.md
+├─ 00_Core/
+│  └─ README.md
+├─ 10_Music_Validation/
+│  ├─ README.md
+│  └─ C6_Am7/
+│     ├─ README.md
+│     ├─ Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
+│     └─ music_v02_c6_am7_rehearing_loop.py
+├─ 20_Music_Structure/
+│  ├─ README.md
+│  └─ C6_Am7/
+│     ├─ README.md
+│     └─ Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md
+├─ 30_Reference/
+│  └─ README.md
+├─ 40_Music_Modules/
+│  └─ README.md
+├─ 50_T2_Fixtures/
+│  └─ README.md
+├─ 70_T2_Extraction/
+│  └─ README.md
+├─ 90_Historical/
+│  ├─ README.md
+│  └─ T2_extraction_origin/
+│     └─ README.md
+├─ tools/
+│  └─ README.md
+├─ artifacts/
+│  ├─ README.md
+│  └─ audio/
+│     ├─ README.md
+│     └─ music_v02_c6_am7_rehearing_loop.wav
 ├─ 10_検証/
 │  ├─ 01_C6とAm7.md
 │  ├─ 02_C_major_候補集合と制約.md
@@ -502,9 +534,7 @@ RDL音楽理論/
 │  ├─ mediation_selected_outcome_commitment_readiness_stress_3199_3248.py
 │  ├─ mediation_outcome_commitment_attempt_stress_3249_3298.py
 │  ├─ mediation_commitment_record_boundary_stress_3299_3348.py
-│  ├─ mediation_post_commitment_alternative_retention_stress_3349_3398.py
-│  ├─ Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
-│  └─ music_v02_c6_am7_rehearing_loop.py
+│  └─ mediation_post_commitment_alternative_retention_stress_3349_3398.py
 ├─ 20_構造抽出/
 │  └─ 動態Adapter候補_構造抽出版.md
 │  └─ 音程実現_候補生成と制約の構造抽出版.md
@@ -612,8 +642,7 @@ RDL音楽理論/
 │  ├─ RDL_Music_Theory_既存検証_A_B_C分類_第一段階.md
 │  ├─ T2候補_Metabolic_Runtime状態機械_第一圧縮.md
 │  ├─ T2候補_Metabolic_Runtime状態機械_第二圧縮入口.md
-│  ├─ RDL_Music_Core_v0.2再構成入口.md
-│  └─ Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md
+│  └─ RDL_Music_Core_v0.2再構成入口.md
 ├─ 30_既知音楽理論参照/
 │  ├─ 00_既知音楽理論参照_地図.md
 │  └─ 01_音程.md
@@ -647,6 +676,36 @@ RDL音楽理論/
 │  ├─ RDL音楽理論_今後の展望_調律系遷移と微分音的連続性.md
 │  └─ RDL_Music_Theory_方針修正計画書.md
 ```
+
+## ■ 1.1 移行期の責務境界
+
+理論上の責務分離に合わせ、同一repo内に新しい責務別ゾーンを併設する。
+
+```text
+Music本線
+  00_Core
+  10_Music_Validation
+  20_Music_Structure
+  30_Reference
+  40_Music_Modules
+
+Music↔T2接続
+  50_T2_Fixtures
+
+T2候補抽出
+  70_T2_Extraction
+
+由来保存
+  90_Historical
+
+横断補助
+  tools
+  artifacts
+```
+
+現段階では旧 `10_検証` と旧 `20_構造抽出` を一括移動しない。既存3398工程は現役のMusic本線ではなく、論理的には `90_Historical/T2_extraction_origin` に属する。A/B/C分類やMetabolic Runtime圧縮は、論理的には `70_T2_Extraction` に属する。
+
+今後の新規Music本線ファイルは、新構造へ置く。旧pathは、リンク破壊を避けるため当面保持する。
 
 ## ■ 2. 各文書の役割
 
@@ -1284,11 +1343,11 @@ activation input bundle candidateに`Gamma_existing_70_activation_bridge`を与�
 
 3299〜3348で得たmediation commitment recordを、post commitment alternative retentionへ渡せるかを検査する。record後のalternative retentionをalternative deletion、commitment record rewrite、mediation closure、resolutionにせず、採用後にも別解釈を再活性化可能な状態として保持する。実装は`mediation_post_commitment_alternative_retention_stress_3349_3398.py`。
 
-### 10_検証/Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
+### 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md
 
 C6 / Am7題材をMusic v0.2本線の小さい実音楽ループとして再実行する。音集合 `{C,E,G,A}` と一部上部関係を保存し、低音・配置・後続文脈だけを変えることで、C6候補からAm7方向の候補を生成する。再聴取は `structural prediction / perceptual hypothesis / actual listening observation` に分け、`F_device` 側の音声生成を人間聴取の確認と同一視しない。実装は`music_v02_c6_am7_rehearing_loop.py`。
 
-### 20_構造抽出/Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md
+### 20_Music_Structure/C6_Am7/Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md
 
 Music v0.2 C6 / Am7最小ループから、B、保存関係、変更関係、生成された状態候補、再聴取の三分割、F_device fixture、Music Core v0.2への返却点を抽出する。50工程列へ拡張せず、同一材料の保存と関係配置の変更によって別の音楽状態候補を生成できることだけを保持する。
 
@@ -1866,7 +1925,7 @@ B依存と時刻が自明な場合は、\(M_B\)、\(W\)、\(E\)、\(H\)、\(ξ\)
 
 `30_既知音楽理論参照`は既存体系の辞書であり、`40_中核音楽理論`はRDL音楽側のModule計画である。中核音楽理論は基層知覚を直接モデル化せず、物理層とlearned層を詰めた後、その間に残る写像・破断・残差から`B_base / Γ_base / M_B^base候補`を仮設する。
 
-現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/3349〜3398_mediation_post_commitment_alternative_retention_stress_test_50工程_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md` / `20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md` / `20_構造抽出/音程Module_processing_requestから既存70_activation接続境界_125〜127構造抽出版.md` / `20_構造抽出/音程Module_reentered_input_contractから螺旋型再入循環_179〜228構造抽出版.md` / `20_構造抽出/和声機能Module_螺旋型再入循環移植_229〜238構造抽出版.md` / `20_構造抽出/リズム拍節Module_螺旋型再入循環移植_239〜248構造抽出版.md` / `20_構造抽出/音高調律Module_螺旋型再入循環移植_249〜258構造抽出版.md` / `20_構造抽出/螺旋型再入循環_四Module差異抽出_259〜268構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_関係検査_269〜278構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_相互作用面_279〜288構造抽出版.md` / `20_構造抽出/音高調律から音程綴り境界_片方向stress_test_289〜298構造抽出版.md` / `20_構造抽出/四Module相互作用面_stress_test_299〜348構造抽出版.md` / `20_構造抽出/四Module相互作用面_予測分岐と複数解釈保持_349〜398構造抽出版.md` / `20_構造抽出/予測分岐解決policy境界_399〜448構造抽出版.md` / `20_構造抽出/複数解釈record_schema_449〜498構造抽出版.md` / `20_構造抽出/policy_originとB依存選択_499〜548構造抽出版.md` / `20_構造抽出/weighting_without_collapse_549〜598構造抽出版.md` / `20_構造抽出/threshold_policyと低weight候補保持_599〜648構造抽出版.md` / `20_構造抽出/secondary_candidate_reactivation_649〜698構造抽出版.md` / `20_構造抽出/candidate_lifecycle_map_699〜748構造抽出版.md` / `20_構造抽出/reactivated_to_selection_boundary_749〜798構造抽出版.md` / `20_構造抽出/selection_controller_after_reactivation_799〜848構造抽出版.md` / `20_構造抽出/post_selection_lifecycle_849〜898構造抽出版.md` / `20_構造抽出/selection_record_updateとalternative_memory_899〜948構造抽出版.md` / `20_構造抽出/alternative_memory_limit_949〜998構造抽出版.md` / `20_構造抽出/memory_reactivation_priority_999〜1048構造抽出版.md` / `20_構造抽出/refrain_identity_boundary_1049〜1098構造抽出版.md` / `20_構造抽出/refrain_variation_lifecycle_1099〜1148構造抽出版.md` / `20_構造抽出/variation_sequence_boundary_1149〜1198構造抽出版.md` / `20_構造抽出/branch_reentry_policy_1199〜1248構造抽出版.md` / `20_構造抽出/parallel_variation_memory_1249〜1298構造抽出版.md` / `20_構造抽出/polyphonic_memory_coordination_1299〜1348構造抽出版.md` / `20_構造抽出/coordination_resolution_pressure_1349〜1398構造抽出版.md` / `20_構造抽出/deferred_resolution_lifecycle_1399〜1448構造抽出版.md` / `20_構造抽出/resolution_return_boundary_1449〜1498構造抽出版.md` / `20_構造抽出/post_resolution_memory_update_1499〜1548構造抽出版.md` / `20_構造抽出/post_resolution_reentry_cycle_1549〜1598構造抽出版.md` / `20_構造抽出/iterated_reentry_memory_drift_1599〜1648構造抽出版.md` / `20_構造抽出/drift_accumulation_threshold_1649〜1698構造抽出版.md` / `20_構造抽出/split_candidate_reintegration_1699〜1748構造抽出版.md` / `20_構造抽出/reintegration_context_pressure_1749〜1798構造抽出版.md` / `20_構造抽出/context_pressure_selection_delay_1799〜1848構造抽出版.md` / `20_構造抽出/delayed_selection_reactivation_1849〜1898構造抽出版.md` / `20_構造抽出/reactivated_selection_commitment_boundary_1899〜1948構造抽出版.md` / `20_構造抽出/commitment_revision_memory_1949〜1998構造抽出版.md` / `20_構造抽出/revision_reentry_consistency_1999〜2048構造抽出版.md` / `20_構造抽出/revision_conflict_detection_2049〜2098構造抽出版.md` / `20_構造抽出/conflict_resolution_policy_2099〜2148構造抽出版.md` / `20_構造抽出/policy_execution_readiness_2149〜2198構造抽出版.md` / `20_構造抽出/policy_execution_attempt_boundary_2199〜2248構造抽出版.md` / `20_構造抽出/attempt_outcome_observation_2249〜2298構造抽出版.md` / `20_構造抽出/outcome_interpretation_boundary_2299〜2348構造抽出版.md` / `20_構造抽出/interpretation_commitment_readiness_2349〜2398構造抽出版.md` / `20_構造抽出/interpretation_commitment_attempt_2399〜2448構造抽出版.md` / `20_構造抽出/commitment_record_boundary_2449〜2498構造抽出版.md` / `20_構造抽出/post_commitment_trace_update_2499〜2548構造抽出版.md` / `20_構造抽出/post_commitment_alternative_retention_2549〜2598構造抽出版.md` / `20_構造抽出/alternative_reactivation_after_commitment_2599〜2648構造抽出版.md` / `20_構造抽出/reactivation_conflict_with_commitment_2649〜2698構造抽出版.md` / `20_構造抽出/conflict_mediation_after_reactivation_2699〜2748構造抽出版.md` / `20_構造抽出/mediation_outcome_readiness_2749〜2798構造抽出版.md` / `20_構造抽出/mediation_outcome_attempt_boundary_2799〜2848構造抽出版.md` / `20_構造抽出/mediation_attempt_outcome_observation_2849〜2898構造抽出版.md` / `20_構造抽出/mediation_outcome_observation_record_boundary_2899〜2948構造抽出版.md` / `20_構造抽出/mediation_record_selection_readiness_2949〜2998構造抽出版.md` / `20_構造抽出/mediation_selection_controller_boundary_2999〜3048構造抽出版.md` / `20_構造抽出/mediation_selection_controller_result_3049〜3098構造抽出版.md` / `20_構造抽出/mediation_outcome_selection_candidate_3099〜3148構造抽出版.md` / `20_構造抽出/mediation_selected_outcome_boundary_3149〜3198構造抽出版.md` / `20_構造抽出/mediation_selected_outcome_commitment_readiness_3199〜3248構造抽出版.md` / `20_構造抽出/mediation_outcome_commitment_attempt_3249〜3298構造抽出版.md` / `20_構造抽出/mediation_commitment_record_boundary_3299〜3348構造抽出版.md` / `20_構造抽出/mediation_post_commitment_alternative_retention_3349〜3398構造抽出版.md` / `20_構造抽出/RDL_Music_Theory_既存検証_A_B_C分類_第一段階.md` / `20_構造抽出/T2候補_Metabolic_Runtime状態機械_第一圧縮.md` / `20_構造抽出/T2候補_Metabolic_Runtime状態機械_第二圧縮入口.md` / `20_構造抽出/RDL_Music_Core_v0.2再構成入口.md` / `10_検証/Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md` / `20_構造抽出/Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md`
+現在の入口：`40_中核音楽理論/00_中核音楽理論_計画表.md` / Module計画作成済み：`01_音高調律`〜`10_記譜綴り` / 横断レビュー：`40_中核音楽理論/11_全Module横断レビュー_破断と最小検証.md` / 作成済み検証：`10_検証/42_和声機能_同一和音とkey_context分岐_最小実験.md`〜`10_検証/3349〜3398_mediation_post_commitment_alternative_retention_stress_test_50工程_最小実験.md` / 構造抽出：`20_構造抽出/中核音楽理論_42〜45循環分解_構造抽出版.md` / `20_構造抽出/和声機能_target候補生成からselection境界_46〜53構造抽出版.md` / `20_構造抽出/基層候補_A1〜A3_54〜56構造抽出版.md` / `20_構造抽出/基層_learned_bridge_57〜59構造抽出版.md` / `20_構造抽出/基層_learned_candidate_generation_60〜62構造抽出版.md` / `20_構造抽出/基層_learned_bridgeからselection境界_57〜64構造抽出版.md` / `20_構造抽出/基層_learned_bridgeから中核Module入力境界_57〜68構造抽出版.md` / `20_構造抽出/基層_learned_core_inputから音程ラベル候補境界_69〜73構造抽出版.md` / `20_構造抽出/音程ラベル候補からtarget_selection境界_74〜76構造抽出版.md` / `20_構造抽出/音程selected_targetから実現_bridge境界_77〜79構造抽出版.md` / `20_構造抽出/音程実現後_next_contextとharmonic_annotation境界_80〜82構造抽出版.md` / `20_構造抽出/音程Module_基層learned入力から後段文脈接続_69〜82統合構造地図.md` / `20_構造抽出/音程next_context_harmonic_annotation整合_record境界_83〜85構造抽出版.md` / `20_構造抽出/音程Module_入力分解文脈接続整合record_69〜85統合構造地図.md` / `20_構造抽出/音程Module_state_recordからM_B候補_Core診断境界_86〜88構造抽出版.md` / `20_構造抽出/音程Module_M_B候補_confirmation_readiness境界_89〜91構造抽出版.md` / `20_構造抽出/音程Module_confirmationからCore整合候補境界_92〜94構造抽出版.md` / `20_構造抽出/音程Module_Core整合候補からadoption_record境界_95〜97構造抽出版.md` / `20_構造抽出/音程Module_adoption_recordから次検証計画境界_98〜100構造抽出版.md` / `20_構造抽出/音程Module_next_planからexecution_readiness境界_101〜103構造抽出版.md` / `20_構造抽出/音程Module_execution_runから構造破断診断境界_104〜106構造抽出版.md` / `20_構造抽出/音程Module_構造破断診断からupdate_review境界_107〜109構造抽出版.md` / `20_構造抽出/音程Module_update_acceptanceからpush_readiness境界_110〜112構造抽出版.md` / `20_構造抽出/音程Module_publication_planからhandoff_summary境界_113〜115構造抽出版.md` / `20_構造抽出/音程Module_contract_generalization入口境界_116〜118構造抽出版.md` / `20_構造抽出/音程Module_input_reception契約定義境界_119〜121構造抽出版.md` / `20_構造抽出/音程Module_input_contractからprocessing_request境界_122〜124構造抽出版.md` / `20_構造抽出/音程Module_processing_requestから既存70_activation接続境界_125〜127構造抽出版.md` / `20_構造抽出/音程Module_reentered_input_contractから螺旋型再入循環_179〜228構造抽出版.md` / `20_構造抽出/和声機能Module_螺旋型再入循環移植_229〜238構造抽出版.md` / `20_構造抽出/リズム拍節Module_螺旋型再入循環移植_239〜248構造抽出版.md` / `20_構造抽出/音高調律Module_螺旋型再入循環移植_249〜258構造抽出版.md` / `20_構造抽出/螺旋型再入循環_四Module差異抽出_259〜268構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_関係検査_269〜278構造抽出版.md` / `20_構造抽出/四Module音楽的固有性_相互作用面_279〜288構造抽出版.md` / `20_構造抽出/音高調律から音程綴り境界_片方向stress_test_289〜298構造抽出版.md` / `20_構造抽出/四Module相互作用面_stress_test_299〜348構造抽出版.md` / `20_構造抽出/四Module相互作用面_予測分岐と複数解釈保持_349〜398構造抽出版.md` / `20_構造抽出/予測分岐解決policy境界_399〜448構造抽出版.md` / `20_構造抽出/複数解釈record_schema_449〜498構造抽出版.md` / `20_構造抽出/policy_originとB依存選択_499〜548構造抽出版.md` / `20_構造抽出/weighting_without_collapse_549〜598構造抽出版.md` / `20_構造抽出/threshold_policyと低weight候補保持_599〜648構造抽出版.md` / `20_構造抽出/secondary_candidate_reactivation_649〜698構造抽出版.md` / `20_構造抽出/candidate_lifecycle_map_699〜748構造抽出版.md` / `20_構造抽出/reactivated_to_selection_boundary_749〜798構造抽出版.md` / `20_構造抽出/selection_controller_after_reactivation_799〜848構造抽出版.md` / `20_構造抽出/post_selection_lifecycle_849〜898構造抽出版.md` / `20_構造抽出/selection_record_updateとalternative_memory_899〜948構造抽出版.md` / `20_構造抽出/alternative_memory_limit_949〜998構造抽出版.md` / `20_構造抽出/memory_reactivation_priority_999〜1048構造抽出版.md` / `20_構造抽出/refrain_identity_boundary_1049〜1098構造抽出版.md` / `20_構造抽出/refrain_variation_lifecycle_1099〜1148構造抽出版.md` / `20_構造抽出/variation_sequence_boundary_1149〜1198構造抽出版.md` / `20_構造抽出/branch_reentry_policy_1199〜1248構造抽出版.md` / `20_構造抽出/parallel_variation_memory_1249〜1298構造抽出版.md` / `20_構造抽出/polyphonic_memory_coordination_1299〜1348構造抽出版.md` / `20_構造抽出/coordination_resolution_pressure_1349〜1398構造抽出版.md` / `20_構造抽出/deferred_resolution_lifecycle_1399〜1448構造抽出版.md` / `20_構造抽出/resolution_return_boundary_1449〜1498構造抽出版.md` / `20_構造抽出/post_resolution_memory_update_1499〜1548構造抽出版.md` / `20_構造抽出/post_resolution_reentry_cycle_1549〜1598構造抽出版.md` / `20_構造抽出/iterated_reentry_memory_drift_1599〜1648構造抽出版.md` / `20_構造抽出/drift_accumulation_threshold_1649〜1698構造抽出版.md` / `20_構造抽出/split_candidate_reintegration_1699〜1748構造抽出版.md` / `20_構造抽出/reintegration_context_pressure_1749〜1798構造抽出版.md` / `20_構造抽出/context_pressure_selection_delay_1799〜1848構造抽出版.md` / `20_構造抽出/delayed_selection_reactivation_1849〜1898構造抽出版.md` / `20_構造抽出/reactivated_selection_commitment_boundary_1899〜1948構造抽出版.md` / `20_構造抽出/commitment_revision_memory_1949〜1998構造抽出版.md` / `20_構造抽出/revision_reentry_consistency_1999〜2048構造抽出版.md` / `20_構造抽出/revision_conflict_detection_2049〜2098構造抽出版.md` / `20_構造抽出/conflict_resolution_policy_2099〜2148構造抽出版.md` / `20_構造抽出/policy_execution_readiness_2149〜2198構造抽出版.md` / `20_構造抽出/policy_execution_attempt_boundary_2199〜2248構造抽出版.md` / `20_構造抽出/attempt_outcome_observation_2249〜2298構造抽出版.md` / `20_構造抽出/outcome_interpretation_boundary_2299〜2348構造抽出版.md` / `20_構造抽出/interpretation_commitment_readiness_2349〜2398構造抽出版.md` / `20_構造抽出/interpretation_commitment_attempt_2399〜2448構造抽出版.md` / `20_構造抽出/commitment_record_boundary_2449〜2498構造抽出版.md` / `20_構造抽出/post_commitment_trace_update_2499〜2548構造抽出版.md` / `20_構造抽出/post_commitment_alternative_retention_2549〜2598構造抽出版.md` / `20_構造抽出/alternative_reactivation_after_commitment_2599〜2648構造抽出版.md` / `20_構造抽出/reactivation_conflict_with_commitment_2649〜2698構造抽出版.md` / `20_構造抽出/conflict_mediation_after_reactivation_2699〜2748構造抽出版.md` / `20_構造抽出/mediation_outcome_readiness_2749〜2798構造抽出版.md` / `20_構造抽出/mediation_outcome_attempt_boundary_2799〜2848構造抽出版.md` / `20_構造抽出/mediation_attempt_outcome_observation_2849〜2898構造抽出版.md` / `20_構造抽出/mediation_outcome_observation_record_boundary_2899〜2948構造抽出版.md` / `20_構造抽出/mediation_record_selection_readiness_2949〜2998構造抽出版.md` / `20_構造抽出/mediation_selection_controller_boundary_2999〜3048構造抽出版.md` / `20_構造抽出/mediation_selection_controller_result_3049〜3098構造抽出版.md` / `20_構造抽出/mediation_outcome_selection_candidate_3099〜3148構造抽出版.md` / `20_構造抽出/mediation_selected_outcome_boundary_3149〜3198構造抽出版.md` / `20_構造抽出/mediation_selected_outcome_commitment_readiness_3199〜3248構造抽出版.md` / `20_構造抽出/mediation_outcome_commitment_attempt_3249〜3298構造抽出版.md` / `20_構造抽出/mediation_commitment_record_boundary_3299〜3348構造抽出版.md` / `20_構造抽出/mediation_post_commitment_alternative_retention_3349〜3398構造抽出版.md` / `20_構造抽出/RDL_Music_Theory_既存検証_A_B_C分類_第一段階.md` / `20_構造抽出/T2候補_Metabolic_Runtime状態機械_第一圧縮.md` / `20_構造抽出/T2候補_Metabolic_Runtime状態機械_第二圧縮入口.md` / `20_構造抽出/RDL_Music_Core_v0.2再構成入口.md` / `10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_保存変化生成再聴取_最小ループ.md` / `20_Music_Structure/C6_Am7/Music_v0.2_C6_Am7_保存変化生成再聴取_構造抽出版.md`
 
 ### 50_既知基層解釈参照/
 

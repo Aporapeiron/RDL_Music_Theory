@@ -2,7 +2,7 @@
 
 *対象：同一音集合 `{C,E,G,A}` を保存したまま、低音・配置・後続文脈だけを変える小さい実音楽ループ*  
 *状態：DRAFT v0.1 / Music Core v0.2再構成入口後の最小検証*  
-*実装：`10_検証/music_v02_c6_am7_rehearing_loop.py`*
+*実装：`10_Music_Validation/C6_Am7/music_v02_c6_am7_rehearing_loop.py`*
 
 ---
 
@@ -203,7 +203,7 @@ C3 E3 G3 A3
 出力予定:
 
 ```text
-10_検証/artifacts/music_v02_c6_am7_rehearing_loop.wav
+artifacts/audio/music_v02_c6_am7_rehearing_loop.wav
 ```
 
 ---
