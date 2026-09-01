@@ -64,7 +64,7 @@ first_downbeat_after_entry = 5
 downbeat_origin = 5
 ```
 
-1小節分の拍節場を先に作り、downbeatを一度可聴化してから、C4をpickupとして入れる。
+4拍分のpre-roll内でdownbeatを一度可聴化し、bar-phase referenceを作ってから、C4をpickupとして入れる。ここでは `preroll duration = 4 beats` と `complete audible bar history` を同一視しない。
 
 ### 2.4 four_beat_preroll_downbeat_entry
 
@@ -112,6 +112,7 @@ pre-roll clickはdevice fixtureであり、人間がその拍節場を実際に�
 ```text
 meter_history_is_not_identical_to_local_pickup_offset
 pulse_history_is_not_audible_bar_phase_history
+preroll_duration_is_not_complete_audible_bar_history
 meter_phase_continuity_is_not_optional_for_preroll_pickup
 pre_roll_clicks_are_device_fixture_not_human_meter_confirmation
 pickup_candidate_is_not_actual_listening_observation
