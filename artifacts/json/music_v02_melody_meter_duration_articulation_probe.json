@@ -1,0 +1,227 @@
+{
+  "schema": "rdl_music_v02_melody_meter_duration_articulation_probe_v0_1",
+  "subject": "melody_meter_duration_articulation_probe",
+  "preserved_material": {
+    "melody": [
+      "C4",
+      "D4",
+      "E4",
+      "G4",
+      "E4",
+      "D4",
+      "C4",
+      "G3"
+    ],
+    "contour": [
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "onset_positions": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0
+    ],
+    "note_accent_indices": [
+      0,
+      4
+    ],
+    "meter_reference": "4/4 click grid with downbeats at 0 and 4"
+  },
+  "frames": [
+    {
+      "name": "detached_reference_same_onsets",
+      "note_duration_beats": 0.72,
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "preserved_onset_positions": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "preserved_note_accent_indices": [
+        0,
+        4
+      ],
+      "changed_relation": "reference detached duration with fixed onsets",
+      "structural_prediction": "melody keeps clear onset identity while leaving short rests between notes",
+      "perceptual_hypothesis": "listener may hear balanced articulation without strong gap or overlap pressure",
+      "actual_listening_observation": null,
+      "candidate_classification": "duration_reference_candidate",
+      "articulation_kind": "detached_reference",
+      "inter_onset_gap_beats": 0.28
+    },
+    {
+      "name": "staccato_gap_same_onsets",
+      "note_duration_beats": 0.36,
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "preserved_onset_positions": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "preserved_note_accent_indices": [
+        0,
+        4
+      ],
+      "changed_relation": "short duration creates audible rest before next fixed onset",
+      "structural_prediction": "same onset grid becomes segmented by inter-note silence",
+      "perceptual_hypothesis": "listener may hear the melody as lighter or more fragmented",
+      "actual_listening_observation": null,
+      "candidate_classification": "staccato_gap_candidate",
+      "articulation_kind": "staccato_gap",
+      "inter_onset_gap_beats": 0.64
+    },
+    {
+      "name": "tenuto_connected_same_onsets",
+      "note_duration_beats": 1.0,
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "preserved_onset_positions": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "preserved_note_accent_indices": [
+        0,
+        4
+      ],
+      "changed_relation": "duration fills the inter-onset interval without changing onset grid",
+      "structural_prediction": "same onset grid becomes connected without overlap",
+      "perceptual_hypothesis": "listener may hear stronger melodic continuity",
+      "actual_listening_observation": null,
+      "candidate_classification": "connected_tenuto_candidate",
+      "articulation_kind": "connected_tenuto",
+      "inter_onset_gap_beats": 0.0
+    },
+    {
+      "name": "overlap_legato_same_onsets",
+      "note_duration_beats": 1.16,
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "preserved_onset_positions": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "preserved_note_accent_indices": [
+        0,
+        4
+      ],
+      "changed_relation": "duration exceeds inter-onset interval and overlaps the next fixed onset",
+      "structural_prediction": "same onset grid gains carry-over relation between neighboring notes",
+      "perceptual_hypothesis": "listener may hear continuity or harmonic blur, pending actual observation",
+      "actual_listening_observation": null,
+      "candidate_classification": "overlap_legato_candidate",
+      "articulation_kind": "overlap_legato",
+      "inter_onset_gap_beats": -0.15999999999999992
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_melody_meter_duration_articulation_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_melody_meter_duration_articulation_probe.json",
+  "stop_lines": [
+    "duration_articulation_is_not_identical_to_onset_phase",
+    "staccato_gap_is_not_deletion_of_melody_identity",
+    "overlap_legato_is_not_harmonic_state_commitment",
+    "click_track_is_device_fixture_not_human_meter_confirmation",
+    "actual_listening_observation_remains_null_until_recorded"
+  ]
+}

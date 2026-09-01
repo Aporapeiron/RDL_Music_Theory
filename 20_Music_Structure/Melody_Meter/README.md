@@ -16,3 +16,7 @@ pre-roll付きpickup 構造抽出版
 syncopation位相分離 構造抽出版
 : Music_v0.2_旋律拍節_syncopation位相分離_構造抽出版.md。
   note accent displacement と onset phase displacement の非同一性をMusic Core v0.2へ返す。
+
+duration articulation分離 構造抽出版
+: Music_v0.2_旋律拍節_duration_articulation分離_構造抽出版.md。
+  duration articulation と onset phase / note accent の非同一性をMusic Core v0.2へ返す。
