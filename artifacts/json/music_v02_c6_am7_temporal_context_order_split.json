@@ -1,0 +1,93 @@
+{
+  "schema": "rdl_music_v02_c6_am7_temporal_context_order_split_v0_1",
+  "subject": "C6_Am7_temporal_context_order_split",
+  "source_probe": "10_Music_Validation/C6_Am7/music_v02_c6_am7_temporal_context_probe.py",
+  "purpose": "separate phrase-internal temporal context from presentation-order memory effects",
+  "single_phrase_files": [
+    {
+      "name": "c_centered_frame",
+      "audio_path": "artifacts/audio/c6_am7_temporal_context_order_split/c_centered_frame.wav",
+      "target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:C-centered before and after target",
+      "candidate_classification": "C6_candidate_by_temporal_context",
+      "actual_listening_observation": null
+    },
+    {
+      "name": "a_centered_frame",
+      "audio_path": "artifacts/audio/c6_am7_temporal_context_order_split/a_centered_frame.wav",
+      "target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:A-centered before and after target",
+      "candidate_classification": "Am7_candidate_by_temporal_context",
+      "actual_listening_observation": null
+    },
+    {
+      "name": "c_to_a_pivot_frame",
+      "audio_path": "artifacts/audio/c6_am7_temporal_context_order_split/c_to_a_pivot_frame.wav",
+      "target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:C-centered before target, A-centered after target",
+      "candidate_classification": "C6_Am7_pivot_candidate",
+      "actual_listening_observation": null
+    },
+    {
+      "name": "a_to_c_resistance_frame",
+      "audio_path": "artifacts/audio/c6_am7_temporal_context_order_split/a_to_c_resistance_frame.wav",
+      "target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:A-centered before target, C-centered after target",
+      "candidate_classification": "Am7_pressure_with_C_reabsorption_candidate",
+      "actual_listening_observation": null
+    }
+  ],
+  "order_variants": [
+    {
+      "name": "canonical_order",
+      "phrase_order": [
+        "c_centered_frame",
+        "a_centered_frame",
+        "c_to_a_pivot_frame",
+        "a_to_c_resistance_frame"
+      ],
+      "audio_path": "artifacts/audio/c6_am7_temporal_context_order_split/canonical_order.wav",
+      "presentation_memory_risk": "phrase order may affect the next phrase's listening context",
+      "actual_listening_observation": null
+    },
+    {
+      "name": "reversed_context_order",
+      "phrase_order": [
+        "a_centered_frame",
+        "c_centered_frame",
+        "a_to_c_resistance_frame",
+        "c_to_a_pivot_frame"
+      ],
+      "audio_path": "artifacts/audio/c6_am7_temporal_context_order_split/reversed_context_order.wav",
+      "presentation_memory_risk": "phrase order may affect the next phrase's listening context",
+      "actual_listening_observation": null
+    }
+  ],
+  "manifest_path": "artifacts/json/music_v02_c6_am7_temporal_context_order_split.json",
+  "stop_lines": [
+    "single_phrase_file_reduces_but_does_not_remove_listener_memory",
+    "order_variant_tests_presentation_order_not_chord_truth",
+    "actual_listening_observation_remains_null_until_recorded",
+    "same_target_sonority_remains_identical_inside_each_phrase_definition"
+  ]
+}

@@ -1364,6 +1364,14 @@ Music v0.2 C6 / Am7最小ループから、B、保存関係、変更関係、生
 
 C6 / Am7題材で、同一音集合 `{C,E,G,A}` を保存したまま、context only、register only、bass primary、full tiltを分けて観測するMusic v0.2検証。音響実現上の純粋介入の難しさを `residual_changes` として保持し、どの関係を主に変えたかと、どの状態候補が前景化したかを分ける。実装は`music_v02_c6_am7_intervention_separation.py`。
 
+### 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_時間文脈提示順序分離_最小ループ.md
+
+時間文脈実音化後に、各phrase単独WAVと提示順序variantを分け、phrase内contextとphrase間memoryを区別するためのMusic v0.2検証記録。
+
+### 20_Music_Structure/C6_Am7/Music_v0.2_C6_Am7_時間文脈提示順序分離_構造抽出版.md
+
+C6 / Am7時間文脈検証において、作品内phraseの前後関係と、検証提示上の順序記憶を分けてMusic Core v0.2へ返す構造抽出版。
+
 ### 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_時間文脈実音化_最小ループ.md
 
 C6 / Am7のcontextをmanifest上の記述から、前和音・同一target・後和音として実際に時間上で鳴る関係へ移すMusic v0.2検証記録。

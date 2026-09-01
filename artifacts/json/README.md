@@ -18,3 +18,6 @@ music_v02_c6_am7_intervention_separation.json
 
 - music_v02_c6_am7_temporal_context_probe.json
   C6 / Am7時間文脈実音化プローブのtarget同一性・前後文脈・実聴取slot manifest。
+
+- music_v02_c6_am7_temporal_context_order_split.json
+  C6 / Am7時間文脈提示順序分離の単独phrase・順序variant・実聴取slot manifest。

@@ -18,3 +18,6 @@ music_v02_c6_am7_intervention_separation.wav
 
 - music_v02_c6_am7_temporal_context_probe.wav
   C6 / Am7時間文脈実音化プローブのdevice-side audio fixture。
+
+- c6_am7_temporal_context_order_split/
+  C6 / Am7時間文脈提示順序分離の単独phrase WAVと順序variant WAV。
