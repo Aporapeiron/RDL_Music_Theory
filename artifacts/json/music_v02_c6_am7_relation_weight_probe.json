@@ -1,0 +1,182 @@
+{
+  "schema": "rdl_music_v02_c6_am7_relation_weight_probe_v0_1",
+  "subject": "C6_Am7_relation_weight_probe",
+  "preserved_pitch_class_set": [
+    "C",
+    "E",
+    "G",
+    "A"
+  ],
+  "scale_note": "scores are structural probe values, not human listening measurements",
+  "states": [
+    {
+      "name": "source_C6_stable",
+      "notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "bass": "C",
+      "preceding_context": "C-centered arrival",
+      "following_context": "C-centered continuation expected",
+      "relation_vector": {
+        "bass_relation": 0,
+        "register_gravity": 0,
+        "context_support": 0
+      },
+      "structural_pressure_to_am7": 0,
+      "c_center_resistance": 3,
+      "structural_prediction": "C6 candidate is foregrounded by bass, register, and context",
+      "perceptual_hypothesis": "listener may hear C as the most stable reference",
+      "actual_listening_observation": null,
+      "classification": "C6_candidate"
+    },
+    {
+      "name": "context_only",
+      "notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "bass": "C",
+      "preceding_context": "C-centered arrival retained",
+      "following_context": "A-centered continuation becomes available",
+      "relation_vector": {
+        "bass_relation": 0,
+        "register_gravity": 0,
+        "context_support": 1
+      },
+      "structural_pressure_to_am7": 1,
+      "c_center_resistance": 3,
+      "structural_prediction": "context adds Am7 availability without rebasing the sounding sonority",
+      "perceptual_hypothesis": "listener may notice redirection while C remains grounded",
+      "actual_listening_observation": null,
+      "classification": "C6_candidate_with_Am7_pressure"
+    },
+    {
+      "name": "register_only",
+      "notes": [
+        "C2",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "bass": "C",
+      "preceding_context": "C-centered arrival",
+      "following_context": "C-centered continuation expected",
+      "relation_vector": {
+        "bass_relation": 0,
+        "register_gravity": -1,
+        "context_support": 0
+      },
+      "structural_pressure_to_am7": 0,
+      "c_center_resistance": 4,
+      "structural_prediction": "lower C register reinforces C6 rather than tilting toward Am7",
+      "perceptual_hypothesis": "listener may hear stronger C grounding",
+      "actual_listening_observation": null,
+      "classification": "C6_candidate"
+    },
+    {
+      "name": "bass_only",
+      "notes": [
+        "A2",
+        "C3",
+        "E3",
+        "G3"
+      ],
+      "bass": "A",
+      "preceding_context": "C-centered arrival retained",
+      "following_context": "C-centered continuation expected",
+      "relation_vector": {
+        "bass_relation": 2,
+        "register_gravity": 1,
+        "context_support": 0
+      },
+      "structural_pressure_to_am7": 3,
+      "c_center_resistance": 2,
+      "structural_prediction": "A bass creates Am7 tilt, while C-centered context remains as resistance",
+      "perceptual_hypothesis": "listener may hear a bass-driven Am7 possibility with C memory",
+      "actual_listening_observation": null,
+      "classification": "Am7_tilt_candidate"
+    },
+    {
+      "name": "bass_plus_context",
+      "notes": [
+        "A2",
+        "C3",
+        "E3",
+        "G3"
+      ],
+      "bass": "A",
+      "preceding_context": "C-centered memory retained",
+      "following_context": "A-centered continuation becomes available",
+      "relation_vector": {
+        "bass_relation": 2,
+        "register_gravity": 1,
+        "context_support": 1
+      },
+      "structural_pressure_to_am7": 4,
+      "c_center_resistance": 1,
+      "structural_prediction": "bass and following context support Am7, with some C memory retained",
+      "perceptual_hypothesis": "listener may hear Am7 more readily than in bass_only",
+      "actual_listening_observation": null,
+      "classification": "Am7_tilt_candidate"
+    },
+    {
+      "name": "bass_plus_register",
+      "notes": [
+        "A2",
+        "C3",
+        "E3",
+        "G3"
+      ],
+      "bass": "A",
+      "preceding_context": "C-centered arrival retained",
+      "following_context": "C-centered continuation expected",
+      "relation_vector": {
+        "bass_relation": 2,
+        "register_gravity": 1,
+        "context_support": 0
+      },
+      "structural_pressure_to_am7": 3,
+      "c_center_resistance": 2,
+      "structural_prediction": "bass and register act together, but C-centered continuation resists closure",
+      "perceptual_hypothesis": "listener may hear Am7 color without full contextual release",
+      "actual_listening_observation": null,
+      "classification": "Am7_tilt_candidate"
+    },
+    {
+      "name": "full_tilt",
+      "notes": [
+        "A2",
+        "C3",
+        "E3",
+        "G3"
+      ],
+      "bass": "A",
+      "preceding_context": "C-centered memory retained",
+      "following_context": "A-centered continuation becomes available",
+      "relation_vector": {
+        "bass_relation": 2,
+        "register_gravity": 1,
+        "context_support": 2
+      },
+      "structural_pressure_to_am7": 5,
+      "c_center_resistance": 1,
+      "structural_prediction": "bass, register, and context jointly make Am7 the strongest candidate",
+      "perceptual_hypothesis": "listener may hear the clearest Am7 tilt here",
+      "actual_listening_observation": null,
+      "classification": "Am7_candidate_strong"
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_c6_am7_relation_weight_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_c6_am7_relation_weight_probe.json",
+  "stop_lines": [
+    "structural_pressure_score_is_not_actual_hearing_strength",
+    "classification_is_candidate_not_chord_truth",
+    "relation_weight_is_contextual_not_universal_constant",
+    "actual_listening_observation_remains_null_until_recorded"
+  ]
+}

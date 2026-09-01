@@ -12,3 +12,6 @@ music_v02_c6_am7_rehearing_observation.json
 music_v02_c6_am7_intervention_separation.json
   separated context/register/bass/full-tilt intervention manifest
 ```
+
+- music_v02_c6_am7_relation_weight_probe.json
+  C6 / Am7関係重みプローブの構造圧・C中心抵抗・実聴取slot manifest。

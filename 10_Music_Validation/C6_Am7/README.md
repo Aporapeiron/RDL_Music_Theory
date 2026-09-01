@@ -12,3 +12,7 @@
 介入分離 最小ループ
   context only / register only / bass primary / full tiltを分け、primary interventionとresidual changesを記録する。
 ```
+
+関係重みプローブ 最小ループ
+: Music_v0.2_C6_Am7_関係重みプローブ_最小ループ.md / music_v02_c6_am7_relation_weight_probe.py。
+  同一音集合を保存したまま、bass / register / context がAm7方向の構造圧をどう変えるか比較する。

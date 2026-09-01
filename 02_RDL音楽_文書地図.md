@@ -1,4 +1,4 @@
-﻿# RDL音楽理論｜文書地図
+# RDL音楽理論｜文書地図
 
 *RDL音楽理論の文書配置と依存関係を記録する。*
 
@@ -1363,6 +1363,14 @@ Music v0.2 C6 / Am7最小ループから、B、保存関係、変更関係、生
 ### 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_介入分離_最小ループ.md
 
 C6 / Am7題材で、同一音集合 `{C,E,G,A}` を保存したまま、context only、register only、bass primary、full tiltを分けて観測するMusic v0.2検証。音響実現上の純粋介入の難しさを `residual_changes` として保持し、どの関係を主に変えたかと、どの状態候補が前景化したかを分ける。実装は`music_v02_c6_am7_intervention_separation.py`。
+
+### 10_Music_Validation/C6_Am7/Music_v0.2_C6_Am7_関係重みプローブ_最小ループ.md
+
+C6 / Am7介入分離の次段階として、同一音集合 `{C,E,G,A}` を保存したまま、bass relation / register gravity / context support がAm7方向の構造圧をどう変えるか比較するMusic v0.2検証記録。
+
+### 20_Music_Structure/C6_Am7/Music_v0.2_C6_Am7_関係重みプローブ_構造抽出版.md
+
+関係重みプローブから、pitch-class保存と和声状態候補の非同一性、C中心抵抗、Am7方向構造圧をMusic Core v0.2へ返すための構造抽出版。
 
 ### 20_Music_Structure/C6_Am7/Music_v0.2_C6_Am7_介入分離_構造抽出版.md
 

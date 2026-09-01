@@ -12,3 +12,6 @@ music_v02_c6_am7_rehearing_loop.wav
 music_v02_c6_am7_intervention_separation.wav
   source C6 -> context only -> register only -> bass primary -> full tilt
 ```
+
+- music_v02_c6_am7_relation_weight_probe.wav
+  C6 / Am7関係重みプローブのdevice-side audio fixture。
