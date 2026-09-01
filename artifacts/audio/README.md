@@ -15,3 +15,6 @@ music_v02_c6_am7_intervention_separation.wav
 
 - music_v02_c6_am7_relation_weight_probe.wav
   C6 / Am7関係重みプローブのdevice-side audio fixture。
+
+- music_v02_c6_am7_temporal_context_probe.wav
+  C6 / Am7時間文脈実音化プローブのdevice-side audio fixture。

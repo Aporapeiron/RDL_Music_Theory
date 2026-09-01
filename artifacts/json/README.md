@@ -15,3 +15,6 @@ music_v02_c6_am7_intervention_separation.json
 
 - music_v02_c6_am7_relation_weight_probe.json
   C6 / Am7関係重みプローブの構造圧・C中心抵抗・実聴取slot manifest。
+
+- music_v02_c6_am7_temporal_context_probe.json
+  C6 / Am7時間文脈実音化プローブのtarget同一性・前後文脈・実聴取slot manifest。

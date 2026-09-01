@@ -1,0 +1,195 @@
+{
+  "schema": "rdl_music_v02_c6_am7_temporal_context_probe_v0_1",
+  "subject": "C6_Am7_temporal_context_probe",
+  "target_invariance": {
+    "target_notes": [
+      "C3",
+      "E3",
+      "G3",
+      "A3"
+    ],
+    "target_is_identical_in_all_phrases": true
+  },
+  "phrases": [
+    {
+      "name": "c_centered_frame",
+      "preceding": {
+        "role": "preceding_context",
+        "notes": [
+          "C3",
+          "E3",
+          "G3"
+        ],
+        "label": "C_major_arrival"
+      },
+      "target": {
+        "role": "target",
+        "notes": [
+          "C3",
+          "E3",
+          "G3",
+          "A3"
+        ],
+        "label": "shared_C_E_G_A_sonority"
+      },
+      "following": {
+        "role": "following_context",
+        "notes": [
+          "C3",
+          "E3",
+          "G3",
+          "C4"
+        ],
+        "label": "C_major_continuation"
+      },
+      "preserved_target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:C-centered before and after target",
+      "structural_prediction": "the identical target sonority is framed as C6-side stable",
+      "perceptual_hypothesis": "listener may retain C as the local reference through the target",
+      "actual_listening_observation": null,
+      "candidate_classification": "C6_candidate_by_temporal_context"
+    },
+    {
+      "name": "a_centered_frame",
+      "preceding": {
+        "role": "preceding_context",
+        "notes": [
+          "A2",
+          "C3",
+          "E3"
+        ],
+        "label": "A_minor_arrival"
+      },
+      "target": {
+        "role": "target",
+        "notes": [
+          "C3",
+          "E3",
+          "G3",
+          "A3"
+        ],
+        "label": "shared_C_E_G_A_sonority"
+      },
+      "following": {
+        "role": "following_context",
+        "notes": [
+          "A2",
+          "C3",
+          "E3",
+          "A3"
+        ],
+        "label": "A_minor_continuation"
+      },
+      "preserved_target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:A-centered before and after target",
+      "structural_prediction": "the identical target sonority is framed as Am7-side available",
+      "perceptual_hypothesis": "listener may hear the target as belonging more readily to A minor",
+      "actual_listening_observation": null,
+      "candidate_classification": "Am7_candidate_by_temporal_context"
+    },
+    {
+      "name": "c_to_a_pivot_frame",
+      "preceding": {
+        "role": "preceding_context",
+        "notes": [
+          "C3",
+          "E3",
+          "G3"
+        ],
+        "label": "C_major_arrival"
+      },
+      "target": {
+        "role": "target",
+        "notes": [
+          "C3",
+          "E3",
+          "G3",
+          "A3"
+        ],
+        "label": "shared_C_E_G_A_sonority"
+      },
+      "following": {
+        "role": "following_context",
+        "notes": [
+          "A2",
+          "C3",
+          "E3",
+          "A3"
+        ],
+        "label": "A_minor_continuation"
+      },
+      "preserved_target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:C-centered before target, A-centered after target",
+      "structural_prediction": "the identical target sonority acts as a pivot from C6 stability toward Am7 availability",
+      "perceptual_hypothesis": "listener may hear a delayed reinterpretation at or after the following chord",
+      "actual_listening_observation": null,
+      "candidate_classification": "C6_Am7_pivot_candidate"
+    },
+    {
+      "name": "a_to_c_resistance_frame",
+      "preceding": {
+        "role": "preceding_context",
+        "notes": [
+          "A2",
+          "C3",
+          "E3"
+        ],
+        "label": "A_minor_arrival"
+      },
+      "target": {
+        "role": "target",
+        "notes": [
+          "C3",
+          "E3",
+          "G3",
+          "A3"
+        ],
+        "label": "shared_C_E_G_A_sonority"
+      },
+      "following": {
+        "role": "following_context",
+        "notes": [
+          "C3",
+          "E3",
+          "G3",
+          "C4"
+        ],
+        "label": "C_major_continuation"
+      },
+      "preserved_target_notes": [
+        "C3",
+        "E3",
+        "G3",
+        "A3"
+      ],
+      "changed_relation": "temporal_context:A-centered before target, C-centered after target",
+      "structural_prediction": "the identical target sonority opens Am7 expectation but is reabsorbed into C-centered continuation",
+      "perceptual_hypothesis": "listener may hear A-minor color that fails to settle as the following C frame returns",
+      "actual_listening_observation": null,
+      "candidate_classification": "Am7_pressure_with_C_reabsorption_candidate"
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_c6_am7_temporal_context_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_c6_am7_temporal_context_probe.json",
+  "stop_lines": [
+    "target_sonority_identity_is_not_context_identity",
+    "temporal_context_is_realized_in_audio_not_only_manifest_text",
+    "structural_prediction_is_not_actual_human_listening",
+    "candidate_classification_is_not_final_chord_truth"
+  ]
+}

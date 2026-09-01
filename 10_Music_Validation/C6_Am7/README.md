@@ -16,3 +16,7 @@
 関係重みプローブ 最小ループ
 : Music_v0.2_C6_Am7_関係重みプローブ_最小ループ.md / music_v02_c6_am7_relation_weight_probe.py。
   同一音集合を保存したまま、bass / register / context がAm7方向の構造圧をどう変えるか比較する。
+
+時間文脈実音化 最小ループ
+: Music_v0.2_C6_Am7_時間文脈実音化_最小ループ.md / music_v02_c6_am7_temporal_context_probe.py。
+  同一target C3 E3 G3 A3 を保存し、前後和音だけを変えてcontextを実際に時間上で鳴らす。
