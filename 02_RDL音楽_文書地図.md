@@ -2456,3 +2456,11 @@ C6 / Am7実聴取前小括後の次対象として、同じ旋律・同じ輪郭
 ### 20_Music_Structure/Melody_Meter/Music_v0.2_旋律拍節_輪郭保存アクセント変位_構造抽出版.md
 
 旋律×拍節検証から、melodic contour preservation と melodic-metric state preservation の非同一性をMusic Core v0.2へ返す構造抽出版。
+
+### 10_Music_Validation/Melody_Meter/Music_v0.2_旋律拍節_meter_accent_pickup分離_最小ループ.md
+
+旋律×拍節の初回プローブで露出した、meter frame / accent positions / pickup relation が音響実装ではaccent scheduleへ圧縮されやすい問題を受け、拍節参照、音符アクセント、弱起位置を分けて実音化するMusic v0.2検証記録。
+
+### 20_Music_Structure/Melody_Meter/Music_v0.2_旋律拍節_meter_accent_pickup分離_構造抽出版.md
+
+弱起は最初の音を強く鳴らすことではなく、拍節境界に対する開始位置関係であることを抽出し、meter reference / note accent / pickup offset の非同一性をMusic Core v0.2へ返す構造抽出版。

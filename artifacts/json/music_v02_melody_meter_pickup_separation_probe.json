@@ -1,0 +1,203 @@
+{
+  "schema": "rdl_music_v02_melody_meter_pickup_separation_probe_v0_1",
+  "subject": "melody_meter_pickup_separation_probe",
+  "preserved_material": {
+    "melody": [
+      "C4",
+      "D4",
+      "E4",
+      "G4",
+      "E4",
+      "D4",
+      "C4",
+      "G3"
+    ],
+    "durations": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "contour": [
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1
+    ]
+  },
+  "frames": [
+    {
+      "name": "downbeat_note_accent_aligned",
+      "beats_per_bar": 4,
+      "pickup_offset_beats": 0,
+      "meter_downbeat_positions": [
+        0,
+        4
+      ],
+      "note_accent_indices": [
+        0,
+        4
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "note_accent"
+      ],
+      "structural_prediction": "meter downbeat and note accent align, yielding stable periodic phrasing",
+      "perceptual_hypothesis": "listener may hear the first note as arrival on the bar",
+      "actual_listening_observation": null,
+      "candidate_classification": "aligned_downbeat_melody_candidate"
+    },
+    {
+      "name": "true_one_beat_pickup",
+      "beats_per_bar": 4,
+      "pickup_offset_beats": 1,
+      "meter_downbeat_positions": [
+        1,
+        5
+      ],
+      "note_accent_indices": [
+        1,
+        5
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "pickup_offset",
+        "note_accent_after_pickup"
+      ],
+      "structural_prediction": "first note is before the audible downbeat; second note receives downbeat support",
+      "perceptual_hypothesis": "listener may hear C4 as pickup and D4 as the first metrical arrival",
+      "actual_listening_observation": null,
+      "candidate_classification": "true_pickup_reinterpretation_candidate"
+    },
+    {
+      "name": "pickup_without_note_accent",
+      "beats_per_bar": 4,
+      "pickup_offset_beats": 1,
+      "meter_downbeat_positions": [
+        1,
+        5
+      ],
+      "note_accent_indices": [],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "pickup_offset"
+      ],
+      "structural_prediction": "pickup relation is carried by meter reference rather than note loudness",
+      "perceptual_hypothesis": "listener may still hear weak upbeat entry because the grid arrives after C4",
+      "actual_listening_observation": null,
+      "candidate_classification": "meter_only_pickup_candidate"
+    },
+    {
+      "name": "accent_without_pickup",
+      "beats_per_bar": 4,
+      "pickup_offset_beats": 0,
+      "meter_downbeat_positions": [
+        0,
+        4
+      ],
+      "note_accent_indices": [
+        1,
+        5
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "note_accent_displaced"
+      ],
+      "structural_prediction": "note accent is displaced while melody still begins on the audible downbeat",
+      "perceptual_hypothesis": "listener may hear syncopation rather than true pickup",
+      "actual_listening_observation": null,
+      "candidate_classification": "accent_displacement_without_pickup_candidate"
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_melody_meter_pickup_separation_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_melody_meter_pickup_separation_probe.json",
+  "stop_lines": [
+    "pickup_relation_is_not_identical_to_first_note_accent",
+    "meter_reference_is_not_identical_to_note_accent_schedule",
+    "click_track_is_device_fixture_not_human_meter_confirmation",
+    "actual_listening_observation_remains_null_until_recorded"
+  ]
+}

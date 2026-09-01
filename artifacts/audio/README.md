@@ -24,3 +24,6 @@ music_v02_c6_am7_intervention_separation.wav
 
 - music_v02_melody_meter_identity_probe.wav
   旋律×拍節 輪郭保存アクセント変位プローブのdevice-side audio fixture。
+
+- music_v02_melody_meter_pickup_separation_probe.wav
+  旋律×拍節 meter / accent / pickup 分離プローブのdevice-side audio fixture。
