@@ -1,7 +1,7 @@
 """Melody-meter pre-roll pickup probe for Music v0.2.
 
 This probe asks whether pickup relation should be represented only by a local
-meter offset, or by an already-established meter field before the melody enters.
+meter offset, or by pulse history / bar-phase history before the melody enters.
 The melody remains identical; pre-roll clicks create meter history before C4.
 """
 
@@ -43,6 +43,7 @@ class PrerollPickupFrame:
     preserved_melody: tuple[str, ...]
     preserved_contour: tuple[int, ...]
     meter_history_relation: str
+    meter_history_type: str
     structural_prediction: str
     perceptual_hypothesis: str
     actual_listening_observation: str | None
@@ -68,6 +69,7 @@ def build_frames() -> list[PrerollPickupFrame]:
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
             meter_history_relation="meter reference begins together with melody; pickup is local offset only",
+            meter_history_type="no_prior_meter_history",
             structural_prediction="pickup relation is available but meter history before C4 is absent",
             perceptual_hypothesis="listener may need the D4 downbeat to reinterpret C4 as pickup after it occurs",
             actual_listening_observation=None,
@@ -83,8 +85,9 @@ def build_frames() -> list[PrerollPickupFrame]:
             note_accent_indices=(1, 5),
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
-            meter_history_relation="two clicks establish beats before melody enters on the beat before downbeat",
-            structural_prediction="C4 enters into an already-audible meter field as pickup; D4 receives downbeat support",
+            meter_history_relation="two clicks establish pulse before melody enters; bar-phase downbeat is not yet audible",
+            meter_history_type="pulse_history_without_audible_bar_phase",
+            structural_prediction="C4 enters after audible pulse history, but bar-phase must be inferred when D4 downbeat arrives",
             perceptual_hypothesis="listener may hear C4 as pickup more immediately than without pre-roll",
             actual_listening_observation=None,
             candidate_classification="preroll_supported_pickup_candidate",
@@ -99,9 +102,10 @@ def build_frames() -> list[PrerollPickupFrame]:
             note_accent_indices=(1, 5),
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
-            meter_history_relation="full bar of clicks establishes meter before pickup entry",
-            structural_prediction="meter field is established before melody, strengthening pickup interpretation",
-            perceptual_hypothesis="listener may hear the clearest anacrusis relation in this fixture",
+            meter_history_relation="full bar of clicks establishes audible bar-phase before pickup entry",
+            meter_history_type="audible_bar_phase_history",
+            structural_prediction="pickup candidate gains additional meter-history support before melody entry",
+            perceptual_hypothesis="listener may hear the clearest anacrusis relation in this fixture, pending actual observation",
             actual_listening_observation=None,
             candidate_classification="strong_preroll_pickup_candidate",
         ),
@@ -115,7 +119,8 @@ def build_frames() -> list[PrerollPickupFrame]:
             note_accent_indices=(0, 4),
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
-            meter_history_relation="full bar of clicks establishes meter, then melody enters on downbeat",
+            meter_history_relation="full bar of clicks establishes audible bar-phase, then melody enters on downbeat",
+            meter_history_type="audible_bar_phase_history_with_downbeat_entry",
             structural_prediction="pre-roll exists, but C4 is arrival rather than pickup",
             perceptual_hypothesis="listener may hear stable downbeat entry despite same pre-roll duration",
             actual_listening_observation=None,
@@ -205,6 +210,7 @@ def write_manifest(frames: list[PrerollPickupFrame], manifest_path: Path) -> Non
         "manifest_path": MANIFEST_RELATIVE_PATH,
         "stop_lines": [
             "meter_history_is_not_identical_to_local_pickup_offset",
+            "pulse_history_is_not_audible_bar_phase_history",
             "meter_phase_continuity_is_not_optional_for_preroll_pickup",
             "pre_roll_clicks_are_device_fixture_not_human_meter_confirmation",
             "pickup_candidate_is_not_actual_listening_observation",

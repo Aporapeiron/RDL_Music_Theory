@@ -53,7 +53,7 @@ first_downbeat_after_entry = 3
 downbeat_origin = 3
 ```
 
-2拍のclickが先に鳴り、その後C4がdownbeat前に入る。
+2拍のclickが先に鳴り、その後C4がdownbeat前に入る。ただし、この2拍にはdownbeat clickが含まれないため、これはbar-phase historyではなくpulse historyとして扱う。
 
 ### 2.3 four_beat_preroll_pickup
 
@@ -64,7 +64,7 @@ first_downbeat_after_entry = 5
 downbeat_origin = 5
 ```
 
-1小節分の拍節場を先に作ってから、C4をpickupとして入れる。
+1小節分の拍節場を先に作り、downbeatを一度可聴化してから、C4をpickupとして入れる。
 
 ### 2.4 four_beat_preroll_downbeat_entry
 
@@ -92,11 +92,14 @@ artifacts/json/music_v02_melody_meter_preroll_pickup_probe.json
 pickup_offset:
   旋律開始が次のdownbeatより前にある
 
-meter_history:
-  旋律開始前に拍節参照がすでに聞こえている
+pulse_history:
+  旋律開始前にpulse参照は聞こえるが、downbeat phaseはまだ聞こえていない
+
+audible_bar_phase_history:
+  旋律開始前に少なくとも一度downbeat phaseが聞こえている
 ```
 
-したがって、弱起は単なるnote accentでも、単なる局所offsetでもなく、事前に成立し、その後も同じphaseで継続する拍節場へのentryとして扱える。
+したがって、弱起は単なるnote accentでも、単なる局所offsetでもなく、`pickup_offset`、`pulse_history` / `audible_bar_phase_history`、そして同じphaseで継続する拍節場へのentryとして扱える。
 
 ## 5. 実聴取slot
 
@@ -108,6 +111,7 @@ pre-roll clickはdevice fixtureであり、人間がその拍節場を実際に�
 
 ```text
 meter_history_is_not_identical_to_local_pickup_offset
+pulse_history_is_not_audible_bar_phase_history
 meter_phase_continuity_is_not_optional_for_preroll_pickup
 pre_roll_clicks_are_device_fixture_not_human_meter_confirmation
 pickup_candidate_is_not_actual_listening_observation

@@ -16,7 +16,9 @@ artifacts/json/music_v02_melody_meter_preroll_pickup_probe.json
 
 ```text
 pickup_offset
-  ≠ meter_history
+  ≠ pulse_history
+  ≠ audible_bar_phase_history
+  ≠ meter_phase_continuity
 ```
 
 ## 2. 分離された関係
@@ -25,8 +27,11 @@ pickup_offset
 pickup_offset:
   melody entry occurs before the next downbeat
 
-meter_history:
-  audible meter reference exists before melody entry
+pulse_history:
+  audible pulse exists before melody entry, but no downbeat has yet been heard
+
+audible_bar_phase_history:
+  audible downbeat phase exists before melody entry
 
 meter_phase_continuity:
   downbeat is computed by (beat - downbeat_origin) % beats_per_bar == 0
@@ -42,9 +47,11 @@ no_preroll_local_pickup:
   local_pickup_without_preroll_candidate
 
 two_beat_preroll_pickup:
+  pulse_history_without_audible_bar_phase
   preroll_supported_pickup_candidate
 
 four_beat_preroll_pickup:
+  audible_bar_phase_history
   strong_preroll_pickup_candidate
 
 four_beat_preroll_downbeat_entry:
@@ -54,14 +61,14 @@ four_beat_preroll_downbeat_entry:
 ## 4. Music Core v0.2へ返す命題
 
 ```text
-weak pickup relation is strengthened when a meter field exists before melody entry.
+pickup candidate gains additional meter-history support when an audible meter field exists before melody entry.
 
 しかし、meter history and meter phase continuity alone do not create pickup:
   same pre-roll + downbeat entry
   -> arrival candidate, not pickup candidate
 ```
 
-したがって、弱起は `pickup_offset`、`meter_history`、`meter_phase_continuity` の相互作用として扱う必要がある。
+したがって、弱起は `pickup_offset`、`pulse_history` / `audible_bar_phase_history`、`meter_phase_continuity` の相互作用として扱う必要がある。
 
 ## 5. 前回との差分
 
@@ -70,7 +77,7 @@ meter / accent / pickup分離:
   meter_reference, note_accent, pickup_offsetを分けた
 
 pre-roll付きpickup:
-  pickup_offset, meter_history, meter_phase_continuity をさらに分けた
+  pickup_offset, pulse_history, audible_bar_phase_history, meter_phase_continuity をさらに分けた
 ```
 
 これにより、旋律×拍節では、関係が次のような階層で見える。
@@ -79,7 +86,8 @@ pre-roll付きpickup:
 note accent
 meter reference
 pickup offset
-meter history
+pulse history
+audible bar-phase history
 meter phase continuity
 ```
 
@@ -87,6 +95,7 @@ meter phase continuity
 
 ```text
 meter_history_is_not_identical_to_local_pickup_offset
+pulse_history_is_not_audible_bar_phase_history
 meter_phase_continuity_is_not_optional_for_preroll_pickup
 pre_roll_clicks_are_device_fixture_not_human_meter_confirmation
 pickup_candidate_is_not_actual_listening_observation
