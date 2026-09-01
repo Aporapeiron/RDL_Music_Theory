@@ -38,6 +38,7 @@ class PrerollPickupFrame:
     preroll_beats: int
     melody_entry_beat: int
     first_downbeat_after_entry: int
+    downbeat_origin: int
     note_accent_indices: tuple[int, ...]
     preserved_melody: tuple[str, ...]
     preserved_contour: tuple[int, ...]
@@ -62,6 +63,7 @@ def build_frames() -> list[PrerollPickupFrame]:
             preroll_beats=0,
             melody_entry_beat=0,
             first_downbeat_after_entry=1,
+            downbeat_origin=1,
             note_accent_indices=(1, 5),
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
@@ -77,6 +79,7 @@ def build_frames() -> list[PrerollPickupFrame]:
             preroll_beats=2,
             melody_entry_beat=2,
             first_downbeat_after_entry=3,
+            downbeat_origin=3,
             note_accent_indices=(1, 5),
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
@@ -92,6 +95,7 @@ def build_frames() -> list[PrerollPickupFrame]:
             preroll_beats=4,
             melody_entry_beat=4,
             first_downbeat_after_entry=5,
+            downbeat_origin=5,
             note_accent_indices=(1, 5),
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
@@ -107,6 +111,7 @@ def build_frames() -> list[PrerollPickupFrame]:
             preroll_beats=4,
             melody_entry_beat=4,
             first_downbeat_after_entry=4,
+            downbeat_origin=4,
             note_accent_indices=(0, 4),
             preserved_melody=MELODY,
             preserved_contour=preserved_contour,
@@ -156,9 +161,7 @@ def add_note(samples: list[float], note: str, start_beat: int, beats: int, accen
 
 
 def is_downbeat(frame: PrerollPickupFrame, beat: int) -> bool:
-    if beat == frame.first_downbeat_after_entry:
-        return True
-    return beat % frame.beats_per_bar == 0 and beat <= frame.melody_entry_beat
+    return (beat - frame.downbeat_origin) % frame.beats_per_bar == 0
 
 
 def render_frame(frame: PrerollPickupFrame) -> list[int]:
@@ -202,6 +205,7 @@ def write_manifest(frames: list[PrerollPickupFrame], manifest_path: Path) -> Non
         "manifest_path": MANIFEST_RELATIVE_PATH,
         "stop_lines": [
             "meter_history_is_not_identical_to_local_pickup_offset",
+            "meter_phase_continuity_is_not_optional_for_preroll_pickup",
             "pre_roll_clicks_are_device_fixture_not_human_meter_confirmation",
             "pickup_candidate_is_not_actual_listening_observation",
             "actual_listening_observation_remains_null_until_recorded",
@@ -215,9 +219,15 @@ def main() -> None:
     expected_contour = contour(MELODY)
     assert all(frame.preserved_melody == MELODY for frame in frames)
     assert all(frame.preserved_contour == expected_contour for frame in frames)
+    assert frames[1].downbeat_origin == frames[1].first_downbeat_after_entry
+    assert frames[2].downbeat_origin == frames[2].first_downbeat_after_entry
+    assert frames[3].downbeat_origin == frames[3].first_downbeat_after_entry
     assert frames[1].melody_entry_beat < frames[1].first_downbeat_after_entry
     assert frames[2].melody_entry_beat < frames[2].first_downbeat_after_entry
     assert frames[3].melody_entry_beat == frames[3].first_downbeat_after_entry
+    assert not is_downbeat(frames[2], frames[2].melody_entry_beat)
+    assert is_downbeat(frames[2], frames[2].first_downbeat_after_entry)
+    assert is_downbeat(frames[3], frames[3].melody_entry_beat)
     assert all(frame.actual_listening_observation is None for frame in frames)
     audio_path = ROOT / AUDIO_RELATIVE_PATH
     manifest_path = ROOT / MANIFEST_RELATIVE_PATH
@@ -227,7 +237,7 @@ def main() -> None:
     for frame in frames:
         print(
             f"frame={frame.name}; preroll={frame.preroll_beats}; entry={frame.melody_entry_beat}; "
-            f"downbeat_after_entry={frame.first_downbeat_after_entry}; class={frame.candidate_classification}; "
+            f"downbeat_after_entry={frame.first_downbeat_after_entry}; origin={frame.downbeat_origin}; class={frame.candidate_classification}; "
             f"actual={frame.actual_listening_observation}"
         )
     print(f"device_audio_file={audio_path.name}")

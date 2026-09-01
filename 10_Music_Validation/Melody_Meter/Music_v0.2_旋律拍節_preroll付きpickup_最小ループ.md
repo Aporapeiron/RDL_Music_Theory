@@ -17,7 +17,7 @@ meter history
   = melody begins after an already audible meter field
 ```
 
-今回は、pre-roll clicksを使い、旋律開始前に拍節参照を鳴らす。
+今回は、pre-roll clicksを使い、旋律開始前に拍節参照を鳴らす。ただし、clickが前に鳴るだけでは足りない。pre-rollから旋律中まで、同じ `downbeat_origin` によるmeter phaseが継続している必要がある。
 
 ## 1. 保存されるもの
 
@@ -50,6 +50,7 @@ first_downbeat_after_entry = 1
 preroll_beats = 2
 melody_entry_beat = 2
 first_downbeat_after_entry = 3
+downbeat_origin = 3
 ```
 
 2拍のclickが先に鳴り、その後C4がdownbeat前に入る。
@@ -60,6 +61,7 @@ first_downbeat_after_entry = 3
 preroll_beats = 4
 melody_entry_beat = 4
 first_downbeat_after_entry = 5
+downbeat_origin = 5
 ```
 
 1小節分の拍節場を先に作ってから、C4をpickupとして入れる。
@@ -70,6 +72,7 @@ first_downbeat_after_entry = 5
 preroll_beats = 4
 melody_entry_beat = 4
 first_downbeat_after_entry = 4
+downbeat_origin = 4
 ```
 
 同じpre-rollがあっても、C4がdownbeat上に入るcontrolである。
@@ -93,7 +96,7 @@ meter_history:
   旋律開始前に拍節参照がすでに聞こえている
 ```
 
-したがって、弱起は単なるnote accentでも、単なる局所offsetでもなく、事前に成立した拍節場へのentryとして扱える。
+したがって、弱起は単なるnote accentでも、単なる局所offsetでもなく、事前に成立し、その後も同じphaseで継続する拍節場へのentryとして扱える。
 
 ## 5. 実聴取slot
 
@@ -105,6 +108,7 @@ pre-roll clickはdevice fixtureであり、人間がその拍節場を実際に�
 
 ```text
 meter_history_is_not_identical_to_local_pickup_offset
+meter_phase_continuity_is_not_optional_for_preroll_pickup
 pre_roll_clicks_are_device_fixture_not_human_meter_confirmation
 pickup_candidate_is_not_actual_listening_observation
 actual_listening_observation_remains_null_until_recorded
