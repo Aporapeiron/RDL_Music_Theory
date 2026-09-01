@@ -24,3 +24,6 @@ music_v02_c6_am7_intervention_separation.json
 
 - music_v02_c6_am7_pre_listening_closure.json
   C6 / Am7実聴取前小括のCore返却候補・保留命題・actual listening slot集約manifest。
+
+- music_v02_melody_meter_identity_probe.json
+  旋律×拍節 輪郭保存アクセント変位プローブの構造予測・実聴取slot manifest。

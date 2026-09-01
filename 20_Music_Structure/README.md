@@ -11,3 +11,6 @@ Music実験から音楽固有のB/W/M_Bを抽出する
 ```
 
 汎用T2機構を抽出する文書は `70_T2_Extraction` 側に置く。
+
+- Melody_Meter/
+  旋律×拍節検証からMusic Coreへ返す構造抽出。

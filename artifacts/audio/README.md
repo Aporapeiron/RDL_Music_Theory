@@ -21,3 +21,6 @@ music_v02_c6_am7_intervention_separation.wav
 
 - c6_am7_temporal_context_order_split/
   C6 / Am7時間文脈提示順序分離の単独phrase WAVと順序variant WAV。
+
+- music_v02_melody_meter_identity_probe.wav
+  旋律×拍節 輪郭保存アクセント変位プローブのdevice-side audio fixture。

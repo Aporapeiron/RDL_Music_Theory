@@ -2448,3 +2448,11 @@ fallback採用後の実状態遷移 v0.1 / Module候補・最小接続検査
 同一音程fallback遷移の投影・候補再構成 v0.1 / Module候補・最小接続検査
 C6とAm7 v0.1 / 履歴由来・後順位候補
 ```
+
+### 10_Music_Validation/Melody_Meter/Music_v0.2_旋律拍節_輪郭保存アクセント変位_最小ループ.md
+
+C6 / Am7実聴取前小括後の次対象として、同じ旋律・同じ輪郭を保存したまま、拍節フレーム、アクセント位置、pickup関係を変え、旋律同一性と拍節状態の非同一性を検証するMusic v0.2最小ループ。
+
+### 20_Music_Structure/Melody_Meter/Music_v0.2_旋律拍節_輪郭保存アクセント変位_構造抽出版.md
+
+旋律×拍節検証から、melodic contour preservation と melodic-metric state preservation の非同一性をMusic Core v0.2へ返す構造抽出版。
