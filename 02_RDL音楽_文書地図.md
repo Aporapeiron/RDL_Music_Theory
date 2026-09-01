@@ -2464,3 +2464,11 @@ C6 / Am7実聴取前小括後の次対象として、同じ旋律・同じ輪郭
 ### 20_Music_Structure/Melody_Meter/Music_v0.2_旋律拍節_meter_accent_pickup分離_構造抽出版.md
 
 弱起は最初の音を強く鳴らすことではなく、拍節境界に対する開始位置関係であることを抽出し、meter reference / note accent / pickup offset の非同一性をMusic Core v0.2へ返す構造抽出版。
+
+### 10_Music_Validation/Melody_Meter/Music_v0.2_旋律拍節_preroll付きpickup_最小ループ.md
+
+meter / accent / pickup分離後、旋律開始前にpre-roll clicksで拍節場を成立させ、local pickup offset と meter history を分けるMusic v0.2検証記録。
+
+### 20_Music_Structure/Melody_Meter/Music_v0.2_旋律拍節_preroll付きpickup_構造抽出版.md
+
+弱起を pickup_offset と meter_history の相互作用として抽出し、同じpre-rollでもdownbeat entryなら弱起候補にならないことをMusic Core v0.2へ返す構造抽出版。

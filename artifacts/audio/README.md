@@ -27,3 +27,6 @@ music_v02_c6_am7_intervention_separation.wav
 
 - music_v02_melody_meter_pickup_separation_probe.wav
   旋律×拍節 meter / accent / pickup 分離プローブのdevice-side audio fixture。
+
+- music_v02_melody_meter_preroll_pickup_probe.wav
+  旋律×拍節 pre-roll付きpickupプローブのdevice-side audio fixture。

@@ -1,0 +1,185 @@
+{
+  "schema": "rdl_music_v02_melody_meter_preroll_pickup_probe_v0_1",
+  "subject": "melody_meter_preroll_pickup_probe",
+  "preserved_material": {
+    "melody": [
+      "C4",
+      "D4",
+      "E4",
+      "G4",
+      "E4",
+      "D4",
+      "C4",
+      "G3"
+    ],
+    "durations": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "contour": [
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1
+    ]
+  },
+  "frames": [
+    {
+      "name": "no_preroll_local_pickup",
+      "beats_per_bar": 4,
+      "preroll_beats": 0,
+      "melody_entry_beat": 0,
+      "first_downbeat_after_entry": 1,
+      "note_accent_indices": [
+        1,
+        5
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "meter_history_relation": "meter reference begins together with melody; pickup is local offset only",
+      "structural_prediction": "pickup relation is available but meter history before C4 is absent",
+      "perceptual_hypothesis": "listener may need the D4 downbeat to reinterpret C4 as pickup after it occurs",
+      "actual_listening_observation": null,
+      "candidate_classification": "local_pickup_without_preroll_candidate"
+    },
+    {
+      "name": "two_beat_preroll_pickup",
+      "beats_per_bar": 4,
+      "preroll_beats": 2,
+      "melody_entry_beat": 2,
+      "first_downbeat_after_entry": 3,
+      "note_accent_indices": [
+        1,
+        5
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "meter_history_relation": "two clicks establish beats before melody enters on the beat before downbeat",
+      "structural_prediction": "C4 enters into an already-audible meter field as pickup; D4 receives downbeat support",
+      "perceptual_hypothesis": "listener may hear C4 as pickup more immediately than without pre-roll",
+      "actual_listening_observation": null,
+      "candidate_classification": "preroll_supported_pickup_candidate"
+    },
+    {
+      "name": "four_beat_preroll_pickup",
+      "beats_per_bar": 4,
+      "preroll_beats": 4,
+      "melody_entry_beat": 4,
+      "first_downbeat_after_entry": 5,
+      "note_accent_indices": [
+        1,
+        5
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "meter_history_relation": "full bar of clicks establishes meter before pickup entry",
+      "structural_prediction": "meter field is established before melody, strengthening pickup interpretation",
+      "perceptual_hypothesis": "listener may hear the clearest anacrusis relation in this fixture",
+      "actual_listening_observation": null,
+      "candidate_classification": "strong_preroll_pickup_candidate"
+    },
+    {
+      "name": "four_beat_preroll_downbeat_entry",
+      "beats_per_bar": 4,
+      "preroll_beats": 4,
+      "melody_entry_beat": 4,
+      "first_downbeat_after_entry": 4,
+      "note_accent_indices": [
+        0,
+        4
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "meter_history_relation": "full bar of clicks establishes meter, then melody enters on downbeat",
+      "structural_prediction": "pre-roll exists, but C4 is arrival rather than pickup",
+      "perceptual_hypothesis": "listener may hear stable downbeat entry despite same pre-roll duration",
+      "actual_listening_observation": null,
+      "candidate_classification": "preroll_downbeat_entry_control_candidate"
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_melody_meter_preroll_pickup_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_melody_meter_preroll_pickup_probe.json",
+  "stop_lines": [
+    "meter_history_is_not_identical_to_local_pickup_offset",
+    "pre_roll_clicks_are_device_fixture_not_human_meter_confirmation",
+    "pickup_candidate_is_not_actual_listening_observation",
+    "actual_listening_observation_remains_null_until_recorded"
+  ]
+}

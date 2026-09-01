@@ -30,3 +30,6 @@ music_v02_c6_am7_intervention_separation.json
 
 - music_v02_melody_meter_pickup_separation_probe.json
   旋律×拍節 meter / accent / pickup 分離プローブの構造予測・実聴取slot manifest。
+
+- music_v02_melody_meter_preroll_pickup_probe.json
+  旋律×拍節 pre-roll付きpickupプローブのmeter history・実聴取slot manifest。
