@@ -1,0 +1,247 @@
+{
+  "schema": "rdl_music_v02_melody_meter_syncopation_probe_v0_1",
+  "subject": "melody_meter_syncopation_probe",
+  "preserved_material": {
+    "melody": [
+      "C4",
+      "D4",
+      "E4",
+      "G4",
+      "E4",
+      "D4",
+      "C4",
+      "G3"
+    ],
+    "contour": [
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "note_duration_beats": 0.72,
+    "meter_reference": "4/4 click grid with downbeats at 0 and 4"
+  },
+  "frames": [
+    {
+      "name": "onbeat_accent_aligned_reference",
+      "beats_per_bar": 4,
+      "downbeat_origin": 0,
+      "onset_phase_beats": 0.0,
+      "note_accent_indices": [
+        0,
+        4
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "onbeat_onset",
+        "downbeat_note_accent"
+      ],
+      "structural_prediction": "onsets and note accents align with the 4/4 reference",
+      "perceptual_hypothesis": "listener may hear the melody as metrically settled",
+      "actual_listening_observation": null,
+      "candidate_classification": "aligned_onbeat_reference_candidate",
+      "onset_positions": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "downbeat_positions": [
+        0,
+        4,
+        8
+      ]
+    },
+    {
+      "name": "accent_displaced_onbeat_onsets",
+      "beats_per_bar": 4,
+      "downbeat_origin": 0,
+      "onset_phase_beats": 0.0,
+      "note_accent_indices": [
+        1,
+        5
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "onbeat_onset",
+        "note_accent_displacement"
+      ],
+      "structural_prediction": "note accent is displaced while onset phase remains on the beat grid",
+      "perceptual_hypothesis": "listener may hear syncopation pressure without onset displacement",
+      "actual_listening_observation": null,
+      "candidate_classification": "accent_only_syncopation_candidate",
+      "onset_positions": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        6.0,
+        7.0
+      ],
+      "downbeat_positions": [
+        0,
+        4,
+        8
+      ]
+    },
+    {
+      "name": "offbeat_onsets_without_note_accent",
+      "beats_per_bar": 4,
+      "downbeat_origin": 0,
+      "onset_phase_beats": 0.5,
+      "note_accent_indices": [],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "offbeat_onset_phase",
+        "no_note_accent"
+      ],
+      "structural_prediction": "onsets fall between beats while note accent remains absent",
+      "perceptual_hypothesis": "listener may hear metric suspension carried by onset phase alone",
+      "actual_listening_observation": null,
+      "candidate_classification": "onset_phase_syncopation_candidate",
+      "onset_positions": [
+        0.5,
+        1.5,
+        2.5,
+        3.5,
+        4.5,
+        5.5,
+        6.5,
+        7.5
+      ],
+      "downbeat_positions": [
+        0,
+        4,
+        8
+      ]
+    },
+    {
+      "name": "offbeat_onsets_with_note_accent",
+      "beats_per_bar": 4,
+      "downbeat_origin": 0,
+      "onset_phase_beats": 0.5,
+      "note_accent_indices": [
+        0,
+        4
+      ],
+      "preserved_melody": [
+        "C4",
+        "D4",
+        "E4",
+        "G4",
+        "E4",
+        "D4",
+        "C4",
+        "G3"
+      ],
+      "preserved_contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "separated_relations": [
+        "meter_reference",
+        "offbeat_onset_phase",
+        "offbeat_note_accent"
+      ],
+      "structural_prediction": "offbeat onset phase and note accent support the same displaced relation",
+      "perceptual_hypothesis": "listener may hear the clearest syncopation candidate in this fixture",
+      "actual_listening_observation": null,
+      "candidate_classification": "onset_accent_syncopation_candidate",
+      "onset_positions": [
+        0.5,
+        1.5,
+        2.5,
+        3.5,
+        4.5,
+        5.5,
+        6.5,
+        7.5
+      ],
+      "downbeat_positions": [
+        0,
+        4,
+        8
+      ]
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_melody_meter_syncopation_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_melody_meter_syncopation_probe.json",
+  "stop_lines": [
+    "syncopation_candidate_is_not_identical_to_note_accent_displacement",
+    "onset_phase_displacement_is_not_identical_to_note_accent",
+    "meter_reference_is_fixed_across_frames",
+    "click_track_is_device_fixture_not_human_meter_confirmation",
+    "actual_listening_observation_remains_null_until_recorded"
+  ]
+}

@@ -12,3 +12,7 @@ meter / accent / pickup 分離 構造抽出版
 pre-roll付きpickup 構造抽出版
 : Music_v0.2_旋律拍節_preroll付きpickup_構造抽出版.md。
   pickup offset と meter history の非同一性をMusic Core v0.2へ返す。
+
+syncopation位相分離 構造抽出版
+: Music_v0.2_旋律拍節_syncopation位相分離_構造抽出版.md。
+  note accent displacement と onset phase displacement の非同一性をMusic Core v0.2へ返す。

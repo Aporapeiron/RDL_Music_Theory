@@ -12,3 +12,7 @@ meter / accent / pickup 分離 最小ループ
 pre-roll付きpickup 最小ループ
 : Music_v0.2_旋律拍節_preroll付きpickup_最小ループ.md / music_v02_melody_meter_preroll_pickup_probe.py。
   旋律開始前のmeter historyをclickで実音化し、local pickup offsetと分ける。
+
+syncopation位相分離 最小ループ
+: Music_v0.2_旋律拍節_syncopation位相分離_最小ループ.md / music_v02_melody_meter_syncopation_probe.py。
+  meter referenceを固定したまま、note accent displacementとonset phase displacementを分ける。
