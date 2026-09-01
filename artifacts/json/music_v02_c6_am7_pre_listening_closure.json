@@ -1,0 +1,167 @@
+{
+  "schema": "rdl_music_v02_c6_am7_pre_listening_closure_v0_1",
+  "subject": "C6_Am7_pre_listening_closure",
+  "source_manifests": [
+    "artifacts/json/music_v02_c6_am7_rehearing_observation.json",
+    "artifacts/json/music_v02_c6_am7_intervention_separation.json",
+    "artifacts/json/music_v02_c6_am7_relation_weight_probe.json",
+    "artifacts/json/music_v02_c6_am7_temporal_context_probe.json",
+    "artifacts/json/music_v02_c6_am7_temporal_context_order_split.json"
+  ],
+  "actual_listening_slots": [
+    {
+      "subject": "C6_Am7_bass_relation_tilt",
+      "path": "actual_listening_observation",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_intervention_separation",
+      "path": "cases[0].actual_listening_observation",
+      "name": "context_only",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_intervention_separation",
+      "path": "cases[1].actual_listening_observation",
+      "name": "register_only",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_intervention_separation",
+      "path": "cases[2].actual_listening_observation",
+      "name": "bass_primary",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_intervention_separation",
+      "path": "cases[3].actual_listening_observation",
+      "name": "full_tilt",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_relation_weight_probe",
+      "path": "states[0].actual_listening_observation",
+      "name": "source_C6_stable",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_relation_weight_probe",
+      "path": "states[1].actual_listening_observation",
+      "name": "context_only",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_relation_weight_probe",
+      "path": "states[2].actual_listening_observation",
+      "name": "register_only",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_relation_weight_probe",
+      "path": "states[3].actual_listening_observation",
+      "name": "bass_only",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_relation_weight_probe",
+      "path": "states[4].actual_listening_observation",
+      "name": "bass_plus_context",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_relation_weight_probe",
+      "path": "states[5].actual_listening_observation",
+      "name": "bass_plus_register",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_relation_weight_probe",
+      "path": "states[6].actual_listening_observation",
+      "name": "full_tilt",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_probe",
+      "path": "phrases[0].actual_listening_observation",
+      "name": "c_centered_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_probe",
+      "path": "phrases[1].actual_listening_observation",
+      "name": "a_centered_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_probe",
+      "path": "phrases[2].actual_listening_observation",
+      "name": "c_to_a_pivot_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_probe",
+      "path": "phrases[3].actual_listening_observation",
+      "name": "a_to_c_resistance_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_order_split",
+      "path": "single_phrase_files[0].actual_listening_observation",
+      "name": "c_centered_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_order_split",
+      "path": "single_phrase_files[1].actual_listening_observation",
+      "name": "a_centered_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_order_split",
+      "path": "single_phrase_files[2].actual_listening_observation",
+      "name": "c_to_a_pivot_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_order_split",
+      "path": "single_phrase_files[3].actual_listening_observation",
+      "name": "a_to_c_resistance_frame",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_order_split",
+      "path": "order_variants[0].actual_listening_observation",
+      "name": "canonical_order",
+      "value": null
+    },
+    {
+      "subject": "C6_Am7_temporal_context_order_split",
+      "path": "order_variants[1].actual_listening_observation",
+      "name": "reversed_context_order",
+      "value": null
+    }
+  ],
+  "returnable_to_music_core_before_listening": [
+    "pitch_class_set_preservation_does_not_preserve_harmonic_state",
+    "bass_relation_can_rebase_the_same_material_toward_Am7",
+    "register_gravity_depends_on_which_pitch_receives_low_support",
+    "context_must_be_distinguished_as_score_fixture_and_temporal_audio_relation",
+    "identical_target_sonority_can_have_different_candidate_states_under_different_temporal_frames",
+    "presentation_order_memory_is_a_separate_listening_condition_from_phrase_internal_context"
+  ],
+  "pending_until_actual_listening": [
+    "whether_listener_hears_C6_or_Am7_in_each_fixture",
+    "whether_pivot_reinterpretation_occurs_at_target_or_after_following_chord",
+    "whether_order_variants_change perceived candidate strength",
+    "whether_structural_prediction_discrepancies_are_absorbed_by_current_M_B_or_remain_as_H",
+    "whether_any_residual_relation_after_finite_B_should_be_held_as_xi"
+  ],
+  "not_returned_as_core_claims": [
+    "relation_weight_numbers_as_universal_constants",
+    "candidate_classification_as_final_chord_truth",
+    "device_audio_generation_as_human_listening_confirmation",
+    "C6_Am7_problem_as_resolved_binary_label_choice"
+  ],
+  "next_music_target_after_listening_or_deferral": "melody_meter_identity_preservation_probe",
+  "manifest_path": "artifacts/json/music_v02_c6_am7_pre_listening_closure.json"
+}

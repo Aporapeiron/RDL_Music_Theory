@@ -24,3 +24,7 @@
 時間文脈提示順序分離 最小ループ
 : Music_v0.2_C6_Am7_時間文脈提示順序分離_最小ループ.md / music_v02_c6_am7_temporal_context_order_split.py。
   phrase単独WAVと順序variantを分け、phrase内contextと提示順序memoryを区別する。
+
+実聴取前小括 最小ループ
+: Music_v0.2_C6_Am7_実聴取前小括_最小ループ.md / music_v02_c6_am7_pre_listening_closure.py。
+  既存C6/Am7 manifest群を集約し、実聴取前にMusic Coreへ返せる命題と保留する命題を分ける。

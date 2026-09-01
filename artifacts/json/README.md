@@ -21,3 +21,6 @@ music_v02_c6_am7_intervention_separation.json
 
 - music_v02_c6_am7_temporal_context_order_split.json
   C6 / Am7時間文脈提示順序分離の単独phrase・順序variant・実聴取slot manifest。
+
+- music_v02_c6_am7_pre_listening_closure.json
+  C6 / Am7実聴取前小括のCore返却候補・保留命題・actual listening slot集約manifest。
