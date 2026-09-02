@@ -30,6 +30,8 @@ B_timbre_attack_identity_probe:
     attack slope proxy
     brightness proxy
     harmonic count
+    plateau seconds
+    encoded onset positions
 ```
 
 ここで保存するのは、pitch / onset / duration / orderである。変えるのは音色を作るattack envelope、harmonic spectrum、attack transient noiseである。
@@ -69,7 +71,18 @@ classification = spectrum_changed_attack_preserved_candidate
 
 attack envelopeを保ったままspectrumだけを明るくする。
 
-### 2.4 transient_noise_attack
+### 2.4 noise_only_same_attack_spectrum
+
+```text
+attack_seconds = 0.09
+harmonic_profile = fundamental only
+transient_noise > 0
+classification = noise_changed_attack_spectrum_preserved_candidate
+```
+
+attack envelopeとspectrumを保ったまま、transient noiseだけを加える。noise単独の比較条件である。
+
+### 2.5 transient_noise_attack
 
 ```text
 attack_seconds = 0.008
@@ -78,7 +91,7 @@ transient_noise > 0
 classification = attack_and_spectrum_changed_candidate
 ```
 
-attack envelope、spectrum、transient noiseを同時に変えた複合条件である。
+attack envelope、spectrum、transient noiseを同時に変えた複合条件である。noise-only controlとは異なり、noise単独の効果としては扱わない。
 
 ## 3. 生成artifact
 
@@ -87,7 +100,7 @@ artifacts/audio/music_v02_timbre_attack_identity_probe.wav
 artifacts/json/music_v02_timbre_attack_identity_probe.json
 ```
 
-音声は4状態を順に鳴らすdevice-side fixtureである。
+音声は5状態を順に鳴らすdevice-side fixtureである。
 
 ## 4. 実聴取slot
 
@@ -108,16 +121,20 @@ same pitch-onset-duration material
 + changed attack envelope
 + changed harmonic spectrum
 + optional attack transient
++ derived plateau / energy distribution
 -> different timbre-attack candidate state
 ```
 
-attackは開始時刻そのものではなく、開始直後のエネルギー形状である。spectrumはpitch変更ではなく、同じ基音に対する倍音分布の変更として扱う。
+attackはencoded signal onsetそのものではなく、開始直後のエネルギー形状である。ただし、perceived / effective onsetが同一に聞こえるとはまだ言わない。attack durationを変えると、同じ総duration内でplateau時間とエネルギー分布も派生的に変わる。spectrumはpitch変更ではなく、同じ基音に対する倍音分布の変更として扱う。
 
 ## 6. 停止線
 
 ```text
 same_pitch_onset_duration_is_not_same_timbre_attack_candidate_state
 attack_envelope_is_not_identical_to_spectrum
+encoded_signal_onset_is_not_identical_to_perceived_onset
+attack_duration_change_entails_energy_distribution_and_plateau_change
+transient_noise_can_be_varied_without_attack_duration_or_spectrum_change
 spectrum_change_is_not_pitch_change_in_this_fixture
 transient_noise_is_attack_color_fixture_not_listener_confirmation
 brightness_proxy_is_fixture_descriptor_not_universal_timbre_constant

@@ -45,6 +45,8 @@ derived_descriptors:
   attack slope proxy
   brightness proxy
   harmonic count
+  plateau seconds
+  encoded onset positions
 ```
 
 ## 4. 候補状態
@@ -59,6 +61,9 @@ sharp_attack_same_spectrum:
 bright_spectrum_same_attack:
   spectrum_changed_attack_preserved_candidate
 
+noise_only_same_attack_spectrum:
+  noise_changed_attack_spectrum_preserved_candidate
+
 transient_noise_attack:
   attack_and_spectrum_changed_candidate
 ```
@@ -67,17 +72,19 @@ transient_noise_attack:
 
 ```text
 attack envelope
-  ≠ onset time
+  ≠ encoded signal onset time
+  may affect perceived / effective onset
 
 harmonic spectrum
   ≠ pitch identity in this fixture
 
 transient noise
+  can be varied while attack duration and spectrum are held
   = attack color fixture
   ≠ actual listener confirmation
 ```
 
-同じ音列でも、音の入り方と倍音分布が変わると、timbre-attack候補状態は変わる。ただし、現段階では聴取上の楽器感・硬さ・明るさを確定しない。
+同じ音列でも、音の入り方と倍音分布が変わると、timbre-attack候補状態は変わる。ただし、encoded onset保存はperceived onset保存を意味しない。またattack duration変更は、同じ総duration内のplateau時間とエネルギー分布を派生的に変える。現段階では聴取上の楽器感・硬さ・明るさを確定しない。
 
 ## 6. melody / meter 系列からの差分
 
@@ -89,6 +96,8 @@ melody / meter:
 timbre / attack:
   within-event formation relation
   attack envelope / spectrum / transient
+  encoded onset vs perceived onset
+  plateau / energy distribution
 ```
 
 ここで扱う関係は、音事象がいつ置かれるかではなく、置かれた音事象が開始直後にどのような形で形成されるかである。
@@ -98,6 +107,9 @@ timbre / attack:
 ```text
 same_pitch_onset_duration_is_not_same_timbre_attack_candidate_state
 attack_envelope_is_not_identical_to_spectrum
+encoded_signal_onset_is_not_identical_to_perceived_onset
+attack_duration_change_entails_energy_distribution_and_plateau_change
+transient_noise_can_be_varied_without_attack_duration_or_spectrum_change
 spectrum_change_is_not_pitch_change_in_this_fixture
 transient_noise_is_attack_color_fixture_not_listener_confirmation
 brightness_proxy_is_fixture_descriptor_not_universal_timbre_constant

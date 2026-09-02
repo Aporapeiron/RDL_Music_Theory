@@ -64,6 +64,15 @@ class TimbreAttackFrame:
     def attack_slope_proxy(self) -> float:
         return round(1.0 / self.attack_seconds, 3)
 
+    @property
+    def encoded_onsets_beats(self) -> tuple[int, ...]:
+        return self.preserved_onsets_beats
+
+    @property
+    def plateau_seconds(self) -> float:
+        duration_seconds = self.preserved_duration_beats * BEAT_SECONDS
+        return round(max(0.0, duration_seconds - self.attack_seconds - self.release_seconds), 3)
+
 
 def build_frames() -> list[TimbreAttackFrame]:
     pitches = tuple(note for note, _beat in MATERIAL)
@@ -79,7 +88,7 @@ def build_frames() -> list[TimbreAttackFrame]:
             harmonic_profile=(1.0,),
             transient_noise_amount=0.0,
             primary_interventions=("reference attack envelope", "reference harmonic spectrum"),
-            derived_relations=("attack_slope_proxy = 11.111", "brightness_proxy = 1.0", "transient_noise_amount = 0.0"),
+            derived_relations=("attack_slope_proxy = 11.111", "brightness_proxy = 1.0", "plateau_seconds = 0.24", "transient_noise_amount = 0.0"),
             timbre_attack_candidate="soft_sine_reference_candidate",
             structural_prediction="same pitch-onset material with soft attack and minimal spectrum",
             perceptual_hypothesis="listener may hear a rounded or vowel-like entry",
@@ -96,7 +105,7 @@ def build_frames() -> list[TimbreAttackFrame]:
             harmonic_profile=(1.0,),
             transient_noise_amount=0.0,
             primary_interventions=("shorten attack envelope",),
-            derived_relations=("attack_slope_proxy = 125.0", "brightness_proxy = 1.0", "transient_noise_amount = 0.0"),
+            derived_relations=("attack_slope_proxy = 125.0", "brightness_proxy = 1.0", "plateau_seconds = 0.322", "transient_noise_amount = 0.0"),
             timbre_attack_candidate="sharp_attack_same_spectrum_candidate",
             structural_prediction="same spectrum with sharper onset edge",
             perceptual_hypothesis="listener may hear a more percussive entry without pitch/onset change",
@@ -113,7 +122,7 @@ def build_frames() -> list[TimbreAttackFrame]:
             harmonic_profile=(1.0, 0.45, 0.22, 0.12),
             transient_noise_amount=0.0,
             primary_interventions=("add upper harmonics",),
-            derived_relations=("attack_slope_proxy = 11.111", "brightness_proxy = 1.698", "transient_noise_amount = 0.0"),
+            derived_relations=("attack_slope_proxy = 11.111", "brightness_proxy = 1.698", "plateau_seconds = 0.24", "transient_noise_amount = 0.0"),
             timbre_attack_candidate="bright_spectrum_same_attack_candidate",
             structural_prediction="same attack timing with brighter harmonic distribution",
             perceptual_hypothesis="listener may hear brighter color without changed onset placement",
@@ -121,6 +130,22 @@ def build_frames() -> list[TimbreAttackFrame]:
             candidate_classification="spectrum_changed_attack_preserved_candidate",
         ),
         TimbreAttackFrame(
+            name="noise_only_same_attack_spectrum",
+            preserved_pitches=pitches,
+            preserved_onsets_beats=onsets,
+            preserved_duration_beats=NOTE_DURATION_BEATS,
+            attack_seconds=0.09,
+            release_seconds=0.08,
+            harmonic_profile=(1.0,),
+            transient_noise_amount=0.08,
+            primary_interventions=("add attack transient noise",),
+            derived_relations=("attack_slope_proxy = 11.111", "brightness_proxy = 1.0", "plateau_seconds = 0.24", "transient_noise_amount = 0.08"),
+            timbre_attack_candidate="noise_only_same_attack_spectrum_candidate",
+            structural_prediction="same attack envelope and spectrum with added attack transient color",
+            perceptual_hypothesis="listener may hear noisier articulation without brightness or attack-duration change",
+            actual_listening_observation=None,
+            candidate_classification="noise_changed_attack_spectrum_preserved_candidate",
+        ),        TimbreAttackFrame(
             name="transient_noise_attack",
             preserved_pitches=pitches,
             preserved_onsets_beats=onsets,
@@ -130,7 +155,7 @@ def build_frames() -> list[TimbreAttackFrame]:
             harmonic_profile=(1.0, 0.38, 0.16),
             transient_noise_amount=0.08,
             primary_interventions=("shorten attack envelope", "add attack transient noise", "add upper harmonics"),
-            derived_relations=("attack_slope_proxy = 125.0", "brightness_proxy = 1.455", "transient_noise_amount = 0.08"),
+            derived_relations=("attack_slope_proxy = 125.0", "brightness_proxy = 1.455", "plateau_seconds = 0.322", "transient_noise_amount = 0.08"),
             timbre_attack_candidate="transient_attack_color_candidate",
             structural_prediction="same pitch-onset material with sharper and noisier attack color",
             perceptual_hypothesis="listener may hear plucked or struck articulation",
@@ -185,6 +210,8 @@ def frame_record(frame: TimbreAttackFrame) -> dict[str, object]:
     record["harmonic_count"] = frame.harmonic_count
     record["brightness_proxy"] = frame.brightness_proxy
     record["attack_slope_proxy"] = frame.attack_slope_proxy
+    record["plateau_seconds"] = frame.plateau_seconds
+    record["encoded_onsets_beats"] = list(frame.encoded_onsets_beats)
     return record
 
 
@@ -217,6 +244,9 @@ def write_manifest(frames: list[TimbreAttackFrame], manifest_path: Path) -> None
         "stop_lines": [
             "same_pitch_onset_duration_is_not_same_timbre_attack_candidate_state",
             "attack_envelope_is_not_identical_to_spectrum",
+            "encoded_signal_onset_is_not_identical_to_perceived_onset",
+            "attack_duration_change_entails_energy_distribution_and_plateau_change",
+            "transient_noise_can_be_varied_without_attack_duration_or_spectrum_change",
             "spectrum_change_is_not_pitch_change_in_this_fixture",
             "transient_noise_is_attack_color_fixture_not_listener_confirmation",
             "brightness_proxy_is_fixture_descriptor_not_universal_timbre_constant",
@@ -238,7 +268,12 @@ def main() -> None:
     assert frames[1].attack_seconds < frames[0].attack_seconds
     assert frames[2].attack_seconds == frames[0].attack_seconds
     assert frames[2].brightness_proxy > frames[0].brightness_proxy
+    assert frames[3].name == "noise_only_same_attack_spectrum"
+    assert frames[3].attack_seconds == frames[0].attack_seconds
+    assert frames[3].harmonic_profile == frames[0].harmonic_profile
     assert frames[3].transient_noise_amount > 0.0
+    assert frames[4].transient_noise_amount > 0.0
+    assert frames[1].plateau_seconds > frames[0].plateau_seconds
     assert all(frame.actual_listening_observation is None for frame in frames)
 
     audio_path = ROOT / AUDIO_RELATIVE_PATH

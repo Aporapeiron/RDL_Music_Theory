@@ -51,6 +51,7 @@
       "derived_relations": [
         "attack_slope_proxy = 11.111",
         "brightness_proxy = 1.0",
+        "plateau_seconds = 0.24",
         "transient_noise_amount = 0.0"
       ],
       "timbre_attack_candidate": "soft_sine_reference_candidate",
@@ -60,7 +61,14 @@
       "candidate_classification": "soft_attack_low_brightness_candidate",
       "harmonic_count": 1,
       "brightness_proxy": 1.0,
-      "attack_slope_proxy": 11.111
+      "attack_slope_proxy": 11.111,
+      "plateau_seconds": 0.24,
+      "encoded_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ]
     },
     {
       "name": "sharp_attack_same_spectrum",
@@ -89,6 +97,7 @@
       "derived_relations": [
         "attack_slope_proxy = 125.0",
         "brightness_proxy = 1.0",
+        "plateau_seconds = 0.322",
         "transient_noise_amount = 0.0"
       ],
       "timbre_attack_candidate": "sharp_attack_same_spectrum_candidate",
@@ -98,7 +107,14 @@
       "candidate_classification": "attack_changed_spectrum_preserved_candidate",
       "harmonic_count": 1,
       "brightness_proxy": 1.0,
-      "attack_slope_proxy": 125.0
+      "attack_slope_proxy": 125.0,
+      "plateau_seconds": 0.322,
+      "encoded_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ]
     },
     {
       "name": "bright_spectrum_same_attack",
@@ -130,6 +146,7 @@
       "derived_relations": [
         "attack_slope_proxy = 11.111",
         "brightness_proxy = 1.698",
+        "plateau_seconds = 0.24",
         "transient_noise_amount = 0.0"
       ],
       "timbre_attack_candidate": "bright_spectrum_same_attack_candidate",
@@ -139,7 +156,60 @@
       "candidate_classification": "spectrum_changed_attack_preserved_candidate",
       "harmonic_count": 4,
       "brightness_proxy": 1.698,
-      "attack_slope_proxy": 11.111
+      "attack_slope_proxy": 11.111,
+      "plateau_seconds": 0.24,
+      "encoded_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "noise_only_same_attack_spectrum",
+      "preserved_pitches": [
+        "C4",
+        "E4",
+        "G4",
+        "C5"
+      ],
+      "preserved_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "preserved_duration_beats": 0.82,
+      "attack_seconds": 0.09,
+      "release_seconds": 0.08,
+      "harmonic_profile": [
+        1.0
+      ],
+      "transient_noise_amount": 0.08,
+      "primary_interventions": [
+        "add attack transient noise"
+      ],
+      "derived_relations": [
+        "attack_slope_proxy = 11.111",
+        "brightness_proxy = 1.0",
+        "plateau_seconds = 0.24",
+        "transient_noise_amount = 0.08"
+      ],
+      "timbre_attack_candidate": "noise_only_same_attack_spectrum_candidate",
+      "structural_prediction": "same attack envelope and spectrum with added attack transient color",
+      "perceptual_hypothesis": "listener may hear noisier articulation without brightness or attack-duration change",
+      "actual_listening_observation": null,
+      "candidate_classification": "noise_changed_attack_spectrum_preserved_candidate",
+      "harmonic_count": 1,
+      "brightness_proxy": 1.0,
+      "attack_slope_proxy": 11.111,
+      "plateau_seconds": 0.24,
+      "encoded_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ]
     },
     {
       "name": "transient_noise_attack",
@@ -172,6 +242,7 @@
       "derived_relations": [
         "attack_slope_proxy = 125.0",
         "brightness_proxy = 1.455",
+        "plateau_seconds = 0.322",
         "transient_noise_amount = 0.08"
       ],
       "timbre_attack_candidate": "transient_attack_color_candidate",
@@ -181,7 +252,14 @@
       "candidate_classification": "attack_and_spectrum_changed_candidate",
       "harmonic_count": 3,
       "brightness_proxy": 1.455,
-      "attack_slope_proxy": 125.0
+      "attack_slope_proxy": 125.0,
+      "plateau_seconds": 0.322,
+      "encoded_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ]
     }
   ],
   "device_audio_path": "artifacts/audio/music_v02_timbre_attack_identity_probe.wav",
@@ -189,6 +267,9 @@
   "stop_lines": [
     "same_pitch_onset_duration_is_not_same_timbre_attack_candidate_state",
     "attack_envelope_is_not_identical_to_spectrum",
+    "encoded_signal_onset_is_not_identical_to_perceived_onset",
+    "attack_duration_change_entails_energy_distribution_and_plateau_change",
+    "transient_noise_can_be_varied_without_attack_duration_or_spectrum_change",
     "spectrum_change_is_not_pitch_change_in_this_fixture",
     "transient_noise_is_attack_color_fixture_not_listener_confirmation",
     "brightness_proxy_is_fixture_descriptor_not_universal_timbre_constant",
