@@ -8,3 +8,6 @@ Music固有の検証を置く領域。
 
 - Melody_Meter/
   旋律輪郭保存と拍節・アクセント変位のMusic v0.2検証。
+
+- Timbre_Attack/
+  pitch/onset/durationを保存し、attack envelopeとspectrumを変えるMusic v0.2検証。

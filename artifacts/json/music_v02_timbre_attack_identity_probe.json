@@ -1,0 +1,198 @@
+{
+  "schema": "rdl_music_v02_timbre_attack_identity_probe_v0_1",
+  "subject": "timbre_attack_identity_probe",
+  "preserved_material": {
+    "pitches": [
+      "C4",
+      "E4",
+      "G4",
+      "C5"
+    ],
+    "onsets_beats": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "duration_beats": 0.82,
+    "note_order": [
+      "C4",
+      "E4",
+      "G4",
+      "C5"
+    ]
+  },
+  "frames": [
+    {
+      "name": "soft_sine_reference",
+      "preserved_pitches": [
+        "C4",
+        "E4",
+        "G4",
+        "C5"
+      ],
+      "preserved_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "preserved_duration_beats": 0.82,
+      "attack_seconds": 0.09,
+      "release_seconds": 0.08,
+      "harmonic_profile": [
+        1.0
+      ],
+      "transient_noise_amount": 0.0,
+      "primary_interventions": [
+        "reference attack envelope",
+        "reference harmonic spectrum"
+      ],
+      "derived_relations": [
+        "attack_slope_proxy = 11.111",
+        "brightness_proxy = 1.0",
+        "transient_noise_amount = 0.0"
+      ],
+      "timbre_attack_candidate": "soft_sine_reference_candidate",
+      "structural_prediction": "same pitch-onset material with soft attack and minimal spectrum",
+      "perceptual_hypothesis": "listener may hear a rounded or vowel-like entry",
+      "actual_listening_observation": null,
+      "candidate_classification": "soft_attack_low_brightness_candidate",
+      "harmonic_count": 1,
+      "brightness_proxy": 1.0,
+      "attack_slope_proxy": 11.111
+    },
+    {
+      "name": "sharp_attack_same_spectrum",
+      "preserved_pitches": [
+        "C4",
+        "E4",
+        "G4",
+        "C5"
+      ],
+      "preserved_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "preserved_duration_beats": 0.82,
+      "attack_seconds": 0.008,
+      "release_seconds": 0.08,
+      "harmonic_profile": [
+        1.0
+      ],
+      "transient_noise_amount": 0.0,
+      "primary_interventions": [
+        "shorten attack envelope"
+      ],
+      "derived_relations": [
+        "attack_slope_proxy = 125.0",
+        "brightness_proxy = 1.0",
+        "transient_noise_amount = 0.0"
+      ],
+      "timbre_attack_candidate": "sharp_attack_same_spectrum_candidate",
+      "structural_prediction": "same spectrum with sharper onset edge",
+      "perceptual_hypothesis": "listener may hear a more percussive entry without pitch/onset change",
+      "actual_listening_observation": null,
+      "candidate_classification": "attack_changed_spectrum_preserved_candidate",
+      "harmonic_count": 1,
+      "brightness_proxy": 1.0,
+      "attack_slope_proxy": 125.0
+    },
+    {
+      "name": "bright_spectrum_same_attack",
+      "preserved_pitches": [
+        "C4",
+        "E4",
+        "G4",
+        "C5"
+      ],
+      "preserved_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "preserved_duration_beats": 0.82,
+      "attack_seconds": 0.09,
+      "release_seconds": 0.08,
+      "harmonic_profile": [
+        1.0,
+        0.45,
+        0.22,
+        0.12
+      ],
+      "transient_noise_amount": 0.0,
+      "primary_interventions": [
+        "add upper harmonics"
+      ],
+      "derived_relations": [
+        "attack_slope_proxy = 11.111",
+        "brightness_proxy = 1.698",
+        "transient_noise_amount = 0.0"
+      ],
+      "timbre_attack_candidate": "bright_spectrum_same_attack_candidate",
+      "structural_prediction": "same attack timing with brighter harmonic distribution",
+      "perceptual_hypothesis": "listener may hear brighter color without changed onset placement",
+      "actual_listening_observation": null,
+      "candidate_classification": "spectrum_changed_attack_preserved_candidate",
+      "harmonic_count": 4,
+      "brightness_proxy": 1.698,
+      "attack_slope_proxy": 11.111
+    },
+    {
+      "name": "transient_noise_attack",
+      "preserved_pitches": [
+        "C4",
+        "E4",
+        "G4",
+        "C5"
+      ],
+      "preserved_onsets_beats": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "preserved_duration_beats": 0.82,
+      "attack_seconds": 0.008,
+      "release_seconds": 0.08,
+      "harmonic_profile": [
+        1.0,
+        0.38,
+        0.16
+      ],
+      "transient_noise_amount": 0.08,
+      "primary_interventions": [
+        "shorten attack envelope",
+        "add attack transient noise",
+        "add upper harmonics"
+      ],
+      "derived_relations": [
+        "attack_slope_proxy = 125.0",
+        "brightness_proxy = 1.455",
+        "transient_noise_amount = 0.08"
+      ],
+      "timbre_attack_candidate": "transient_attack_color_candidate",
+      "structural_prediction": "same pitch-onset material with sharper and noisier attack color",
+      "perceptual_hypothesis": "listener may hear plucked or struck articulation",
+      "actual_listening_observation": null,
+      "candidate_classification": "attack_and_spectrum_changed_candidate",
+      "harmonic_count": 3,
+      "brightness_proxy": 1.455,
+      "attack_slope_proxy": 125.0
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_timbre_attack_identity_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_timbre_attack_identity_probe.json",
+  "stop_lines": [
+    "same_pitch_onset_duration_is_not_same_timbre_attack_candidate_state",
+    "attack_envelope_is_not_identical_to_spectrum",
+    "spectrum_change_is_not_pitch_change_in_this_fixture",
+    "transient_noise_is_attack_color_fixture_not_listener_confirmation",
+    "brightness_proxy_is_fixture_descriptor_not_universal_timbre_constant",
+    "device_audio_generation_is_not_actual_listening_observation",
+    "actual_listening_observation_remains_null_until_recorded"
+  ]
+}

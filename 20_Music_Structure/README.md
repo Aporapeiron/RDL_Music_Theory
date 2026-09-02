@@ -14,3 +14,6 @@ Music実験から音楽固有のB/W/M_Bを抽出する
 
 - Melody_Meter/
   旋律×拍節検証からMusic Coreへ返す構造抽出。
+
+- Timbre_Attack/
+  音色 / attack検証からMusic Coreへ返す構造抽出。
