@@ -60,6 +60,9 @@ immediate_return_bar_aligned:
 delayed_return_after_filler:
   delayed_motif_return_candidate
 
+delayed_return_after_silence:
+  silent_gap_delayed_return_candidate
+
 offphase_return_after_filler:
   offphase_motif_return_candidate
 
@@ -79,10 +82,11 @@ motif-memory candidate state is conditioned by:
   intervening local memory
   derived return phase
   derived return gap
-  intervening duration required by return start time
+  required absence interval derived from return start time
+  sounding intervening material
 ```
 
-同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。ただし、現段階では `=` で確定せず、候補状態がこれらの関係に条件づけられると見る。return start timeは単独で宙に浮いた変数ではなく、このfixtureではreturn gap、return phase、必要なintervening durationを派生させる。
+同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。ただし、現段階では `=` で確定せず、候補状態がこれらの関係に条件づけられると見る。return start timeは単独で宙に浮いた変数ではなく、このfixtureではreturn gap / absence intervalとreturn phaseを派生させる。ただし、同じabsence intervalをsounding fillerで埋めるかsilenceとして残すかは別条件である。
 
 ## 6. duration articulationからの差分
 
@@ -105,7 +109,8 @@ same_motif_material_is_not_same_memory_candidate_state
 return_timing_is_not_identical_to_motif_identity
 return_phase_is_derived_from_return_start_time_under_fixed_meter
 return_gap_is_derived_from_return_start_time_and_motif_end
-return_start_time_entails_required_absence_or_intervening_duration_under_this_fixture
+return_start_time_entails_required_absence_interval_under_this_fixture
+absence_interval_is_not_identical_to_sounding_intervening_material
 motif_memory_candidate_state_is_conditioned_not_equated
 intervening_material_is_not_erasure_of_motif_memory
 motif_return_candidate_is_not_actual_refrain_perception

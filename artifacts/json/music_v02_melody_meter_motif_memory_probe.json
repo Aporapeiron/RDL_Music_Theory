@@ -51,11 +51,12 @@
       ],
       "memory_condition": "fresh return with no intervening material",
       "derived_memory_candidate": "direct repetition candidate before actual listening",
-      "structural_prediction": "same motif functions as direct repetition",
+      "structural_prediction": "direct-repetition structural candidate",
       "perceptual_hypothesis": "listener may hear confirmation or simple echo",
       "actual_listening_observation": null,
       "candidate_classification": "immediate_repetition_candidate",
       "return_gap_beats": 0,
+      "absence_interval_beats": 0,
       "return_phase": 0,
       "intervening_duration_beats": 0
     },
@@ -98,13 +99,52 @@
       ],
       "memory_condition": "motif is absent for one bar before reentry",
       "derived_memory_candidate": "delayed return candidate after motif absence",
-      "structural_prediction": "same motif returns as remembered material rather than immediate repetition",
+      "structural_prediction": "delayed-return structural candidate after sounding filler",
       "perceptual_hypothesis": "listener may hear refrain-like return or phrase answer",
       "actual_listening_observation": null,
       "candidate_classification": "delayed_motif_return_candidate",
       "return_gap_beats": 4,
+      "absence_interval_beats": 4,
       "return_phase": 0,
       "intervening_duration_beats": 4
+    },
+    {
+      "name": "delayed_return_after_silence",
+      "first_motif_start_beat": 0,
+      "return_motif_start_beat": 8,
+      "intervening_material": [],
+      "intervening_durations": [],
+      "preserved_motif": [
+        "C4",
+        "D4",
+        "E4",
+        "G4"
+      ],
+      "preserved_motif_contour": [
+        1,
+        1,
+        1
+      ],
+      "primary_interventions": [
+        "set return_motif_start_beat to 8",
+        "set intervening_material to silence"
+      ],
+      "return_relation": "motif returns at bar downbeat after four beats of silence",
+      "derived_relations": [
+        "return_gap_beats = 4",
+        "return_phase = 0",
+        "intervening_duration_beats = 0"
+      ],
+      "memory_condition": "motif is absent for one bar with no sounding filler",
+      "derived_memory_candidate": "silent-gap delayed return candidate before actual listening",
+      "structural_prediction": "delayed-return structural candidate after silent gap",
+      "perceptual_hypothesis": "listener may hear a cleaner return or weaker retained connection",
+      "actual_listening_observation": null,
+      "candidate_classification": "silent_gap_delayed_return_candidate",
+      "return_gap_beats": 4,
+      "absence_interval_beats": 4,
+      "return_phase": 0,
+      "intervening_duration_beats": 0
     },
     {
       "name": "offphase_return_after_filler",
@@ -141,11 +181,12 @@
       ],
       "memory_condition": "motif returns while bar phase is displaced",
       "derived_memory_candidate": "offphase return candidate derived from return start time",
-      "structural_prediction": "same motif reappears with metric displacement pressure",
+      "structural_prediction": "offphase-return structural candidate",
       "perceptual_hypothesis": "listener may hear return plus interruption or compression",
       "actual_listening_observation": null,
       "candidate_classification": "offphase_motif_return_candidate",
       "return_gap_beats": 2,
+      "absence_interval_beats": 2,
       "return_phase": 2,
       "intervening_duration_beats": 2
     },
@@ -188,11 +229,12 @@
       ],
       "memory_condition": "intervening material changes contour direction before return",
       "derived_memory_candidate": "contrast-supported return candidate before actual listening",
-      "structural_prediction": "same motif returns against transformed local memory",
+      "structural_prediction": "contrast-supported return structural candidate",
       "perceptual_hypothesis": "listener may hear stronger return because contrast precedes it",
       "actual_listening_observation": null,
       "candidate_classification": "contrast_supported_motif_return_candidate",
       "return_gap_beats": 4,
+      "absence_interval_beats": 4,
       "return_phase": 0,
       "intervening_duration_beats": 4
     }
@@ -204,7 +246,8 @@
     "return_timing_is_not_identical_to_motif_identity",
     "return_phase_is_derived_from_return_start_time_under_fixed_meter",
     "return_gap_is_derived_from_return_start_time_and_motif_end",
-    "return_start_time_entails_required_absence_or_intervening_duration_under_this_fixture",
+    "return_start_time_entails_required_absence_interval_under_this_fixture",
+    "absence_interval_is_not_identical_to_sounding_intervening_material",
     "motif_memory_candidate_state_is_conditioned_not_equated",
     "intervening_material_is_not_erasure_of_motif_memory",
     "motif_return_candidate_is_not_actual_refrain_perception",
