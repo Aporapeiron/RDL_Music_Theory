@@ -39,17 +39,16 @@ meter_reference:
 ## 3. 変化するもの
 
 ```text
-return_gap:
-  motif absence duration before return
+primary_interventions:
+  return start time
+  intervening material
 
-return_phase:
-  metrical phase where the motif returns
+derived_relations:
+  return gap
+  return phase
 
-intervening_material:
-  local memory between first motif and return
-
-memory_condition:
-  how the motif is held or displaced before reentry
+entailed_condition:
+  memory condition before return
 ```
 
 ## 4. 候補状態
@@ -74,14 +73,14 @@ transformed_filler_then_return:
 motif identity
   ≠ material identity alone
 
-motif memory state
-  = preserved fragment
-  + absence interval
-  + intervening local memory
-  + return phase
+motif-memory candidate state is conditioned by:
+  preserved fragment
+  absence interval
+  intervening local memory
+  derived return phase
 ```
 
-同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。
+同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。ただし、現段階では `=` で確定せず、候補状態がこれらの関係に条件づけられると見る。
 
 ## 6. duration articulationからの差分
 

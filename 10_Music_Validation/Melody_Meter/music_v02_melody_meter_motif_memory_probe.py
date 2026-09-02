@@ -46,8 +46,11 @@ class MotifMemoryFrame:
     intervening_durations: tuple[int, ...]
     preserved_motif: tuple[str, ...]
     preserved_motif_contour: tuple[int, ...]
+    primary_interventions: tuple[str, ...]
     return_relation: str
+    derived_relations: tuple[str, ...]
     memory_condition: str
+    entailed_memory_condition: str
     structural_prediction: str
     perceptual_hypothesis: str
     actual_listening_observation: str | None
@@ -81,8 +84,11 @@ def build_frames() -> list[MotifMemoryFrame]:
             intervening_durations=(),
             preserved_motif=MOTIF,
             preserved_motif_contour=preserved_contour,
+            primary_interventions=("set return_motif_start_beat to 4", "set intervening_material to empty"),
             return_relation="motif returns immediately at next bar downbeat",
+            derived_relations=("return_gap_beats = 0", "return_phase = 0"),
             memory_condition="fresh return with no intervening material",
+            entailed_memory_condition="direct repetition candidate before actual listening",
             structural_prediction="same motif functions as direct repetition",
             perceptual_hypothesis="listener may hear confirmation or simple echo",
             actual_listening_observation=None,
@@ -96,8 +102,11 @@ def build_frames() -> list[MotifMemoryFrame]:
             intervening_durations=(1, 1, 1, 1),
             preserved_motif=MOTIF,
             preserved_motif_contour=preserved_contour,
+            primary_interventions=("set return_motif_start_beat to 8", "set intervening_material to descending filler"),
             return_relation="motif returns after one intervening 4-beat filler",
+            derived_relations=("return_gap_beats = 4", "return_phase = 0"),
             memory_condition="motif is absent for one bar before reentry",
+            entailed_memory_condition="delayed return candidate after motif absence",
             structural_prediction="same motif returns as remembered material rather than immediate repetition",
             perceptual_hypothesis="listener may hear refrain-like return or phrase answer",
             actual_listening_observation=None,
@@ -111,8 +120,11 @@ def build_frames() -> list[MotifMemoryFrame]:
             intervening_durations=(1, 1),
             preserved_motif=MOTIF,
             preserved_motif_contour=preserved_contour,
+            primary_interventions=("set return_motif_start_beat to 6", "set intervening_material to two-beat filler"),
             return_relation="motif returns before the next bar downbeat after shorter filler",
+            derived_relations=("return_gap_beats = 2", "return_phase = 2"),
             memory_condition="motif returns while bar phase is displaced",
+            entailed_memory_condition="offphase return candidate derived from return start time",
             structural_prediction="same motif reappears with metric displacement pressure",
             perceptual_hypothesis="listener may hear return plus interruption or compression",
             actual_listening_observation=None,
@@ -126,8 +138,11 @@ def build_frames() -> list[MotifMemoryFrame]:
             intervening_durations=(1, 1, 1, 1),
             preserved_motif=MOTIF,
             preserved_motif_contour=preserved_contour,
+            primary_interventions=("set return_motif_start_beat to 8", "set intervening_material to contrasting contour"),
             return_relation="motif returns at bar downbeat after contrasting contour",
+            derived_relations=("return_gap_beats = 4", "return_phase = 0"),
             memory_condition="intervening material changes contour direction before return",
+            entailed_memory_condition="contrast-supported return candidate before actual listening",
             structural_prediction="same motif returns against transformed local memory",
             perceptual_hypothesis="listener may hear stronger return because contrast precedes it",
             actual_listening_observation=None,
@@ -234,6 +249,9 @@ def write_manifest(frames: list[MotifMemoryFrame], manifest_path: Path) -> None:
         "stop_lines": [
             "same_motif_material_is_not_same_memory_state",
             "return_timing_is_not_identical_to_motif_identity",
+            "return_phase_is_derived_from_return_start_time_under_fixed_meter",
+            "return_gap_is_derived_from_return_start_time_and_motif_end",
+            "motif_memory_candidate_state_is_conditioned_not_equated",
             "intervening_material_is_not_erasure_of_motif_memory",
             "motif_return_candidate_is_not_actual_refrain_perception",
             "click_track_is_device_fixture_not_human_meter_confirmation",

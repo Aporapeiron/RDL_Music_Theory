@@ -23,14 +23,17 @@ B_melody_meter_motif_memory_probe:
   preserved_motif_durations = 1 1 1 1
   preserved_motif_contour = up up up
   fixed_meter_reference = 4/4 click grid
-  changed_relations:
-    return timing
-    return phase
+  primary_interventions:
+    return start time
     intervening material
+  derived_relations:
+    return gap
+    return phase
+  entailed_condition:
     memory condition before return
 ```
 
-今回保存するのは、戻ってくるmotifそのものの音高列・長さ列・輪郭である。変えるのは、motifがいつ戻るか、戻る前に何が鳴ったかである。
+今回保存するのは、戻ってくるmotifそのものの音高列・長さ列・輪郭である。一次介入として変えるのは、motifのreturn start timeと、戻る前に鳴るintervening materialである。return gapとreturn phaseは、固定meter内でreturn start timeから派生する。
 
 ## 2. 検証状態
 
@@ -104,7 +107,7 @@ same motif
 -> different motif-memory candidate state
 ```
 
-motif同一性は、断片そのものだけでなく、戻るまでの不在期間、戻る拍節phase、直前に保持されている局所記憶によって変化する。
+motif-memory candidate stateは、断片そのものだけでなく、戻るまでの不在期間、戻る拍節phase、直前に保持されている局所記憶によって条件づけられる。ここでは等式として確定しない。
 
 ## 6. 停止線
 
