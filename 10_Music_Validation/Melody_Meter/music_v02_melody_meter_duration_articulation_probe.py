@@ -41,7 +41,9 @@ class DurationArticulationFrame:
     preserved_contour: tuple[int, ...]
     preserved_onset_positions: tuple[float, ...]
     preserved_note_accent_indices: tuple[int, ...]
+    primary_intervention: str
     changed_relation: str
+    entailed_changes: tuple[str, ...]
     structural_prediction: str
     perceptual_hypothesis: str
     actual_listening_observation: str | None
@@ -80,7 +82,9 @@ def build_frames() -> list[DurationArticulationFrame]:
             preserved_contour=preserved_contour,
             preserved_onset_positions=ONSET_POSITIONS,
             preserved_note_accent_indices=NOTE_ACCENT_INDICES,
+            primary_intervention="set note_duration_beats to 0.72",
             changed_relation="reference detached duration with fixed onsets",
+            entailed_changes=("short inter-onset rest",),
             structural_prediction="melody keeps clear onset identity while leaving short rests between notes",
             perceptual_hypothesis="listener may hear balanced articulation without strong gap or overlap pressure",
             actual_listening_observation=None,
@@ -93,7 +97,9 @@ def build_frames() -> list[DurationArticulationFrame]:
             preserved_contour=preserved_contour,
             preserved_onset_positions=ONSET_POSITIONS,
             preserved_note_accent_indices=NOTE_ACCENT_INDICES,
+            primary_intervention="set note_duration_beats to 0.36",
             changed_relation="short duration creates audible rest before next fixed onset",
+            entailed_changes=("larger inter-onset rest",),
             structural_prediction="same onset grid becomes segmented by inter-note silence",
             perceptual_hypothesis="listener may hear the melody as lighter or more fragmented",
             actual_listening_observation=None,
@@ -106,7 +112,9 @@ def build_frames() -> list[DurationArticulationFrame]:
             preserved_contour=preserved_contour,
             preserved_onset_positions=ONSET_POSITIONS,
             preserved_note_accent_indices=NOTE_ACCENT_INDICES,
+            primary_intervention="set note_duration_beats to 1.00",
             changed_relation="duration fills the inter-onset interval without changing onset grid",
+            entailed_changes=("zero inter-onset rest",),
             structural_prediction="same onset grid becomes connected without overlap",
             perceptual_hypothesis="listener may hear stronger melodic continuity",
             actual_listening_observation=None,
@@ -119,7 +127,9 @@ def build_frames() -> list[DurationArticulationFrame]:
             preserved_contour=preserved_contour,
             preserved_onset_positions=ONSET_POSITIONS,
             preserved_note_accent_indices=NOTE_ACCENT_INDICES,
+            primary_intervention="set note_duration_beats to 1.16",
             changed_relation="duration exceeds inter-onset interval and overlaps the next fixed onset",
+            entailed_changes=("negative inter-onset gap", "0.16 beat local vertical overlap", "neighboring pitches become briefly simultaneous"),
             structural_prediction="same onset grid gains carry-over relation between neighboring notes",
             perceptual_hypothesis="listener may hear continuity or harmonic blur, pending actual observation",
             actual_listening_observation=None,
@@ -222,6 +232,8 @@ def write_manifest(frames: list[DurationArticulationFrame], manifest_path: Path)
         "manifest_path": MANIFEST_RELATIVE_PATH,
         "stop_lines": [
             "duration_articulation_is_not_identical_to_onset_phase",
+            "duration_thresholds_are_fixture_parameters_not_universal_articulation_constants",
+            "primary_duration_intervention_is_not_identical_to_entailed_vertical_overlap",
             "staccato_gap_is_not_deletion_of_melody_identity",
             "overlap_legato_is_not_harmonic_state_commitment",
             "click_track_is_device_fixture_not_human_meter_confirmation",

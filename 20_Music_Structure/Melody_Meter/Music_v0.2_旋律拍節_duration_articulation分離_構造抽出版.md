@@ -10,7 +10,8 @@ artifacts/json/music_v02_melody_meter_duration_articulation_probe.json
 
 ## 1. 抽出主題
 
-syncopation位相分離で分けた `onset_phase` と `note_accent` に対して、今回は duration articulation を分ける。
+syncopation位相分離で分けた `onset_phase` と
+ote_accent` に対して、今回は duration articulation を分ける。
 
 ```text
 duration_articulation
@@ -53,6 +54,9 @@ connected_tenuto:
 
 overlap_legato:
   note continues beyond the next onset
+
+entailed_vertical_overlap:
+  duration extension makes neighboring pitches briefly simultaneous
 ```
 
 ## 4. 候補状態
@@ -79,9 +83,12 @@ same onset positions
 
 duration articulation is a relation between neighboring events,
 not merely a rendering parameter.
+
+one primary duration intervention may entail secondary relation changes,
+such as local vertical simultaneity.
 ```
 
-旋律同一性は、点としてのonset列だけではなく、onset間に残る余白・接続・重なりでも変化する。
+旋律同一性は、点としてのonset列だけではなく、onset間に残る余白・接続・重なりでも変化する。ただし、overlapで生じる局所的同時発音は、ただちに和声状態へのcommitmentではない。
 
 ## 6. syncopation位相分離からの差分
 
@@ -104,6 +111,8 @@ syncopationでは「音がmeter gridのどこへ入るか」が主題だった�
 
 ```text
 duration_articulation_is_not_identical_to_onset_phase
+duration_thresholds_are_fixture_parameters_not_universal_articulation_constants
+primary_duration_intervention_is_not_identical_to_entailed_vertical_overlap
 staccato_gap_is_not_deletion_of_melody_identity
 overlap_legato_is_not_harmonic_state_commitment
 click_track_is_device_fixture_not_human_meter_confirmation

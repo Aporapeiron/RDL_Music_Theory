@@ -74,7 +74,7 @@ inter_onset_gap_beats = -0.16
 classification = overlap_legato_candidate
 ```
 
-onsetは変えず、前の音が次のonsetへ持ち越される重なりを作る。
+onsetは変えず、前の音が次のonsetへ持ち越される重なりを作る。これはprimary interventionとしては `duration 1.00 -> 1.16` だが、派生的に `0.16 beat local vertical overlap` と `neighboring pitches become briefly simultaneous` を伴う。
 
 ## 3. 生成artifact
 
@@ -95,7 +95,7 @@ structural prediction
   ≠ actual listening observation
 ```
 
-staccato、tenuto、legatoが実聴取上どの程度そう聞こえるかは、actual listeningで別に記録する。
+staccato、tenuto、legatoが実聴取上どの程度そう聞こえるかは、actual listeningで別に記録する。ここで使うduration thresholdはfixture parameterであり、普遍的なarticulation定数ではない。
 
 ## 5. Music上の仮説
 
@@ -113,6 +113,8 @@ same melodic contour
 
 ```text
 duration_articulation_is_not_identical_to_onset_phase
+duration_thresholds_are_fixture_parameters_not_universal_articulation_constants
+primary_duration_intervention_is_not_identical_to_entailed_vertical_overlap
 staccato_gap_is_not_deletion_of_melody_identity
 overlap_legato_is_not_harmonic_state_commitment
 click_track_is_device_fixture_not_human_meter_confirmation
