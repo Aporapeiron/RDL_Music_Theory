@@ -27,4 +27,8 @@ duration articulation 実聴取前小括
 
 motif memory 最小ループ
 : Music_v0.2_旋律拍節_motif_memory_最小ループ.md / music_v02_melody_meter_motif_memory_probe.py。
-  同一motifの再帰時刻・拍節phase・介在材料を分け、motif-memory状態候補を検証する。
+  同一motifの再帰時刻・拍節phase・介在材料を分け、motif-memory候補状態を検証する。
+
+motif memory 実聴取前小括
+: Music_v0.2_旋律拍節_motif_memory_実聴取前小括.md / music_v02_melody_meter_motif_memory_pre_listening_closure.py。
+  motif memory系列を追加variantへ拡張せず、構造として返せる命題と実聴取まで保留する命題を分ける。

@@ -1,0 +1,64 @@
+{
+  "schema": "rdl_music_v02_melody_meter_motif_memory_pre_listening_closure_v0_1",
+  "subject": "melody_meter_motif_memory_pre_listening_closure",
+  "source_manifests": [
+    "artifacts/json/music_v02_melody_meter_motif_memory_probe.json"
+  ],
+  "actual_listening_slots": [
+    {
+      "subject": "melody_meter_motif_memory_probe",
+      "path": "frames[0].actual_listening_observation",
+      "name": "immediate_return_bar_aligned",
+      "value": null
+    },
+    {
+      "subject": "melody_meter_motif_memory_probe",
+      "path": "frames[1].actual_listening_observation",
+      "name": "delayed_return_after_filler",
+      "value": null
+    },
+    {
+      "subject": "melody_meter_motif_memory_probe",
+      "path": "frames[2].actual_listening_observation",
+      "name": "delayed_return_after_silence",
+      "value": null
+    },
+    {
+      "subject": "melody_meter_motif_memory_probe",
+      "path": "frames[3].actual_listening_observation",
+      "name": "offphase_return_after_filler",
+      "value": null
+    },
+    {
+      "subject": "melody_meter_motif_memory_probe",
+      "path": "frames[4].actual_listening_observation",
+      "name": "transformed_filler_then_return",
+      "value": null
+    }
+  ],
+  "returnable_to_music_core_before_listening": [
+    "same_motif_material_does_not_preserve_motif_memory_candidate_state",
+    "return_start_time_derives_return_gap_and_return_phase_under_fixed_meter",
+    "absence_interval_is_not_identical_to_sounding_intervening_material",
+    "melodic_material_silence_is_not_total_acoustic_silence_when_meter_reference_continues",
+    "intervening_material_identity_can_change_while_return_start_gap_and_phase_are_held",
+    "motif_memory_fixture_extends_local_timing_relations_to_mid_range_absence_retention_return"
+  ],
+  "pending_until_actual_listening": [
+    "whether_direct_repetition_is_heard_as_confirmation_or_simple_echo",
+    "whether_delayed_return_is_heard_as_refrain_answer_or_recollection",
+    "whether_silent_gap_or_sounding_filler_better_supports_motif_retention",
+    "whether_offphase_return_is_heard_as_interruption_compression_or_syncopated_return",
+    "whether_contrast_before_return_increases_perceived_return_strength",
+    "which_discrepancies_are_absorbed_by_current_M_B_or_remain_as_H",
+    "which_unrecovered_relation_due_to_the_chosen_finite_B_is_described_as_xi_in_this_observation"
+  ],
+  "not_returned_as_core_claims": [
+    "device_candidate_classification_as_actual_listener_memory_state",
+    "melodic_material_silence_as_total_acoustic_silence",
+    "return_phase_as_independent_intervention_under_fixed_meter",
+    "motif_return_candidate_as_confirmed_refrain_perception"
+  ],
+  "next_music_target_after_listening_or_deferral": "timbre_attack_identity_probe",
+  "manifest_path": "artifacts/json/music_v02_melody_meter_motif_memory_pre_listening_closure.json"
+}

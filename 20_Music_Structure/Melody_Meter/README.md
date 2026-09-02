@@ -27,4 +27,4 @@ duration articulation 実聴取前小括 構造抽出版
 
 motif memory 構造抽出版
 : Music_v0.2_旋律拍節_motif_memory_構造抽出版.md。
-  motif material identity と motif-memory state の非同一性をMusic Core v0.2へ返す。
+  motif material identity と motif-memory candidate state の非同一性をMusic Core v0.2へ返す。
