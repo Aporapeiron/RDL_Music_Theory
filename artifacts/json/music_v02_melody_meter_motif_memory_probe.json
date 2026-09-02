@@ -1,0 +1,166 @@
+{
+  "schema": "rdl_music_v02_melody_meter_motif_memory_probe_v0_1",
+  "subject": "melody_meter_motif_memory_probe",
+  "preserved_material": {
+    "motif": [
+      "C4",
+      "D4",
+      "E4",
+      "G4"
+    ],
+    "motif_durations": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "motif_contour": [
+      1,
+      1,
+      1
+    ],
+    "meter_reference": "4/4 click grid with downbeat origin 0"
+  },
+  "frames": [
+    {
+      "name": "immediate_return_bar_aligned",
+      "first_motif_start_beat": 0,
+      "return_motif_start_beat": 4,
+      "intervening_material": [],
+      "intervening_durations": [],
+      "preserved_motif": [
+        "C4",
+        "D4",
+        "E4",
+        "G4"
+      ],
+      "preserved_motif_contour": [
+        1,
+        1,
+        1
+      ],
+      "return_relation": "motif returns immediately at next bar downbeat",
+      "memory_condition": "fresh return with no intervening material",
+      "structural_prediction": "same motif functions as direct repetition",
+      "perceptual_hypothesis": "listener may hear confirmation or simple echo",
+      "actual_listening_observation": null,
+      "candidate_classification": "immediate_repetition_candidate",
+      "return_gap_beats": 0,
+      "return_phase": 0
+    },
+    {
+      "name": "delayed_return_after_filler",
+      "first_motif_start_beat": 0,
+      "return_motif_start_beat": 8,
+      "intervening_material": [
+        "G4",
+        "F4",
+        "E4",
+        "D4"
+      ],
+      "intervening_durations": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "preserved_motif": [
+        "C4",
+        "D4",
+        "E4",
+        "G4"
+      ],
+      "preserved_motif_contour": [
+        1,
+        1,
+        1
+      ],
+      "return_relation": "motif returns after one intervening 4-beat filler",
+      "memory_condition": "motif is absent for one bar before reentry",
+      "structural_prediction": "same motif returns as remembered material rather than immediate repetition",
+      "perceptual_hypothesis": "listener may hear refrain-like return or phrase answer",
+      "actual_listening_observation": null,
+      "candidate_classification": "delayed_motif_return_candidate",
+      "return_gap_beats": 4,
+      "return_phase": 0
+    },
+    {
+      "name": "offphase_return_after_filler",
+      "first_motif_start_beat": 0,
+      "return_motif_start_beat": 6,
+      "intervening_material": [
+        "G4",
+        "F4"
+      ],
+      "intervening_durations": [
+        1,
+        1
+      ],
+      "preserved_motif": [
+        "C4",
+        "D4",
+        "E4",
+        "G4"
+      ],
+      "preserved_motif_contour": [
+        1,
+        1,
+        1
+      ],
+      "return_relation": "motif returns before the next bar downbeat after shorter filler",
+      "memory_condition": "motif returns while bar phase is displaced",
+      "structural_prediction": "same motif reappears with metric displacement pressure",
+      "perceptual_hypothesis": "listener may hear return plus interruption or compression",
+      "actual_listening_observation": null,
+      "candidate_classification": "offphase_motif_return_candidate",
+      "return_gap_beats": 2,
+      "return_phase": 2
+    },
+    {
+      "name": "transformed_filler_then_return",
+      "first_motif_start_beat": 0,
+      "return_motif_start_beat": 8,
+      "intervening_material": [
+        "A4",
+        "G4",
+        "E4",
+        "C4"
+      ],
+      "intervening_durations": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "preserved_motif": [
+        "C4",
+        "D4",
+        "E4",
+        "G4"
+      ],
+      "preserved_motif_contour": [
+        1,
+        1,
+        1
+      ],
+      "return_relation": "motif returns at bar downbeat after contrasting contour",
+      "memory_condition": "intervening material changes contour direction before return",
+      "structural_prediction": "same motif returns against transformed local memory",
+      "perceptual_hypothesis": "listener may hear stronger return because contrast precedes it",
+      "actual_listening_observation": null,
+      "candidate_classification": "contrast_supported_motif_return_candidate",
+      "return_gap_beats": 4,
+      "return_phase": 0
+    }
+  ],
+  "device_audio_path": "artifacts/audio/music_v02_melody_meter_motif_memory_probe.wav",
+  "manifest_path": "artifacts/json/music_v02_melody_meter_motif_memory_probe.json",
+  "stop_lines": [
+    "same_motif_material_is_not_same_memory_state",
+    "return_timing_is_not_identical_to_motif_identity",
+    "intervening_material_is_not_erasure_of_motif_memory",
+    "motif_return_candidate_is_not_actual_refrain_perception",
+    "click_track_is_device_fixture_not_human_meter_confirmation",
+    "actual_listening_observation_remains_null_until_recorded"
+  ]
+}

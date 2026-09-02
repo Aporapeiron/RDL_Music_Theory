@@ -24,3 +24,7 @@ duration articulation分離 最小ループ
 duration articulation 実聴取前小括
 : Music_v0.2_旋律拍節_duration_articulation_実聴取前小括.md。
   duration値を細分化せず、構造として返せる命題と実聴取まで保留する命題を分ける。
+
+motif memory 最小ループ
+: Music_v0.2_旋律拍節_motif_memory_最小ループ.md / music_v02_melody_meter_motif_memory_probe.py。
+  同一motifの再帰時刻・拍節phase・介在材料を分け、motif-memory状態候補を検証する。

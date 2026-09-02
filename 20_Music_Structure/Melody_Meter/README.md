@@ -24,3 +24,7 @@ duration articulation分離 構造抽出版
 duration articulation 実聴取前小括 構造抽出版
 : Music_v0.2_旋律拍節_duration_articulation_実聴取前小括_構造抽出版.md。
   primary intervention と entailed relational changes の再出現をMusic側候補として保持する。
+
+motif memory 構造抽出版
+: Music_v0.2_旋律拍節_motif_memory_構造抽出版.md。
+  motif material identity と motif-memory state の非同一性をMusic Core v0.2へ返す。
