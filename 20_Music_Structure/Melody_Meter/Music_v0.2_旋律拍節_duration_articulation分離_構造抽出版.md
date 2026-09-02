@@ -10,8 +10,7 @@ artifacts/json/music_v02_melody_meter_duration_articulation_probe.json
 
 ## 1. 抽出主題
 
-syncopation位相分離で分けた `onset_phase` と
-ote_accent` に対して、今回は duration articulation を分ける。
+syncopation位相分離で分けた `onset_phase` と `note_accent` に対して、今回は duration articulation を分ける。
 
 ```text
 duration_articulation

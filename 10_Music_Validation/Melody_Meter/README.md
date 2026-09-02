@@ -20,3 +20,7 @@ syncopation位相分離 最小ループ
 duration articulation分離 最小ループ
 : Music_v0.2_旋律拍節_duration_articulation分離_最小ループ.md / music_v02_melody_meter_duration_articulation_probe.py。
   onset位置、note accent、meter referenceを固定したまま、音価・余白・重なりを分ける。
+
+duration articulation 実聴取前小括
+: Music_v0.2_旋律拍節_duration_articulation_実聴取前小括.md。
+  duration値を細分化せず、構造として返せる命題と実聴取まで保留する命題を分ける。
