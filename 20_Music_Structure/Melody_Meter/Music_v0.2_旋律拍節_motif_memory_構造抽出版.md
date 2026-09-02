@@ -15,7 +15,7 @@ duration articulationまでの局所時間関係から、motifの再帰関係へ
 ```text
 same motif material
   ≠ same return timing
-  ≠ same motif-memory state
+  ≠ same motif-memory candidate state
 ```
 
 同じ断片が戻っても、それが直接反復なのか、不在後の回帰なのか、拍節phaseをずらした割り込みなのかは異なる。
@@ -47,8 +47,8 @@ derived_relations:
   return gap
   return phase
 
-entailed_condition:
-  memory condition before return
+derived_memory_candidate:
+  memory candidate before actual listening
 ```
 
 ## 4. 候補状態
@@ -78,9 +78,11 @@ motif-memory candidate state is conditioned by:
   absence interval
   intervening local memory
   derived return phase
+  derived return gap
+  intervening duration required by return start time
 ```
 
-同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。ただし、現段階では `=` で確定せず、候補状態がこれらの関係に条件づけられると見る。
+同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。ただし、現段階では `=` で確定せず、候補状態がこれらの関係に条件づけられると見る。return start timeは単独で宙に浮いた変数ではなく、このfixtureではreturn gap、return phase、必要なintervening durationを派生させる。
 
 ## 6. duration articulationからの差分
 
@@ -99,8 +101,12 @@ motif memory:
 ## 7. 停止線
 
 ```text
-same_motif_material_is_not_same_memory_state
+same_motif_material_is_not_same_memory_candidate_state
 return_timing_is_not_identical_to_motif_identity
+return_phase_is_derived_from_return_start_time_under_fixed_meter
+return_gap_is_derived_from_return_start_time_and_motif_end
+return_start_time_entails_required_absence_or_intervening_duration_under_this_fixture
+motif_memory_candidate_state_is_conditioned_not_equated
 intervening_material_is_not_erasure_of_motif_memory
 motif_return_candidate_is_not_actual_refrain_perception
 click_track_is_device_fixture_not_human_meter_confirmation

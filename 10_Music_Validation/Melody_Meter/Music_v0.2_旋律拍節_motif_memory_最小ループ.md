@@ -12,7 +12,7 @@ duration articulationまでは、主に隣接音どうしの局所時間関係�
 ```text
 same motif material
   ≠ same return timing
-  ≠ same motif-memory state
+  ≠ same motif-memory candidate state
 ```
 
 ## 1. 境界B
@@ -29,11 +29,11 @@ B_melody_meter_motif_memory_probe:
   derived_relations:
     return gap
     return phase
-  entailed_condition:
-    memory condition before return
+  derived_memory_candidate:
+    memory candidate before actual listening
 ```
 
-今回保存するのは、戻ってくるmotifそのものの音高列・長さ列・輪郭である。一次介入として変えるのは、motifのreturn start timeと、戻る前に鳴るintervening materialである。return gapとreturn phaseは、固定meter内でreturn start timeから派生する。
+今回保存するのは、戻ってくるmotifそのものの音高列・長さ列・輪郭である。一次介入として変えるのは、motifのreturn start timeと、戻る前に鳴るintervening materialである。return gapとreturn phaseは、固定meter内でreturn start timeから派生する。このfixtureではreturn start timeを動かすと、必要な不在時間およびintervening durationも連動して変わる。
 
 ## 2. 検証状態
 
@@ -102,9 +102,10 @@ structural prediction
 
 ```text
 same motif
-+ changed return timing
++ changed return start time
 + changed intervening material
--> different motif-memory candidate state
+-> derived return gap / return phase / intervening duration
+-> conditioned motif-memory candidate state
 ```
 
 motif-memory candidate stateは、断片そのものだけでなく、戻るまでの不在期間、戻る拍節phase、直前に保持されている局所記憶によって条件づけられる。ここでは等式として確定しない。
@@ -112,8 +113,9 @@ motif-memory candidate stateは、断片そのものだけでなく、戻るま�
 ## 6. 停止線
 
 ```text
-same_motif_material_is_not_same_memory_state
+same_motif_material_is_not_same_memory_candidate_state
 return_timing_is_not_identical_to_motif_identity
+return_start_time_entails_required_absence_or_intervening_duration_under_this_fixture
 intervening_material_is_not_erasure_of_motif_memory
 motif_return_candidate_is_not_actual_refrain_perception
 click_track_is_device_fixture_not_human_meter_confirmation

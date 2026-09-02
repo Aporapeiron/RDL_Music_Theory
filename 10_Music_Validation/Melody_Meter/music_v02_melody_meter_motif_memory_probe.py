@@ -50,7 +50,7 @@ class MotifMemoryFrame:
     return_relation: str
     derived_relations: tuple[str, ...]
     memory_condition: str
-    entailed_memory_condition: str
+    derived_memory_candidate: str
     structural_prediction: str
     perceptual_hypothesis: str
     actual_listening_observation: str | None
@@ -63,6 +63,10 @@ class MotifMemoryFrame:
     @property
     def return_phase(self) -> int:
         return (self.return_motif_start_beat - DOWNBEAT_ORIGIN) % BEATS_PER_BAR
+
+    @property
+    def intervening_duration_beats(self) -> int:
+        return sum(self.intervening_durations)
 
 
 def contour(notes: tuple[str, ...]) -> tuple[int, ...]:
@@ -86,9 +90,9 @@ def build_frames() -> list[MotifMemoryFrame]:
             preserved_motif_contour=preserved_contour,
             primary_interventions=("set return_motif_start_beat to 4", "set intervening_material to empty"),
             return_relation="motif returns immediately at next bar downbeat",
-            derived_relations=("return_gap_beats = 0", "return_phase = 0"),
+            derived_relations=("return_gap_beats = 0", "return_phase = 0", "intervening_duration_beats = 0"),
             memory_condition="fresh return with no intervening material",
-            entailed_memory_condition="direct repetition candidate before actual listening",
+            derived_memory_candidate="direct repetition candidate before actual listening",
             structural_prediction="same motif functions as direct repetition",
             perceptual_hypothesis="listener may hear confirmation or simple echo",
             actual_listening_observation=None,
@@ -104,9 +108,9 @@ def build_frames() -> list[MotifMemoryFrame]:
             preserved_motif_contour=preserved_contour,
             primary_interventions=("set return_motif_start_beat to 8", "set intervening_material to descending filler"),
             return_relation="motif returns after one intervening 4-beat filler",
-            derived_relations=("return_gap_beats = 4", "return_phase = 0"),
+            derived_relations=("return_gap_beats = 4", "return_phase = 0", "intervening_duration_beats = 4"),
             memory_condition="motif is absent for one bar before reentry",
-            entailed_memory_condition="delayed return candidate after motif absence",
+            derived_memory_candidate="delayed return candidate after motif absence",
             structural_prediction="same motif returns as remembered material rather than immediate repetition",
             perceptual_hypothesis="listener may hear refrain-like return or phrase answer",
             actual_listening_observation=None,
@@ -122,9 +126,9 @@ def build_frames() -> list[MotifMemoryFrame]:
             preserved_motif_contour=preserved_contour,
             primary_interventions=("set return_motif_start_beat to 6", "set intervening_material to two-beat filler"),
             return_relation="motif returns before the next bar downbeat after shorter filler",
-            derived_relations=("return_gap_beats = 2", "return_phase = 2"),
+            derived_relations=("return_gap_beats = 2", "return_phase = 2", "intervening_duration_beats = 2"),
             memory_condition="motif returns while bar phase is displaced",
-            entailed_memory_condition="offphase return candidate derived from return start time",
+            derived_memory_candidate="offphase return candidate derived from return start time",
             structural_prediction="same motif reappears with metric displacement pressure",
             perceptual_hypothesis="listener may hear return plus interruption or compression",
             actual_listening_observation=None,
@@ -140,9 +144,9 @@ def build_frames() -> list[MotifMemoryFrame]:
             preserved_motif_contour=preserved_contour,
             primary_interventions=("set return_motif_start_beat to 8", "set intervening_material to contrasting contour"),
             return_relation="motif returns at bar downbeat after contrasting contour",
-            derived_relations=("return_gap_beats = 4", "return_phase = 0"),
+            derived_relations=("return_gap_beats = 4", "return_phase = 0", "intervening_duration_beats = 4"),
             memory_condition="intervening material changes contour direction before return",
-            entailed_memory_condition="contrast-supported return candidate before actual listening",
+            derived_memory_candidate="contrast-supported return candidate before actual listening",
             structural_prediction="same motif returns against transformed local memory",
             perceptual_hypothesis="listener may hear stronger return because contrast precedes it",
             actual_listening_observation=None,
@@ -217,6 +221,7 @@ def frame_record(frame: MotifMemoryFrame) -> dict[str, object]:
     record = asdict(frame)
     record["return_gap_beats"] = frame.return_gap_beats
     record["return_phase"] = frame.return_phase
+    record["intervening_duration_beats"] = frame.intervening_duration_beats
     return record
 
 
@@ -247,10 +252,11 @@ def write_manifest(frames: list[MotifMemoryFrame], manifest_path: Path) -> None:
         "device_audio_path": AUDIO_RELATIVE_PATH,
         "manifest_path": MANIFEST_RELATIVE_PATH,
         "stop_lines": [
-            "same_motif_material_is_not_same_memory_state",
+            "same_motif_material_is_not_same_memory_candidate_state",
             "return_timing_is_not_identical_to_motif_identity",
             "return_phase_is_derived_from_return_start_time_under_fixed_meter",
             "return_gap_is_derived_from_return_start_time_and_motif_end",
+            "return_start_time_entails_required_absence_or_intervening_duration_under_this_fixture",
             "motif_memory_candidate_state_is_conditioned_not_equated",
             "intervening_material_is_not_erasure_of_motif_memory",
             "motif_return_candidate_is_not_actual_refrain_perception",
@@ -270,6 +276,7 @@ def main() -> None:
     assert frames[1].return_gap_beats == 4
     assert frames[2].return_phase == 2
     assert frames[3].return_gap_beats == 4
+    assert all(frame.intervening_duration_beats == frame.return_gap_beats for frame in frames)
     assert all(frame.actual_listening_observation is None for frame in frames)
     audio_path = ROOT / AUDIO_RELATIVE_PATH
     manifest_path = ROOT / MANIFEST_RELATIVE_PATH
