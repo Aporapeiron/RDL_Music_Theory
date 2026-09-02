@@ -86,7 +86,7 @@ motif-memory candidate state is conditioned by:
   sounding intervening material
 ```
 
-同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。ただし、現段階では `=` で確定せず、候補状態がこれらの関係に条件づけられると見る。return start timeは単独で宙に浮いた変数ではなく、このfixtureではreturn gap / absence intervalとreturn phaseを派生させる。ただし、同じabsence intervalをsounding fillerで埋めるかsilenceとして残すかは別条件である。
+同じmotif断片でも、戻り方が違えばMusic状態候補は変わる。ただし、現段階では `=` で確定せず、候補状態がこれらの関係に条件づけられると見る。return start timeは単独で宙に浮いた変数ではなく、このfixtureではreturn gap / absence intervalとreturn phaseを派生させる。ただし、同じabsence intervalをsounding fillerで埋めるかmelodic material silenceとして残すかは別条件である。このsilenceは全音響無音ではなく、meter referenceは継続する。
 
 ## 6. duration articulationからの差分
 

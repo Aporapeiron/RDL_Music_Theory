@@ -127,17 +127,17 @@
       ],
       "primary_interventions": [
         "set return_motif_start_beat to 8",
-        "set intervening_material to silence"
+        "set intervening_melodic_material to silence"
       ],
-      "return_relation": "motif returns at bar downbeat after four beats of silence",
+      "return_relation": "motif returns at bar downbeat after four beats without melodic filler",
       "derived_relations": [
         "return_gap_beats = 4",
         "return_phase = 0",
         "intervening_duration_beats = 0"
       ],
-      "memory_condition": "motif is absent for one bar with no sounding filler",
+      "memory_condition": "motif is absent for one bar while meter reference continues without melodic filler",
       "derived_memory_candidate": "silent-gap delayed return candidate before actual listening",
-      "structural_prediction": "delayed-return structural candidate after silent gap",
+      "structural_prediction": "delayed-return structural candidate after melodic-material silence",
       "perceptual_hypothesis": "listener may hear a cleaner return or weaker retained connection",
       "actual_listening_observation": null,
       "candidate_classification": "silent_gap_delayed_return_candidate",
@@ -248,6 +248,8 @@
     "return_gap_is_derived_from_return_start_time_and_motif_end",
     "return_start_time_entails_required_absence_interval_under_this_fixture",
     "absence_interval_is_not_identical_to_sounding_intervening_material",
+    "melodic_material_silence_is_not_total_acoustic_silence",
+    "meter_reference_continues_during_silence_control",
     "motif_memory_candidate_state_is_conditioned_not_equated",
     "intervening_material_is_not_erasure_of_motif_memory",
     "motif_return_candidate_is_not_actual_refrain_perception",

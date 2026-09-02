@@ -33,7 +33,7 @@ B_melody_meter_motif_memory_probe:
     memory candidate before actual listening
 ```
 
-今回保存するのは、戻ってくるmotifそのものの音高列・長さ列・輪郭である。一次介入として変えるのは、motifのreturn start timeと、戻る前に鳴るintervening materialである。return gapとreturn phaseは、固定meter内でreturn start timeから派生する。このfixtureではreturn start timeを動かすと、必要な不在時間が連動して変わる。ただし、その不在時間を音のあるfillerで埋めるか、silenceとして残すかは別条件として扱う。
+今回保存するのは、戻ってくるmotifそのものの音高列・長さ列・輪郭である。一次介入として変えるのは、motifのreturn start timeと、戻る前に鳴るintervening materialである。return gapとreturn phaseは、固定meter内でreturn start timeから派生する。このfixtureではreturn start timeを動かすと、必要な不在時間が連動して変わる。ただし、その不在時間を音のあるfillerで埋めるか、melodic material silenceとして残すかは別条件として扱う。ここでのsilenceは全音響無音ではなく、meter reference clickは継続する。
 
 ## 2. 検証状態
 
@@ -66,7 +66,7 @@ intervening_duration_beats = 0
 classification = silent_gap_delayed_return_candidate
 ```
 
-同じreturn start、同じgap、同じphaseを保ったまま、戻る前の4拍をsounding fillerではなくsilenceとして残す。これによりabsence intervalとsounding intervening materialを分離する。
+同じreturn start、同じgap、同じphaseを保ったまま、戻る前の4拍をsounding fillerではなくmelodic material silenceとして残す。meter reference clickは継続するため、これは全音響無音ではない。これによりabsence intervalとsounding intervening materialを分離する。
 
 ### 2.4 offphase_return_after_filler
 
@@ -128,6 +128,8 @@ same_motif_material_is_not_same_memory_candidate_state
 return_timing_is_not_identical_to_motif_identity
 return_start_time_entails_required_absence_interval_under_this_fixture
 absence_interval_is_not_identical_to_sounding_intervening_material
+melodic_material_silence_is_not_total_acoustic_silence
+meter_reference_continues_during_silence_control
 intervening_material_is_not_erasure_of_motif_memory
 motif_return_candidate_is_not_actual_refrain_perception
 click_track_is_device_fixture_not_human_meter_confirmation
