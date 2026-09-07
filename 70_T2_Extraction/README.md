@@ -44,3 +44,11 @@ Music設計:
 ```
 
 この入口文書から、旧 `04_汎用分解再結晶化方法論`、A/B/C分類、Metabolic Runtime圧縮を再分類して読む。
+
+第一再分類表:
+
+```text
+旧B分類_第一再分類表.md
+```
+
+旧A/B/C分類のB範囲を、T1工程・T2汎用検査道具・Music固有Selection基準・fixture・historical evidenceへ最初にほどく。
