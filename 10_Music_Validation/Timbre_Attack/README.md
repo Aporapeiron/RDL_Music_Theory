@@ -1,5 +1,7 @@
 # Timbre_Attack
 
+[第一音RMS一致の補助比較](第一音RMS一致_補助比較.md)：倍音追加版へ一定ゲインを掛け、固定ゲイン比較と並べる。知覚音量の一致は未確認。実装は `music_v02_timbre_attack_rms_control.py`。
+
 [比較提示とPCM検査](比較提示とPCM検査.md)：既存4条件の単独音声、3対の正逆順提示、介入区間外の波形保存検査と実聴取記録。実装は `music_v02_timbre_attack_listening_pairs.py`。
 
 同じpitch、onset、durationを保存したまま、attack envelope、harmonic profile、transient noiseを変えて、音色・発音状態候補の非同一性を検証するMusic v0.2領域。
