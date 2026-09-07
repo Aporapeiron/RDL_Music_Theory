@@ -70,14 +70,16 @@ RDL音楽理論の共通文法は、別文書 `01_RDL音楽_Core.md` に置く�
 Coreが扱うのは、
 
 ```text
-B       境界・基準
-M_B     現在安定している構造
-W_ij    音楽要素間の関係
-F       実際に現れた作用
-E       現在構造とのずれ
-H       ずれの蓄積
-ξ       現在の記述で回収されないもの
-Δ       状態変化
+B              有限境界・基準
+SILN_music     対象側に提示された音楽的有限関係構造
+W_music        SILN_music内で回収・比較される関係
+M_B            Bのもとで解釈・予測・応答を拘束する自己側の有限整合構造
+EFP            現在入力として切り出された作用断面
+F              interp(M_B, EFP) として形成される解釈・予測
+E              Δ(F, F') として現れる差・不整合
+H              Eのうち現在M_Bで吸収・解消されず残存・蓄積・伝播した状態
+ξ              有限Bを引いたことに伴ってなお残る未回収関係
+θ / M_Δ        H ≥ θ の場合だけ起動する高負荷再編相
 ```
 
 および、
@@ -90,10 +92,10 @@ destabilize()
 shift()
 blur()
 break()
-redistribute()
+redistribute_relation_configuration()
 ```
 
-という基本操作である。
+という基本操作である。旧 `redistribute(ξ)` は、ξを直接操作する命令ではなく、B・W・提示条件・Γの関係配置を変えて再観測する操作へ置き換える。
 
 ---
 
@@ -191,7 +193,7 @@ RDL音楽分析では、まず名称を当てるのではなく、関係を分�
 
 ## ■ 6. 既存音楽理論
 
-既存音楽理論は、それぞれ特定条件で高い操作能力を持つM_Bとして扱う。
+既存音楽理論は、対象そのものの構造ではなく、特定条件で高い解釈・予測・応答能力を持つ `M_B^learned` または `M_B^analysis` の候補として扱う。対象側に現れる音列・和声・拍節・音色・文脈は、まず `SILN_music / W_music` として切り出し、それをどの自己側 `M_B` が読むかを分ける。
 
 候補：
 
@@ -329,9 +331,10 @@ Music
 Analysis
   = 見る {
       B,
-      M_B,
-      W,
-      Δ,
+      SILN_music / W_music,
+      M_B^device / M_B^analysis / M_B^listener,
+      EFP / F,
+      E / H,
       ξ
     }
 
@@ -343,7 +346,7 @@ Composition
     }
 
 Existing Music Theory
-  = usable M_B modules
+  = usable learned / analysis M_B candidates
 
 RDL Music Core
   ≠ 12TET
