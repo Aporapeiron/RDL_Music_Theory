@@ -1,0 +1,172 @@
+{
+  "schema": "rdl_music_timbre_attack_listening_pairs_v1",
+  "source": "10_Music_Validation/Timbre_Attack/music_v02_timbre_attack_identity_probe.py",
+  "sample_rate": 44100,
+  "gain_policy": "existing renderer gain; no added peak/RMS/loudness normalization",
+  "trailing_silence_seconds": 1.34,
+  "measurement_scope": "16-bit rendered PCM; first-note RMS includes attack, plateau and release",
+  "individual_artifacts": [
+    {
+      "condition": "soft_sine_reference",
+      "path": "artifacts/audio/timbre_attack_pairs/soft_sine_reference.wav",
+      "pcm_sha256": "15f81000dc1af57b8d2e29c548b411504c53a2b1d9467d34d185e9245d543177",
+      "first_note_rms_full_scale": 0.14434432845140913,
+      "peak_full_scale": 0.23999755851924193,
+      "actual_listening_observation": null
+    },
+    {
+      "condition": "sharp_attack_same_harmonic_profile",
+      "path": "artifacts/audio/timbre_attack_pairs/sharp_attack_same_harmonic_profile.wav",
+      "pcm_sha256": "6e3b1f4d7c53f35bdb6da808fc023212c08e023e00e441a94e67bcadfd3ed62c",
+      "first_note_rms_full_scale": 0.15708071621393582,
+      "peak_full_scale": 0.23999755851924193,
+      "actual_listening_observation": null
+    },
+    {
+      "condition": "bright_harmonic_profile_same_attack",
+      "path": "artifacts/audio/timbre_attack_pairs/bright_harmonic_profile_same_attack.wav",
+      "pcm_sha256": "911ddd21d4d88157303f06b435524c437a03bf05aa608d15752b0de5455e3c4d",
+      "first_note_rms_full_scale": 0.0907016541980168,
+      "peak_full_scale": 0.17691579943235572,
+      "actual_listening_observation": null
+    },
+    {
+      "condition": "noise_only_same_attack_harmonic_profile",
+      "path": "artifacts/audio/timbre_attack_pairs/noise_only_same_attack_harmonic_profile.wav",
+      "pcm_sha256": "ddb7dbea0e7c2a01ed61e8bc38c007ca430cda98ecc7fd346a44d2781499a668",
+      "first_note_rms_full_scale": 0.14434383005319526,
+      "peak_full_scale": 0.23999755851924193,
+      "actual_listening_observation": null
+    }
+  ],
+  "comparisons": [
+    {
+      "primary_intervention": "attack",
+      "reference": "soft_sine_reference",
+      "variant": "sharp_attack_same_harmonic_profile",
+      "structural_prediction": "PCM differences occur only within the declared per-note window",
+      "device_observation": {
+        "changed_pcm_samples": 15864,
+        "per_note_difference_window_seconds": 0.09,
+        "outside_window_pcm_identical": true,
+        "first_note_difference_rms_full_scale": 0.04181861684327631
+      },
+      "perceptual_hypothesis": "listener may hear a more percussive entry without pitch/onset change",
+      "actual_listening_observation": null,
+      "presentations": [
+        {
+          "order": [
+            "soft_sine_reference",
+            "sharp_attack_same_harmonic_profile"
+          ],
+          "path": "artifacts/audio/timbre_attack_pairs/attack_reference_then_variant.wav",
+          "segment_start_seconds": [
+            0,
+            3.25
+          ],
+          "actual_listening_observation": null
+        },
+        {
+          "order": [
+            "sharp_attack_same_harmonic_profile",
+            "soft_sine_reference"
+          ],
+          "path": "artifacts/audio/timbre_attack_pairs/attack_variant_then_reference.wav",
+          "segment_start_seconds": [
+            0,
+            3.25
+          ],
+          "actual_listening_observation": null
+        }
+      ]
+    },
+    {
+      "primary_intervention": "harmonic_profile",
+      "reference": "soft_sine_reference",
+      "variant": "bright_harmonic_profile_same_attack",
+      "structural_prediction": "PCM differences occur only within the declared per-note window",
+      "device_observation": {
+        "changed_pcm_samples": 72279,
+        "per_note_difference_window_seconds": 0.41,
+        "outside_window_pcm_identical": true,
+        "first_note_difference_rms_full_scale": 0.07605703676166962
+      },
+      "perceptual_hypothesis": "listener may hear brighter color without changed onset placement",
+      "actual_listening_observation": null,
+      "presentations": [
+        {
+          "order": [
+            "soft_sine_reference",
+            "bright_harmonic_profile_same_attack"
+          ],
+          "path": "artifacts/audio/timbre_attack_pairs/harmonic_profile_reference_then_variant.wav",
+          "segment_start_seconds": [
+            0,
+            3.25
+          ],
+          "actual_listening_observation": null
+        },
+        {
+          "order": [
+            "bright_harmonic_profile_same_attack",
+            "soft_sine_reference"
+          ],
+          "path": "artifacts/audio/timbre_attack_pairs/harmonic_profile_variant_then_reference.wav",
+          "segment_start_seconds": [
+            0,
+            3.25
+          ],
+          "actual_listening_observation": null
+        }
+      ]
+    },
+    {
+      "primary_intervention": "transient_noise",
+      "reference": "soft_sine_reference",
+      "variant": "noise_only_same_attack_harmonic_profile",
+      "structural_prediction": "PCM differences occur only within the declared per-note window",
+      "device_observation": {
+        "changed_pcm_samples": 7651,
+        "per_note_difference_window_seconds": 0.045,
+        "outside_window_pcm_identical": true,
+        "first_note_difference_rms_full_scale": 0.00012142522374501606
+      },
+      "perceptual_hypothesis": "listener may hear noisier articulation while harmonic brightness proxy and attack duration are held",
+      "actual_listening_observation": null,
+      "presentations": [
+        {
+          "order": [
+            "soft_sine_reference",
+            "noise_only_same_attack_harmonic_profile"
+          ],
+          "path": "artifacts/audio/timbre_attack_pairs/transient_noise_reference_then_variant.wav",
+          "segment_start_seconds": [
+            0,
+            3.25
+          ],
+          "actual_listening_observation": null
+        },
+        {
+          "order": [
+            "noise_only_same_attack_harmonic_profile",
+            "soft_sine_reference"
+          ],
+          "path": "artifacts/audio/timbre_attack_pairs/transient_noise_variant_then_reference.wav",
+          "segment_start_seconds": [
+            0,
+            3.25
+          ],
+          "actual_listening_observation": null
+        }
+      ]
+    }
+  ],
+  "stop_lines": [
+    "PCM_difference_is_not_perceptual_discrimination",
+    "RMS_is_not_perceived_loudness",
+    "reverse_order_does_not_remove_memory_or_expectation",
+    "harmonic_profile_normalization_can_change_fundamental_amplitude_and_RMS",
+    "noise_difference_is_window_limited_and_may_not_be_audible",
+    "no_E_H_theta_or_Core_update_without_specified_model_and_observation"
+  ]
+}

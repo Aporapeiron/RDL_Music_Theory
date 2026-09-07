@@ -1,5 +1,7 @@
 # Timbre_Attack
 
+[比較提示とPCM検査](比較提示とPCM検査.md)：既存4条件の単独音声、3対の正逆順提示、介入区間外の波形保存検査と実聴取記録。実装は `music_v02_timbre_attack_listening_pairs.py`。
+
 同じpitch、onset、durationを保存したまま、attack envelope、harmonic profile、transient noiseを変えて、音色・発音状態候補の非同一性を検証するMusic v0.2領域。
 
 音色 / attack 同一pitch-onset保存 最小ループ
