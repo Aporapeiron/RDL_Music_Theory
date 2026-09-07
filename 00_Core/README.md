@@ -8,7 +8,7 @@ RDL Music Theoryの入口、Music Core、Music v0.2再構成入口を置く領�
 
 ```text
 Music固有の目的を保持する
-対象側SILN_music / W_musicと自己側M_Bを分離する
+対象側SILN_music / W_music、入力作用EFP、自己側M_Bを分離する
 F = interp(M_B, EFP) として作用解釈を扱う
 E / H / θ / M_Δ / ξ の層を混同しない
 T2抽出後にMusicへ戻る停止線を保持する

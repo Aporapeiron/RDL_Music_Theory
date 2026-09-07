@@ -152,7 +152,10 @@ M_Bは、現在のBにおいて対象側へ埋め込まれた安定構造では�
 
 ```text
 対象側:
-  SILN_music / W_music / EFP
+  SILN_music / W_music
+
+入力作用:
+  EFP
 
 自己側:
   M_B^device

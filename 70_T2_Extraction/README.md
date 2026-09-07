@@ -36,3 +36,11 @@ Music設計:
 ```
 
 したがって、`Metabolic Runtime` 全体や `selection -> commitment -> record` 系列を、丸ごと正式T2とは扱わない。非Music対象でも残るか、またT1工程とT2道具のどちらに属するかを再判定するまでは、このrepo内のExtraction Zoneとして保持する。
+
+現在の入口:
+
+```text
+旧T2候補_新T0T1基準_再分類入口.md
+```
+
+この入口文書から、旧 `04_汎用分解再結晶化方法論`、A/B/C分類、Metabolic Runtime圧縮を再分類して読む。

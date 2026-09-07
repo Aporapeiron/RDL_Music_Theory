@@ -1,7 +1,10 @@
-﻿# RDL_Music_Theory 既存検証 A/B/C分類 第一段階
+# RDL_Music_Theory 既存検証 A/B/C分類 第一段階
 
 ## 位置づけ
 
+> [!NOTE]
+> **新T0/T1基準での読み替え**
+> 本文書の `B = T2候補`、`secondary = legacy-T2-candidate` は旧分類名である。現在は、B分類をそのまま正式T2へ移管しない。B分類内の要素は、`T1工程`、`T2汎用検査道具`、`Music固有Selection基準`、`Music↔汎用fixture`、`historical evidence` に再分類するための材料として読む。
 `60_今後の展望/RDL_Music_Theory_方針修正計画書.md` の第一段階に従い、既存検証を削除・移動せず、主対象によって暫定分類する。
 
 この分類は正式移管ではない。
@@ -10,7 +13,7 @@
 
 ```text
 primary = A / B / C
-secondary tags = Music-specific / T2-candidate / fixture
+secondary tags = Music-specific / legacy-T2-candidate / fixture
 ```
 
 ```text
@@ -86,37 +89,37 @@ Music側へ残す主領域。
 
 ## B. Music起源だが汎用化候補
 
-T2 Mechanism候補としてマークする主領域。
+旧T2 Mechanism候補としてマークしていた主領域。現在は正式T2ではなく、再分類待ちの汎用構造候補として扱う。
 
 ```text
 86〜127
   primary = B
-  secondary = T2-candidate / fixture
+  secondary = legacy-T2-candidate / fixture
   state record、validation、M_B候補、Core整合候補、adoption、plan、execution readiness、update review、push readiness、handoff、contract generalization、input contract、payload binding、activation bridge。
 
 179〜228
   primary = B
-  secondary = T2-candidate
+  secondary = legacy-T2-candidate
   螺旋型再入循環。T1代謝を連続運用すると現れるT2実行パターン候補。
 
 399〜998
   primary = B
-  secondary = T2-candidate / fixture
+  secondary = legacy-T2-candidate / fixture
   policy、multiple interpretation record schema、B依存選択、weighting、threshold、candidate lifecycle、selection controller、post selection lifecycle、alternative memory、memory limit。
 
 999〜1598
   primary = B
-  secondary = T2-candidate
+  secondary = legacy-T2-candidate
   memory reactivation、refrain identity、variation lifecycle、variation sequence、branch reentry、parallel variation memory、polyphonic memory coordination、deferred resolution、resolution return、post resolution memory update、post resolution reentry。
 
 1599〜2598
   primary = B
-  secondary = T2-candidate
+  secondary = legacy-T2-candidate
   drift、threshold、split candidate reintegration、context pressure、delayed selection、commitment、revision memory、conflict detection、policy execution、attempt outcome、interpretation commitment、record、trace update、post commitment alternative retention。
 
 2599〜3398
   primary = B
-  secondary = T2-candidate / fixture
+  secondary = legacy-T2-candidate / fixture
   alternative reactivation after commitment、commitment conflict、conflict mediation、mediation outcome readiness、attempt、observation、record boundary、selection readiness、selection controller、selected outcome、commitment readiness、commitment attempt、commitment record、post commitment alternative retention。
 ```
 
@@ -200,11 +203,11 @@ Cは、A/Bのどちらかへ即時吸収しない。
 
 ```text
 A = Music固有の対象構造
-B = T2候補の状態遷移機構
+B = 旧T2候補として抽出された再分類待ちの汎用構造候補
 C = Music fixtureを持つ接続検証
 ```
 
-として分け、次段階ではBを中心に最小骨格へ圧縮する。
+として分け、次段階ではBを中心に、T1工程・T2汎用検査道具・Music固有Selection基準・fixture・historical evidenceへ再分類する。
 
 ## 次段階
 

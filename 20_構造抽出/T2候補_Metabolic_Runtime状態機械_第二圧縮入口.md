@@ -1,8 +1,12 @@
 # T2候補 Metabolic Runtime状態機械 第二圧縮入口
 
+> [!NOTE]
+> **新T0/T1基準での読み替え**
+> 本文書の `T2候補 Metabolic Runtime` は旧分類名である。現在は、Runtime全体を正式T2とは扱わない。主幹に見える部分はT1工程へ、検査・評価に使う交換可能な道具はT2汎用検査道具へ、Musicに依存する判断基準はMusic固有Selection基準へ、工程番号由来の証拠はhistorical evidenceへ再分類して読む。
+
 ## 位置づけ
 
-`T2候補_Metabolic_Runtime状態機械_第一圧縮.md` をさらに削り、T1に近すぎる主幹と、T2固有の実行機構を分ける。
+`T2候補_Metabolic_Runtime状態機械_第一圧縮.md` をさらに削り、T1に近すぎる主幹と、T1工程・T2汎用検査道具・Music固有Selection基準の分岐候補を分ける。
 
 第二圧縮では、第一圧縮で主幹候補に残っていた以下を優先的に壊す。
 

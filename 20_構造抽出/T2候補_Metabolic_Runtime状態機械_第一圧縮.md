@@ -1,8 +1,12 @@
-﻿# T2候補 Metabolic Runtime状態機械 第一圧縮
+# T2候補 Metabolic Runtime状態機械 第一圧縮
+
+> [!NOTE]
+> **新T0/T1基準での読み替え**
+> 本文書の `T2候補 Metabolic Runtime` は旧分類名である。現在は、Runtime全体を正式T2とは扱わない。主幹に見える部分はT1工程へ、検査・評価に使う交換可能な道具はT2汎用検査道具へ、Musicに依存する判断基準はMusic固有Selection基準へ、工程番号由来の証拠はhistorical evidenceへ再分類して読む。
 
 ## 位置づけ
 
-`RDL_Music_Theory_既存検証_A_B_C分類_第一段階.md` のB分類を、工程番号列から切り離し、T2候補の最小状態機械として圧縮する。
+`RDL_Music_Theory_既存検証_A_B_C分類_第一段階.md` のB分類を、工程番号列から切り離し、旧T2候補として抽出された状態機械として圧縮する。
 
 これはRDL_Modulesへ正式移植する仕様ではない。
 
@@ -13,7 +17,7 @@ Music起源のB分類
 ↓
 transition / guard / stop line
 ↓
-T2候補骨格
+再分類待ちの汎用構造候補
 ```
 
 ## 抽出単位

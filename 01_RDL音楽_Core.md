@@ -59,7 +59,10 @@ H_{B_t,t},
 
 ```text
 対象側の有限構造:
-  SILN_music / W_music / EFP
+  SILN_music / W_music
+
+入力作用:
+  EFP
 
 自己側の有限整合構造:
   M_B^device
