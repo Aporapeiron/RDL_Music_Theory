@@ -4,4 +4,4 @@
 
 音色 / attack 同一pitch-onset保存 構造抽出版
 : Music_v0.2_音色attack_同一pitch_onset保存_構造抽出版.md。
-  attack envelope、harmonic spectrum、transient noiseの非同一性をMusic Core v0.2へ返す。
+  attack envelope、harmonic profile、transient noiseの非同一性をMusic Core v0.2へ返す。

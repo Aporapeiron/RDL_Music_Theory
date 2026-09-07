@@ -10,7 +10,7 @@ artifacts/json/music_v02_timbre_attack_identity_probe.json
 
 ## 1. 抽出主題
 
-同じpitch、onset、durationを保存しても、attack envelopeとspectrumが変われば音色・発音状態候補は変わる。
+同じpitch、onset、durationを保存しても、attack envelopeとharmonic profileが変われば音色・発音状態候補は変わる。
 
 ```text
 same pitch-onset-duration material
@@ -38,12 +38,14 @@ note_order:
 ```text
 primary_interventions:
   attack envelope
-  harmonic spectrum
+  harmonic profile
+  non-harmonic transient spectrum
+  total rendered spectrum
   attack transient noise
 
 derived_descriptors:
   attack slope proxy
-  brightness proxy
+  harmonic brightness proxy
   harmonic count
   plateau seconds
   encoded onset positions
@@ -55,17 +57,17 @@ derived_descriptors:
 soft_sine_reference:
   soft_attack_low_brightness_candidate
 
-sharp_attack_same_spectrum:
-  attack_changed_spectrum_preserved_candidate
+sharp_attack_same_harmonic_profile:
+  attack_changed_harmonic_profile_preserved_candidate
 
-bright_spectrum_same_attack:
-  spectrum_changed_attack_preserved_candidate
+bright_harmonic_profile_same_attack:
+  harmonic_profile_changed_attack_preserved_candidate
 
-noise_only_same_attack_spectrum:
-  noise_changed_attack_spectrum_preserved_candidate
+noise_only_same_attack_harmonic_profile:
+  noise_changed_attack_harmonic_profile_preserved_candidate
 
 transient_noise_attack:
-  attack_and_spectrum_changed_candidate
+  attack_and_harmonic_profile_changed_candidate
 ```
 
 ## 5. Music Core v0.2へ返す命題
@@ -75,8 +77,14 @@ attack envelope
   ≠ encoded signal onset time
   may affect perceived / effective onset
 
-harmonic spectrum
+harmonic profile
   ≠ pitch identity in this fixture
+
+non-harmonic transient spectrum
+  changes total rendered spectrum even when harmonic profile is held
+
+total rendered spectrum
+  ≠ harmonic profile alone
 
 transient noise
   can be varied while attack duration and spectrum are held
@@ -84,7 +92,7 @@ transient noise
   ≠ actual listener confirmation
 ```
 
-同じ音列でも、音の入り方と倍音分布が変わると、timbre-attack候補状態は変わる。ただし、encoded onset保存はperceived onset保存を意味しない。またattack duration変更は、同じ総duration内のplateau時間とエネルギー分布を派生的に変える。現段階では聴取上の楽器感・硬さ・明るさを確定しない。
+同じ音列でも、音の入り方と倍音分布が変わると、timbre-attack候補状態は変わる。ただし、encoded onset保存はperceived onset保存を意味しない。またattack duration変更は、同じ総duration内のplateau時間とエネルギー分布を派生的に変える。transient noiseを足すと、harmonic profileは保存されてもtotal rendered spectrumは変わる。現段階では聴取上の楽器感・硬さ・明るさを確定しない。
 
 ## 6. melody / meter 系列からの差分
 
@@ -95,7 +103,7 @@ melody / meter:
 
 timbre / attack:
   within-event formation relation
-  attack envelope / spectrum / transient
+  attack envelope / harmonic profile / non-harmonic transient / total rendered spectrum
   encoded onset vs perceived onset
   plateau / energy distribution
 ```
@@ -106,13 +114,15 @@ timbre / attack:
 
 ```text
 same_pitch_onset_duration_is_not_same_timbre_attack_candidate_state
-attack_envelope_is_not_identical_to_spectrum
+attack_envelope_is_not_identical_to_harmonic_profile
 encoded_signal_onset_is_not_identical_to_perceived_onset
 attack_duration_change_entails_energy_distribution_and_plateau_change
-transient_noise_can_be_varied_without_attack_duration_or_spectrum_change
-spectrum_change_is_not_pitch_change_in_this_fixture
+transient_noise_can_be_varied_without_attack_duration_or_harmonic_profile_change
+transient_noise_changes_total_rendered_spectrum_even_when_harmonic_profile_is_held
+harmonic_profile_change_is_not_pitch_change_in_this_fixture
 transient_noise_is_attack_color_fixture_not_listener_confirmation
-brightness_proxy_is_fixture_descriptor_not_universal_timbre_constant
+harmonic_brightness_proxy_describes_harmonic_profile_not_full_rendered_spectrum
+harmonic_brightness_proxy_is_not_perceptual_brightness
 device_audio_generation_is_not_actual_listening_observation
 actual_listening_observation_remains_null_until_recorded
 ```

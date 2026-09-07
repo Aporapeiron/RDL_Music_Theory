@@ -24,17 +24,17 @@ B_timbre_attack_identity_probe:
   preserved_note_order = C4 E4 G4 C5
   primary_interventions:
     attack envelope
-    harmonic spectrum
+    harmonic profile
     attack transient noise
   derived_descriptors:
     attack slope proxy
-    brightness proxy
+    harmonic brightness proxy
     harmonic count
     plateau seconds
     encoded onset positions
 ```
 
-ここで保存するのは、pitch / onset / duration / orderである。変えるのは音色を作るattack envelope、harmonic spectrum、attack transient noiseである。
+ここで保存するのは、pitch / onset / duration / orderである。変えるのは音色を作るattack envelope、harmonic profile、attack transient noiseである。
 
 ## 2. 検証状態
 
@@ -49,38 +49,38 @@ classification = soft_attack_low_brightness_candidate
 
 基準状態。柔らかい立ち上がりと最小spectrumを持つ。
 
-### 2.2 sharp_attack_same_spectrum
+### 2.2 sharp_attack_same_harmonic_profile
 
 ```text
 attack_seconds = 0.008
 harmonic_profile = fundamental only
 transient_noise = 0
-classification = attack_changed_spectrum_preserved_candidate
+classification = attack_changed_harmonic_profile_preserved_candidate
 ```
 
-spectrumを保ったままattack envelopeだけを短くする。
+harmonic profileを保ったままattack envelopeだけを短くする。
 
-### 2.3 bright_spectrum_same_attack
+### 2.3 bright_harmonic_profile_same_attack
 
 ```text
 attack_seconds = 0.09
 harmonic_profile = upper harmonics added
 transient_noise = 0
-classification = spectrum_changed_attack_preserved_candidate
+classification = harmonic_profile_changed_attack_preserved_candidate
 ```
 
-attack envelopeを保ったままspectrumだけを明るくする。
+attack envelopeを保ったままharmonic profileだけを明るくする。
 
-### 2.4 noise_only_same_attack_spectrum
+### 2.4 noise_only_same_attack_harmonic_profile
 
 ```text
 attack_seconds = 0.09
 harmonic_profile = fundamental only
 transient_noise > 0
-classification = noise_changed_attack_spectrum_preserved_candidate
+classification = noise_changed_attack_harmonic_profile_preserved_candidate
 ```
 
-attack envelopeとspectrumを保ったまま、transient noiseだけを加える。noise単独の比較条件である。
+attack envelopeとharmonic profileを保ったまま、transient noiseだけを加える。noise単独の比較条件である。ただし、noiseは非調波的なspectral energyを加えるため、total rendered spectrumは保存されない。
 
 ### 2.5 transient_noise_attack
 
@@ -88,10 +88,10 @@ attack envelopeとspectrumを保ったまま、transient noiseだけを加える
 attack_seconds = 0.008
 harmonic_profile = upper harmonics added
 transient_noise > 0
-classification = attack_and_spectrum_changed_candidate
+classification = attack_and_harmonic_profile_changed_candidate
 ```
 
-attack envelope、spectrum、transient noiseを同時に変えた複合条件である。noise-only controlとは異なり、noise単独の効果としては扱わない。
+attack envelope、harmonic profile、transient noiseを同時に変えた複合条件である。noise-only controlとは異なり、noise単独の効果としては扱わない。
 
 ## 3. 生成artifact
 
@@ -119,25 +119,27 @@ structural prediction
 ```text
 same pitch-onset-duration material
 + changed attack envelope
-+ changed harmonic spectrum
++ changed harmonic profile
 + optional attack transient
 + derived plateau / energy distribution
 -> different timbre-attack candidate state
 ```
 
-attackはencoded signal onsetそのものではなく、開始直後のエネルギー形状である。ただし、perceived / effective onsetが同一に聞こえるとはまだ言わない。attack durationを変えると、同じ総duration内でplateau時間とエネルギー分布も派生的に変わる。spectrumはpitch変更ではなく、同じ基音に対する倍音分布の変更として扱う。
+attackはencoded signal onsetそのものではなく、開始直後のエネルギー形状である。ただし、perceived / effective onsetが同一に聞こえるとはまだ言わない。attack durationを変えると、同じ総duration内でplateau時間とエネルギー分布も派生的に変わる。harmonic profileはpitch変更ではなく、同じ基音に対する倍音分布の変更として扱う。ただし、transient noiseを足した場合、harmonic profileは保存されてもtotal rendered spectrumは変わる。harmonic_brightness_proxyはharmonic profileだけのdescriptorであり、full-spectrum brightnessやperceptual brightnessではない。
 
 ## 6. 停止線
 
 ```text
 same_pitch_onset_duration_is_not_same_timbre_attack_candidate_state
-attack_envelope_is_not_identical_to_spectrum
+attack_envelope_is_not_identical_to_harmonic_profile
 encoded_signal_onset_is_not_identical_to_perceived_onset
 attack_duration_change_entails_energy_distribution_and_plateau_change
-transient_noise_can_be_varied_without_attack_duration_or_spectrum_change
-spectrum_change_is_not_pitch_change_in_this_fixture
+transient_noise_can_be_varied_without_attack_duration_or_harmonic_profile_change
+transient_noise_changes_total_rendered_spectrum_even_when_harmonic_profile_is_held
+harmonic_profile_change_is_not_pitch_change_in_this_fixture
 transient_noise_is_attack_color_fixture_not_listener_confirmation
-brightness_proxy_is_fixture_descriptor_not_universal_timbre_constant
+harmonic_brightness_proxy_describes_harmonic_profile_not_full_rendered_spectrum
+harmonic_brightness_proxy_is_not_perceptual_brightness
 device_audio_generation_is_not_actual_listening_observation
 actual_listening_observation_remains_null_until_recorded
 ```
