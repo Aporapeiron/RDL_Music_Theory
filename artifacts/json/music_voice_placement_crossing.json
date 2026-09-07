@@ -1,0 +1,295 @@
+{
+  "schema": "rdl_music_voice_placement_crossing_v1",
+  "material_origin": "authored eight-event fixture, not a transcription",
+  "boundary": {
+    "voice_ids": [
+      "A",
+      "B"
+    ],
+    "tuning": "12TET, A4=440Hz",
+    "sample_rate": 44100,
+    "channels": 1,
+    "onsets_beats": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "beat_seconds": 0.5,
+    "duration_beats": 0.82,
+    "synthesis": {
+      "attack_seconds": 0.09,
+      "release_seconds": 0.08,
+      "harmonic_profile": [
+        1.0
+      ],
+      "transient_noise_amount": 0.0
+    },
+    "per_voice_amplitude": 0.24,
+    "gain_policy": "fixed per voice; no mix normalization",
+    "trailing_silence_seconds": 0.84
+  },
+  "primary_intervention": "voice B transposed +12 semitones for the entire phrase",
+  "preserved": [
+    "voice IDs",
+    "per-voice melodic intervals",
+    "pitch classes",
+    "onset and duration schedules",
+    "synthesis parameters",
+    "voice A PCM"
+  ],
+  "entailed_changes": [
+    "B register",
+    "signed vertical intervals",
+    "pitch-order reversals",
+    "absolute frequency distribution",
+    "possible mix RMS change"
+  ],
+  "stems": {
+    "voice_A": {
+      "path": "artifacts/audio/voice_placement/voice_A.wav",
+      "pcm_sha256": "2584e50934fae58e6e65a1b3a552e7d876bfe8cd51034093aa5ef80d016380f4",
+      "duration_seconds": 4.75,
+      "peak_full_scale": 0.23999755851924193
+    },
+    "separated_voice_B": {
+      "path": "artifacts/audio/voice_placement/separated_voice_B.wav",
+      "pcm_sha256": "0ec7dad0e69399e43b08405604d3538a83e3efd0560da04933fd0291ff356b67",
+      "duration_seconds": 4.75,
+      "peak_full_scale": 0.23999755851924193
+    },
+    "crossing_voice_B": {
+      "path": "artifacts/audio/voice_placement/crossing_voice_B.wav",
+      "pcm_sha256": "a8445875fd9431a639fd25d7d01302191f75210a143c13c4084bcef34d0c2147",
+      "duration_seconds": 4.75,
+      "peak_full_scale": 0.23999755851924193
+    }
+  },
+  "conditions": [
+    {
+      "name": "separated",
+      "voice_midi": {
+        "A": [
+          60,
+          62,
+          65,
+          69,
+          72,
+          69,
+          65,
+          62
+        ],
+        "B": [
+          55,
+          55,
+          57,
+          55,
+          57,
+          55,
+          57,
+          55
+        ]
+      },
+      "melodic_intervals": {
+        "A": [
+          2,
+          3,
+          4,
+          3,
+          -3,
+          -4,
+          -3
+        ],
+        "B": [
+          0,
+          2,
+          -2,
+          2,
+          -2,
+          2,
+          -2
+        ]
+      },
+      "voice_ranges_midi": {
+        "A": [
+          60,
+          72
+        ],
+        "B": [
+          55,
+          57
+        ]
+      },
+      "signed_vertical_semitones_A_minus_B": [
+        5,
+        7,
+        8,
+        14,
+        15,
+        14,
+        8,
+        7
+      ],
+      "upper_voice_id_per_event": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "order_reversal_event_indices": [],
+      "order_reversal_onsets_seconds": [],
+      "mix": {
+        "path": "artifacts/audio/voice_placement/separated.wav",
+        "pcm_sha256": "0bfb5250ff082edef57dfbe6e0de463475a54b46e016c70bf5011518a908e613",
+        "duration_seconds": 4.75,
+        "peak_full_scale": 0.47996459852900786
+      },
+      "structural_prediction": "stable A-above-B order",
+      "perceptual_hypothesis": "octave placement may affect following voice A or B across changes in pitch order",
+      "actual_listening_observation": null
+    },
+    {
+      "name": "crossing",
+      "voice_midi": {
+        "A": [
+          60,
+          62,
+          65,
+          69,
+          72,
+          69,
+          65,
+          62
+        ],
+        "B": [
+          67,
+          67,
+          69,
+          67,
+          69,
+          67,
+          69,
+          67
+        ]
+      },
+      "melodic_intervals": {
+        "A": [
+          2,
+          3,
+          4,
+          3,
+          -3,
+          -4,
+          -3
+        ],
+        "B": [
+          0,
+          2,
+          -2,
+          2,
+          -2,
+          2,
+          -2
+        ]
+      },
+      "voice_ranges_midi": {
+        "A": [
+          60,
+          72
+        ],
+        "B": [
+          67,
+          69
+        ]
+      },
+      "signed_vertical_semitones_A_minus_B": [
+        -7,
+        -5,
+        -4,
+        2,
+        3,
+        2,
+        -4,
+        -5
+      ],
+      "upper_voice_id_per_event": [
+        "B",
+        "B",
+        "B",
+        "A",
+        "A",
+        "A",
+        "B",
+        "B"
+      ],
+      "order_reversal_event_indices": [
+        3,
+        6
+      ],
+      "order_reversal_onsets_seconds": [
+        1.5,
+        3.0
+      ],
+      "mix": {
+        "path": "artifacts/audio/voice_placement/crossing.wav",
+        "pcm_sha256": "c007288fc38dcbcb3a7de55187e5192dfd3989c797b9a7dd1d1987994984d0fe",
+        "duration_seconds": 4.75,
+        "peak_full_scale": 0.47996459852900786
+      },
+      "structural_prediction": "pitch order reverses at events 3 and 6",
+      "perceptual_hypothesis": "octave placement may affect following voice A or B across changes in pitch order",
+      "actual_listening_observation": null
+    }
+  ],
+  "presentations": [
+    {
+      "path": "artifacts/audio/voice_placement/separated_then_crossing.wav",
+      "pcm_sha256": "1e651d5040fe3844842921bdc349d0ec93166899c684098a06225b46476fa4ad",
+      "duration_seconds": 9.5,
+      "peak_full_scale": 0.47996459852900786,
+      "order": [
+        "separated",
+        "crossing"
+      ],
+      "segment_start_seconds": [
+        0,
+        4.75
+      ],
+      "actual_listening_observation": null
+    },
+    {
+      "path": "artifacts/audio/voice_placement/crossing_then_separated.wav",
+      "pcm_sha256": "3bdc22d5011541fd662528848aed8a52883bb4c0e02ba1c823e4ca90d0692f94",
+      "duration_seconds": 9.5,
+      "peak_full_scale": 0.47996459852900786,
+      "order": [
+        "crossing",
+        "separated"
+      ],
+      "segment_start_seconds": [
+        0,
+        4.75
+      ],
+      "actual_listening_observation": null
+    }
+  ],
+  "listening_question": "Can the listener follow voice A or B without switching identity when pitch order changes?",
+  "actual_listening_observation": null,
+  "stop_lines": [
+    "voice_ID_is_not_upper_or_lower_pitch_rank",
+    "octave_placement_is_not_crossing_only_intervention",
+    "preserved_synthesis_parameters_are_not_preserved_perceived_timbre",
+    "pitch_order_reversal_is_not_listener_identity_switch",
+    "discrete_events_are_not_continuous_pitch_glides",
+    "solo_stem_familiarization_changes_listening_history",
+    "no_human_tracking_or_Core_update_inferred_from_PCM"
+  ]
+}

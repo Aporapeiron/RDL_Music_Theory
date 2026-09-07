@@ -1,5 +1,8 @@
 # 20_Music_Structure
 
+- [Voice Placement / Crossing](Voice_Placement/README.md)
+  声部ID・音高順位・知覚上の旋律帰属の区別。
+
 Musicへ戻すための構造抽出を置く領域。
 
 責務:
