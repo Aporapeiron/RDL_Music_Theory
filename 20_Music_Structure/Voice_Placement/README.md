@@ -1,6 +1,6 @@
 # Voice Placement / Crossing：最初の構造抽出
 
-状態：device側の配置検証。人間の旋律帰属は未記録。
+状態：device側の配置検証に加え、[初回会話聴取記録](../../10_Music_Validation/Voice_Placement/初回会話聴取記録.md)あり。混合と単独での聞こえに関する自己報告を保持するが、旋律帰属の切替位置・機序は未確定。
 
 [二声の検証と音源](../../10_Music_Validation/Voice_Placement/README.md)では、Aを固定してB全体を12半音上げた。
 
