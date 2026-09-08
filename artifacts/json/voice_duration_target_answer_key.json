@@ -1,0 +1,47 @@
+{
+  "schema": "rdl_voice_duration_target_key_v1",
+  "trials": [
+    {
+      "trial_id": "T01",
+      "changed_voice": null,
+      "event_index": null,
+      "target_in_B": false,
+      "condition": "unchanged"
+    },
+    {
+      "trial_id": "T02",
+      "changed_voice": "A",
+      "event_index": 5,
+      "target_in_B": false,
+      "condition": "other_voice"
+    },
+    {
+      "trial_id": "T03",
+      "changed_voice": "B",
+      "event_index": 2,
+      "target_in_B": true,
+      "condition": "target"
+    },
+    {
+      "trial_id": "T04",
+      "changed_voice": "A",
+      "event_index": 2,
+      "target_in_B": false,
+      "condition": "other_voice"
+    },
+    {
+      "trial_id": "T05",
+      "changed_voice": null,
+      "event_index": null,
+      "target_in_B": false,
+      "condition": "unchanged"
+    },
+    {
+      "trial_id": "T06",
+      "changed_voice": "B",
+      "event_index": 5,
+      "target_in_B": true,
+      "condition": "target"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "rdl_voice_duration_target_v1",
+  "basis": "existing crossing placement, A fixed; B raised one octave",
+  "sample_rate": 44100,
+  "normal_duration_beats": 0.82,
+  "short_duration_beats": 0.36,
+  "gain_policy": "fixed per voice; no normalization",
+  "primary_intervention": "shorten one note in A or B, or no change",
+  "entailed_changes": [
+    "earlier release",
+    "longer local silence in changed voice",
+    "reduced two-voice simultaneity",
+    "local energy change"
+  ],
+  "response_options": [
+    "yes",
+    "no",
+    "uncertain"
+  ],
+  "actual_listening_observation": null,
+  "limitations": [
+    "target_detection_is_not_whole_voice_tracking",
+    "temporal_pattern_is_changed_by_target",
+    "local_acoustic_cues_can_support_detection",
+    "fixed_order_small_pilot_not_population_estimate",
+    "answer_key_separation_is_not_double_blinding",
+    "training_example_changes_listening_history"
+  ],
+  "examples": {
+    "B_normal": {
+      "path": "artifacts/audio/voice_duration_target/B_normal.wav",
+      "pcm_sha256": "a8445875fd9431a639fd25d7d01302191f75210a143c13c4084bcef34d0c2147"
+    },
+    "B_short_example": {
+      "path": "artifacts/audio/voice_duration_target/B_short_example.wav",
+      "pcm_sha256": "6102055d830cb9098019e9ee77ed322a69461866d5b8872d032b74f5c094baff"
+    }
+  },
+  "presentations": [
+    {
+      "trial_id": "T01",
+      "path": "artifacts/audio/voice_duration_target/T01.wav",
+      "pcm_sha256": "c007288fc38dcbcb3a7de55187e5192dfd3989c797b9a7dd1d1987994984d0fe"
+    },
+    {
+      "trial_id": "T02",
+      "path": "artifacts/audio/voice_duration_target/T02.wav",
+      "pcm_sha256": "164dd01a8d177a99ae8f5447449605e5089be6ae8f86e10ba22e9f54d00cd32d"
+    },
+    {
+      "trial_id": "T03",
+      "path": "artifacts/audio/voice_duration_target/T03.wav",
+      "pcm_sha256": "a38120e61ad956dd318b2908f85012f70cb108dd6dbad1b905a6d114f77ee0ef"
+    },
+    {
+      "trial_id": "T04",
+      "path": "artifacts/audio/voice_duration_target/T04.wav",
+      "pcm_sha256": "9843b3a62f11ff541ec803db69c744a828e8feb9d0c8b1bba55ee9f9d7094f1c"
+    },
+    {
+      "trial_id": "T05",
+      "path": "artifacts/audio/voice_duration_target/T05.wav",
+      "pcm_sha256": "c007288fc38dcbcb3a7de55187e5192dfd3989c797b9a7dd1d1987994984d0fe"
+    },
+    {
+      "trial_id": "T06",
+      "path": "artifacts/audio/voice_duration_target/T06.wav",
+      "pcm_sha256": "447bad792b56024877df4429ab06f674d269c291fdc37c2b58cb16f530455784"
+    }
+  ]
+}
