@@ -1,0 +1,229 @@
+{
+  "schema": "rdl_music_melody_transformation_v1",
+  "material_origin": "authored monophonic eight-note fixture",
+  "boundary": {
+    "tuning": "12TET, A4=440Hz",
+    "sample_rate": 44100,
+    "onsets_beats": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "beat_seconds": 0.5,
+    "duration_beats": 0.82,
+    "inversion_axis_midi": 60,
+    "transposition_semitones": 5
+  },
+  "preserved_all": [
+    "onsets",
+    "durations",
+    "note order as event IDs",
+    "absolute melodic interval sizes",
+    "synthesis settings"
+  ],
+  "transposition_preserves": [
+    "signed melodic intervals",
+    "contour"
+  ],
+  "inversion_changes": [
+    "sign of nonzero melodic intervals",
+    "contour"
+  ],
+  "entailed_changes": [
+    "register and absolute frequencies",
+    "pitch-class content may change"
+  ],
+  "interpretation": "chromatic semitone reflection, not diatonic inversion in a fixed key",
+  "conditions": [
+    {
+      "name": "source",
+      "midi_notes": [
+        60,
+        62,
+        64,
+        67,
+        65,
+        64,
+        62,
+        60
+      ],
+      "signed_intervals_semitones": [
+        2,
+        2,
+        3,
+        -2,
+        -1,
+        -2,
+        -2
+      ],
+      "absolute_intervals_semitones": [
+        2,
+        2,
+        3,
+        2,
+        1,
+        2,
+        2
+      ],
+      "contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "range_midi": [
+        60,
+        67
+      ],
+      "encoded_pitch_class_set": [
+        0,
+        2,
+        4,
+        5,
+        7
+      ],
+      "path": "artifacts/audio/melody_transformation/source.wav",
+      "pcm_sha256": "19ac7fc80bb67dbfc0004ea1c5734c880d2a20de9ac379e487ab7a8b4d6d62ca",
+      "peak_full_scale": 0.23999755851924193,
+      "actual_listening_observation": null
+    },
+    {
+      "name": "transposed_up_five",
+      "midi_notes": [
+        65,
+        67,
+        69,
+        72,
+        70,
+        69,
+        67,
+        65
+      ],
+      "signed_intervals_semitones": [
+        2,
+        2,
+        3,
+        -2,
+        -1,
+        -2,
+        -2
+      ],
+      "absolute_intervals_semitones": [
+        2,
+        2,
+        3,
+        2,
+        1,
+        2,
+        2
+      ],
+      "contour": [
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "range_midi": [
+        65,
+        72
+      ],
+      "encoded_pitch_class_set": [
+        0,
+        5,
+        7,
+        9,
+        10
+      ],
+      "path": "artifacts/audio/melody_transformation/transposed_up_five.wav",
+      "pcm_sha256": "f9e1b94d5d1b8ca5015637285801c942c57e6b08bfdb1e226fb317d42e8c2358",
+      "peak_full_scale": 0.23999755851924193,
+      "actual_listening_observation": null
+    },
+    {
+      "name": "inverted_about_C4",
+      "midi_notes": [
+        60,
+        58,
+        56,
+        53,
+        55,
+        56,
+        58,
+        60
+      ],
+      "signed_intervals_semitones": [
+        -2,
+        -2,
+        -3,
+        2,
+        1,
+        2,
+        2
+      ],
+      "absolute_intervals_semitones": [
+        2,
+        2,
+        3,
+        2,
+        1,
+        2,
+        2
+      ],
+      "contour": [
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "range_midi": [
+        53,
+        60
+      ],
+      "encoded_pitch_class_set": [
+        0,
+        5,
+        7,
+        8,
+        10
+      ],
+      "path": "artifacts/audio/melody_transformation/inverted_about_C4.wav",
+      "pcm_sha256": "6f90ac8df8590ee7d7524696f92e33a71a8b71892b2d80b02ea73cc72557aa09",
+      "peak_full_scale": 0.23999755851924193,
+      "actual_listening_observation": null
+    }
+  ],
+  "presentation": {
+    "path": "artifacts/audio/melody_transformation/source_transposition_inversion.wav",
+    "order": [
+      "source",
+      "transposed_up_five",
+      "inverted_about_C4"
+    ],
+    "segment_start_seconds": [
+      0.0,
+      4.75,
+      9.5
+    ]
+  },
+  "perceptual_hypothesis": "transformed versions may remain recognizably related; untested",
+  "actual_listening_observation": null,
+  "stop_lines": [
+    "encoded_invariants_are_not_perceived_melody_identity",
+    "synthesis_settings_are_not_perceived_timbre_or_loudness",
+    "no_automatic_key_or_harmonic_function_assignment"
+  ]
+}

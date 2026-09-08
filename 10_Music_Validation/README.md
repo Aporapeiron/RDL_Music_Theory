@@ -1,5 +1,8 @@
 # 10_Music_Validation
 
+- [Melody Transformation](Melody_Transformation/README.md)
+  単旋律の移調・半音反行による関係保存と生成。声部追跡・楽器別比較は保留して進める。
+
 - [Voice Placement / Crossing](Voice_Placement/README.md)
   声部IDと音高上下を分け、片声部のオクターブ移動を実音比較する。
 
